@@ -1,0 +1,89 @@
+18:56:17 **** Incremental Build of configuration Debug for project Blink ****
+make -r -j4 all 
+Building file: ../source/App.c
+Building file: ../source/SysTick.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DCPU_MK64FN1M0VLL12 -D__USE_CMSIS -DDEBUG -I../source -I../ -I../SDK/CMSIS -I../SDK/startup -O0 -fno-common -g3 -Wall -c -ffunction-sections -fdata-sections -ffreestanding -fno-builtin -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -MMD -MP -MF"source/App.d" -MT"source/App.o" -MT"source/App.d" -o "source/App.o" "../source/App.c"
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DCPU_MK64FN1M0VLL12 -D__USE_CMSIS -DDEBUG -I../source -I../ -I../SDK/CMSIS -I../SDK/startup -O0 -fno-common -g3 -Wall -c -ffunction-sections -fdata-sections -ffreestanding -fno-builtin -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -MMD -MP -MF"source/SysTick.d" -MT"source/SysTick.o" -MT"source/SysTick.d" -o "source/SysTick.o" "../source/SysTick.c"
+In file included from ../source/SysTick.c:10:0:
+../SDK/CMSIS/core_cm4.h:105:8: error: #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
+       #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
+        ^~~~~
+In file included from ../source/SysTick.c:10:0:
+../SDK/CMSIS/core_cm4.h:1677:39: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
+                                       ^~~~~~~~~
+                                       ITM_Type
+../SDK/CMSIS/core_cm4.h:1694:46: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE uint32_t __NVIC_GetEnableIRQ(IRQn_Type IRQn)
+                                              ^~~~~~~~~
+                                              ITM_Type
+../SDK/CMSIS/core_cm4.h:1713:40: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE void __NVIC_DisableIRQ(IRQn_Type IRQn)
+                                        ^~~~~~~~~
+                                        ITM_Type
+../SDK/CMSIS/core_cm4.h:1732:47: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE uint32_t __NVIC_GetPendingIRQ(IRQn_Type IRQn)
+                                               ^~~~~~~~~
+                                               ITM_Type
+../SDK/CMSIS/core_cm4.h:1751:43: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE void __NVIC_SetPendingIRQ(IRQn_Type IRQn)
+                                           ^~~~~~~~~
+                                           ITM_Type
+../SDK/CMSIS/core_cm4.h:1766:45: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE void __NVIC_ClearPendingIRQ(IRQn_Type IRQn)
+                                             ^~~~~~~~~
+                                             ITM_Type
+../SDK/CMSIS/core_cm4.h:1783:43: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE uint32_t __NVIC_GetActive(IRQn_Type IRQn)
+                                           ^~~~~~~~~
+                                           ITM_Type
+../SDK/CMSIS/core_cm4.h:1805:41: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
+                                         ^~~~~~~~~
+                                         ITM_Type
+../SDK/CMSIS/core_cm4.h:1827:45: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn)
+                                             ^~~~~~~~~
+                                             ITM_Type
+../SDK/CMSIS/core_cm4.h: In function 'NVIC_EncodePriority':
+../SDK/CMSIS/core_cm4.h:1858:64: error: '__NVIC_PRIO_BITS' undeclared (first use in this function)
+   PreemptPriorityBits = ((7UL - PriorityGroupTmp) > (uint32_t)(__NVIC_PRIO_BITS)) ? (uint32_t)(__NVIC_PRIO_BITS) : (uint32_t)(7UL - PriorityGroupTmp);
+                                                                ^~~~~~~~~~~~~~~~
+../SDK/CMSIS/core_cm4.h:1858:64: note: each undeclared identifier is reported only once for each function it appears in
+../SDK/CMSIS/core_cm4.h: In function 'NVIC_DecodePriority':
+../SDK/CMSIS/core_cm4.h:1885:64: error: '__NVIC_PRIO_BITS' undeclared (first use in this function)
+   PreemptPriorityBits = ((7UL - PriorityGroupTmp) > (uint32_t)(__NVIC_PRIO_BITS)) ? (uint32_t)(__NVIC_PRIO_BITS) : (uint32_t)(7UL - PriorityGroupTmp);
+                                                                ^~~~~~~~~~~~~~~~
+../SDK/CMSIS/core_cm4.h: At top level:
+../SDK/CMSIS/core_cm4.h:1902:39: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE void __NVIC_SetVector(IRQn_Type IRQn, uint32_t vector)
+                                       ^~~~~~~~~
+                                       ITM_Type
+../SDK/CMSIS/core_cm4.h:1917:43: error: unknown type name 'IRQn_Type'; did you mean 'ITM_Type'?
+ __STATIC_INLINE uint32_t __NVIC_GetVector(IRQn_Type IRQn)
+                                           ^~~~~~~~~
+                                           ITM_Type
+../source/SysTick.c: In function 'SysTick_Init':
+../source/SysTick.c:23:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [source/SysTick.o] Error 1
+make: *** Waiting for unfinished jobs....
+../source/App.c: In function 'PORTA_IRQHandler':
+../source/App.c:76:1: warning: implicit declaration of function 'PORT_ClearInterruptFlag' [-Wimplicit-function-declaration]
+ PORT_ClearInterruptFlag (PORTA, PIN_SW3);
+ ^~~~~~~~~~~~~~~~~~~~~~~
+../source/App.c: At top level:
+../source/App.c:81:6: warning: conflicting types for 'PORT_ClearInterruptFlag'
+ void PORT_ClearInterruptFlag (PORT_Type *port, pin_t pin)
+      ^~~~~~~~~~~~~~~~~~~~~~~
+../source/App.c:76:1: note: previous implicit declaration of 'PORT_ClearInterruptFlag' was here
+ PORT_ClearInterruptFlag (PORTA, PIN_SW3);
+ ^~~~~~~~~~~~~~~~~~~~~~~
+../source/App.c:67:13: warning: 'delayLoop' defined but not used [-Wunused-function]
+ static void delayLoop(uint32_t veces)
+             ^~~~~~~~~
+Finished building: ../source/App.c
+ 
