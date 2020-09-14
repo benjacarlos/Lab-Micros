@@ -145,3 +145,47 @@ bool gpioRead (pin_t pin)
 	}
 }
 
+
+bool gpioIRQ (pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
+{
+	switch(PIN2PORT(pin))
+		{
+			case PA:
+				NVIC_EnableIRQ(PORTA_IRQn);
+				PORTA->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				break;
+
+			case PB:
+				NVIC_EnableIRQ(PORTB_IRQn);
+				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				break;
+
+			case PC:
+				NVIC_EnableIRQ(PORTC_IRQn);
+				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				break;
+
+			case PD:
+				NVIC_EnableIRQ(PORTD_IRQn);
+				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				break;
+
+			case PE:
+				NVIC_EnableIRQ(PORTE_IRQn);
+				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				break;
+		}
+
+
+
+
+}
+
+//__ISR__ PORTA_IRQHandler(void)
+//{
+//
+//	PORTA->PCR[4]
+//
+//}
+
+
