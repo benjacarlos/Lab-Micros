@@ -1,24 +1,19 @@
-20:00:53 **** Incremental Build of configuration Debug for project Blink ****
+18:20:33 **** Incremental Build of configuration Debug for project Blink ****
 make -r -j4 all 
-Building file: ../source/gpio.c
+Building file: ../source/App.c
 Invoking: MCU C Compiler
-arm-none-eabi-gcc -DCPU_MK64FN1M0VLL12 -D__USE_CMSIS -DDEBUG -I../source -I../ -I../SDK/CMSIS -I../SDK/startup -O0 -fno-common -g3 -Wall -c -ffunction-sections -fdata-sections -ffreestanding -fno-builtin -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -MMD -MP -MF"source/gpio.d" -MT"source/gpio.o" -MT"source/gpio.d" -o "source/gpio.o" "../source/gpio.c"
-../source/gpio.c: In function 'gpioRead':
-../source/gpio.c:146:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-../source/gpio.c: In function 'gpioIRQ':
-../source/gpio.c:174:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-Finished building: ../source/gpio.c
+arm-none-eabi-gcc -DCPU_MK64FN1M0VLL12 -D__USE_CMSIS -DDEBUG -I../source -I../ -I../SDK/CMSIS -I../SDK/startup -O0 -fno-common -g3 -Wall -c -ffunction-sections -fdata-sections -ffreestanding -fno-builtin -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -MMD -MP -MF"source/App.d" -MT"source/App.o" -MT"source/App.d" -o "source/App.o" "../source/App.c"
+../source/App.c:66:13: warning: 'delayLoop' defined but not used [-Wunused-function]
+ static void delayLoop(uint32_t veces)
+             ^~~~~~~~~
+Finished building: ../source/App.c
  
 Building target: Blink.axf
 Invoking: MCU Linker
 arm-none-eabi-gcc -nostdlib -Xlinker -Map="Blink.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T "Blink_Debug.ld" -o "Blink.axf"  ./source/App.o ./source/SysTick.o ./source/gpio.o  ./SDK/startup/hardware.o ./SDK/startup/main.o ./SDK/startup/semihost_hardfault.o ./SDK/startup/startup_mk64f12.o  ./SDK/CMSIS/system_MK64F12.o   
 Memory region         Used Size  Region Size  %age Used
-   PROGRAM_FLASH:        3232 B         1 MB      0.31%
-      SRAM_UPPER:        8208 B       192 KB      4.17%
+   PROGRAM_FLASH:        3768 B         1 MB      0.36%
+      SRAM_UPPER:        8552 B       192 KB      4.35%
       SRAM_LOWER:          0 GB        64 KB      0.00%
         FLEX_RAM:          0 GB         4 KB      0.00%
 Finished building target: Blink.axf
@@ -27,8 +22,8 @@ make --no-print-directory post-build
 Performing post-build steps
 arm-none-eabi-size "Blink.axf"; # arm-none-eabi-objcopy -v -O binary "Blink.axf" "Blink.bin" ; # checksum -p MK64FN1M0xxx12 -d "Blink.bin";
    text	   data	    bss	    dec	    hex	filename
-   3224	      8	   8200	  11432	   2ca8	Blink.axf
+   3760	      8	   8544	  12312	   3018	Blink.axf
  
 
-20:00:53 Build Finished (took 959ms)
+18:20:34 Build Finished (took 1s.149ms)
 

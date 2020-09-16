@@ -1,0 +1,236 @@
+/*
+ * prueba.c
+ *
+ *  Created on: Sep 3, 2020
+ *      Author: Agus
+ */
+
+#include "SDK/CMSIS/MK64F12.h"
+#include "SDK/CMSIS/MK64F12_features.h"
+#include "gpio.h"
+#include "hardware.h"
+
+
+
+pinIrqFun_t irqfun_p_array[86];
+pin_t current_pin = 0;
+
+void gpioMode (pin_t pin, uint8_t mode)
+{
+    if (PIN2PORT(pin) == PA)
+    {
+        SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
+        PORTA->PCR[PIN2NUM(pin)] = 0x0;
+        PORTA->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
+        if (mode == OUTPUT)
+        {
+            GPIOA->PDDR = (OUTPUT<<PIN2NUM(pin));
+        }
+        else if (mode == INPUT)
+        {
+            GPIOA->PDDR = (INPUT<<PIN2NUM(pin));
+        }
+    }
+
+    else if (PIN2PORT(pin) == PB)
+    {
+        SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK;
+        PORTB->PCR[PIN2NUM(pin)] = 0x0;
+        PORTB->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
+        if (mode == OUTPUT)
+        {
+            GPIOB->PDDR = (OUTPUT<<PIN2NUM(pin));
+        }
+        else if (mode == INPUT)
+        {
+            GPIOB->PDDR = (INPUT<<PIN2NUM(pin));
+        }
+    }
+
+    else if (PIN2PORT(pin) == PC)
+    {
+        SIM->SCGC5 |= SIM_SCGC5_PORTC_MASK;
+        PORTC->PCR[PIN2NUM(pin)] = 0x0;
+        PORTC->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
+        if (mode == OUTPUT)
+        {
+            GPIOC->PDDR = (OUTPUT<<PIN2NUM(pin));
+        }
+        else if (mode == INPUT)
+        {
+            GPIOC->PDDR = (INPUT<<PIN2NUM(pin));
+        }
+    }
+
+    else if (PIN2PORT(pin) == PD)
+    {
+        SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
+        PORTD->PCR[PIN2NUM(pin)] = 0x0;
+        PORTD->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
+        if (mode == OUTPUT)
+        {
+            GPIOD->PDDR = (OUTPUT<<PIN2NUM(pin));
+        }
+        else if (mode == INPUT)
+        {
+            GPIOD->PDDR = (INPUT<<PIN2NUM(pin));
+        }
+    }
+
+    else if (PIN2PORT(pin) == PE)
+    {
+        SIM->SCGC5 |= SIM_SCGC5_PORTE_MASK;
+        PORTE->PCR[PIN2NUM(pin)] = 0x0;
+        PORTE->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
+        if (mode == OUTPUT)
+        {
+            GPIOE->PDDR = (OUTPUT<<PIN2NUM(pin));
+        }
+        else if (mode == INPUT)
+        {
+            GPIOE->PDDR = (INPUT<<PIN2NUM(pin));
+        }
+    }
+
+}
+
+
+void gpioToggle (pin_t pin)
+{
+	if(PIN2PORT(pin) == PA)
+	{
+		GPIOA->PTOR = 1<<PIN2NUM(pin);
+	}
+
+	else if(PIN2PORT(pin) == PB)
+	{
+		GPIOB->PTOR = 1<<PIN2NUM(pin);
+	}
+
+	else if(PIN2PORT(pin) == PC)
+	{
+		GPIOC->PTOR = 1<<PIN2NUM(pin);
+	}
+
+	else if(PIN2PORT(pin) == PD)
+	{
+		GPIOD->PTOR = 1<<PIN2NUM(pin);
+	}
+
+	else if(PIN2PORT(pin) == PE)
+	{
+		GPIOE->PTOR = 1<<PIN2NUM(pin);
+	}
+}
+
+
+bool gpioRead (pin_t pin)
+{
+	switch(PIN2PORT(pin))
+	{
+		case PA:
+			return ((GPIOA->PDIR >> PIN2NUM(pin)) & 0x01);
+			break;
+
+		case PB:
+			return ((GPIOB->PDIR >> PIN2NUM(pin)) & 0x01);
+			break;
+
+		case PC:
+			return ((GPIOC->PDIR >> PIN2NUM(pin)) & 0x01);
+			break;
+
+		case PD:
+			return ((GPIOD->PDIR >> PIN2NUM(pin)) & 0x01);
+			break;
+
+		case PE:
+			return ((GPIOE->PDIR >> PIN2NUM(pin)) & 0x01);
+			break;
+	}
+}
+
+void gpioPull(pin_t pin, bool mode)
+{
+	switch(PIN2PORT(pin))
+		{
+			case PA:
+				PORTA->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTA->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
+				break;
+
+			case PB:
+				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
+				break;
+
+			case PC:
+				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
+				break;
+
+			case PD:
+				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
+				break;
+
+			case PE:
+				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
+				break;
+		}
+
+
+}
+
+
+bool gpioIRQ (pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
+{
+	current_pin = pin;
+	int var = current_pin;
+	switch(PIN2PORT(pin))
+		{
+			case PA:
+				NVIC_EnableIRQ(PORTA_IRQn);
+				PORTA->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTA->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTA_IRQn] = irqFun;
+				break;
+
+			case PB:
+				NVIC_EnableIRQ(PORTB_IRQn);
+				PORTB->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTB_IRQn] = irqFun;
+				break;
+
+			case PC:
+				NVIC_EnableIRQ(PORTC_IRQn);
+				PORTC->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTB_IRQn] = irqFun;
+				break;
+
+			case PD:
+				NVIC_EnableIRQ(PORTD_IRQn);
+				PORTD->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTD_IRQn] = irqFun;
+				break;
+
+			case PE:
+				NVIC_EnableIRQ(PORTE_IRQn);
+				PORTE->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTE_IRQn] = irqFun;
+				break;
+		}
+}
+
+__ISR__ PORTA_IRQHandler(void)
+{
+	PORTA->PCR[PIN2NUM(current_pin)] |= PORT_PCR_ISF_MASK;
+	(*irqfun_p_array[PORTA_IRQn])();
+}
+
+

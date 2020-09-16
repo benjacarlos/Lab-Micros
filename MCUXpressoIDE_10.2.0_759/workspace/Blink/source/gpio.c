@@ -8,7 +8,12 @@
 #include "SDK/CMSIS/MK64F12.h"
 #include "SDK/CMSIS/MK64F12_features.h"
 #include "gpio.h"
+#include "hardware.h"
 
+
+
+pinIrqFun_t irqfun_p_array[86];
+pin_t current_pin;
 
 void gpioMode (pin_t pin, uint8_t mode)
 {
@@ -145,47 +150,86 @@ bool gpioRead (pin_t pin)
 	}
 }
 
-
-bool gpioIRQ (pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
+void gpioPull(pin_t pin, bool mode)
 {
 	switch(PIN2PORT(pin))
 		{
 			case PA:
-				NVIC_EnableIRQ(PORTA_IRQn);
-				PORTA->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				PORTA->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTA->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
 				break;
 
 			case PB:
-				NVIC_EnableIRQ(PORTB_IRQn);
-				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
 				break;
 
 			case PC:
-				NVIC_EnableIRQ(PORTC_IRQn);
-				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
 				break;
 
 			case PD:
-				NVIC_EnableIRQ(PORTD_IRQn);
-				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
 				break;
 
 			case PE:
-				NVIC_EnableIRQ(PORTE_IRQn);
-				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
+				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
 				break;
 		}
 
 
-
-
 }
 
-//__ISR__ PORTA_IRQHandler(void)
-//{
-//
-//	PORTA->PCR[4]
-//
-//}
+
+bool gpioIRQ (pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
+{
+	current_pin = pin;
+	switch(PIN2PORT(pin))
+		{
+			case PA:
+				NVIC_EnableIRQ(PORTA_IRQn);
+				PORTA->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTA->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTA_IRQn] = irqFun;
+				break;
+
+			case PB:
+				NVIC_EnableIRQ(PORTB_IRQn);
+				PORTB->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTB_IRQn] = irqFun;
+				break;
+
+			case PC:
+				NVIC_EnableIRQ(PORTC_IRQn);
+				PORTC->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTB_IRQn] = irqFun;
+				break;
+
+			case PD:
+				NVIC_EnableIRQ(PORTD_IRQn);
+				PORTD->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTD_IRQn] = irqFun;
+				break;
+
+			case PE:
+				NVIC_EnableIRQ(PORTE_IRQn);
+				PORTE->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
+				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
+				irqfun_p_array[PORTE_IRQn] = irqFun;
+				break;
+		}
+}
+
+__ISR__ PORTA_IRQHandler(void)
+{
+	PORTA->PCR[PIN2NUM(current_pin)] |= PORT_PCR_ISF_MASK;
+	(*irqfun_p_array[PORTA_IRQn])();
+}
 
 

@@ -45,17 +45,6 @@ enum { PA, PB, PC, PD, PE };
 #define HIGH    1
 #endif // LOW
 
-// IRQ modes
-enum {
-    GPIO_IRQ_MODE_DISABLE,
-    GPIO_IRQ_MODE_RISING_EDGE,
-    GPIO_IRQ_MODE_FALLING_EDGE,
-    GPIO_IRQ_MODE_BOTH_EDGES,
-
-    GPIO_IRQ_CANT_MODES
-};
-
-
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
@@ -78,12 +67,29 @@ typedef enum
 
 }PORTMux_t;
 
+typedef enum
+{
+	PORT_eDisabled             = 0x00,
+	PORT_eDMARising            = 0x01,
+	PORT_eDMAFalling           = 0x02,
+	PORT_eDMAEither            = 0x03,
+	PORT_eInterruptDisasserted = 0x08,
+	PORT_eInterruptRising      = 0x09,
+	PORT_eInterruptFalling     = 0x0A,
+	PORT_eInterruptEither      = 0x0B,
+	PORT_eInterruptAsserted    = 0x0C,
 
+} PORTEvent_t;
 
 
 /*******************************************************************************
  * VARIABLE PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
+
+extern pinIrqFun_t irqfun_p_array[86];//arreglo con punteros a funcion para callbacks de interrupciones, la idea es tener un lugar en este arreglo poara cada puerto
+						          //y utilizar los defines dados en mf64f PORTX_IRqn para los indices.
+
+extern pin_t current_pin;
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
@@ -124,6 +130,10 @@ void gpioToggle (pin_t pin);
  * @return HIGH or LOW
  */
 bool gpioRead (pin_t pin);
+
+
+
+void gpioPull(pin_t pin, bool mode);
 
 
 /*******************************************************************************
