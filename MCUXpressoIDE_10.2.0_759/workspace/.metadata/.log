@@ -2332,3 +2332,6 @@ org.eclipse.swt.SWTException: Invalid thread access
 
 !ENTRY com.nxp.mcuxpresso.trace.core 4 0 2020-09-18 12:33:26.902
 !MESSAGE Unable to find Trace Service for '(gdb[5].proc[42000].threadGroup[i1],gdb[5].proc[42000].OSthread[1]).thread[1].frame[0]'
+
+!ENTRY com.nxp.mcuxpresso.trace.core 4 0 2020-09-18 15:12:12.069
+!MESSAGE Unable to find Trace Service for '(gdb[6].proc[42000].threadGroup[i1],gdb[6].proc[42000].OSthread[1]).thread[1].frame[0]'

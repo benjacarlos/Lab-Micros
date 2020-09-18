@@ -248,28 +248,28 @@ __ISR__ PORTA_IRQHandler(void)
 
 __ISR__ PORTB_IRQHandler(void)
 {
-	PORTB->PCR[PIN2NUM(irq_data.irq_pins[PB])] |= PORT_PCR_ISF_MASK;
+	PORTB->PCR[PIN2NUM(irq_data.irq_pins[PB]))] |= PORT_PCR_ISF_MASK;
 //	(*irqfun_p_array[PORTB_IRQn])();
 	(*irq_data.irqfun_p_array[PB])();
 }
 
 __ISR__ PORTC_IRQHandler(void)
 {
-	PORTC->PCR[PIN2NUM(irq_data.irq_pins[PC])] |= PORT_PCR_ISF_MASK;
+	PORTC->PCR[PIN2NUM(irq_data.irq_pins[PC]))] |= PORT_PCR_ISF_MASK;
 //	(*irqfun_p_array[PORTC_IRQn])();
 	(*irq_data.irqfun_p_array[PC])();
 }
 
 __ISR__ PORTD_IRQHandler(void)
 {
-	PORTD->PCR[PIN2NUM(irq_data.irq_pins[PD])] |= PORT_PCR_ISF_MASK;
+	PORTD->PCR[PIN2NUM(irq_data.irq_pins[PD]))] |= PORT_PCR_ISF_MASK;
 //	(*irqfun_p_array[PORTD_IRQn])();
 	(*irq_data.irqfun_p_array[PD])();
 }
 
 __ISR__ PORTE_IRQHandler(void)
 {
-	PORTE->PCR[PIN2NUM(irq_data.irq_pins[PD])] |= PORT_PCR_ISF_MASK;
+	PORTE->PCR[PIN2NUM(irq_data.irq_pins[PD]))] |= PORT_PCR_ISF_MASK;
 //	(*irqfun_p_array[PORTE_IRQn])();
 	(*irq_data.irqfun_p_array[PE])();
 }

@@ -46,7 +46,8 @@ void App_Init (void)
 {
     gpioMode(PIN_LED_RED, OUTPUT);
     gpioMode(PIN_SW3, INPUT);
-
+    SysTick_Init(systick_test_fun);
+    gpioIRQ(PIN_SW3, PORT_eInterruptFalling, test_fun);
 }
 
 

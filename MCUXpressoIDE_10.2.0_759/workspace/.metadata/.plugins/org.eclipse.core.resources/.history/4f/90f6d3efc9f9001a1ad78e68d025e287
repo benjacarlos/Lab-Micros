@@ -13,7 +13,7 @@
 #include "gpio.h"
 #include "board.h"
 #include "hardware.h"
-
+#include <stdio.h>
 
 irq_fun systick_irqfun;
 
@@ -32,5 +32,7 @@ bool SysTick_Init (void (*funcallback)(void))
 
 __ISR__ SysTick_Handler(void)
 {
+
 	(*systick_irqfun)();
+
 }

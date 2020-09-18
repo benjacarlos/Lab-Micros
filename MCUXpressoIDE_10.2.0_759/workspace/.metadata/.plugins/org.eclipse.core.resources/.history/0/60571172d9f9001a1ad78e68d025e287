@@ -82,24 +82,14 @@ typedef enum
 } PORTEvent_t;
 
 
-
-typedef struct
-{
-	pinIrqFun_t irqfun_p_array[5];
-	pin_t irq_pins[5];
-
-} gpio_funs;
-
 /*******************************************************************************
  * VARIABLE PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
 
-//extern pinIrqFun_t irqfun_p_array[5];//arreglo con punteros a funcion para callbacks de interrupciones, la idea es tener un lugar en este arreglo poara cada puerto
+extern pinIrqFun_t irqfun_p_array[86];//arreglo con punteros a funcion para callbacks de interrupciones, la idea es tener un lugar en este arreglo poara cada puerto
 						          //y utilizar los defines dados en mf64f PORTX_IRqn para los indices.
 
-
-
-//extern pin_t current_pin; //esta variable contiene el ultimo pin que se quiere interrumpir, se llamó anteriormente a la funcion gpioIRQ para configurarlo.
+extern pin_t current_pin; //esta variable contiene el ultimo pin que se quiere interrumpir, se llamó anteriormente a la funcion gpioIRQ para configurarlo.
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
