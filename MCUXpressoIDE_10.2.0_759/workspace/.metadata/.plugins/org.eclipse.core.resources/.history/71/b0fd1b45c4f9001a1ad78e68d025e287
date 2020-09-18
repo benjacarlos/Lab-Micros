@@ -35,4 +35,14 @@ __ISR__ SysTick_Handler(void)
 
 	(*systick_irqfun)();
 
+
+	static uint32_t counter = 4; //cuento 4 veces y asi con 125 ms logro un blink cada medio segundo, es practico porque solo tengo 24 bits en el registro systick
+
+	if (counter == 0)
+	{
+		gpioToggle(PIN_LED_RED);
+		counter = 4;
+	}
+
+	counter--;
 }

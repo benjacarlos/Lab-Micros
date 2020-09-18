@@ -15,12 +15,12 @@
 #include "hardware.h"
 #include <stdio.h>
 
-irq_fun systick_irqfun;
+void (*systick_irqfun)(void);
 
 bool SysTick_Init (void (*funcallback)(void))
 {
 
-	systick_irqfun = funcallback;
+	systick_irqfun = *funcallback;
 
 	//Inicializacion de SysTick
 	SysTick->CTRL = 0x00;
@@ -35,4 +35,14 @@ __ISR__ SysTick_Handler(void)
 
 	(*systick_irqfun)();
 
+
+	static uint32_t counter = 4; //cuento 4 veces y asi con 125 ms logro un blink cada medio segundo, es practico porque solo tengo 24 bits en el registro systick
+
+	if (counter == 0)
+	{
+		gpioToggle(PIN_LED_RED);
+		counter = 4;
+	}
+
+	counter--;
 }
