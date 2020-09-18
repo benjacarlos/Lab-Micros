@@ -10,7 +10,7 @@
 #include "gpio.h"
 #include "hardware.h"
 
-//variables globaels que sirven para el funcionamiento de ñas funciones de interrupcion
+
 
 pinIrqFun_t irqfun_p_array[86];
 pin_t current_pin;
@@ -150,7 +150,7 @@ bool gpioRead (pin_t pin)
 	}
 }
 
-void gpioPull(pin_t pin, bool mode)//arreglar modo
+void gpioPull(pin_t pin, bool mode)
 {
 	switch(PIN2PORT(pin))
 		{
@@ -179,6 +179,8 @@ void gpioPull(pin_t pin, bool mode)//arreglar modo
 				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
 				break;
 		}
+
+
 }
 
 
@@ -197,33 +199,32 @@ bool gpioIRQ (pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
 			case PB:
 				NVIC_EnableIRQ(PORTB_IRQn);
 				PORTB->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
-				PORTB->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
+				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
 				irqfun_p_array[PORTB_IRQn] = irqFun;
 				break;
 
 			case PC:
 				NVIC_EnableIRQ(PORTC_IRQn);
 				PORTC->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
-				PORTC->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
+				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
 				irqfun_p_array[PORTB_IRQn] = irqFun;
 				break;
 
 			case PD:
 				NVIC_EnableIRQ(PORTD_IRQn);
 				PORTD->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
-				PORTD->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
+				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
 				irqfun_p_array[PORTD_IRQn] = irqFun;
 				break;
 
 			case PE:
 				NVIC_EnableIRQ(PORTE_IRQn);
 				PORTE->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
-				PORTE->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
+				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_IRQC(irqMode);
 				irqfun_p_array[PORTE_IRQn] = irqFun;
 				break;
 		}
 }
-
 
 __ISR__ PORTA_IRQHandler(void)
 {
@@ -231,26 +232,4 @@ __ISR__ PORTA_IRQHandler(void)
 	(*irqfun_p_array[PORTA_IRQn])();
 }
 
-__ISR__ PORTB_IRQHandler(void)
-{
-	PORTB->PCR[PIN2NUM(current_pin)] |= PORT_PCR_ISF_MASK;
-	(*irqfun_p_array[PORTB_IRQn])();
-}
 
-__ISR__ PORTC_IRQHandler(void)
-{
-	PORTC->PCR[PIN2NUM(current_pin)] |= PORT_PCR_ISF_MASK;
-	(*irqfun_p_array[PORTC_IRQn])();
-}
-
-__ISR__ PORTD_IRQHandler(void)
-{
-	PORTD->PCR[PIN2NUM(current_pin)] |= PORT_PCR_ISF_MASK;
-	(*irqfun_p_array[PORTD_IRQn])();
-}
-
-__ISR__ PORTE_IRQHandler(void)
-{
-	PORTE->PCR[PIN2NUM(current_pin)] |= PORT_PCR_ISF_MASK;
-	(*irqfun_p_array[PORTE_IRQn])();
-}

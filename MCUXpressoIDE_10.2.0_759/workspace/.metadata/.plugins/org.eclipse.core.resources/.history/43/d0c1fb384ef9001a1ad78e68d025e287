@@ -20,7 +20,7 @@ bool SysTick_Init (void)
 {
     //Inicializacion de SysTick
 	SysTick->CTRL = 0x00;
-	SysTick->LOAD = 12500000L - 1; // 125ms @ 100MHz
+	SysTick->LOAD = 12500000L - 1; // 500ms @ 100MHz
 	SysTick->VAL = 0x00;
 	SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
 }

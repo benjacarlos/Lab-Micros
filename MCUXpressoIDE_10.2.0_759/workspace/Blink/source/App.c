@@ -31,7 +31,7 @@
  ******************************************************************************/
 
 static void delayLoop(uint32_t veces);
-static void fun(void);
+static void test_fun(void);
 
 
 /*******************************************************************************
@@ -46,7 +46,7 @@ void App_Init (void)
     gpioMode(PIN_LED_RED, OUTPUT);
     gpioMode(PIN_SW3, INPUT);
 //    SysTick_Init();
-    gpioIRQ(PIN_SW3, PORT_eInterruptFalling, fun);
+    gpioIRQ(PIN_SW3, PORT_eInterruptFalling, test_fun);
 }
 
 
@@ -68,7 +68,8 @@ static void delayLoop(uint32_t veces)
     while (veces--);
 }
 
-void fun(void)
+//funcion de prueba
+void test_fun(void)
 {
 	gpioToggle(PIN_LED_RED);
 }

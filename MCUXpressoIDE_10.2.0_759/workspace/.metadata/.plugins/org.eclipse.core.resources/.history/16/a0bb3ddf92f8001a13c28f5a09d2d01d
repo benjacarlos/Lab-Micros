@@ -10,6 +10,10 @@
 
 #include "board.h"
 #include "gpio.h"
+#include "SysTick.h"
+#include "hardware.h"
+
+#include"SysTick.h"
 
 #include "SDK/CMSIS/MK64F12.h"
 #include "SDK/CMSIS/MK64F12_features.h"
@@ -27,6 +31,7 @@
  ******************************************************************************/
 
 static void delayLoop(uint32_t veces);
+static void fun(void);
 
 
 /*******************************************************************************
@@ -40,21 +45,15 @@ void App_Init (void)
 {
     gpioMode(PIN_LED_RED, OUTPUT);
     gpioMode(PIN_SW3, INPUT);
+//    SysTick_Init();
+    gpioIRQ(PIN_SW3, PORT_eInterruptFalling, fun);
 }
 
 
 /* Función que se llama constantemente en un ciclo infinito */
 void App_Run (void)
 {
-//    delayLoop(200000UL);
-//    gpioToggle(PIN_LED_RED);
 
-
-		if (!gpioRead(PIN_SW3))
-	{
-		delayLoop(4000000UL);
-		gpioToggle(PIN_LED_RED);
-	}
 }
 
 
@@ -67,6 +66,11 @@ void App_Run (void)
 static void delayLoop(uint32_t veces)
 {
     while (veces--);
+}
+
+void fun(void)
+{
+	gpioToggle(PIN_LED_RED);
 }
 
 

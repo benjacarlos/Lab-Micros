@@ -1,18 +1,28 @@
-18:20:33 **** Incremental Build of configuration Debug for project Blink ****
+22:23:18 **** Incremental Build of configuration Debug for project Blink ****
 make -r -j4 all 
 Building file: ../source/App.c
+Building file: ../SDK/startup/startup_mk64f12.c
+Building file: ../SDK/CMSIS/system_MK64F12.c
 Invoking: MCU C Compiler
 arm-none-eabi-gcc -DCPU_MK64FN1M0VLL12 -D__USE_CMSIS -DDEBUG -I../source -I../ -I../SDK/CMSIS -I../SDK/startup -O0 -fno-common -g3 -Wall -c -ffunction-sections -fdata-sections -ffreestanding -fno-builtin -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -MMD -MP -MF"source/App.d" -MT"source/App.o" -MT"source/App.d" -o "source/App.o" "../source/App.c"
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DCPU_MK64FN1M0VLL12 -D__USE_CMSIS -DDEBUG -I../source -I../ -I../SDK/CMSIS -I../SDK/startup -O0 -fno-common -g3 -Wall -c -ffunction-sections -fdata-sections -ffreestanding -fno-builtin -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -MMD -MP -MF"SDK/startup/startup_mk64f12.d" -MT"SDK/startup/startup_mk64f12.o" -MT"SDK/startup/startup_mk64f12.d" -o "SDK/startup/startup_mk64f12.o" "../SDK/startup/startup_mk64f12.c"
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -DCPU_MK64FN1M0VLL12 -D__USE_CMSIS -DDEBUG -I../source -I../ -I../SDK/CMSIS -I../SDK/startup -O0 -fno-common -g3 -Wall -c -ffunction-sections -fdata-sections -ffreestanding -fno-builtin -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -MMD -MP -MF"SDK/CMSIS/system_MK64F12.d" -MT"SDK/CMSIS/system_MK64F12.o" -MT"SDK/CMSIS/system_MK64F12.d" -o "SDK/CMSIS/system_MK64F12.o" "../SDK/CMSIS/system_MK64F12.c"
 ../source/App.c:66:13: warning: 'delayLoop' defined but not used [-Wunused-function]
  static void delayLoop(uint32_t veces)
              ^~~~~~~~~
+Finished building: ../SDK/startup/startup_mk64f12.c
+ 
 Finished building: ../source/App.c
+Finished building: ../SDK/CMSIS/system_MK64F12.c
+ 
  
 Building target: Blink.axf
 Invoking: MCU Linker
 arm-none-eabi-gcc -nostdlib -Xlinker -Map="Blink.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T "Blink_Debug.ld" -o "Blink.axf"  ./source/App.o ./source/SysTick.o ./source/gpio.o  ./SDK/startup/hardware.o ./SDK/startup/main.o ./SDK/startup/semihost_hardfault.o ./SDK/startup/startup_mk64f12.o  ./SDK/CMSIS/system_MK64F12.o   
 Memory region         Used Size  Region Size  %age Used
-   PROGRAM_FLASH:        3768 B         1 MB      0.36%
+   PROGRAM_FLASH:          4 KB         1 MB      0.39%
       SRAM_UPPER:        8552 B       192 KB      4.35%
       SRAM_LOWER:          0 GB        64 KB      0.00%
         FLEX_RAM:          0 GB         4 KB      0.00%
@@ -22,5 +32,5 @@ make --no-print-directory post-build
 Performing post-build steps
 arm-none-eabi-size "Blink.axf"; # arm-none-eabi-objcopy -v -O binary "Blink.axf" "Blink.bin" ; # checksum -p MK64FN1M0xxx12 -d "Blink.bin";
    text	   data	    bss	    dec	    hex	filename
-   3760	      8	   8544	  12312	   3018	Blink.axf
+   4088	      8	   8544	  12640	   3160	Blink.axf
  

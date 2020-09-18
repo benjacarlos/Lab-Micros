@@ -10,7 +10,7 @@
 #include "gpio.h"
 #include "hardware.h"
 
-//variables globaels que sirven para el funcionamiento de ñas funciones de interrupcion
+
 
 pinIrqFun_t irqfun_p_array[86];
 pin_t current_pin;
@@ -150,7 +150,7 @@ bool gpioRead (pin_t pin)
 	}
 }
 
-void gpioPull(pin_t pin, bool mode)//arreglar modo
+void gpioPull(pin_t pin, bool mode)
 {
 	switch(PIN2PORT(pin))
 		{
@@ -179,6 +179,8 @@ void gpioPull(pin_t pin, bool mode)//arreglar modo
 				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
 				break;
 		}
+
+
 }
 
 
@@ -223,7 +225,6 @@ bool gpioIRQ (pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
 				break;
 		}
 }
-
 
 __ISR__ PORTA_IRQHandler(void)
 {

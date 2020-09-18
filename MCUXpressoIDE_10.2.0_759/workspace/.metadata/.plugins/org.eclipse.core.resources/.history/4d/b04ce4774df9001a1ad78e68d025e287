@@ -225,7 +225,7 @@ bool gpioIRQ (pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
 }
 
 
-__ISR__ PORTA_IRQHandler(void)
+__ISR__ PORTA_IRQHandler(void, int var1)
 {
 	PORTA->PCR[PIN2NUM(current_pin)] |= PORT_PCR_ISF_MASK;
 	(*irqfun_p_array[PORTA_IRQn])();
