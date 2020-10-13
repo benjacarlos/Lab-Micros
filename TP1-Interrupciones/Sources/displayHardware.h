@@ -9,7 +9,7 @@
 
 // Seteo IO del display con el K64
 void InitHardwareDisplay(void);
-//Imprime el caracter c en la posicion que recibe.
+//Imprime el caracter en posicion
 void PrintChar(const char c,unsigned int pos);
 
-#endif /* SEGMENTDISPLAY_H_ */
+#endif /* DISPLAYHARDWARE_H_ */

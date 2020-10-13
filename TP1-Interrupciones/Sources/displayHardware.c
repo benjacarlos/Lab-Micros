@@ -63,8 +63,11 @@ enum {FIRST_DIGIT,SECOND_DIGIT,THIRD_DIGIT, FOURTH_DIGIT, NUMBER_OF_DIGITS};
 #define CSEGF PORTNUM2PIN(PB,9)// PTB9
 #define CSEGG PORTNUM2PIN(PC,17)// PTC17
 #define CSEGDP PORTNUM2PIN(PC,16)// PTC16
-#define SEL1 PORTNUM2PIN(PC,4)// PTC4
-#define SEL2 PORTNUM2PIN(PE,24)// PTE24
+#define SEL0 PORTNUM2PIN(PC,4)// PTC4
+#define SEL1 PORTNUM2PIN(PE,24)// PTE24
+
+#define HIGH 1
+#define LOW 0
 
 /**************************************************************************
  * 								SEGMENT MASK
@@ -77,15 +80,18 @@ enum {FIRST_DIGIT,SECOND_DIGIT,THIRD_DIGIT, FOURTH_DIGIT, NUMBER_OF_DIGITS};
 #define C_MASK 0x04
 #define B_MASK 0x02
 #define A_MASK 0x01
+#define SPACE 0x00
+#define SEL0_MASK 0x01
+#define SEL1_MASK 0x02
 
 /**************************************************************************
  * 								FUNCIONES
  **************************************************************************/
 // Funcion para prender los leds de cada segmento correspondiente al valor dado
-void setChar(const unsigned char val);
+void setDigit(const unsigned char val);
 
 // Funcion de seleccion de display a la cual imprimir
-void setDisplay(unsigned int sel_display);
+void setDisplayPos(unsigned int pos);
 
 void InitHardwareDisplay(void)
 {
@@ -108,6 +114,100 @@ void InitHardwareDisplay(void)
 		}
 }
 
+void PrintChar(const char c,unsigned int pos)
+{
+	if( pos< NUMBER_OF_DIGITS )
+	{
+		setDisplayPos(pos);
+		if( (c >= '0') && (c <= '9') ) //Se desea imprimir un numero
+			setDigit(num_array[c-'0']);
+		else if( (c >= 'A') && (c <= 'Z') ) //Se desea imprimir una letra
+			setDigit(abc_array[c-'A']);
+		else if( (c >= 'a') && (c <= 'z') ) //Se desea imprimir una letra
+			setDigit(abc_array[c-'a']);
+		else //Casos especiales
+		{
+			if(c == ' ') //Espacio en blanco
+				setDigit(SPACE);
+			else if(c == '-') //Guion
+				setDigit(G_MASK);
+		}
+	}
+}
 
+void setDigit(const unsigned char val)
+{
+	//Aplico mascara para cada segmento del display
+	if( val & G_MASK )
+	{
+		gpioWrite(CSEGG, HIGH);
+	}
+	else
+	{
+		gpioWrite(CSEGG, LOW);
+	}
+	//Segmento F
+	if( val & F_MASK )
+	{
+		gpioWrite(CSEGF, HIGH);
+	}
+	else
+	{
+		gpioWrite(CSEGF, LOW);
+	}
+	//Segmento E
+	if( val & E_MASK )
+	{
+		gpioWrite(CSEGE, HIGH);
+	}
+	else
+	{
+		gpioWrite(CSEGE, LOW);
+	}
+	//Segmento D
+	if( val & D_MASK )
+	{
+		gpioWrite(CSEGD, HIGH);
+	}
+	else
+	{
+		gpioWrite(CSEGD, LOW);
+	}
+	//Segmento C
+	if( val & C_MASK )
+	{
+		gpioWrite(CSEGC, HIGH);
+	}
+	else
+	{
+		gpioWrite(CSEGC, LOW);
+	}
+	//Segmento B
+	if( val & B_MASK )
+	{
+		gpioWrite(CSEGB, HIGH);
+	}
+	else
+	{
+		gpioWrite(CSEGB, LOW);
+	}
+	//Segmento A
+	if( val & A_MASK )
+	{
+		gpioWrite(CSEGA, HIGH);
+	}
+	else
+	{
+		gpioWrite(CSEGA, LOW);
+	}
 
+}
 
+void setDisplayPos(unsigned int pos)
+{
+	if(pos < NUMBER_OF_DIGITS)
+	{
+		gpioWrite(SEL0, (pos & SEL0_MASK));
+		gpioWrite(SEL1, (pos & SEL1_MASK)>>1);
+	}
+}
