@@ -9,7 +9,7 @@
 /**************************************************************************
  * 							HEADERS INCLUIDOS
  **************************************************************************/
-#include "displayHardware.h"
+#include "displaySegment.h"
 #include "gpio.h"
 #include <stdbool.h>
 /**************************************************************************
@@ -93,7 +93,7 @@ void setDigit(const unsigned char val);
 // Funcion de seleccion de display a la cual imprimir
 void setDisplayPos(unsigned int pos);
 
-void InitHardwareDisplay(void)
+void InitSegmentDisplay(void)
 {
 	if(!initialized)
 		{
@@ -138,6 +138,7 @@ void PrintChar(const char c,unsigned int pos)
 void setDigit(const unsigned char val)
 {
 	//Aplico mascara para cada segmento del display
+	//Segmento g
 	if( val & G_MASK )
 	{
 		gpioWrite(CSEGG, HIGH);
@@ -146,7 +147,7 @@ void setDigit(const unsigned char val)
 	{
 		gpioWrite(CSEGG, LOW);
 	}
-	//Segmento F
+	//Segmento f
 	if( val & F_MASK )
 	{
 		gpioWrite(CSEGF, HIGH);
@@ -155,7 +156,7 @@ void setDigit(const unsigned char val)
 	{
 		gpioWrite(CSEGF, LOW);
 	}
-	//Segmento E
+	//Segmento e
 	if( val & E_MASK )
 	{
 		gpioWrite(CSEGE, HIGH);
@@ -164,7 +165,7 @@ void setDigit(const unsigned char val)
 	{
 		gpioWrite(CSEGE, LOW);
 	}
-	//Segmento D
+	//Segmento d
 	if( val & D_MASK )
 	{
 		gpioWrite(CSEGD, HIGH);
@@ -173,7 +174,7 @@ void setDigit(const unsigned char val)
 	{
 		gpioWrite(CSEGD, LOW);
 	}
-	//Segmento C
+	//Segmento c
 	if( val & C_MASK )
 	{
 		gpioWrite(CSEGC, HIGH);
@@ -182,7 +183,7 @@ void setDigit(const unsigned char val)
 	{
 		gpioWrite(CSEGC, LOW);
 	}
-	//Segmento B
+	//Segmento b
 	if( val & B_MASK )
 	{
 		gpioWrite(CSEGB, HIGH);
@@ -191,7 +192,7 @@ void setDigit(const unsigned char val)
 	{
 		gpioWrite(CSEGB, LOW);
 	}
-	//Segmento A
+	//Segmento a
 	if( val & A_MASK )
 	{
 		gpioWrite(CSEGA, HIGH);

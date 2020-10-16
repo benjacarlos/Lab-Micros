@@ -4,12 +4,12 @@
 //
 
 
-#ifdef DISPLAYHARDWARE_H_
-#define DISPLAYHARDWARE_H_
+#ifdef DISPLAYSEGMENT_H_
+#define DISPLAYSEGMENT_H_
 
 // Seteo IO del display con el K64
-void InitHardwareDisplay(void);
+void InitSegmentDisplay(void);
 //Imprime el caracter en posicion
 void PrintChar(const char c,unsigned int pos);
 
-#endif /* DISPLAYHARDWARE_H_ */
+#endif /* DISPLAYSEGMENT_H_ */
