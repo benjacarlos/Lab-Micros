@@ -4,19 +4,40 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../source/AdminID.c \
 ../source/App.c \
+../source/FSM.c \
+../source/FSMTABLE.c \
 ../source/SysTick.c \
-../source/gpio.c 
+../source/displayLed.c \
+../source/displayManager.c \
+../source/displaySegment.c \
+../source/gpio.c \
+../source/timer.c 
 
 OBJS += \
+./source/AdminID.o \
 ./source/App.o \
+./source/FSM.o \
+./source/FSMTABLE.o \
 ./source/SysTick.o \
-./source/gpio.o 
+./source/displayLed.o \
+./source/displayManager.o \
+./source/displaySegment.o \
+./source/gpio.o \
+./source/timer.o 
 
 C_DEPS += \
+./source/AdminID.d \
 ./source/App.d \
+./source/FSM.d \
+./source/FSMTABLE.d \
 ./source/SysTick.d \
-./source/gpio.d 
+./source/displayLed.d \
+./source/displayManager.d \
+./source/displaySegment.d \
+./source/gpio.d \
+./source/timer.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

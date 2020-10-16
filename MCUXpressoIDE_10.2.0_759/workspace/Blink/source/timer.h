@@ -1,14 +1,14 @@
 /***************************************************************************//**
   @file     timer.h
-  @brief    Timer driver. Advance implementation
-  @author   NicolÃ¡s Magliola
+  @brief    Timer driver.
+  @author   Grupo 5.
  ******************************************************************************/
 
 #ifndef _TIMER_H_
 #define _TIMER_H_
 
 /*******************************************************************************
- * INCLUDE HEADER FILES
+ * HEADER FILES
  ******************************************************************************/
 
 #include <stdint.h>
@@ -17,22 +17,15 @@
 
 
 /*******************************************************************************
- * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
+ *  CONSTANTES Y MACROS
  ******************************************************************************/
 
-#define TIMER_TICK_MS       1
-#define TIMER_MS2TICKS(ms)  ((ms)/TIMER_TICK_MS)
-
-#define TIMERS_MAX_CANT     16
-#define TIMER_INVALID_ID    255
-
+enum {INACTIVITY, DISPLAY, TIMERS_CANT}; //Aca van los diferentes timers utilizados (inactividad, display, rotacion encoder, etc)
 
 /*******************************************************************************
- * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
+ * ESTRUCTURAS Y TYPEDEF
  ******************************************************************************/
 
-// Timer Modes
-enum { TIM_MODE_SINGLESHOT, TIM_MODE_PERIODIC, CANT_TIM_MODES };
 
 // Timer alias
 typedef uint32_t ttick_t;
@@ -40,61 +33,51 @@ typedef uint8_t tim_id_t;
 typedef void (*tim_callback_t)(void);
 
 
-/*******************************************************************************
- * VARIABLE PROTOTYPES WITH GLOBAL SCOPE
- ******************************************************************************/
 
 /*******************************************************************************
- * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
+ * FUNCIONES (SERVICIOS)
  ******************************************************************************/
 
 /**
- * @brief Initialice timer and corresponding peripheral
+ * @brief Inicializa timers y perifericos necesarios
  */
 void timerInit(void);
 
 
-// Non-Blocking services ////////////////////////////////////////////////
+/**
+ * @brief Comienza un nuevo timer
+ * @param id ID del timer a iniciar
+ * @param period timepo hasta que expire el timer EN MILISEGUNDOS
+ * @param callback callback que se llama cuando expira
+ */
+void timerStart(tim_id_t id, ttick_t period, tim_callback_t callback);
 
 /**
- * @brief Request an timer
- * @return ID of the timer to use
+ * @brief devuelve contador del timer
+ * @param id indice del timer que quiero reiniciar
+ * @return cuanto transcurrio del contador del timer (en ms)
  */
-tim_id_t timerGetId(void);
-
+ttick_t timerGetCnt(tim_id_t id);
 
 /**
- * @brief Begin to run a new timer
- * @param id ID of the timer to start
- * @param ticks time until timer expires, in ticks
- * @param mode SINGLESHOT or PERIODIC
- * @param callback Function to be call when timer expires
+ * @brief reinicia un timer
+ * @param id indice del timer que quiero reiniciar
  */
-void timerStart(tim_id_t id, ttick_t ticks, uint8_t mode, tim_callback_t callback);
-
-
-/**
- * @brief Finish to run a timer
- * @param id ID of the timer to stop
- */
-void timerStop(tim_id_t id);
+void timerRestart(tim_id_t id);
 
 
 /**
- * @brief Verify if a timer has run timeout
- * @param id ID of the timer to check for expiration
- * @return 1 = timer expired
+ * @brief Activa un timer
+ * @param id indice del timer que quiero activar
  */
-bool timerExpired(tim_id_t id);
+void timerEnable(tim_id_t id);
 
-
-// Blocking services ////////////////////////////////////////////////
 
 /**
- * @brief Wait the specified time. Use internal timer
- * @param ticks time to wait in ticks
+ * @brief Desactiva un timer
+ * @param id indice del timer que quiero desactivar
  */
-void timerDelay(ttick_t ticks);
+void timerDisable(tim_id_t id);
 
 
 /*******************************************************************************

@@ -10,7 +10,7 @@
  * INCLUDE HEADER FILES
  ******************************************************************************/
 
-#include AdminID.h
+#include "AdminID.h"
 
 
 
@@ -22,7 +22,7 @@
 bool enterCodeID(ID IDregister, users usuario)
 {
 
-	for(f=1;f<=100;f++)
+	for(int f=1;f<=100;f++)
 	{
 		if(IDregister == usuario.ID)
 		{
