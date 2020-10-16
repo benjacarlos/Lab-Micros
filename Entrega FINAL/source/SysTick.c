@@ -15,18 +15,20 @@
 #include "hardware.h"
 
 
+#define CLK 100000000U //100MHz
+
 irq_fun systick_irqfun;
 
 bool SysTick_Init (void (*funcallback)(void))
 {
 
-	systick_irqfun = funcallback;
 
 	//Inicializacion de SysTick
 	SysTick->CTRL = 0x00;
-	SysTick->LOAD = 12500000L - 1; // 125ms @ 100MHz
+	SysTick->LOAD = (CLK/SYSTICK_ISR_FREQUENCY_HZ) - 1; // load en pulsos por periodo - 1
 	SysTick->VAL = 0x00;
 	SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
+	systick_irqfun = funcallback;
 }
 
 

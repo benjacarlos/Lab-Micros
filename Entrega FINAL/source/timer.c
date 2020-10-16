@@ -18,8 +18,8 @@
 
 #define NULL 0
 
-#define MS_TO_TICKS(ms) ((ms * SYSTICK_ISR_FREQ_HZ)/1000UL )
-#define MS_TO_TICK_MAX(ms) ((ms / 1000UL) * SYSTICK_ISR_FREQ_HZ)
+#define MS_TO_TICKS(ms) ((ms * SYSTICK_ISR_FREQUENCY_HZ)/1000UL )
+#define MS_TO_TICKS_MAX(ms) ((ms / 1000UL) * SYSTICK_ISR_FREQUENCY_HZ)
 #define MS_LIMIT 1000000
 
 
@@ -82,7 +82,7 @@ void timerInit(void)
 
 void timerStart(tim_id_t id, ttick_t ticks, tim_callback_t callback)
 {
-	DisableTimer(id); //se desactiva el timer para realizar cambios
+	timerDisable(id); //se desactiva el timer para realizar cambios
 
 
 	if(ticks > MS_LIMIT)
@@ -91,12 +91,12 @@ void timerStart(tim_id_t id, ttick_t ticks, tim_callback_t callback)
 	}
 	else
 	{
-		(timers + id)->timeout = MS_TO_TICKS(ticks);
+		(timers + id)->period = MS_TO_TICKS(ticks);
 	}
 
 	(timers + id)->cnt = 0;
 	(timers + id)->callback = callback;
-	(timers + id)->state = true;
+	timerEnable(id);
 
 }
 
@@ -112,12 +112,12 @@ void timerRestart(tim_id_t id)
 
 void timerEnable(tim_id_t id)
 {
-	(timers + id)->enabled = true;
+	(timers + id)->state = true;
 }
 
 void timerDisable(tim_id_t id)
 {
-	(timers + id)->enabled = false;
+	(timers + id)->state = false;
 }
 
 
@@ -129,20 +129,15 @@ void timerDisable(tim_id_t id)
 
 static void timer_isr(void)
 {
-    // ****** COMPLETAR ******
-    // decremento los timers activos
-    // si hubo timeout!
-    // 1) execute action: callback or set flag
-    // 2) update state
 
-	for (int i = 0; i < timers_cant; i++)
+	for (int i = 0; i < TIMERS_CANT; i++)
 	{
 		if( (timers + i)->state)
 		{
 			if( ++((timers + i)->cnt) >=  ((timers + i)->period)) //incremento el contador y veo si hubo timeout
 			{
 				(timers + i)->cnt = 0;
-				((timers + i)->callback)();
+				((timers + i)->callback)();  //se llama el callback
 			}
 
 		}
