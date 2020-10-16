@@ -1,8 +1,0 @@
-#ignora extras de altium, latex y LTspice, carpetas comprimidas, y archivos de configuracion de windows.
-
-## configuracion de windows ##
-*.ini
-
-##Logs del mcu
-*.metadata
-*.log
