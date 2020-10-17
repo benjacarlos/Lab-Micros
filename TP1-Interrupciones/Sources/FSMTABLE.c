@@ -54,7 +54,7 @@ STATE estado_0[] =
 STATE estado_1[] =
 {
     {USER_ID, estado_4, check_user_id},
-    {ERROR,estado_1,error_message},
+    {ERROR,estado_0,error_message},
     {FIN_TABLA, estado_0, do_nothing}
 };
 /*
