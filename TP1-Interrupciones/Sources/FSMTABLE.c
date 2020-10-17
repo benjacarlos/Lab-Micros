@@ -79,7 +79,7 @@ STATE estado_9[] ={
 STATE estado_2[] =
 {
     {ADMIN_ID, estado_5, check_admin_id},
-    {ERROR, estado_2, error_message},
+    {ERROR, estado_0, error_message},
     {FIN_TABLA, estado_0, do_nothing}
 };
 /*
