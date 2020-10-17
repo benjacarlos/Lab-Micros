@@ -17,10 +17,8 @@ extern STATE estado_5[];
 extern STATE estado_6[];
 extern STATE estado_7[];
 extern STATE estado_8[];
-extern STATE estado_9[];
-extern STATE estado_10[];
-extern STATE estado_11[];
-extern STATE estado_12[];
+
+
 
 /*Funciones de las acciones*/
 void do_nothing(void);
@@ -54,21 +52,14 @@ STATE estado_0[] =
 STATE estado_1[] =
 {
     {USER_ID, estado_4, check_user_id},
-    {ERROR,estado_0,error_message},
+    {ERROR,estado_1,error_message},
     {FIN_TABLA, estado_0, do_nothing}
 };
 /*
-    Estado 4: Modo usuario, checkeo de pin
+    Estado 4: Modo usuario, checkeo de pin y apertura de puerta
 */
 STATE estado_4[] = {
-    {USER_PIN, estado_9, check_user_pin},
-    {ERROR, estado_1, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
-};
-/*
-    Estado 9: Modo usuario, apertura de puerta
-*/
-STATE estado_9[] ={
+    {USER_PIN, estado_4, check_user_pin},
     {OPEN_DOOR, estado_0, open_door},
     {ERROR, estado_4, error_message},
     {FIN_TABLA, estado_0, do_nothing}
@@ -79,7 +70,7 @@ STATE estado_9[] ={
 STATE estado_2[] =
 {
     {ADMIN_ID, estado_5, check_admin_id},
-    {ERROR, estado_0, error_message},
+    {ERROR, estado_2, error_message},
     {FIN_TABLA, estado_0, do_nothing}
 };
 /*
@@ -88,43 +79,26 @@ STATE estado_2[] =
 STATE estado_5[] =
 {
     {ADMIN_PIN, estado_6, check_admin_pin},
-    {ERROR, estado_2, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
-};
-/*
-    Estado 6: Modo admin, chekeo usuario
-*/
-STATE estado_6[] =
-{
-    {USER_ID, estado_10, check_user_id},
     {ERROR, estado_5, error_message},
     {FIN_TABLA, estado_0, do_nothing}
 };
 /*
-    Estado 10: Modo admin, acciones a usuarios
+    Estado 6: Modo admin, acciones a usuarios
 */
-STATE estado_10[] =
+STATE estado_6[] =
 {
+    {USER_ID, estado_6, check_user_id},
     {ADD_ID, estado_7, add_id},
     {USER_PIN, estado_8, check_user_pin},
     {ERROR, estado_6, error_message},
     {FIN_TABLA, estado_0, do_nothing}
 };
 /*
-    Estado 7: Modo admin, agregado de usuarios
+    Estado 7: Modo admin, agregado de usuarios pin
 */
 STATE estado_7[] =
 {
-    {ADD_PIN, estado_11, add_pin},
-    {ERROR, estado_10, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
-};
-/*
-    Estado 11: Modo admin, manejo de error en el agregado de PIN
-*/
-STATE estado_11[] =
-{
-    {SUCCES, estado_6, do_nothing},
+    {ADD_PIN, estado_6, add_pin},
     {ERROR, estado_7, error_message},
     {FIN_TABLA, estado_0, do_nothing}
 };
@@ -133,16 +107,7 @@ STATE estado_11[] =
 */
 STATE estado_8[] =
 {
-    {CHANGE_PIN, estado_12, change_pin},
-    {ERROR, estado_10, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
-};
-/*
-    Estado 12: Modo admin, manejo de error en el cambio de PIN
-*/
-STATE estado_12[] =
-{
-    {SUCCES, estado_6, do_nothing},
+    {CHANGE_PIN, estado_6, change_pin},
     {ERROR, estado_8, error_message},
     {FIN_TABLA, estado_0, do_nothing}
 };
