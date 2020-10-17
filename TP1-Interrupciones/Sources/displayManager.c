@@ -44,6 +44,7 @@ void InitDisplay(void)
 	{
 		InitializeSegmentDisplay();
 		ClearDisplay();
+		InitializeTimers();
 //		SetTimer(DISPLAY, MS_BETWEEN_SYMBOLS/MAX_BRIGHTNESS, &GenerateDisplayEv);
 //		SetTimer(MESSAGE,STRING_TIME, &ShiftLeft);//Setteo el timer con la velocidad de movimiento del string.
 		DisableTimer(MESSAGE); //Por default asumo que se desea un mensaje que nose mueva a traves del display.
