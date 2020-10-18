@@ -9,6 +9,7 @@ C_SRCS += \
 ../source/FSM.c \
 ../source/FSMTABLE.c \
 ../source/SysTick.c \
+../source/boardLed.c \
 ../source/displayLed.c \
 ../source/displayManager.c \
 ../source/displaySegment.c \
@@ -21,6 +22,7 @@ OBJS += \
 ./source/FSM.o \
 ./source/FSMTABLE.o \
 ./source/SysTick.o \
+./source/boardLed.o \
 ./source/displayLed.o \
 ./source/displayManager.o \
 ./source/displaySegment.o \
@@ -33,6 +35,7 @@ C_DEPS += \
 ./source/FSM.d \
 ./source/FSMTABLE.d \
 ./source/SysTick.d \
+./source/boardLed.d \
 ./source/displayLed.d \
 ./source/displayManager.d \
 ./source/displaySegment.d \

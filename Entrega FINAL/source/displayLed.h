@@ -9,12 +9,20 @@
 #define DISPLAYLED_H_
 #include <stdbool.h>
 
-void InitLeds();
-void ResetLeds();
-void LedBlink(int pos, bool on_off);
-void SetLed(int pos, bool on_off);
-bool GetLedBlink(int pos);
-bool GetLedStatus();
-void SetBrightness(int pos, int brightness);
+#define LED_DISPLAY_MAX 3
 
+void InitDisplayLeds();
+void ResetDisplayLeds();
+
+//Configuraciones del led
+void SetLedDisplayBlink(int pos, bool on_off);
+void SetDisplayBrightness(int pos, int brightness);
+
+void SetDisplayLed(int pos, bool on_off);
+bool GetDisplayLedBlink(int pos);
+
+//Pongo en on off a los leds convenientes
+void setDisplayLedPos(int pos, bool on_off);
+//Verifico caracteristicas del led y updateo el led
+void showDisplayLeds(int pos);
 #endif /* SOURCES_DISPLAYLED_H_ */
