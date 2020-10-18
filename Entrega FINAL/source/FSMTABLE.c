@@ -40,86 +40,86 @@ void add_pin(void);
 */
 STATE estado_0[] =
 {
-    {USER, estado_1, do_nothing},
-    {ADMIN, estado_2, do_nothing},
-    {DISPLAY, estado_3, do_nothing},
-    {ERROR, estado_0, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
+    {EV_USER, estado_1, do_nothing},
+    {EV_ADMIN, estado_2, do_nothing},
+    {EV_DISPLAY, estado_3, do_nothing},
+    {EV_ERROR, estado_0, error_message},
+    {EV_FIN_TABLA, estado_0, do_nothing}
 };
 /*
     Estado 1: Modo usuario, chekeo de id
 */
 STATE estado_1[] =
 {
-    {USER_ID, estado_4, check_user_id},
-    {ERROR,estado_1,error_message},
-    {FIN_TABLA, estado_0, do_nothing}
+    {EV_USER_ID, estado_4, check_user_id},
+    {EV_ERROR,estado_1,error_message},
+    {EV_FIN_TABLA, estado_0, do_nothing}
 };
 /*
     Estado 4: Modo usuario, checkeo de pin y apertura de puerta
 */
 STATE estado_4[] = {
-    {USER_PIN, estado_4, check_user_pin},
-    {OPEN_DOOR, estado_0, open_door},
-    {ERROR, estado_4, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
+    {EV_USER_PIN, estado_4, check_user_pin},
+    {EV_OPEN_DOOR, estado_0, open_door},
+    {EV_ERROR, estado_4, error_message},
+    {EV_FIN_TABLA, estado_0, do_nothing}
 };
 /*
     Estado 2: Modo admin, chekeo id
 */
 STATE estado_2[] =
 {
-    {ADMIN_ID, estado_5, check_admin_id},
-    {ERROR, estado_2, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
+    {EV_ADMIN_ID, estado_5, check_admin_id},
+    {EV_ERROR, estado_2, error_message},
+    {EV_FIN_TABLA, estado_0, do_nothing}
 };
 /*
     Estado 5: Modo admin, chekeo pin
 */
 STATE estado_5[] =
 {
-    {ADMIN_PIN, estado_6, check_admin_pin},
-    {ERROR, estado_5, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
+    {EV_ADMIN_PIN, estado_6, check_admin_pin},
+    {EV_ERROR, estado_5, error_message},
+    {EV_FIN_TABLA, estado_0, do_nothing}
 };
 /*
     Estado 6: Modo admin, acciones a usuarios
 */
 STATE estado_6[] =
 {
-    {USER_ID, estado_6, check_user_id},
-    {ADD_ID, estado_7, add_id},
-    {USER_PIN, estado_8, check_user_pin},
-    {ERROR, estado_6, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
+    {EV_USER_ID, estado_6, check_user_id},
+    {EV_ADD_ID, estado_7, add_id},
+    {EV_USER_PIN, estado_8, check_user_pin},
+    {EV_ERROR, estado_6, error_message},
+    {EV_FIN_TABLA, estado_0, do_nothing}
 };
 /*
     Estado 7: Modo admin, agregado de usuarios pin
 */
 STATE estado_7[] =
 {
-    {ADD_PIN, estado_6, add_pin},
-    {ERROR, estado_7, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
+    {EV_ADD_PIN, estado_6, add_pin},
+    {EV_ERROR, estado_7, error_message},
+    {EV_FIN_TABLA, estado_0, do_nothing}
 };
 /*
     Estado 8: Modo admin, cambio de usuarios pin
 */
 STATE estado_8[] =
 {
-    {CHANGE_PIN, estado_6, change_pin},
-    {ERROR, estado_8, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
+    {EV_CHANGE_PIN, estado_6, change_pin},
+    {EV_ERROR, estado_8, error_message},
+    {EV_FIN_TABLA, estado_0, do_nothing}
 };
 /*
     Estado 3: Modo Display
 */
 STATE estado_3[] =
 {
-    {LIGHT_UP, estado_3, light_plus},
-    {LIGHT_DOWN, estado_3, light_minus},
-    {ERROR, estado_3, error_message},
-    {FIN_TABLA, estado_0, do_nothing}
+    {EV_LIGHT_UP, estado_3, light_plus},
+    {EV_LIGHT_DOWN, estado_3, light_minus},
+    {EV_ERROR, estado_3, error_message},
+    {EV_FIN_TABLA, estado_0, do_nothing}
 };
 
 /*Rutinas de accion*/

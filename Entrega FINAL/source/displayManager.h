@@ -7,6 +7,7 @@
 
 #ifndef DISPLAYMANAGER_H_
 #define DISPLAYMANAGER_H_
+#include <stdbool.h>
 
 //Inicializa los recursos necesarios para utilizar el display
 void InitDisplay(void);

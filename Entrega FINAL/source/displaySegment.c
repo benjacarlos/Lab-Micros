@@ -17,7 +17,8 @@
  **************************************************************************/
 
 // Display de 7 Segmentos
-//
+
+//http://en.fakoo.de/siekoo.html
 //const unsigned char seven_seg_digits_decode_gfedcba[75]= {
 ///*  0     1     2     3     4     5     6     7     8     9     :     ;     */
 //    0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x00, 0x00,
@@ -49,7 +50,7 @@ static const unsigned char abc_array[]=
 };
 
 // Flag de Inicializacion
-static bool iniHDips = false;
+static bool initialized = false;
 
 // Cantidad de displays
 enum {FIRST_DIGIT,SECOND_DIGIT,THIRD_DIGIT, FOURTH_DIGIT, NUMBER_OF_DIGITS};
@@ -107,8 +108,8 @@ void InitSegmentDisplay(void)
 			gpioMode(CSEGG, OUTPUT);
 			gpioMode(CSEGDP, OUTPUT);
 			//Inicializo pins de la linea de seleccion del display a utilizar
+			gpioMode(SEL0, OUTPUT);
 			gpioMode(SEL1, OUTPUT);
-			gpioMode(SEL2, OUTPUT);
 
 			initialized = true;
 		}
