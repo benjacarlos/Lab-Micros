@@ -50,7 +50,7 @@ static const unsigned char abc_array[]=
 };
 
 // Flag de Inicializacion
-static bool iniHDips = false;
+static bool initialized = false;
 
 // Cantidad de displays
 enum {FIRST_DIGIT,SECOND_DIGIT,THIRD_DIGIT, FOURTH_DIGIT, NUMBER_OF_DIGITS};
@@ -108,8 +108,8 @@ void InitSegmentDisplay(void)
 			gpioMode(CSEGG, OUTPUT);
 			gpioMode(CSEGDP, OUTPUT);
 			//Inicializo pins de la linea de seleccion del display a utilizar
+			gpioMode(SEL0, OUTPUT);
 			gpioMode(SEL1, OUTPUT);
-			gpioMode(SEL2, OUTPUT);
 
 			initialized = true;
 		}

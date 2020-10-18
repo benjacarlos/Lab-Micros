@@ -7,7 +7,6 @@
 
 #include "displayManager.h"
 #include "timer.h"
-#include <stdbool.h>
 #include <stdint.h>
 #include "displaySegment.h"
 #include "displayLed.h"
@@ -39,6 +38,7 @@ static bool initialized = false;
 void ledDisplayCallback (void);
 unsigned int GetStringSize(const char* str);
 void GenerateDisplayEv(void);
+void ShiftLeft(void);
 
 void InitDisplay(void)
 {
@@ -55,8 +55,7 @@ void InitDisplay(void)
 		timerStart(LED, LED_MS, &ledDisplayCallback);
 		timerDisable(MESSAGE); //Por default asumo que se desea un mensaje que nose mueva a traves del display.
 
-		brigthness = MAX_BRIGHTNESS; //Por default comienza con la intensidad del display al maximo.
-		display_counter= 0;
+		SetBrightness(MAX_BRIGHTNESS); //Por default comienza con la intensidad del display al maximo.
 		initialized = true;
 	}
 }
@@ -133,15 +132,16 @@ void UpdateDisplay(void)
 				display_pos = DISPLAY_SIZE-1;
 			}
 		}
-		else if(current_string[string_position] == '\0')
+		else if(current_string[string_pos] == '\0')
 		{
 			string_size = string_pos;
 			PrintChar(' ',display_pos);
 		}
 		else
 		{
-			PrintChar(current_string[string_position],display_pos);
+			PrintChar(current_string[string_pos],display_pos);
 		}
+	}
 }
 
 void ShiftLeft()
@@ -159,6 +159,12 @@ void ledDisplayCallback (void)
 
 }
 
+void GenerateDisplayEv(void)
+{
+	//fsm evento display para update
+	return;
+}
+
 unsigned int GetStringSize(const char* str)
 {
 	unsigned int size = 0;
@@ -166,8 +172,4 @@ unsigned int GetStringSize(const char* str)
 	return --size;
 }
 
-void GenerateDisplayEv(void)
-{
-	//fsm evento display para update
-}
 

@@ -26,7 +26,7 @@ void ledBoardInit()
 
 void setLedBoard(int led_color, bool on_off)
 {
-	switch (color)
+	switch (led_color)
 	{
 		//led on when low (check)
 		case BR_LED_RED:

@@ -22,7 +22,7 @@
 //#define PIN_LED_GREEN   PORTNUM2PIN(PE, 26) // PTE26
 //#define PIN_LED_BLUE    PORTNUM2PIN(PB,21) // PTB21
 
-#define LED_MS 1 //1ms
+
 #define BLINK_FREQ 5 //1/2 seg
 
 enum {DISPLAY_LED, BOARD_LED, WHERE_LED};
@@ -50,9 +50,9 @@ static int bright_counter[LED_DISPLAY_MAX];
 /********************************************************************************************
  * 										FUNCIONES
  ********************************************************************************************/
-void blinkHandle(int pos);
+bool blinkHandle(int pos);
 
-void brightnessHandle(int pos);
+bool brightnessHandle(int pos);
 
 void InitDisplayLeds()
 {
@@ -81,7 +81,7 @@ void ResetDisplayLeds()
 	{
 		led_displaying[i] = false;
 		blinking[i] = false;
-		link_cleared[i] = false;
+		blink_cleared[i] = false;
 		bright_counter[i] = 0;
 		brightness[i] = MAX_BRIGHTNESS;
 	}
@@ -108,7 +108,7 @@ void SetLedDisplayBlink(int pos, bool on_off)
 void SetDisplayLed(int pos, bool on_off)
 {
 	if( pos < LED_DISPLAY_MAX)
-		curr_displaying[pos] = on_off;
+		led_displaying[pos] = on_off;
 }
 
 bool GetDisplayLedBlink(int pos)
@@ -116,7 +116,7 @@ bool GetDisplayLedBlink(int pos)
 	return blinking[pos];
 }
 
-void SetDisplayBrightness(int pos, int brightness)
+void SetDisplayBrightness(int pos, int bright)
 {
 	if( (bright < MAX_BRIGHTNESS) && (bright >= MIN_BRIGHTNESS) )
 		brightness[pos] = bright;
@@ -127,8 +127,8 @@ void SetDisplayBrightness(int pos, int brightness)
 void setDisplayLedPos(int pos, bool on_off)
 {
 	pos++; // 1 2 3
-	gpioWrite (PIN_DIODE_0, on_off && (pos & STATUS0_MASK));
-	gpioWrite (PIN_DIODE_1, on_off && (pos & STATUS1_MASK));
+	gpioWrite (STATUS0, on_off && (pos & STATUS0_MASK));
+	gpioWrite (STATUS1, on_off && (pos & STATUS1_MASK));
 }
 
 void showDisplayLeds(int pos)
@@ -140,7 +140,7 @@ void showDisplayLeds(int pos)
 }
 
 
-void brightnessHandle(int pos)
+bool brightnessHandle(int pos)
 {
 	bool should_show = true;
 	if(brightness[pos] < MAX_BRIGHTNESS)
@@ -152,7 +152,7 @@ void brightnessHandle(int pos)
 		return should_show;
 }
 
-void blinkHandle(int pos)
+bool blinkHandle(int pos)
 {
 	static int blink_counter[LED_DISPLAY_MAX] = {0, 0, 0};
 

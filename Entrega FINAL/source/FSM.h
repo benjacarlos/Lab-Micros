@@ -8,7 +8,7 @@
 	//includes
 	#include <stdint.h>
 	// Variables
-	#define FIN_TABLA 0xFF
+	#define EV_FIN_TABLA 0xFF
 	typedef uint8_t BYTE;
 	typedef struct tabla_estados	{
 		BYTE evento;
