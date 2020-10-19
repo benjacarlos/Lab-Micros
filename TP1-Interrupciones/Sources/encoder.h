@@ -43,11 +43,11 @@ typedef struct{
 void InitEncoder(void);
 //
 encoderUd_t popEncoderEvent(void);
-_Bool isEncEventValid(void);
+_Bool isEncoderEventValid(void);
 void rotationCallback(void);
 void initEncoderQueue(void);
 
 //encoderQueue_t getEncoderQueue(void);  // por ahora no hace falta tomar eventos
-
+void buttonCallback(void);
 
 #endif /* SOURCES_ENCODER_H_ */

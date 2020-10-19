@@ -18,7 +18,7 @@
 #define SIGNAL_PINC PORTNUM2PIN(PD,2)	// PTD2
 
 
-#define BUTTON_TIME 	100000 		// 100 milisegundos
+#define BUTTON_FREQUENCY 	100000 		// 100 milisegundos
 #define ROTATION_FREQUENCY 66000	//80 milisegundos
 
 
@@ -54,8 +54,8 @@ void initEncoderHAL(void (*funcallback)(void))
 		encoderTimerCount = 0;
 		// Inicio el Timer del encoder
 		timerInit();
-		timerStart(CHECK_ROTATION_TIMER, ROTATION_FREQUENCY, funcallback);
-		timerStart(BUTTON_TIMER, BUTTON_TIME, &encTimerRoutine);
+		timerStart(ROTATION_TIMER, ROTATION_FREQUENCY, funcallback);
+		timerStart(BUTTON_TIMER, BUTTON_FREQUENCY, &encTimerRoutine);
 
 		//EnableTimer(ENCODER_TIMER);
 		inicioEncoder = true;
