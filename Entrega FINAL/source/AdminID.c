@@ -40,8 +40,8 @@ void initDataBase(void)
 
 estado agregoUsuario(user_t newUser){
 	// me fijo si no hay ovweflow
-	if(dataBase.top == MAX_CANT_USERS-1){
-			return DATABASE_FULL;
+	if(dataBase.top == MAX_USERS-1){
+			return DATABASE_LLENO;
 		}
 	else{
 		// checks if ID already on list
@@ -60,11 +60,10 @@ estado agregoUsuario(user_t newUser){
 	}
 }
 
-
 estado eliminoUsuario(user_t userToDelete){
 	// checks if ID is on list
-	int posicion = buscoID(userToDelete.ID);
-	if( posicion < (MAX_USERS+1) )
+	int posicion = buscoID( userToDelete.ID[TAMANO_ID] );
+	if( posicion < MAX_USERS+1 )
 	{
 		// si encuentro el ID lo borro
 		user_t topUser = dataBase.list[dataBase.top];	// guardo el ultimo usuario de la lista
@@ -80,13 +79,13 @@ estado eliminoUsuario(user_t userToDelete){
 
 
 //	Función que busca la posicion del ID
-int buscoID (char userID[TAMAÑO_ID]){
+int buscoID (char userID[TAMANO_ID]){
 	bool IDfound = false;
-	int posicion,j; //busco el ID
+	int posicion, j; //busco el ID
 	for(posicion=0 ; posicion< (dataBase.top + 1) ; ++posicion){
 		bool same = true;
-		for(j=0 ; i<TAMAÑO_ID ; ++i){
-			if(dataBase.list[posicion].ID[j] != userToDelete.ID[j]){
+		for(j=0 ; j<TAMANO_ID ; ++j){
+			if(dataBase.list[posicion].ID[j] != userID[j]){
 				same = false;	// mientras sea falso sigo en el for
 			}
 		}
@@ -94,7 +93,7 @@ int buscoID (char userID[TAMAÑO_ID]){
 			IDfound = true;
 			break;
 		}
-	if (IFfound){
+	if (IDfound){
 		return posicion;
 	}
 	else{
@@ -102,15 +101,14 @@ int buscoID (char userID[TAMAÑO_ID]){
 	}
 
 }
-
-estado cambioPIN(char usersID[TAMAÑO_ID], char usersNewPIN[PIN_MAXIMO]){
+estado cambioPIN(char usersID[TAMANO_ID], char usersNewPIN[PIN_MAXIMO]){
 	// busco el ID en la base de datos
 	estado value = ID_NO_ENCONTRADO;
-	int posicion = buscoID(usersID[TAMAÑO_ID]);
+	int posicion = buscoID(usersID[TAMANO_ID]);
 	if( posicion < MAX_USERS+1 ){
 		int j;
 		for(j=0;j<PIN_MAXIMO;j++){
-			dataBase.list[posicion].PIN[j] = usersNewPIN[j]; //reemplazo el PIN
+			dataBase.list[posicion].pin[j] = usersNewPIN[j]; //reemplazo el PIN
 			}
 		value=EXITO;
 	}
@@ -118,30 +116,30 @@ estado cambioPIN(char usersID[TAMAÑO_ID], char usersNewPIN[PIN_MAXIMO]){
 }
 
 
-category_t verificoCategory(char usersID[TAMAÑO_ID]){
+category_t verificoCategory(char usersID[TAMANO_ID]){
 // checks if ID is on list
-	int posicion = buscoID( usersID[TAMAÑO_ID] );
-	return dataBase.list[posicion].category;  // devuelvo la categoria del ID
+	int posicion = buscoID( usersID[TAMANO_ID] );
+	return dataBase.list[posicion].categoria;  // devuelvo la categoria del ID
 }
 
 
-bool cambioCatagory(char usersID[TAMAÑO_ID], category_t nuevaCategory){
+bool cambioCatagory(char usersID[TAMANO_ID], category_t nuevaCategory){
 	// busco el ID en la base de datos
-	int usuario = buscoID( usersID[TAMAÑO_ID] );
-	category_t categoryUser = verificoCategory( usersID[TAMAÑO_ID] );
+	int usuario = buscoID( usersID[TAMANO_ID] );
+	category_t categoryUser = verificoCategory( usersID[TAMANO_ID] );
 	bool value=false;
 	if( (categoryUser != MASTER) | (nuevaCategory == MASTER) ){
-		dataBase.list[usuario].category = nuevaCategory;
+		dataBase.list[usuario].categoria = nuevaCategory;
 		value = true;
 	}
 	return value;
 }
 
 
-bool verificoID(char usersID[TAMAÑO_ID]){
+bool verificoID(char usersID[TAMANO_ID]){
 // checks if ID is on list
 	bool IDfound = false;
-	int posicion = buscoId(usersID[TAMAÑO_ID]);
+	int posicion = buscoId(usersID[TAMANO_ID]);
 	if (posicion < MAX_USERS+1){
 		IDfound = true;
 	}
@@ -150,13 +148,13 @@ bool verificoID(char usersID[TAMAÑO_ID]){
 
 
 
-bool verificoPIN(char usersID[TAMAÑO_ID], char usersPIN[PIN_MAXIMO]){
+bool verificoPIN(char usersID[TAMANO_ID], char usersPIN[PIN_MAXIMO]){
 	// Busco el ID en la base de datos
-	int posicion = buscoID(usersID[TAMAÑO_ID]);
+	int posicion = buscoID(usersID[TAMANO_ID]);
 	bool correctPIN = true;
 	int j;
-		for(j=0 ; j<PIN_MAX_LENGTH ; j++){
-			if(dataBase.userList[posicion].usersPIN[j] != usersPIN[j]){  // verifico el PIN
+		for(j=0 ; j<PIN_MAXIMO ; j++){
+			if(dataBase.list[posicion].pin[j] != usersPIN[j]){  // verifico el PIN
 				correctPIN = false;
 				break;
 			}
