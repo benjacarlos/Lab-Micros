@@ -5,18 +5,27 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../source/App.c \
+../source/CardReader.c \
+../source/CardReaderDecoder.c \
+../source/CardReaderHAL.c \
 ../source/SysTick.c \
 ../source/gpio.c \
 ../source/timer.c 
 
 OBJS += \
 ./source/App.o \
+./source/CardReader.o \
+./source/CardReaderDecoder.o \
+./source/CardReaderHAL.o \
 ./source/SysTick.o \
 ./source/gpio.o \
 ./source/timer.o 
 
 C_DEPS += \
 ./source/App.d \
+./source/CardReader.d \
+./source/CardReaderDecoder.d \
+./source/CardReaderHAL.d \
 ./source/SysTick.d \
 ./source/gpio.d \
 ./source/timer.d 

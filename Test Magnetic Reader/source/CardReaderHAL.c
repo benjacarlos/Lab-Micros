@@ -1,7 +1,7 @@
 /*
  * CardReaderHAL.c
  *
- *  Created on: Oct 17, 2020
+ *  Created on: Oct 12, 2020
  *      Author: Grupo 5
  */
 
@@ -22,7 +22,6 @@
 #define CLK_PIN PORTNUM2PIN(PC, 7) //cable verde
 #define ENABLE_PIN PORTNUM2PIN(PC, 0) //cable amarillo
 
-//Agregar Debug
 
 
 /*******************************************************************************
@@ -54,7 +53,7 @@ void Queue_Init(void);
 static bool read_enable = false;
 
 static uint8_t save_items = 0;
-static uint8_t data_counter = 0;
+static uint32_t data_counter = 0;
 
 static cardReaderQueue_t reader_queue;
 
@@ -75,7 +74,7 @@ void CardReaderHW_Init(void)
 		gpioMode(CLK_PIN, INPUT_PULLUP);
 		gpioMode(ENABLE_PIN, INPUT_PULLUP);
 
-		gpioIRQ(ENABLE_PIN, GPIO_IRQ_MODE_BOTH_EDGES, (pinIrqFun_t) enableRoutine);
+		gpioIRQ(ENABLE_PIN, GPIO_IRQ_MODE_BOTH_EDGES, (pinIrqFun_t) enablefun);
 
 		read_enable = false;
 	}
@@ -164,4 +163,10 @@ CardEncodedData_t * get_buffer(void)
 	}
 
 	return buffer;
+}
+
+
+bool queue_not_empty(void)
+{
+	return !reader_queue.empty;
 }

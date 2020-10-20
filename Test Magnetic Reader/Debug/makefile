@@ -25,25 +25,25 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: Test\ Timers.axf
+all: Test\ Magnetic\ Reader.axf
 
 # Tool invocations
-Test\ Timers.axf: $(OBJS) $(USER_OBJS)
+Test\ Magnetic\ Reader.axf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -Xlinker -Map="Test Timers.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T "Entrega_Final_Debug.ld" -o "Test Timers.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -Xlinker -Map="Test Magnetic Reader.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T "Entrega_Final_Debug.ld" -o "Test Magnetic Reader.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) "Test Timers.axf"
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) "Test Magnetic Reader.axf"
 	-@echo ' '
 
 post-build:
 	-@echo 'Performing post-build steps'
-	-arm-none-eabi-size "Test Timers.axf"; # arm-none-eabi-objcopy -v -O binary "Test Timers.axf" "Test Timers.bin" ; # checksum -p MK64FN1M0xxx12 -d "Test Timers.bin";
+	-arm-none-eabi-size "Test Magnetic Reader.axf"; # arm-none-eabi-objcopy -v -O binary "Test Magnetic Reader.axf" "Test Magnetic Reader.bin" ; # checksum -p MK64FN1M0xxx12 -d "Test Magnetic Reader.bin";
 	-@echo ' '
 
 .PHONY: all clean dependents post-build

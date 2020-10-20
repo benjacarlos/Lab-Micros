@@ -1,13 +1,14 @@
 /*
  * CardReaderHAL.h
  *
- *  Created on: Oct 17, 2020
- *      Author: Grupo 7
+ *  Created on: Oct 12, 2020
+ *      Author: Grupo 5
  */
 
 #ifndef CARDREADERHAL_H_
 #define CARDREADERHAL_H_
 
+#include <stdint.h>
 
 /*******************************************************************************
  *  CONSTANTES Y MACROS
@@ -39,6 +40,8 @@ void CardReaderHW_Init(void);
  */
 CardEncodedData_t * get_buffer(void);
 
+
+_Bool queue_not_empty(void); //devuelve true si NO esta vacia la cola, es decir si vino un evento de lectura
 
 #endif /* CARDREADERHAL_H_ */
 
