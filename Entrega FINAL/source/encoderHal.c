@@ -35,7 +35,7 @@ static uint8_t encoderTimerCount;
  *								FUNCIONES LOCALES
  *******************************************************************************/
 
-// void encoderTimerRoutine(void);	// idea no utilizada
+void encoderTimerRoutine(void);	// idea no utilizada
 
 /*******************************************************************************
  *									FUNCIONES
@@ -53,7 +53,7 @@ void initEncoderHal(void (*funcallback)(void))
 		encoderTimerCount = 0;// Inicio el Timer del encoder
 		timerInit();
 		timerStart(ROTATION_TIMER, ROTATION_FREQUENCY, funcallback);
-		timerStart(BUTTON_TIMER, BUTTON_FREQUENCY, &encTimerRoutine);
+		timerStart(BUTTON_TIMER, BUTTON_FREQUENCY, &encoderTimerRoutine);
 
 		// se inicio el Encoder
 		inicioEncoder = true;
