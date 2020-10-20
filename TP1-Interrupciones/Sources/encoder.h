@@ -23,13 +23,15 @@
 #define LOW 	0
 #define HIGH	1
 
-typedef enum {UP, DOWN, BACK, ENTER, CANCEL}enc_type;	// esta no es mi idea, yo preferia usar números
+typedef enum { UP , DOWN , ENTER , BACK }encoder_type;	//
 
+// valores que toma el evento
 typedef struct{
-	enc_type input;
+	encoder_type input;
 	_Bool isValid;
 }encoderUd_t;
 
+// cola de eventos
 typedef struct{
 	int top; 			//contador de eventos
 	encoderUd_t event;
@@ -40,12 +42,13 @@ typedef struct{
  * FUNCIONES
  ******************************************************************************/
 
-void InitEncoder(void);
+void initEncoder(void);					// inicio el encoder en general
 //
-encoderUd_t popEncoderEvent(void);
-_Bool isEncoderEventValid(void);
-void rotationCallback(void);
-void initEncoderQueue(void);
+encoderUd_t pullEncoderEvent(void);		// saco el ultimo evento de la cola de evento
+void pushEncoderEvent(encoderUd_t event);	// meto un evento en la cola de evento
+_Bool isEncoderEventValid(void);		//
+void rotationCallback(void);			//
+void initEncoderQueue(void);			// inicio la cola de evento del encoder
 
 //encoderQueue_t getEncoderQueue(void);  // por ahora no hace falta tomar eventos
 void buttonCallback(void);
