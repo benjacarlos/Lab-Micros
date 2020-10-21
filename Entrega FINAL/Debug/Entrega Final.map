@@ -172,7 +172,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x28 ./source/CardReader.o
  .debug_macro   0x00000000       0x22 ./source/CardReader.o
  .debug_line    0x00000000      0x11f ./source/CardReader.o
- .debug_str     0x00000000     0x390f ./source/CardReader.o
+ .debug_str     0x00000000     0x391b ./source/CardReader.o
  .comment       0x00000000       0x7f ./source/CardReader.o
  .debug_frame   0x00000000       0x6c ./source/CardReader.o
  .ARM.attributes
@@ -213,7 +213,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x22 ./source/CardReaderDecoder.o
  .debug_macro   0x00000000      0x174 ./source/CardReaderDecoder.o
  .debug_line    0x00000000      0x281 ./source/CardReaderDecoder.o
- .debug_str     0x00000000     0x43cc ./source/CardReaderDecoder.o
+ .debug_str     0x00000000     0x43d8 ./source/CardReaderDecoder.o
  .comment       0x00000000       0x7f ./source/CardReaderDecoder.o
  .debug_frame   0x00000000       0xd4 ./source/CardReaderDecoder.o
  .ARM.attributes
@@ -262,11 +262,12 @@ Discarded input sections
  .debug_macro   0x00000000       0x3a ./source/CardReaderHAL.o
  .debug_macro   0x00000000      0x174 ./source/CardReaderHAL.o
  .debug_line    0x00000000      0x165 ./source/CardReaderHAL.o
- .debug_str     0x00000000     0x3e01 ./source/CardReaderHAL.o
+ .debug_str     0x00000000     0x3e0d ./source/CardReaderHAL.o
  .comment       0x00000000       0x7f ./source/CardReaderHAL.o
  .debug_frame   0x00000000       0xcc ./source/CardReaderHAL.o
  .ARM.attributes
                 0x00000000       0x39 ./source/CardReaderHAL.o
+ .group         0x00000000        0xc ./source/EncoderHandler.o
  .group         0x00000000        0xc ./source/EncoderHandler.o
  .group         0x00000000        0xc ./source/EncoderHandler.o
  .group         0x00000000        0xc ./source/EncoderHandler.o
@@ -278,27 +279,37 @@ Discarded input sections
  .bss.IsPin     0x00000000        0x1 ./source/EncoderHandler.o
  .bss.IsID      0x00000000        0x1 ./source/EncoderHandler.o
  .bss.Number    0x00000000        0x1 ./source/EncoderHandler.o
+ .bss.Numero_entero
+                0x00000000        0x8 ./source/EncoderHandler.o
+ .bss.Pointer   0x00000000        0x1 ./source/EncoderHandler.o
+ .text.InitNumber
+                0x00000000       0x3c ./source/EncoderHandler.o
+ .text.GettingTotalNumber
+                0x00000000      0x1c0 ./source/EncoderHandler.o
+ .text.GetTotalNum
+                0x00000000       0x14 ./source/EncoderHandler.o
  .text.UpdateNumber
-                0x00000000       0x78 ./source/EncoderHandler.o
+                0x00000000       0xd0 ./source/EncoderHandler.o
  .text.GetNumber
                 0x00000000       0x18 ./source/EncoderHandler.o
  .text.ResetNumber
                 0x00000000       0x18 ./source/EncoderHandler.o
- .debug_info    0x00000000      0x128 ./source/EncoderHandler.o
- .debug_abbrev  0x00000000       0xbe ./source/EncoderHandler.o
+ .debug_info    0x00000000      0x23c ./source/EncoderHandler.o
+ .debug_abbrev  0x00000000      0x164 ./source/EncoderHandler.o
  .debug_aranges
-                0x00000000       0x30 ./source/EncoderHandler.o
- .debug_ranges  0x00000000       0x20 ./source/EncoderHandler.o
- .debug_macro   0x00000000       0x4b ./source/EncoderHandler.o
+                0x00000000       0x48 ./source/EncoderHandler.o
+ .debug_ranges  0x00000000       0x68 ./source/EncoderHandler.o
+ .debug_macro   0x00000000       0x6a ./source/EncoderHandler.o
  .debug_macro   0x00000000      0xa5a ./source/EncoderHandler.o
  .debug_macro   0x00000000       0x22 ./source/EncoderHandler.o
- .debug_macro   0x00000000       0x10 ./source/EncoderHandler.o
  .debug_macro   0x00000000      0x34e ./source/EncoderHandler.o
- .debug_macro   0x00000000       0x1c ./source/EncoderHandler.o
- .debug_line    0x00000000      0x110 ./source/EncoderHandler.o
- .debug_str     0x00000000     0x38f6 ./source/EncoderHandler.o
+ .debug_macro   0x00000000       0x3a ./source/EncoderHandler.o
+ .debug_macro   0x00000000       0x10 ./source/EncoderHandler.o
+ .debug_macro   0x00000000       0x22 ./source/EncoderHandler.o
+ .debug_line    0x00000000      0x1b6 ./source/EncoderHandler.o
+ .debug_str     0x00000000     0x3a01 ./source/EncoderHandler.o
  .comment       0x00000000       0x7f ./source/EncoderHandler.o
- .debug_frame   0x00000000       0x74 ./source/EncoderHandler.o
+ .debug_frame   0x00000000       0xe8 ./source/EncoderHandler.o
  .ARM.attributes
                 0x00000000       0x39 ./source/EncoderHandler.o
  .group         0x00000000        0xc ./source/FSM.o
@@ -887,7 +898,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/door.o
  .debug_macro   0x00000000       0x29 ./source/door.o
  .debug_line    0x00000000      0x2cb ./source/door.o
- .debug_str     0x00000000     0x6dab ./source/door.o
+ .debug_str     0x00000000     0x6db7 ./source/door.o
  .comment       0x00000000       0x7f ./source/door.o
  .debug_frame   0x00000000       0xb8 ./source/door.o
  .ARM.attributes
@@ -932,7 +943,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 ./source/encoder.o
  .debug_macro   0x00000000       0x22 ./source/encoder.o
  .debug_line    0x00000000      0x1bc ./source/encoder.o
- .debug_str     0x00000000     0x3aa2 ./source/encoder.o
+ .debug_str     0x00000000     0x3aae ./source/encoder.o
  .comment       0x00000000       0x7f ./source/encoder.o
  .debug_frame   0x00000000      0x10c ./source/encoder.o
  .ARM.attributes
