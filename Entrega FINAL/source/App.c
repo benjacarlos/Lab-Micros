@@ -11,7 +11,7 @@
 #include <stdbool.h>
 #include "AdminID.h"
 //fsm
-//queue
+#include "EventQueue.h"
 
 
 //Input_Output
@@ -21,8 +21,7 @@
 #include "CardReader.h"
 #include "timer.h"
 #include "door.h"
-
-//timerqueue
+#include "timerqueue.h"
 
 
 #include "SDK/CMSIS/MK64F12.h"
@@ -53,8 +52,8 @@ void inactivity_callback(void);
 
 static UserData_t userData;
 
-//changingstate
-//nameevent
+static _Bool changeState = false;
+static event_t event;
 
 /*******************************************************************************
  *******************************************************************************
@@ -79,7 +78,7 @@ void App_Init (void)
    initDataBase();
 
    //user data init
-
+   userDataReset(true, true, true, true, &userData);
 
 
 }
@@ -100,7 +99,7 @@ void App_Run (void)
 
 void inactivity_callback(void)
 {
-	//pusshtimerevent
+	pushTimerEvent(INACTIVITY);
 }
 /*******************************************************************************
  ******************************************************************************/

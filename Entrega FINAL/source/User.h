@@ -8,8 +8,8 @@
 #ifndef USER_H_
 #define USER_H_
 
+#include <CardReader.h>
 #include "encoder.h"
-#include "CardReader.h"
 #include "timer.h"
 
 

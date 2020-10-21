@@ -3,18 +3,23 @@
 */
 
 #ifndef FSM_H
+#define FSM_H
 
-	#define FSM_H
-	//includes
-	#include <stdint.h>
-	// Variables
-	#define EV_FIN_TABLA 0xFF
-	typedef uint8_t BYTE;
-	typedef struct tabla_estados	{
-		BYTE evento;
-		BYTE *nextstate;
-		void(*accion) (void);
-	}STATE;
+//includes
+#include <stdint.h>
+
+
+
+
+// Variables
+#define EV_FIN_TABLA 0xFF
+typedef uint8_t BYTE;
+
+typedef struct tabla_estados	{
+	BYTE evento;
+	BYTE *nextstate;
+	void(*accion) (void);
+}STATE;
 
 #endif
 	

@@ -10,6 +10,7 @@ C_SRCS += \
 ../source/CardReaderDecoder.c \
 ../source/CardReaderHAL.c \
 ../source/EncoderHandler.c \
+../source/EventQueue.c \
 ../source/FSM.c \
 ../source/FSMTABLE.c \
 ../source/FSM_actions.c \
@@ -33,6 +34,7 @@ OBJS += \
 ./source/CardReaderDecoder.o \
 ./source/CardReaderHAL.o \
 ./source/EncoderHandler.o \
+./source/EventQueue.o \
 ./source/FSM.o \
 ./source/FSMTABLE.o \
 ./source/FSM_actions.o \
@@ -56,6 +58,7 @@ C_DEPS += \
 ./source/CardReaderDecoder.d \
 ./source/CardReaderHAL.d \
 ./source/EncoderHandler.d \
+./source/EventQueue.d \
 ./source/FSM.d \
 ./source/FSMTABLE.d \
 ./source/FSM_actions.d \
