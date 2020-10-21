@@ -74,7 +74,7 @@ void CardReaderHW_Init(void)
 		gpioMode(CLK_PIN, INPUT_PULLUP);
 		gpioMode(ENABLE_PIN, INPUT_PULLUP);
 
-		gpioIRQ(ENABLE_PIN, GPIO_IRQ_MODE_BOTH_EDGES, (pinIrqFun_t) enablefun);
+		gpioIRQ(ENABLE_PIN, PORT_eInterruptEither, (pinIrqFun_t) enablefun);
 
 		read_enable = false;
 	}
@@ -106,12 +106,12 @@ void enablefun(void)
 	if(read_enable)
 	{
 		data_counter = 0;
-		gpioIRQ(CLK_PIN, GPIO_IRQ_MODE_FALLING_EDGE, (pinIrqFun_t) clockfun); //levanto interrupciones del puerto de clk
+		gpioIRQ(CLK_PIN, PORT_eInterruptFalling, (pinIrqFun_t) clockfun); //levanto interrupciones del puerto de clk
 	}
 	else
 	{
 
-		gpioIRQ(CLK_PIN, GPIO_IRQ_MODE_DISABLE, (pinIrqFun_t) clockfun); //desactivo las interrupciones si no se esta leyendo
+		gpioIRQ(CLK_PIN, PORT_eDisabled, (pinIrqFun_t) clockfun); //desactivo las interrupciones si no se esta leyendo
 
 		//Ahora no esta vacia la cola porque guarde los datos que levante del lector
 		reader_queue.topofthequeue = save_items;
