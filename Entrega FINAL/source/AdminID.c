@@ -93,6 +93,7 @@ int buscoID (char userID[TAMANO_ID]){
 			IDfound = true;
 			break;
 		}
+	}
 	if (IDfound){
 		return posicion;
 	}
@@ -100,7 +101,9 @@ int buscoID (char userID[TAMANO_ID]){
 		return (MAX_USERS+1);
 	}
 
+
 }
+
 estado cambioPIN(char usersID[TAMANO_ID], char usersNewPIN[PIN_MAXIMO]){
 	// busco el ID en la base de datos
 	estado value = ID_NO_ENCONTRADO;
@@ -148,17 +151,20 @@ bool verificoID(char usersID[TAMANO_ID]){
 
 
 
-bool verificoPIN(char usersID[TAMANO_ID], char usersPIN[PIN_MAXIMO]){
+bool verificoPIN(char usersID[TAMANO_ID], char usersPIN[PIN_MAXIMO])
+{
 	// Busco el ID en la base de datos
 	int posicion = buscoID(usersID[TAMANO_ID]);
 	bool correctPIN = true;
 	int j;
-		for(j=0 ; j<PIN_MAXIMO ; j++){
-			if(dataBase.list[posicion].pin[j] != usersPIN[j]){  // verifico el PIN
-				correctPIN = false;
-				break;
-			}
+	for(j=0 ; j < PIN_MAXIMO ; j++)
+	{
+		if(dataBase.list[posicion].pin[j] != usersPIN[j])// verifico el PIN
+		{
+			correctPIN = false;
+			break;
 		}
+	}
 	return correctPIN;
 }
 

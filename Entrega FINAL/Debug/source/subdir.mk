@@ -8,6 +8,7 @@ C_SRCS += \
 ../source/App.c \
 ../source/FSM.c \
 ../source/FSMTABLE.c \
+../source/FSM_actions.c \
 ../source/SysTick.c \
 ../source/boardLed.c \
 ../source/displayLed.c \
@@ -23,6 +24,7 @@ OBJS += \
 ./source/App.o \
 ./source/FSM.o \
 ./source/FSMTABLE.o \
+./source/FSM_actions.o \
 ./source/SysTick.o \
 ./source/boardLed.o \
 ./source/displayLed.o \
@@ -38,6 +40,7 @@ C_DEPS += \
 ./source/App.d \
 ./source/FSM.d \
 ./source/FSMTABLE.d \
+./source/FSM_actions.d \
 ./source/SysTick.d \
 ./source/boardLed.d \
 ./source/displayLed.d \

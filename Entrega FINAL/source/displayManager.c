@@ -50,7 +50,7 @@ void InitDisplay(void)
 		ClearDisplay();
 
 		timerInit();
-		timerStart(DISPLAY, MS_BETWEEN_SYMBOLS/(MAX_BRIGHTNESS+1), &GenerateDisplayEv);
+		timerStart(DISPLAY, MS_BETWEEN_SYMBOLS/(MAX_BRIGHTNESS+1), &UpdateDisplay);
 		timerStart(MESSAGE,STRING_TIME, &ShiftLeft);//Setteo el timer con la velocidad de movimiento del string.
 		timerStart(LED, LED_MS, &ledDisplayCallback);
 		timerDisable(MESSAGE); //Por default asumo que se desea un mensaje que nose mueva a traves del display.
@@ -77,7 +77,7 @@ void PrintMessage(const char* string, bool moving_string)
 
 	if(!moving_string)
 		{
-			DisableTimer(MESSAGE);//Deshabilito mensaje corrido
+			timerDisable(MESSAGE);//Deshabilito mensaje corrido
 			string_size = GetStringSize(string);
 			if(string_size > DISPLAY_SIZE)
 			{
@@ -96,7 +96,7 @@ void PrintMessage(const char* string, bool moving_string)
 			current_string = string;
 			string_pos = 0;
 			display_pos = DISPLAY_SIZE-1; //El mensaje se mueve de derecha a izquierda.
-			EnableTimer(MESSAGE);
+			timerEnable(MESSAGE);
 		}
 }
 
@@ -126,7 +126,7 @@ void UpdateDisplay(void)
 		if(string_pos > string_size)
 		{
 			PrintChar(' ',display_pos);
-			if(string_pos == (string_size + DISPLAY_SIZE) ) //Si se mostro todo el mensaje, vuelve a pasarlo.
+			if(string_pos == (string_size + DISPLAY_SIZE) ) //Si se mostro  el mensaje, vuelve a pasarlo.
 			{
 				string_pos = 0;
 				display_pos = DISPLAY_SIZE-1;
@@ -144,10 +144,11 @@ void UpdateDisplay(void)
 	}
 }
 
-void ShiftLeft()
+void ShiftLeft(void)
 {
 	string_pos++;
 }
+
 void ledDisplayCallback (void)
 {
 	static int pos = 0;

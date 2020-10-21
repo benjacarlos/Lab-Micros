@@ -1,6 +1,7 @@
 #include "fsm.h"
 #include "fsmtable.h"
 #include "FSM_actions.h"
+#include <stdio.h>
 
 //Almacena el estado actual
 static STATE* p2state = NULL;

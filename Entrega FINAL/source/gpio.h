@@ -78,6 +78,7 @@ typedef enum
 	PORT_eInterruptFalling     = 0x0A,
 	PORT_eInterruptEither      = 0x0B,
 	PORT_eInterruptAsserted    = 0x0C,
+	GPIO_IRQ_CANT_MODES        = 0x0D,
 
 } PORTEvent_t;
 
@@ -142,8 +143,8 @@ void gpioToggle (pin_t pin);
 bool gpioRead (pin_t pin);
 
 
+void gpioWrite (pin_t pin, _Bool value);
 
-void gpioPull(pin_t pin, bool mode);
 
 
 /*******************************************************************************

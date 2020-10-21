@@ -15,8 +15,9 @@
  *									DEFINICIONES
  ******************************************************************************/
 //Leds del display 1, 2, 3, el 0 no tiene led
-#define STATUS0 PORTNUM2PIN(PA,0)//PTA0
+#define STATUS0 PORTNUM2PIN(PD,2)//PTD2
 #define STATUS1 PORTNUM2PIN(PC,4)//PTC4
+
    //Leds del board (incluidos en board.h)
 //#define PIN_LED_RED     PORTNUM2PIN(PB, 22)// PTB22
 //#define PIN_LED_GREEN   PORTNUM2PIN(PE, 26) // PTE26
@@ -118,7 +119,7 @@ bool GetDisplayLedBlink(int pos)
 
 void SetDisplayBrightness(int pos, int bright)
 {
-	if( (bright <= MAX_BRIGHTNESS) && (bright >= MIN_BRIGHTNESS) )
+	if( (bright < MAX_BRIGHTNESS) && (bright >= MIN_BRIGHTNESS) )
 		brightness[pos] = bright;
 }
 
@@ -143,7 +144,7 @@ void showDisplayLeds(int pos)
 bool brightnessHandle(int pos)
 {
 	bool should_show = true;
-	if(brightness[pos] <= MAX_BRIGHTNESS)
+	if(brightness[pos] < MAX_BRIGHTNESS)
 			if((bright_counter[pos]++) == brightness[pos])
 			{
 				should_show = false;
@@ -151,6 +152,7 @@ bool brightnessHandle(int pos)
 			}
 		return should_show;
 }
+
 
 bool blinkHandle(int pos)
 {

@@ -10,7 +10,7 @@
 #include <stdbool.h>
 
 #define LED_DISPLAY_MAX 3
-#define LED_MS 1 //1ms
+#define LED_MS 3 //1ms
 
 void InitDisplayLeds();
 void ResetDisplayLeds();

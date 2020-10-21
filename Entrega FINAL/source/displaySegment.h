@@ -4,7 +4,7 @@
 //
 
 
-#ifdef DISPLAYSEGMENT_H_
+#ifndef DISPLAYSEGMENT_H_
 #define DISPLAYSEGMENT_H_
 
 // Seteo IO del display con el K64

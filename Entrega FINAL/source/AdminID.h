@@ -53,7 +53,7 @@ void initDataBase(void);
 // funciones para usuarios
 estado agregoUsuario(user_t newUser);											// agregar un nuevo usuario
 estado eliminoUsuario(user_t userToDelete);										// borrar usuario
-void cambioPIN(char usersID[TAMANO_ID], char usersNewPIN[PIN_MAXIMO]);			// cambio de PIN
+estado cambioPIN(char usersID[TAMANO_ID], char usersNewPIN[PIN_MAXIMO]);			// cambio de PIN
 // funciones para corroborar acciones
 int buscoID (char userID[TAMANO_ID]);											// busco el ID que quiero devuelve la posicion de este
 category_t verificoCategory(char usersID[TAMANO_ID]);							// verifico la categoria del usuario

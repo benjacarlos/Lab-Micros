@@ -10,266 +10,246 @@
 #include "gpio.h"
 #include "hardware.h"
 
-//variables globaels que sirven para el funcionamiento de las funciones de interrupcion
 
-//pinIrqFun_t irqfun_p_array[86];
-//pin_t current_pin;
+#ifndef GPIO_MUX
+#define GPIO_MUX     001
+#endif
+
+#ifndef PORTS_N
+#define PORTS_N 5
+#define PINS_N 32
+#endif
+
+_Bool validPin(pin_t pin);
+
+void setPCRmux(PORT_Type * p2port, uint8_t numPin, uint8_t mux);
+
+void setPCRpullEnable(PORT_Type * portPointer, uint8_t pinNum);
+
+void setPCRpullUp(PORT_Type * portPointer, uint8_t numPin);
+
+void setPCRpullDown(PORT_Type * portPointer, uint8_t numPin);
+
+void setGPIOddr(GPIO_Type * p2port, uint8_t numPin, uint32_t mode);
+
+void setPCRirqc(PORT_Type * p2port, uint8_t numPin, uint8_t irqMode);
+
+void setGPIOdataOut(GPIO_Type * gpioPortPointer, uint8_t numPin, _Bool value);
 
 gpio_funs irq_data;
 
+pinIrqFun_t irqFuns[PORTS_N][PINS_N];
+
 void gpioMode (pin_t pin, uint8_t mode)
 {
-    if (PIN2PORT(pin) == PA)
-    {
-        SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
-        PORTA->PCR[PIN2NUM(pin)] = 0x0;
-        PORTA->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
-        if (mode == OUTPUT)
-        {
-            GPIOA->PDDR = (OUTPUT<<PIN2NUM(pin));
-        }
-        else if (mode == INPUT)
-        {
-            GPIOA->PDDR = (INPUT<<PIN2NUM(pin));
-        }
-    }
+	uint8_t port = PIN2PORT(pin);
+	uint8_t pinNum = PIN2NUM(pin);
 
-    else if (PIN2PORT(pin) == PB)
-    {
-        SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK;
-        PORTB->PCR[PIN2NUM(pin)] = 0x0;
-        PORTB->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
-        if (mode == OUTPUT)
-        {
-            GPIOB->PDDR = (OUTPUT<<PIN2NUM(pin));
-        }
-        else if (mode == INPUT)
-        {
-            GPIOB->PDDR = (INPUT<<PIN2NUM(pin));
-        }
-    }
+	PORT_Type * portPointer[] = PORT_BASE_PTRS;
+	GPIO_Type * gpioPortPointer[] = GPIO_BASE_PTRS;
 
-    else if (PIN2PORT(pin) == PC)
-    {
-        SIM->SCGC5 |= SIM_SCGC5_PORTC_MASK;
-        PORTC->PCR[PIN2NUM(pin)] = 0x0;
-        PORTC->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
-        if (mode == OUTPUT)
-        {
-            GPIOC->PDDR = (OUTPUT<<PIN2NUM(pin));
-        }
-        else if (mode == INPUT)
-        {
-            GPIOC->PDDR = (INPUT<<PIN2NUM(pin));
-        }
-    }
+	if (validPin(pin))
+	{
+			setPCRmux(portPointer[port], pinNum, GPIO_MUX);
 
-    else if (PIN2PORT(pin) == PD)
-    {
-        SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
-        PORTD->PCR[PIN2NUM(pin)] = 0x0;
-        PORTD->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
-        if (mode == OUTPUT)
-        {
-            GPIOD->PDDR = (OUTPUT<<PIN2NUM(pin));
-        }
-        else if (mode == INPUT)
-        {
-            GPIOD->PDDR = (INPUT<<PIN2NUM(pin));
-        }
-    }
+			if(mode == INPUT_PULLUP || mode == INPUT_PULLDOWN)
+			{
+				setPCRpullEnable(portPointer[port], pinNum);
+				if (mode == INPUT_PULLUP)
+				{
+					setPCRpullUp(portPointer[port], pinNum);
+				}
+				else
+				{
+					setPCRpullDown(portPointer[port], pinNum);
+				}
+				mode = INPUT;
 
-    else if (PIN2PORT(pin) == PE)
-    {
-        SIM->SCGC5 |= SIM_SCGC5_PORTE_MASK;
-        PORTE->PCR[PIN2NUM(pin)] = 0x0;
-        PORTE->PCR[PIN2NUM(pin)] |= PORT_PCR_MUX(PORT_mGpio);
-        if (mode == OUTPUT)
-        {
-            GPIOE->PDDR = (OUTPUT<<PIN2NUM(pin));
-        }
-        else if (mode == INPUT)
-        {
-            GPIOE->PDDR = (INPUT<<PIN2NUM(pin));
-        }
-    }
-
+			}
+			setGPIOddr(gpioPortPointer[port], pinNum, (uint32_t) mode);
+		}
 }
 
 
 void gpioToggle (pin_t pin)
 {
-	if(PIN2PORT(pin) == PA)
-	{
-		GPIOA->PTOR = 1<<PIN2NUM(pin);
-	}
+	uint8_t port = PIN2PORT(pin);
+	uint8_t pinNum = PIN2NUM(pin);
 
-	else if(PIN2PORT(pin) == PB)
-	{
-		GPIOB->PTOR = 1<<PIN2NUM(pin);
-	}
+	GPIO_Type * gpioPortPointer[] = GPIO_BASE_PTRS;
 
-	else if(PIN2PORT(pin) == PC)
-	{
-		GPIOC->PTOR = 1<<PIN2NUM(pin);
-	}
 
-	else if(PIN2PORT(pin) == PD)
-	{
-		GPIOD->PTOR = 1<<PIN2NUM(pin);
-	}
+	uint32_t writemask = ((uint32_t)(1<<pinNum));
+	uint32_t deletemask = ~writemask;
 
-	else if(PIN2PORT(pin) == PE)
-	{
-		GPIOE->PTOR = 1<<PIN2NUM(pin);
-	}
+	gpioPortPointer[port]->PTOR = gpioPortPointer[port]->PTOR & deletemask;
+	gpioPortPointer[port]->PTOR = gpioPortPointer[port]->PTOR | writemask;
 }
 
 
-bool gpioRead (pin_t pin)
+_Bool gpioRead (pin_t pin)
 {
-	switch(PIN2PORT(pin))
+	uint8_t port = PIN2PORT(pin);
+	uint8_t pinNum = PIN2NUM(pin);
+
+	GPIO_Type * gpioPortPointer[] = GPIO_BASE_PTRS;
+
+	uint32_t readmask = (uint32_t)(1 << pinNum);
+	return ((gpioPortPointer[port]->PDIR) & readmask);
+}
+
+
+void gpioWrite (pin_t pin, _Bool value)
+{
+	uint8_t port = PIN2PORT(pin);
+	uint8_t numPin = PIN2NUM(pin);
+	GPIO_Type * gpioPortPointer[] = GPIO_BASE_PTRS;
+	uint32_t maskPin = (uint32_t)(1 << numPin);
+
+
+	if((gpioPortPointer[port]->PDDR) & maskPin)
 	{
-		case PA:
-			return ((GPIOA->PDIR >> PIN2NUM(pin)) & 0x01);
-			break;
-
-		case PB:
-			return ((GPIOB->PDIR >> PIN2NUM(pin)) & 0x01);
-			break;
-
-		case PC:
-			return ((GPIOC->PDIR >> PIN2NUM(pin)) & 0x01);
-			break;
-
-		case PD:
-			return ((GPIOD->PDIR >> PIN2NUM(pin)) & 0x01);
-			break;
-
-		case PE:
-			return ((GPIOE->PDIR >> PIN2NUM(pin)) & 0x01);
-			break;
+		setGPIOdataOut(gpioPortPointer[port], numPin, value);
 	}
 }
 
-void gpioPull(pin_t pin, bool mode)//arreglar modo
+
+void setGPIOdataOut(GPIO_Type * gpioPortPointer, uint8_t numPin, _Bool value)
 {
-	switch(PIN2PORT(pin))
-		{
-			case PA:
-				PORTA->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
-				PORTA->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
-				break;
-
-			case PB:
-				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
-				PORTB->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
-				break;
-
-			case PC:
-				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
-				PORTC->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
-				break;
-
-			case PD:
-				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
-				PORTD->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
-				break;
-
-			case PE:
-				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_PE(1);
-				PORTE->PCR[PIN2NUM(pin)] = PORT_PCR_PS(mode);
-				break;
-		}
+	uint32_t maskDataOut = (uint32_t)(value << numPin);
+	uint32_t mask2delete = ~((uint32_t)(1 << numPin));
+	gpioPortPointer->PDOR = (gpioPortPointer->PDOR & mask2delete);
+	gpioPortPointer->PDOR = (gpioPortPointer->PDOR | maskDataOut);
 }
 
+_Bool validPin(pin_t pin)
+{
+	_Bool valid = false;
+	if((pin >= PORTNUM2PIN(PA,0)) && (pin <= PORTNUM2PIN(PE,31)))
+	{
+		valid = true;
+	}
+
+	return valid;
+}
+
+void setPCRmux(PORT_Type * p2port, uint8_t numPin, uint8_t mux)
+{
+	uint32_t currentPCR = (p2port->PCR)[numPin];
+	currentPCR = (currentPCR) & (~PORT_PCR_MUX_MASK);
+	currentPCR = currentPCR | PORT_PCR_MUX(mux);
+	(p2port->PCR)[numPin] = currentPCR;
+
+}
+
+void setPCRpullEnable(PORT_Type * portPointer, uint8_t pinNum)
+{
+	uint32_t maskPE = (HIGH << PORT_PCR_PE_SHIFT);
+	(portPointer->PCR)[pinNum] = ((portPointer->PCR)[pinNum] | maskPE);
+}
+
+
+void setPCRpullUp(PORT_Type * portPointer, uint8_t numPin)
+{
+	uint32_t maskPE = (HIGH << PORT_PCR_PS_SHIFT);
+	(portPointer->PCR)[numPin] = ((portPointer->PCR)[numPin] | maskPE);
+}
+
+void setPCRpullDown(PORT_Type * portPointer, uint8_t numPin)
+{
+	uint32_t maskPE = (HIGH << PORT_PCR_PE_SHIFT);
+	(portPointer->PCR)[numPin] = ((portPointer->PCR)[numPin] & (~maskPE));
+}
+
+void setGPIOddr(GPIO_Type * p2port, uint8_t pinNum, uint32_t mode)
+{
+	uint32_t maskDDR = (mode << pinNum);
+	p2port->PDDR = ((p2port->PDDR) | maskDDR);
+}
 
 bool gpioIRQ (pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
 {
-//	current_pin = pin;
+	_Bool out = false;
 
+	uint8_t port;
+	uint8_t pinNum;
 
-	switch(PIN2PORT(pin))
+	IRQn_Type p2portsIRQ[] = PORT_IRQS;
+	PORT_Type * portPointer[] = PORT_BASE_PTRS;
+
+	if(validPin(pin))
+	{
+
+		port = PIN2PORT(pin);
+		pinNum = PIN2NUM(pin);
+
+		if (irqMode != GPIO_IRQ_CANT_MODES)
 		{
-			case PA:
-				irq_data.irq_pins[PA] = pin;
-				NVIC_EnableIRQ(PORTA_IRQn);
-				PORTA->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
-				PORTA->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
-//				irqfun_p_array[PORTA_IRQn] = irqFun;
-				irq_data.irqfun_p_array[PA] = irqFun;
-				break;
+			setPCRirqc(portPointer[port], pinNum, irqMode);
+			irqFuns[port][pinNum] = irqFun;
 
-			case PB:
-				irq_data.irq_pins[PB] = pin;
-				NVIC_EnableIRQ(PORTB_IRQn);
-				PORTB->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
-				PORTB->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
-//				irqfun_p_array[PORTB_IRQn] = irqFun;
-				irq_data.irqfun_p_array[PB] = irqFun;
-				break;
-
-			case PC:
-				irq_data.irq_pins[PC] = pin;
-				NVIC_EnableIRQ(PORTC_IRQn);
-				PORTC->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
-				PORTC->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
-//				irqfun_p_array[PORTB_IRQn] = irqFun;
-				irq_data.irqfun_p_array[PC] = irqFun;
-				break;
-
-			case PD:
-				irq_data.irq_pins[PD] = pin;
-				NVIC_EnableIRQ(PORTD_IRQn);
-				PORTD->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
-				PORTD->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
-//				irqfun_p_array[PORTD_IRQn] = irqFun;
-				irq_data.irqfun_p_array[PD] = irqFun;
-				break;
-
-			case PE:
-				irq_data.irq_pins[PE] = pin;
-				NVIC_EnableIRQ(PORTE_IRQn);
-				PORTE->PCR[PIN2NUM(pin)] |= PORT_PCR_ISF_MASK;
-				PORTE->PCR[PIN2NUM(pin)] |= PORT_PCR_IRQC(irqMode);
-//				irqfun_p_array[PORTE_IRQn] = irqFun;
-				irq_data.irqfun_p_array[PE] = irqFun;
-				break;
+			out = true;
 		}
+
+		NVIC_EnableIRQ(p2portsIRQ[port]);
+	}
+
+	return out;
+
+}
+
+void setPCRirqc(PORT_Type * p2port, uint8_t pinNum, uint8_t irqMode)
+{
+	uint32_t currentPCR = (p2port->PCR)[pinNum];
+	currentPCR = currentPCR & (~PORT_PCR_IRQC_MASK);
+	currentPCR = currentPCR | PORT_PCR_IRQC(irqMode);
+	(p2port->PCR)[pinNum] = currentPCR;
+}
+
+
+void IRQHandler(uint8_t port)
+{
+	_Bool foundirq = false;
+	int i;
+	uint32_t currentPCR;
+	PORT_Type * portPointer[] = PORT_BASE_PTRS;
+
+	for(i = 0; (i < PINS_N) && (!foundirq); i++)
+	{
+		if( ((portPointer[port])->PCR[i]) & PORT_PCR_ISF_MASK )
+		{
+			foundirq = true;
+			irqFuns[port][i]();
+
+			currentPCR = portPointer[port]->PCR[i];
+			currentPCR = currentPCR & (~PORT_PCR_ISF_MASK);
+			portPointer[port]->PCR[i] = currentPCR | PORT_PCR_ISF(HIGH);
+		}
+	}
 }
 
 
 __ISR__ PORTA_IRQHandler(void)
 {
-	PORTA->PCR[PIN2NUM(irq_data.irq_pins[PA])] |= PORT_PCR_ISF_MASK;
-//	(*irqfun_p_array[PORTA_IRQn])();
-	(*irq_data.irqfun_p_array[PA])();
+	IRQHandler(PA);
 }
 
 __ISR__ PORTB_IRQHandler(void)
 {
-	PORTB->PCR[PIN2NUM(irq_data.irq_pins[PB])] |= PORT_PCR_ISF_MASK;
-//	(*irqfun_p_array[PORTB_IRQn])();
-	(*irq_data.irqfun_p_array[PB])();
+	IRQHandler(PB);
 }
 
 __ISR__ PORTC_IRQHandler(void)
 {
-	PORTC->PCR[PIN2NUM(irq_data.irq_pins[PC])] |= PORT_PCR_ISF_MASK;
-//	(*irqfun_p_array[PORTC_IRQn])();
-	(*irq_data.irqfun_p_array[PC])();
+	IRQHandler(PC);
 }
 
 __ISR__ PORTD_IRQHandler(void)
 {
-	PORTD->PCR[PIN2NUM(irq_data.irq_pins[PD])] |= PORT_PCR_ISF_MASK;
-//	(*irqfun_p_array[PORTD_IRQn])();
-	(*irq_data.irqfun_p_array[PD])();
+	IRQHandler(PD);
 }
 
 __ISR__ PORTE_IRQHandler(void)
 {
-	PORTE->PCR[PIN2NUM(irq_data.irq_pins[PD])] |= PORT_PCR_ISF_MASK;
-//	(*irqfun_p_array[PORTE_IRQn])();
-	(*irq_data.irqfun_p_array[PE])();
+	IRQHandler(PE);
 }
