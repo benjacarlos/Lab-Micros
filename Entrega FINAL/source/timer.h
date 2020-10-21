@@ -20,7 +20,7 @@
  *  CONSTANTES Y MACROS
  ******************************************************************************/
 
-enum {INACTIVITY, DISPLAY, MESSAGE, LED, TIMERS_CANT}; //Aca van los diferentes timers utilizados (inactividad, display, rotacion encoder, etc)
+enum {INACTIVITY, DISPLAY, MESSAGE, LED, ROTATION_TIMER, BUTTON_TIMER, TIMERS_CANT}; //Aca van los diferentes timers utilizados (inactividad, display, rotacion encoder, etc)
 
 /*******************************************************************************
  * ESTRUCTURAS Y TYPEDEF

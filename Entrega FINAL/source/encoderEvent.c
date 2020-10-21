@@ -12,7 +12,7 @@
  *								DEFINICIONES
  ******************************************************************************/
 
-typedef enum {A, B, C, CANT_TOTAL_SEÑALES}encoder_signal;
+typedef enum {A, B, C, CANT_TOTAL_SIGNALS}encoder_signal;
 
 
 /*******************************************************************************
