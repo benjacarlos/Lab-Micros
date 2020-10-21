@@ -6,6 +6,7 @@
 C_SRCS += \
 ../source/AdminID.c \
 ../source/App.c \
+../source/EncoderHandler.c \
 ../source/FSM.c \
 ../source/FSMTABLE.c \
 ../source/FSM_actions.c \
@@ -22,6 +23,7 @@ C_SRCS += \
 OBJS += \
 ./source/AdminID.o \
 ./source/App.o \
+./source/EncoderHandler.o \
 ./source/FSM.o \
 ./source/FSMTABLE.o \
 ./source/FSM_actions.o \
@@ -38,6 +40,7 @@ OBJS += \
 C_DEPS += \
 ./source/AdminID.d \
 ./source/App.d \
+./source/EncoderHandler.d \
 ./source/FSM.d \
 ./source/FSMTABLE.d \
 ./source/FSM_actions.d \

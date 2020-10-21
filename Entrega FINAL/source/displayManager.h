@@ -9,6 +9,10 @@
 #define DISPLAYMANAGER_H_
 #include <stdbool.h>
 
+//Limites de brillo
+#define MIN_BRIGHTNESS 0
+#define MAX_BRIGHTNESS 3
+
 //Inicializa los recursos necesarios para utilizar el display
 void InitDisplay(void);
 
@@ -23,6 +27,9 @@ void SetBrightness(unsigned char brightness_factor);
 
 //Actualiza el contenido del display.
 void UpdateDisplay(void);
+
+//Obtengo la luminusidad actual
+unsigned char GetBrightnees(void);
 
 
 #endif /* DISPLAYMANAGER_H_ */

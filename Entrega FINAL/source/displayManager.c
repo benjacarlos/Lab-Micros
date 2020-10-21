@@ -17,8 +17,6 @@
 #define DISPLAY_SIZE 4
 #define STRING_TIME 325 //Delay en ms entre cada shifteo
 #define FPS 60 //Frames per second
-#define MIN_BRIGHTNESS 0
-#define MAX_BRIGHTNESS 3
 #define MS_BETWEEN_SYMBOLS ( (1000/FPS)/(DISPLAY_SIZE) )
 
 /******************************************************************************
@@ -28,7 +26,7 @@ static const char* current_string;
 static int string_pos;
 static int display_pos;
 static int string_size;
-//static unsigned int brigthness;
+static unsigned char brigthness;
 //static unsigned char display_counter; //cuantos llamados faltan para pasar al proximo simbolo
 static bool initialized = false;
 
@@ -55,7 +53,8 @@ void InitDisplay(void)
 		timerStart(LED, LED_MS, &ledDisplayCallback);
 		timerDisable(MESSAGE); //Por default asumo que se desea un mensaje que nose mueva a traves del display.
 
-		SetBrightness(MAX_BRIGHTNESS); //Por default comienza con la intensidad del display al maximo.
+		brigthness=MAX_BRIGHTNESS;
+		SetBrightness(brigthness); //Por default comienza con la intensidad del display al maximo.
 		initialized = true;
 	}
 }
@@ -106,6 +105,7 @@ void SetBrightness(unsigned char brightness_factor)
 	{
 		SetDisplayBrightness(i, brightness_factor);
 	}
+	brigthness=brightness_factor;
 }
 
 void UpdateDisplay(void)
@@ -173,4 +173,6 @@ unsigned int GetStringSize(const char* str)
 	return --size;
 }
 
-
+unsigned char GetBrightnees(void){
+	return brigthness;
+}

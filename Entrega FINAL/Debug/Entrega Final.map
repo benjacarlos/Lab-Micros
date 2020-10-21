@@ -80,7 +80,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x22 ./source/AdminID.o
  .debug_macro   0x00000000       0x1c ./source/AdminID.o
  .debug_line    0x00000000      0x1cb ./source/AdminID.o
- .debug_str     0x00000000     0x3a05 ./source/AdminID.o
+ .debug_str     0x00000000     0x3a11 ./source/AdminID.o
  .comment       0x00000000       0x7f ./source/AdminID.o
  .debug_frame   0x00000000      0x164 ./source/AdminID.o
  .ARM.attributes
@@ -144,6 +144,40 @@ Discarded input sections
  .debug_macro   0x00000000      0xa5a ./source/App.o
  .debug_macro   0x00000000      0x34e ./source/App.o
  .debug_macro   0x00000000       0x22 ./source/App.o
+ .group         0x00000000        0xc ./source/EncoderHandler.o
+ .group         0x00000000        0xc ./source/EncoderHandler.o
+ .group         0x00000000        0xc ./source/EncoderHandler.o
+ .group         0x00000000        0xc ./source/EncoderHandler.o
+ .group         0x00000000        0xc ./source/EncoderHandler.o
+ .text          0x00000000        0x0 ./source/EncoderHandler.o
+ .data          0x00000000        0x0 ./source/EncoderHandler.o
+ .bss           0x00000000        0x0 ./source/EncoderHandler.o
+ .bss.IsPin     0x00000000        0x1 ./source/EncoderHandler.o
+ .bss.IsID      0x00000000        0x1 ./source/EncoderHandler.o
+ .bss.Number    0x00000000        0x1 ./source/EncoderHandler.o
+ .text.UpdateNumber
+                0x00000000       0x78 ./source/EncoderHandler.o
+ .text.GetNumber
+                0x00000000       0x18 ./source/EncoderHandler.o
+ .text.ResetNumber
+                0x00000000       0x18 ./source/EncoderHandler.o
+ .debug_info    0x00000000      0x128 ./source/EncoderHandler.o
+ .debug_abbrev  0x00000000       0xbe ./source/EncoderHandler.o
+ .debug_aranges
+                0x00000000       0x30 ./source/EncoderHandler.o
+ .debug_ranges  0x00000000       0x20 ./source/EncoderHandler.o
+ .debug_macro   0x00000000       0x4b ./source/EncoderHandler.o
+ .debug_macro   0x00000000      0xa5a ./source/EncoderHandler.o
+ .debug_macro   0x00000000       0x22 ./source/EncoderHandler.o
+ .debug_macro   0x00000000       0x10 ./source/EncoderHandler.o
+ .debug_macro   0x00000000      0x34e ./source/EncoderHandler.o
+ .debug_macro   0x00000000       0x1c ./source/EncoderHandler.o
+ .debug_line    0x00000000      0x110 ./source/EncoderHandler.o
+ .debug_str     0x00000000     0x38f6 ./source/EncoderHandler.o
+ .comment       0x00000000       0x7f ./source/EncoderHandler.o
+ .debug_frame   0x00000000       0x74 ./source/EncoderHandler.o
+ .ARM.attributes
+                0x00000000       0x39 ./source/EncoderHandler.o
  .group         0x00000000        0xc ./source/FSM.o
  .group         0x00000000        0xc ./source/FSM.o
  .text          0x00000000        0x0 ./source/FSM.o
@@ -159,7 +193,7 @@ Discarded input sections
  .debug_macro   0x00000000      0xa5a ./source/FSM.o
  .debug_macro   0x00000000      0x34e ./source/FSM.o
  .debug_line    0x00000000       0xbe ./source/FSM.o
- .debug_str     0x00000000     0x3829 ./source/FSM.o
+ .debug_str     0x00000000     0x3835 ./source/FSM.o
  .comment       0x00000000       0x7f ./source/FSM.o
  .debug_frame   0x00000000       0x34 ./source/FSM.o
  .ARM.attributes
@@ -265,11 +299,13 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/FSMTABLE.o
  .debug_macro   0x00000000      0x16f ./source/FSMTABLE.o
  .debug_line    0x00000000      0x333 ./source/FSMTABLE.o
- .debug_str     0x00000000     0x804c ./source/FSMTABLE.o
+ .debug_str     0x00000000     0x8058 ./source/FSMTABLE.o
  .comment       0x00000000       0x7f ./source/FSMTABLE.o
  .debug_frame   0x00000000       0x78 ./source/FSMTABLE.o
  .ARM.attributes
                 0x00000000       0x39 ./source/FSMTABLE.o
+ .group         0x00000000        0xc ./source/FSM_actions.o
+ .group         0x00000000        0xc ./source/FSM_actions.o
  .group         0x00000000        0xc ./source/FSM_actions.o
  .group         0x00000000        0xc ./source/FSM_actions.o
  .group         0x00000000        0xc ./source/FSM_actions.o
@@ -305,15 +341,15 @@ Discarded input sections
  .bss           0x00000000        0x0 ./source/FSM_actions.o
  .text.do_nothing
                 0x00000000        0xe ./source/FSM_actions.o
- .rodata        0x00000000      0x105 ./source/FSM_actions.o
+ .rodata        0x00000000       0xd1 ./source/FSM_actions.o
  .text.error_message
                 0x00000000       0x14 ./source/FSM_actions.o
  .text.open_door
                 0x00000000       0x14 ./source/FSM_actions.o
  .text.light_plus
-                0x00000000       0x14 ./source/FSM_actions.o
+                0x00000000       0x28 ./source/FSM_actions.o
  .text.light_minus
-                0x00000000       0x14 ./source/FSM_actions.o
+                0x00000000       0x28 ./source/FSM_actions.o
  .text.check_user_id
                 0x00000000       0x14 ./source/FSM_actions.o
  .text.check_user_pin
@@ -326,13 +362,15 @@ Discarded input sections
  .text.change_pin
                 0x00000000       0x14 ./source/FSM_actions.o
  .text.add_pin  0x00000000       0x14 ./source/FSM_actions.o
- .debug_info    0x00000000      0x965 ./source/FSM_actions.o
- .debug_abbrev  0x00000000      0x1b1 ./source/FSM_actions.o
+ .debug_info    0x00000000      0x98b ./source/FSM_actions.o
+ .debug_abbrev  0x00000000      0x1da ./source/FSM_actions.o
  .debug_aranges
                 0x00000000       0x78 ./source/FSM_actions.o
  .debug_ranges  0x00000000       0x68 ./source/FSM_actions.o
- .debug_macro   0x00000000      0x1a0 ./source/FSM_actions.o
+ .debug_macro   0x00000000      0x1b8 ./source/FSM_actions.o
  .debug_macro   0x00000000      0xa5a ./source/FSM_actions.o
+ .debug_macro   0x00000000       0x22 ./source/FSM_actions.o
+ .debug_macro   0x00000000       0x10 ./source/FSM_actions.o
  .debug_macro   0x00000000       0x22 ./source/FSM_actions.o
  .debug_macro   0x00000000       0x52 ./source/FSM_actions.o
  .debug_macro   0x00000000       0x17 ./source/FSM_actions.o
@@ -362,10 +400,10 @@ Discarded input sections
  .debug_macro   0x00000000       0x3d ./source/FSM_actions.o
  .debug_macro   0x00000000       0x16 ./source/FSM_actions.o
  .debug_macro   0x00000000      0x16f ./source/FSM_actions.o
- .debug_line    0x00000000      0x394 ./source/FSM_actions.o
- .debug_str     0x00000000     0x7506 ./source/FSM_actions.o
+ .debug_line    0x00000000      0x3b9 ./source/FSM_actions.o
+ .debug_str     0x00000000     0x7598 ./source/FSM_actions.o
  .comment       0x00000000       0x7f ./source/FSM_actions.o
- .debug_frame   0x00000000      0x164 ./source/FSM_actions.o
+ .debug_frame   0x00000000      0x174 ./source/FSM_actions.o
  .ARM.attributes
                 0x00000000       0x39 ./source/FSM_actions.o
  .group         0x00000000        0xc ./source/SysTick.o
@@ -427,7 +465,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x3a ./source/boardLed.o
  .debug_macro   0x00000000       0x34 ./source/boardLed.o
  .debug_line    0x00000000      0x100 ./source/boardLed.o
- .debug_str     0x00000000     0x39d8 ./source/boardLed.o
+ .debug_str     0x00000000     0x39e4 ./source/boardLed.o
  .comment       0x00000000       0x7f ./source/boardLed.o
  .debug_frame   0x00000000       0x50 ./source/boardLed.o
  .ARM.attributes
@@ -521,11 +559,12 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/displayLed.o
  .debug_macro   0x00000000       0x29 ./source/displayLed.o
  .debug_line    0x00000000      0x3a1 ./source/displayLed.o
- .debug_str     0x00000000     0x6e9b ./source/displayLed.o
+ .debug_str     0x00000000     0x6ea7 ./source/displayLed.o
  .comment       0x00000000       0x7f ./source/displayLed.o
  .debug_frame   0x00000000      0x18c ./source/displayLed.o
  .ARM.attributes
                 0x00000000       0x39 ./source/displayLed.o
+ .group         0x00000000        0xc ./source/displayManager.o
  .group         0x00000000        0xc ./source/displayManager.o
  .group         0x00000000        0xc ./source/displayManager.o
  .group         0x00000000        0xc ./source/displayManager.o
@@ -559,17 +598,19 @@ Discarded input sections
                 0x00000000        0x4 ./source/displayManager.o
  .bss.string_size
                 0x00000000        0x4 ./source/displayManager.o
+ .bss.brigthness
+                0x00000000        0x1 ./source/displayManager.o
  .bss.initialized
                 0x00000000        0x1 ./source/displayManager.o
  .text.InitDisplay
-                0x00000000       0x68 ./source/displayManager.o
+                0x00000000       0x78 ./source/displayManager.o
  .rodata        0x00000000        0x1 ./source/displayManager.o
  .text.ClearDisplay
                 0x00000000       0x3c ./source/displayManager.o
  .text.PrintMessage
                 0x00000000       0x94 ./source/displayManager.o
  .text.SetBrightness
-                0x00000000       0x2e ./source/displayManager.o
+                0x00000000       0x38 ./source/displayManager.o
  .text.UpdateDisplay
                 0x00000000       0xd0 ./source/displayManager.o
  .text.ShiftLeft
@@ -580,15 +621,18 @@ Discarded input sections
                 0x00000000        0xe ./source/displayManager.o
  .text.GetStringSize
                 0x00000000       0x32 ./source/displayManager.o
- .bss.pos.5659  0x00000000        0x4 ./source/displayManager.o
- .debug_info    0x00000000      0xa56 ./source/displayManager.o
- .debug_abbrev  0x00000000      0x260 ./source/displayManager.o
+ .text.GetBrightnees
+                0x00000000       0x18 ./source/displayManager.o
+ .bss.pos.5662  0x00000000        0x4 ./source/displayManager.o
+ .debug_info    0x00000000      0xa7c ./source/displayManager.o
+ .debug_abbrev  0x00000000      0x27a ./source/displayManager.o
  .debug_aranges
-                0x00000000       0x60 ./source/displayManager.o
- .debug_ranges  0x00000000       0x50 ./source/displayManager.o
- .debug_macro   0x00000000      0x15d ./source/displayManager.o
+                0x00000000       0x68 ./source/displayManager.o
+ .debug_ranges  0x00000000       0x58 ./source/displayManager.o
+ .debug_macro   0x00000000      0x156 ./source/displayManager.o
  .debug_macro   0x00000000      0xa5a ./source/displayManager.o
  .debug_macro   0x00000000       0x22 ./source/displayManager.o
+ .debug_macro   0x00000000       0x10 ./source/displayManager.o
  .debug_macro   0x00000000      0x34e ./source/displayManager.o
  .debug_macro   0x00000000       0x17 ./source/displayManager.o
  .debug_macro   0x00000000       0x22 ./source/displayManager.o
@@ -609,10 +653,10 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/displayManager.o
  .debug_macro   0x00000000       0x29 ./source/displayManager.o
  .debug_macro   0x00000000       0x16 ./source/displayManager.o
- .debug_line    0x00000000      0x39c ./source/displayManager.o
- .debug_str     0x00000000     0x6e27 ./source/displayManager.o
+ .debug_line    0x00000000      0x3af ./source/displayManager.o
+ .debug_str     0x00000000     0x6e4c ./source/displayManager.o
  .comment       0x00000000       0x7f ./source/displayManager.o
- .debug_frame   0x00000000      0x134 ./source/displayManager.o
+ .debug_frame   0x00000000      0x154 ./source/displayManager.o
  .ARM.attributes
                 0x00000000       0x39 ./source/displayManager.o
  .group         0x00000000        0xc ./source/displaySegment.o
@@ -647,7 +691,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x22 ./source/displaySegment.o
  .debug_macro   0x00000000       0x3a ./source/displaySegment.o
  .debug_line    0x00000000      0x15b ./source/displaySegment.o
- .debug_str     0x00000000     0x3adc ./source/displaySegment.o
+ .debug_str     0x00000000     0x3ae8 ./source/displaySegment.o
  .comment       0x00000000       0x7f ./source/displaySegment.o
  .debug_frame   0x00000000       0x98 ./source/displaySegment.o
  .ARM.attributes
@@ -681,7 +725,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x34e ./source/encoderEvent.o
  .debug_macro   0x00000000       0x1c ./source/encoderEvent.o
  .debug_line    0x00000000      0x14c ./source/encoderEvent.o
- .debug_str     0x00000000     0x3912 ./source/encoderEvent.o
+ .debug_str     0x00000000     0x391e ./source/encoderEvent.o
  .comment       0x00000000       0x7f ./source/encoderEvent.o
  .debug_frame   0x00000000       0xd0 ./source/encoderEvent.o
  .ARM.attributes
@@ -756,7 +800,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x29 ./source/encoderHal.o
  .debug_macro   0x00000000       0x40 ./source/encoderHal.o
  .debug_line    0x00000000      0x2ec ./source/encoderHal.o
- .debug_str     0x00000000     0x6f50 ./source/encoderHal.o
+ .debug_str     0x00000000     0x6f5c ./source/encoderHal.o
  .comment       0x00000000       0x7f ./source/encoderHal.o
  .debug_frame   0x00000000       0xd8 ./source/encoderHal.o
  .ARM.attributes
@@ -877,7 +921,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x29 ./source/timer.o
  .debug_macro   0x00000000       0x10 ./source/timer.o
  .debug_line    0x00000000      0x31a ./source/timer.o
- .debug_str     0x00000000     0x6e0b ./source/timer.o
+ .debug_str     0x00000000     0x6e17 ./source/timer.o
  .comment       0x00000000       0x7f ./source/timer.o
  .debug_frame   0x00000000      0x11c ./source/timer.o
  .ARM.attributes
@@ -1262,6 +1306,7 @@ Linker script and memory map
 
 LOAD ./source/AdminID.o
 LOAD ./source/App.o
+LOAD ./source/EncoderHandler.o
 LOAD ./source/FSM.o
 LOAD ./source/FSMTABLE.o
 LOAD ./source/FSM_actions.o
@@ -2002,23 +2047,23 @@ OUTPUT(Entrega Final.axf elf32-littlearm)
  .debug_line    0x00000ccf      0x6d8 ./SDK/startup/startup_mk64f12.o
  .debug_line    0x000013a7      0x1c7 ./SDK/CMSIS/system_MK64F12.o
 
-.debug_str      0x00000000    0x7c936
- .debug_str     0x00000000    0x7b5bc ./source/App.o
-                              0x7b85f (size before relaxing)
- .debug_str     0x0007b5bc       0x69 ./source/SysTick.o
-                              0x771af (size before relaxing)
- .debug_str     0x0007b625      0x86a ./source/gpio.o
-                              0x7790c (size before relaxing)
- .debug_str     0x0007be8f      0x21f ./SDK/startup/hardware.o
-                              0x771ea (size before relaxing)
- .debug_str     0x0007c0ae       0x1b ./SDK/startup/main.o
-                              0x76fbe (size before relaxing)
- .debug_str     0x0007c0c9       0x36 ./SDK/startup/semihost_hardfault.o
-                               0x2d28 (size before relaxing)
- .debug_str     0x0007c0ff      0x7d5 ./SDK/startup/startup_mk64f12.o
-                               0x3596 (size before relaxing)
- .debug_str     0x0007c8d4       0x62 ./SDK/CMSIS/system_MK64F12.o
-                              0x770f9 (size before relaxing)
+.debug_str      0x00000000    0x7c942
+ .debug_str     0x00000000    0x7b5c8 ./source/App.o
+                              0x7b86b (size before relaxing)
+ .debug_str     0x0007b5c8       0x69 ./source/SysTick.o
+                              0x771bb (size before relaxing)
+ .debug_str     0x0007b631      0x86a ./source/gpio.o
+                              0x77918 (size before relaxing)
+ .debug_str     0x0007be9b      0x21f ./SDK/startup/hardware.o
+                              0x771f6 (size before relaxing)
+ .debug_str     0x0007c0ba       0x1b ./SDK/startup/main.o
+                              0x76fca (size before relaxing)
+ .debug_str     0x0007c0d5       0x36 ./SDK/startup/semihost_hardfault.o
+                               0x2d34 (size before relaxing)
+ .debug_str     0x0007c10b      0x7d5 ./SDK/startup/startup_mk64f12.o
+                               0x35a2 (size before relaxing)
+ .debug_str     0x0007c8e0       0x62 ./SDK/CMSIS/system_MK64F12.o
+                              0x77105 (size before relaxing)
 
 .comment        0x00000000       0x7e
  .comment       0x00000000       0x7e ./source/App.o

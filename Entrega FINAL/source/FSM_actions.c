@@ -1,5 +1,6 @@
-#include <stdio.h>
 #include "FSM_actions.h"
+#include "displayManager.h"
+#include <stdio.h>
 
 void do_nothing(void){
 }
@@ -13,11 +14,22 @@ void open_door(void) {
 }
 
 void light_plus(void) {
-    printf("Aumento el nivel de brillo\n");
+	char Brightnees=GetBrightnees();
+	if (Brightnees < MAX_BRIGHTNESS){
+    	SetBrightness(Brightnees++);
+    	//Se le debe agregar el UpdateDisplay para realizar el cambio?
+    }
+    else{
+    }
 }
 
 void light_minus(void) {
-    printf("Disminuyo el brillo\n");
+	char Brightnees=GetBrightnees();
+    if (Brightnees > MIN_BRIGHTNESS){
+    	SetBrightness(Brightnees--);
+    }
+    else{
+    }
 }
 
 void check_user_id(void) {
