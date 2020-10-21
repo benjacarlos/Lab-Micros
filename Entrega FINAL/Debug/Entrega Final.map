@@ -358,12 +358,12 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x28 ./source/EventQueue.o
  .debug_ranges  0x00000000       0x18 ./source/EventQueue.o
- .debug_macro   0x00000000      0x16b ./source/EventQueue.o
+ .debug_macro   0x00000000      0x16f ./source/EventQueue.o
  .debug_macro   0x00000000      0xa5a ./source/EventQueue.o
+ .debug_macro   0x00000000       0x10 ./source/EventQueue.o
  .debug_macro   0x00000000      0x34e ./source/EventQueue.o
  .debug_macro   0x00000000       0x22 ./source/EventQueue.o
  .debug_macro   0x00000000       0x3a ./source/EventQueue.o
- .debug_macro   0x00000000       0x10 ./source/EventQueue.o
  .debug_macro   0x00000000       0x10 ./source/EventQueue.o
  .debug_macro   0x00000000       0x17 ./source/EventQueue.o
  .debug_macro   0x00000000       0x22 ./source/EventQueue.o
@@ -406,7 +406,7 @@ Discarded input sections
  .debug_macro   0x00000000      0xa5a ./source/FSM.o
  .debug_macro   0x00000000      0x34e ./source/FSM.o
  .debug_line    0x00000000       0xbe ./source/FSM.o
- .debug_str     0x00000000     0x3835 ./source/FSM.o
+ .debug_str     0x00000000     0x3829 ./source/FSM.o
  .comment       0x00000000       0x7f ./source/FSM.o
  .debug_frame   0x00000000       0x34 ./source/FSM.o
  .ARM.attributes
@@ -512,7 +512,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/FSMTABLE.o
  .debug_macro   0x00000000      0x16f ./source/FSMTABLE.o
  .debug_line    0x00000000      0x333 ./source/FSMTABLE.o
- .debug_str     0x00000000     0x8058 ./source/FSMTABLE.o
+ .debug_str     0x00000000     0x804c ./source/FSMTABLE.o
  .comment       0x00000000       0x7f ./source/FSMTABLE.o
  .debug_frame   0x00000000       0x78 ./source/FSMTABLE.o
  .ARM.attributes
@@ -614,7 +614,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/FSM_actions.o
  .debug_macro   0x00000000      0x16f ./source/FSM_actions.o
  .debug_line    0x00000000      0x3b9 ./source/FSM_actions.o
- .debug_str     0x00000000     0x7598 ./source/FSM_actions.o
+ .debug_str     0x00000000     0x758c ./source/FSM_actions.o
  .comment       0x00000000       0x7f ./source/FSM_actions.o
  .debug_frame   0x00000000      0x174 ./source/FSM_actions.o
  .ARM.attributes
@@ -674,7 +674,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x3a ./source/boardLed.o
  .debug_macro   0x00000000       0x34 ./source/boardLed.o
  .debug_line    0x00000000      0x100 ./source/boardLed.o
- .debug_str     0x00000000     0x39e4 ./source/boardLed.o
+ .debug_str     0x00000000     0x39d8 ./source/boardLed.o
  .comment       0x00000000       0x7f ./source/boardLed.o
  .debug_frame   0x00000000       0x50 ./source/boardLed.o
  .ARM.attributes
@@ -2442,8 +2442,8 @@ OUTPUT(Entrega Final.axf elf32-littlearm)
  .debug_macro   0x0000015c      0xa5a ./source/AdminID.o
  .debug_macro   0x00000bb6      0x34e ./source/AdminID.o
  .debug_macro   0x00000f04       0x22 ./source/AdminID.o
- .debug_macro   0x00000f26       0x40 ./source/AdminID.o
- .debug_macro   0x00000f66       0x10 ./source/AdminID.o
+ .debug_macro   0x00000f26       0x10 ./source/AdminID.o
+ .debug_macro   0x00000f36       0x40 ./source/AdminID.o
  .debug_macro   0x00000f76       0x10 ./source/AdminID.o
  .debug_macro   0x00000f86       0x17 ./source/AdminID.o
  .debug_macro   0x00000f9d       0x22 ./source/AdminID.o
@@ -2542,7 +2542,7 @@ OUTPUT(Entrega Final.axf elf32-littlearm)
  .debug_line    0x00002793      0x6d8 ./SDK/startup/startup_mk64f12.o
  .debug_line    0x00002e6b      0x1c7 ./SDK/CMSIS/system_MK64F12.o
 
-.debug_str      0x00000000    0x7daa9
+.debug_str      0x00000000    0x7da5f
  .debug_str     0x00000000     0x6ca0 ./source/AdminID.o
                                0x6ef8 (size before relaxing)
  .debug_str     0x00006ca0    0x74c18 ./source/App.o
@@ -2551,36 +2551,36 @@ OUTPUT(Entrega Final.axf elf32-littlearm)
                                0x390f (size before relaxing)
  .debug_str     0x0007b97c      0x20f ./source/CardReaderHAL.o
                                0x3e01 (size before relaxing)
- .debug_str     0x0007bb8b      0x255 ./source/SysTick.o
-                              0x771bb (size before relaxing)
- .debug_str     0x0007bde0      0x1c2 ./source/displayLed.o
+ .debug_str     0x0007bb8b      0x20b ./source/SysTick.o
+                              0x771af (size before relaxing)
+ .debug_str     0x0007bd96      0x1c2 ./source/displayLed.o
                                0x6e9b (size before relaxing)
- .debug_str     0x0007bfa2      0x16f ./source/displayManager.o
+ .debug_str     0x0007bf58      0x16f ./source/displayManager.o
                                0x6e45 (size before relaxing)
- .debug_str     0x0007c111      0x223 ./source/displaySegment.o
-                               0x3ae8 (size before relaxing)
- .debug_str     0x0007c334       0x97 ./source/door.o
+ .debug_str     0x0007c0c7      0x223 ./source/displaySegment.o
+                               0x3adc (size before relaxing)
+ .debug_str     0x0007c2ea       0x97 ./source/door.o
                                0x6dab (size before relaxing)
- .debug_str     0x0007c3cb      0x1a2 ./source/encoder.o
+ .debug_str     0x0007c381      0x1a2 ./source/encoder.o
                                0x3a82 (size before relaxing)
- .debug_str     0x0007c56d       0x9a ./source/encoderEvent.o
-                               0x391e (size before relaxing)
- .debug_str     0x0007c607      0x137 ./source/encoderHal.o
+ .debug_str     0x0007c523       0x9a ./source/encoderEvent.o
+                               0x3912 (size before relaxing)
+ .debug_str     0x0007c5bd      0x137 ./source/encoderHal.o
                                0x6f55 (size before relaxing)
- .debug_str     0x0007c73e      0x78c ./source/gpio.o
-                              0x77918 (size before relaxing)
- .debug_str     0x0007ceca      0x140 ./source/timer.o
+ .debug_str     0x0007c6f4      0x78c ./source/gpio.o
+                              0x7790c (size before relaxing)
+ .debug_str     0x0007ce80      0x140 ./source/timer.o
                                0x6e10 (size before relaxing)
- .debug_str     0x0007d00a      0x217 ./SDK/startup/hardware.o
-                              0x771f6 (size before relaxing)
- .debug_str     0x0007d221       0x1b ./SDK/startup/main.o
-                              0x76fca (size before relaxing)
- .debug_str     0x0007d23c       0x36 ./SDK/startup/semihost_hardfault.o
-                               0x2d34 (size before relaxing)
- .debug_str     0x0007d272      0x7d5 ./SDK/startup/startup_mk64f12.o
-                               0x35a2 (size before relaxing)
- .debug_str     0x0007da47       0x62 ./SDK/CMSIS/system_MK64F12.o
-                              0x77105 (size before relaxing)
+ .debug_str     0x0007cfc0      0x217 ./SDK/startup/hardware.o
+                              0x771ea (size before relaxing)
+ .debug_str     0x0007d1d7       0x1b ./SDK/startup/main.o
+                              0x76fbe (size before relaxing)
+ .debug_str     0x0007d1f2       0x36 ./SDK/startup/semihost_hardfault.o
+                               0x2d28 (size before relaxing)
+ .debug_str     0x0007d228      0x7d5 ./SDK/startup/startup_mk64f12.o
+                               0x3596 (size before relaxing)
+ .debug_str     0x0007d9fd       0x62 ./SDK/CMSIS/system_MK64F12.o
+                              0x770f9 (size before relaxing)
 
 .comment        0x00000000       0x7e
  .comment       0x00000000       0x7e ./source/AdminID.o
