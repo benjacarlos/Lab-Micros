@@ -17,7 +17,7 @@
  * 						VARIABLES LOCALES
  ******************************************************************************/
 
-static dataBase_t dataBase; // arreglo de usuario, el maximo se coloca en el header
+static dataBase_t dataBase; // arreglo de usuarios, el maximo se coloca en el header
 
 
 /*******************************************************************************
@@ -31,24 +31,27 @@ void initDataBase(void)
 	user_t userMaster = {{'6','0','6','1','2','6','8','3'},{'0','0','0','0','0'}, MASTER};
 	user_t newAdmin = {{'6','0','6','1','2','6','8','4'},{'0','0','0','0','1'}, ADMIN };
 	user_t newUser = {{'4','5','1','7','6','6','0','1'},{'0','0','0','1',' '}, BASIC};
-	addUser(userMaster);
-	addUser(newAdmin);
-	addUser(newUser);
+	agregoUsuario(userMaster);
+	agregoUsuario(newAdmin);
+	agregoUsuario(newUser);
 
 }
 
 
-estado agregoUsuario(user_t newUser){
+estado agregoUsuario(user_t newUser)
+{
 	// me fijo si no hay ovweflow
-	if(dataBase.top == MAX_USERS-1){
-			return DATABASE_LLENO;
-		}
-	else{
-		// checks if ID already on list
+	if(dataBase.top == MAX_USERS-1)
+	{
+		return DATABASE_LLENO;
+	}
+	else
+	{
+		// check si id esta en la lista
 		bool IDused = verificoID(newUser.ID);
 		if(!IDused)
 		{
-			// if not on list, user is added
+			// si no está se agrega
 			dataBase.top += 1;
 			dataBase.list[dataBase.top] = newUser;
 			return EXITO;
@@ -60,8 +63,9 @@ estado agregoUsuario(user_t newUser){
 	}
 }
 
-estado eliminoUsuario(user_t userToDelete){
-	// checks if ID is on list
+estado eliminoUsuario(user_t userToDelete)
+{
+	// check si id esta en la lista
 	int posicion = buscoID( userToDelete.ID[TAMANO_ID] );
 	if( posicion < MAX_USERS+1 )
 	{
@@ -73,34 +77,40 @@ estado eliminoUsuario(user_t userToDelete){
 	}
 	else
 	{
-		return ID_YA_EN_USO;
+		return ID_NO_ENCONTRADO;
 	}
 }
 
 
 //	Función que busca la posicion del ID
-int buscoID (char userID[TAMANO_ID]){
-	bool IDfound = false;
+int buscoID(char userID[TAMANO_ID])
+{
+	bool foundID = false;
 	int posicion, j; //busco el ID
-	for(posicion=0 ; posicion< (dataBase.top + 1) ; ++posicion){
+	for(posicion=0 ; posicion< (dataBase.top + 1) ; ++posicion)
+	{
 		bool same = true;
-		for(j=0 ; j<TAMANO_ID ; ++j){
-			if(dataBase.list[posicion].ID[j] != userID[j]){
+		for(j=0 ; j < TAMANO_ID ; ++j)
+		{
+			if(dataBase.list[posicion].ID[j] != userID[j])
+			{
 				same = false;	// mientras sea falso sigo en el for
 			}
 		}
-		if(same){
-			IDfound = true;
+		if(same)
+		{
+			foundID = true;
 			break;
 		}
 	}
-	if (IDfound){
+	if (foundID)
+	{
 		return posicion;
 	}
-	else{
+	else
+	{
 		return (MAX_USERS+1);
 	}
-
 
 }
 
@@ -126,9 +136,9 @@ category_t verificoCategory(char usersID[TAMANO_ID]){
 }
 
 
-bool cambioCatagory(char usersID[TAMANO_ID], category_t nuevaCategory){
+bool cambioCategory(char usersID[TAMANO_ID], category_t nuevaCategory){
 	// busco el ID en la base de datos
-	int usuario = buscoID( usersID[TAMANO_ID] );
+	int usuario = buscoID(usersID[TAMANO_ID]);
 	category_t categoryUser = verificoCategory( usersID[TAMANO_ID] );
 	bool value=false;
 	if( (categoryUser != MASTER) | (nuevaCategory == MASTER) ){
@@ -139,11 +149,13 @@ bool cambioCatagory(char usersID[TAMANO_ID], category_t nuevaCategory){
 }
 
 
-bool verificoID(char usersID[TAMANO_ID]){
+bool verificoID(char usersID[TAMANO_ID])
+{
 // checks if ID is on list
 	bool IDfound = false;
-	int posicion = buscoId(usersID[TAMANO_ID]);
-	if (posicion < MAX_USERS+1){
+	int posicion = buscoID(usersID[TAMANO_ID]);
+	if (posicion < MAX_USERS+1)
+	{
 		IDfound = true;
 	}
 	return IDfound;

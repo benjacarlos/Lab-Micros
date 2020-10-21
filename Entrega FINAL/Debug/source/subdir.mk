@@ -23,7 +23,8 @@ C_SRCS += \
 ../source/encoderEvent.c \
 ../source/encoderHal.c \
 ../source/gpio.c \
-../source/timer.c 
+../source/timer.c \
+../source/timerqueue.c 
 
 OBJS += \
 ./source/AdminID.o \
@@ -45,7 +46,8 @@ OBJS += \
 ./source/encoderEvent.o \
 ./source/encoderHal.o \
 ./source/gpio.o \
-./source/timer.o 
+./source/timer.o \
+./source/timerqueue.o 
 
 C_DEPS += \
 ./source/AdminID.d \
@@ -67,7 +69,8 @@ C_DEPS += \
 ./source/encoderEvent.d \
 ./source/encoderHal.d \
 ./source/gpio.d \
-./source/timer.d 
+./source/timer.d \
+./source/timerqueue.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

@@ -40,7 +40,7 @@ void initEncoder()
 {
 	if(!encoderInitialized)
 	{
-		initEncoderHAL(rotationCallback);		//setea gpio y timer count
+		initEncoderHal(rotationCallback);		//setea gpio y timer count
 		setButtonCallback(buttonCallback);
 		initEncoderQueue();			//inicializo queue de encoder
 
@@ -155,7 +155,7 @@ void buttonCallback(void)
 	}
 	else if(checkRisingEdge())						//si fue un flanco ascendente me fijo cuánto tiempo se presionó el botón para saber si fue ENTER o BACK
 	{
-		if(getEncTimerCount() <= ENTER_COUNT)		//si es menor a ENTER_COUNT el evento es ENTER
+		if(getEncoderTimerCount() <= ENTER_COUNT)		//si es menor a ENTER_COUNT el evento es ENTER
 		{
 			eventEncoderQueue.event.input = ENTER;
 			eventEncoderQueue.event.isValid = true;
