@@ -517,7 +517,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x29 ./source/displayManager.o
  .debug_macro   0x00000000       0x16 ./source/displayManager.o
  .debug_line    0x00000000      0x39c ./source/displayManager.o
- .debug_str     0x00000000     0x6e59 ./source/displayManager.o
+ .debug_str     0x00000000     0x6e53 ./source/displayManager.o
  .comment       0x00000000       0x7f ./source/displayManager.o
  .debug_frame   0x00000000      0x134 ./source/displayManager.o
  .ARM.attributes

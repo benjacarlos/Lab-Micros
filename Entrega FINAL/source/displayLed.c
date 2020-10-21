@@ -118,7 +118,7 @@ bool GetDisplayLedBlink(int pos)
 
 void SetDisplayBrightness(int pos, int bright)
 {
-	if( (bright < MAX_BRIGHTNESS) && (bright >= MIN_BRIGHTNESS) )
+	if( (bright <= MAX_BRIGHTNESS) && (bright >= MIN_BRIGHTNESS) )
 		brightness[pos] = bright;
 }
 
@@ -143,7 +143,7 @@ void showDisplayLeds(int pos)
 bool brightnessHandle(int pos)
 {
 	bool should_show = true;
-	if(brightness[pos] < MAX_BRIGHTNESS)
+	if(brightness[pos] <= MAX_BRIGHTNESS)
 			if((bright_counter[pos]++) == brightness[pos])
 			{
 				should_show = false;

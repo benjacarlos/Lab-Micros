@@ -44,7 +44,7 @@ void InitDisplay(void)
 {
 	if(!initialized)
 	{
-		InitializeSegmentDisplay();
+		InitSegmentDisplay();
 		InitDisplayLeds();
 
 		ClearDisplay();
