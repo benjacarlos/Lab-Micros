@@ -145,7 +145,7 @@ bool brightnessHandle(int pos)
 {
 	bool should_show = true;
 	if(brightness[pos] <= MAX_BRIGHTNESS)
-			if((bright_counter[pos]++) == brightness[pos])
+			if((bright_counter[pos]++) == (brightness[pos]+1))
 			{
 				should_show = false;
 				bright_counter[pos] = 0;

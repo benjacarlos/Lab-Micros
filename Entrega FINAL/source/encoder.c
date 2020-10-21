@@ -26,7 +26,7 @@
 /*******************************************************************************
  * 								VARIABLES
  ******************************************************************************/
-_Bool encoderInitialized = falso ;
+_Bool encoderInitialized = false;
 static encoderQueue_t encoderQueue[ENCODER_EVENTS];
 
 
@@ -40,7 +40,7 @@ void initEncoder()
 {
 	if(!encoderInitialized)
 	{
-		initEncoderHAL(rotationCallback);		//setea gpio y timer count
+		initEncoderHal(rotationCallback);		//setea gpio y timer count
 		setButtonCallback(buttonCallback);
 		initEncoderQueue();			//inicializo queue de encoder
 
@@ -48,10 +48,10 @@ void initEncoder()
 		int n;
 		int k;
 		for( n=0 ; n<STATES ; n++ )					// son 2 encoder_t
-			for( k=0 ; k<CANT_TOTAL_SEÑALES ; k++ )	// reciben las señales A ,B y C
+			for( k=0 ; k<ENC_SIGNAL_COUNT ; k++ )	// reciben las señales A ,B y C
 				updateData(readEncoder(k), k);
 		// se inicializo el encoder
-		initialized = true;
+		encoderInitialized = true;
 	}
 }
 
@@ -155,7 +155,7 @@ void buttonCallback(void)
 	}
 	else if(checkRisingEdge())						//si fue un flanco ascendente me fijo cuánto tiempo se presionó el botón para saber si fue ENTER o BACK
 	{
-		if(getEncTimerCount() <= ENTER_COUNT)		//si es menor a ENTER_COUNT el evento es ENTER
+		if(getEncoderTimerCount() <= ENTER_COUNT)		//si es menor a ENTER_COUNT el evento es ENTER
 		{
 			eventEncoderQueue.event.input = ENTER;
 			eventEncoderQueue.event.isValid = true;

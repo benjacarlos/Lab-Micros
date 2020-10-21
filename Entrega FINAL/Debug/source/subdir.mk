@@ -6,6 +6,9 @@
 C_SRCS += \
 ../source/AdminID.c \
 ../source/App.c \
+../source/CardReader.c \
+../source/CardReaderDecoder.c \
+../source/CardReaderHAL.c \
 ../source/EncoderHandler.c \
 ../source/FSM.c \
 ../source/FSMTABLE.c \
@@ -15,15 +18,23 @@ C_SRCS += \
 ../source/displayLed.c \
 ../source/displayManager.c \
 ../source/displaySegment.c \
+<<<<<<< HEAD
+=======
+../source/door.c \
+>>>>>>> ce4f374d6df580b69968b7b9bdc267dfd70ce840
 ../source/encoder.c \
 ../source/encoderEvent.c \
 ../source/encoderHal.c \
 ../source/gpio.c \
-../source/timer.c 
+../source/timer.c \
+../source/timerqueue.c 
 
 OBJS += \
 ./source/AdminID.o \
 ./source/App.o \
+./source/CardReader.o \
+./source/CardReaderDecoder.o \
+./source/CardReaderHAL.o \
 ./source/EncoderHandler.o \
 ./source/FSM.o \
 ./source/FSMTABLE.o \
@@ -33,15 +44,23 @@ OBJS += \
 ./source/displayLed.o \
 ./source/displayManager.o \
 ./source/displaySegment.o \
+<<<<<<< HEAD
+=======
+./source/door.o \
+>>>>>>> ce4f374d6df580b69968b7b9bdc267dfd70ce840
 ./source/encoder.o \
 ./source/encoderEvent.o \
 ./source/encoderHal.o \
 ./source/gpio.o \
-./source/timer.o 
+./source/timer.o \
+./source/timerqueue.o 
 
 C_DEPS += \
 ./source/AdminID.d \
 ./source/App.d \
+./source/CardReader.d \
+./source/CardReaderDecoder.d \
+./source/CardReaderHAL.d \
 ./source/EncoderHandler.d \
 ./source/FSM.d \
 ./source/FSMTABLE.d \
@@ -51,11 +70,16 @@ C_DEPS += \
 ./source/displayLed.d \
 ./source/displayManager.d \
 ./source/displaySegment.d \
+<<<<<<< HEAD
+=======
+./source/door.d \
+>>>>>>> ce4f374d6df580b69968b7b9bdc267dfd70ce840
 ./source/encoder.d \
 ./source/encoderEvent.d \
 ./source/encoderHal.d \
 ./source/gpio.d \
-./source/timer.d 
+./source/timer.d \
+./source/timerqueue.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
