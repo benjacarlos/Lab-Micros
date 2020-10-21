@@ -15,6 +15,7 @@ C_SRCS += \
 ../source/displayLed.c \
 ../source/displayManager.c \
 ../source/displaySegment.c \
+../source/encoder.c \
 ../source/encoderEvent.c \
 ../source/encoderHal.c \
 ../source/gpio.c \
@@ -32,6 +33,7 @@ OBJS += \
 ./source/displayLed.o \
 ./source/displayManager.o \
 ./source/displaySegment.o \
+./source/encoder.o \
 ./source/encoderEvent.o \
 ./source/encoderHal.o \
 ./source/gpio.o \
@@ -49,6 +51,7 @@ C_DEPS += \
 ./source/displayLed.d \
 ./source/displayManager.d \
 ./source/displaySegment.d \
+./source/encoder.d \
 ./source/encoderEvent.d \
 ./source/encoderHal.d \
 ./source/gpio.d \
