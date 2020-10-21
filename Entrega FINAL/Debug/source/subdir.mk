@@ -19,7 +19,10 @@ C_SRCS += \
 ../source/displayLed.c \
 ../source/displayManager.c \
 ../source/displaySegment.c \
+<<<<<<< HEAD
+=======
 ../source/door.c \
+>>>>>>> ce4f374d6df580b69968b7b9bdc267dfd70ce840
 ../source/encoder.c \
 ../source/encoderEvent.c \
 ../source/encoderHal.c \
@@ -43,7 +46,10 @@ OBJS += \
 ./source/displayLed.o \
 ./source/displayManager.o \
 ./source/displaySegment.o \
+<<<<<<< HEAD
+=======
 ./source/door.o \
+>>>>>>> ce4f374d6df580b69968b7b9bdc267dfd70ce840
 ./source/encoder.o \
 ./source/encoderEvent.o \
 ./source/encoderHal.o \
@@ -67,7 +73,10 @@ C_DEPS += \
 ./source/displayLed.d \
 ./source/displayManager.d \
 ./source/displaySegment.d \
+<<<<<<< HEAD
+=======
 ./source/door.d \
+>>>>>>> ce4f374d6df580b69968b7b9bdc267dfd70ce840
 ./source/encoder.d \
 ./source/encoderEvent.d \
 ./source/encoderHal.d \
