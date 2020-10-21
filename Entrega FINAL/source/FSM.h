@@ -6,20 +6,30 @@
 #define FSM_H
 
 //includes
-#include <stdint.h>
+#include <stdbool.h>
+#include "EventQueue.h"
+
+typedef enum {MENU, STATES_N, STAY}state_name;
 
 
+//debe definirse asi para no tener problemas en la estructura.
+struct estados;
+typedef struct estados (*evHandler_pointer)(UserData_t *);
 
 
-// Variables
-#define EV_FIN_TABLA 0xFF
-typedef uint8_t BYTE;
+typedef struct estados{
+	state_name name;
+	evHandler_pointer ev_handlers[EVENT_N];
+}state_t;
 
-typedef struct tabla_estados	{
-	BYTE evento;
-	BYTE *nextstate;
-	void(*accion) (void);
-}STATE;
+
+typedef struct{
+	state_t presentstate;
+	_Bool salir;
+}fsm_t;
+
+
+void fsmInit(fsm_t *fsm);
 
 #endif
 	
