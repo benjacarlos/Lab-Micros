@@ -26,7 +26,7 @@
 /*******************************************************************************
  * 								VARIABLES
  ******************************************************************************/
-_Bool encoderInitialized = falso ;
+_Bool encoderInitialized = false;
 static encoderQueue_t encoderQueue[ENCODER_EVENTS];
 
 
@@ -48,10 +48,10 @@ void initEncoder()
 		int n;
 		int k;
 		for( n=0 ; n<STATES ; n++ )					// son 2 encoder_t
-			for( k=0 ; k<CANT_TOTAL_SEÑALES ; k++ )	// reciben las señales A ,B y C
+			for( k=0 ; k<ENC_SIGNAL_COUNT ; k++ )	// reciben las señales A ,B y C
 				updateData(readEncoder(k), k);
 		// se inicializo el encoder
-		initialized = true;
+		encoderInitialized = true;
 	}
 }
 

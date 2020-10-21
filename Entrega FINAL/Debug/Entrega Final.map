@@ -1,5 +1,7 @@
 Archive member included to satisfy reference by file (symbol)
 
+c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
+                              ./source/CardReader.o (memcpy)
 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(fpprintf.o)
                               ./source/FSM_actions.o (printf)
 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(printf.o)
@@ -26,8 +28,6 @@ c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../
                               c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(_deferredlazyseek.o) (fseek)
 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(ftell.o)
                               c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(fseek.o) (ftell)
-c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
-                              c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(alloc.o) (memcpy)
 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(__init_alloc.o)
                               c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(alloc.o) (__heaps)
 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(_cr_sbrk.o)
@@ -142,8 +142,131 @@ Discarded input sections
  .data.counter.7898
                 0x00000000        0x4 ./source/App.o
  .debug_macro   0x00000000      0xa5a ./source/App.o
- .debug_macro   0x00000000      0x34e ./source/App.o
  .debug_macro   0x00000000       0x22 ./source/App.o
+ .debug_macro   0x00000000      0x34e ./source/App.o
+ .group         0x00000000        0xc ./source/CardReader.o
+ .group         0x00000000        0xc ./source/CardReader.o
+ .group         0x00000000        0xc ./source/CardReader.o
+ .group         0x00000000        0xc ./source/CardReader.o
+ .group         0x00000000        0xc ./source/CardReader.o
+ .group         0x00000000        0xc ./source/CardReader.o
+ .text          0x00000000        0x0 ./source/CardReader.o
+ .data          0x00000000        0x0 ./source/CardReader.o
+ .bss           0x00000000        0x0 ./source/CardReader.o
+ .text.Cardreader_Init
+                0x00000000        0xc ./source/CardReader.o
+ .text.lecture_ready
+                0x00000000        0xe ./source/CardReader.o
+ .text.get_decoded
+                0x00000000       0x54 ./source/CardReader.o
+ .debug_info    0x00000000      0x115 ./source/CardReader.o
+ .debug_abbrev  0x00000000       0xc5 ./source/CardReader.o
+ .debug_aranges
+                0x00000000       0x30 ./source/CardReader.o
+ .debug_ranges  0x00000000       0x20 ./source/CardReader.o
+ .debug_macro   0x00000000       0x4e ./source/CardReader.o
+ .debug_macro   0x00000000      0xa5a ./source/CardReader.o
+ .debug_macro   0x00000000       0x10 ./source/CardReader.o
+ .debug_macro   0x00000000      0x34e ./source/CardReader.o
+ .debug_macro   0x00000000       0x10 ./source/CardReader.o
+ .debug_macro   0x00000000       0x28 ./source/CardReader.o
+ .debug_macro   0x00000000       0x22 ./source/CardReader.o
+ .debug_line    0x00000000      0x11f ./source/CardReader.o
+ .debug_str     0x00000000     0x390f ./source/CardReader.o
+ .comment       0x00000000       0x7f ./source/CardReader.o
+ .debug_frame   0x00000000       0x6c ./source/CardReader.o
+ .ARM.attributes
+                0x00000000       0x39 ./source/CardReader.o
+ .group         0x00000000        0xc ./source/CardReaderDecoder.o
+ .group         0x00000000        0xc ./source/CardReaderDecoder.o
+ .group         0x00000000        0xc ./source/CardReaderDecoder.o
+ .group         0x00000000        0xc ./source/CardReaderDecoder.o
+ .group         0x00000000        0xc ./source/CardReaderDecoder.o
+ .group         0x00000000        0xc ./source/CardReaderDecoder.o
+ .text          0x00000000        0x0 ./source/CardReaderDecoder.o
+ .data          0x00000000        0x0 ./source/CardReaderDecoder.o
+ .bss           0x00000000        0x0 ./source/CardReaderDecoder.o
+ .rodata.track1
+                0x00000000       0x18 ./source/CardReaderDecoder.o
+ .data.trackarray
+                0x00000000        0x4 ./source/CardReaderDecoder.o
+ .text.dataParser
+                0x00000000       0x68 ./source/CardReaderDecoder.o
+ .text.getShapedTrack
+                0x00000000      0x122 ./source/CardReaderDecoder.o
+ .text.identifySymbol
+                0x00000000       0xa8 ./source/CardReaderDecoder.o
+ .text.shapeTrack
+                0x00000000       0x4a ./source/CardReaderDecoder.o
+ .text.decodeTrack
+                0x00000000      0x2ae ./source/CardReaderDecoder.o
+ .debug_info    0x00000000      0x484 ./source/CardReaderDecoder.o
+ .debug_abbrev  0x00000000      0x108 ./source/CardReaderDecoder.o
+ .debug_aranges
+                0x00000000       0x40 ./source/CardReaderDecoder.o
+ .debug_ranges  0x00000000       0x30 ./source/CardReaderDecoder.o
+ .debug_macro   0x00000000       0x72 ./source/CardReaderDecoder.o
+ .debug_macro   0x00000000      0xa5a ./source/CardReaderDecoder.o
+ .debug_macro   0x00000000       0xf4 ./source/CardReaderDecoder.o
+ .debug_macro   0x00000000      0x34e ./source/CardReaderDecoder.o
+ .debug_macro   0x00000000       0x22 ./source/CardReaderDecoder.o
+ .debug_macro   0x00000000       0x22 ./source/CardReaderDecoder.o
+ .debug_macro   0x00000000      0x174 ./source/CardReaderDecoder.o
+ .debug_line    0x00000000      0x281 ./source/CardReaderDecoder.o
+ .debug_str     0x00000000     0x43cc ./source/CardReaderDecoder.o
+ .comment       0x00000000       0x7f ./source/CardReaderDecoder.o
+ .debug_frame   0x00000000       0xd4 ./source/CardReaderDecoder.o
+ .ARM.attributes
+                0x00000000       0x39 ./source/CardReaderDecoder.o
+ .group         0x00000000        0xc ./source/CardReaderHAL.o
+ .group         0x00000000        0xc ./source/CardReaderHAL.o
+ .group         0x00000000        0xc ./source/CardReaderHAL.o
+ .group         0x00000000        0xc ./source/CardReaderHAL.o
+ .group         0x00000000        0xc ./source/CardReaderHAL.o
+ .group         0x00000000        0xc ./source/CardReaderHAL.o
+ .text          0x00000000        0x0 ./source/CardReaderHAL.o
+ .data          0x00000000        0x0 ./source/CardReaderHAL.o
+ .bss           0x00000000        0x0 ./source/CardReaderHAL.o
+ .bss.read_enable
+                0x00000000        0x1 ./source/CardReaderHAL.o
+ .bss.save_items
+                0x00000000        0x1 ./source/CardReaderHAL.o
+ .bss.data_counter
+                0x00000000        0x4 ./source/CardReaderHAL.o
+ .bss.reader_queue
+                0x00000000      0x508 ./source/CardReaderHAL.o
+ .text.CardReaderHW_Init
+                0x00000000       0x50 ./source/CardReaderHAL.o
+ .text.clockfun
+                0x00000000       0x50 ./source/CardReaderHAL.o
+ .text.enablefun
+                0x00000000       0x84 ./source/CardReaderHAL.o
+ .text.Queue_Init
+                0x00000000       0x20 ./source/CardReaderHAL.o
+ .text.get_buffer
+                0x00000000       0x68 ./source/CardReaderHAL.o
+ .text.queue_not_empty
+                0x00000000       0x30 ./source/CardReaderHAL.o
+ .bss.hw_Init.5005
+                0x00000000        0x1 ./source/CardReaderHAL.o
+ .debug_info    0x00000000      0x24f ./source/CardReaderHAL.o
+ .debug_abbrev  0x00000000      0x137 ./source/CardReaderHAL.o
+ .debug_aranges
+                0x00000000       0x48 ./source/CardReaderHAL.o
+ .debug_ranges  0x00000000       0x38 ./source/CardReaderHAL.o
+ .debug_macro   0x00000000       0x66 ./source/CardReaderHAL.o
+ .debug_macro   0x00000000      0xa5a ./source/CardReaderHAL.o
+ .debug_macro   0x00000000      0x34e ./source/CardReaderHAL.o
+ .debug_macro   0x00000000       0x10 ./source/CardReaderHAL.o
+ .debug_macro   0x00000000       0x22 ./source/CardReaderHAL.o
+ .debug_macro   0x00000000       0x3a ./source/CardReaderHAL.o
+ .debug_macro   0x00000000      0x174 ./source/CardReaderHAL.o
+ .debug_line    0x00000000      0x165 ./source/CardReaderHAL.o
+ .debug_str     0x00000000     0x3e01 ./source/CardReaderHAL.o
+ .comment       0x00000000       0x7f ./source/CardReaderHAL.o
+ .debug_frame   0x00000000       0xcc ./source/CardReaderHAL.o
+ .ARM.attributes
+                0x00000000       0x39 ./source/CardReaderHAL.o
  .group         0x00000000        0xc ./source/EncoderHandler.o
  .group         0x00000000        0xc ./source/EncoderHandler.o
  .group         0x00000000        0xc ./source/EncoderHandler.o
@@ -527,7 +650,7 @@ Discarded input sections
                 0x00000000       0x5c ./source/displayLed.o
  .text.blinkHandle
                 0x00000000       0xa8 ./source/displayLed.o
- .bss.blink_counter.5707
+ .bss.blink_counter.5708
                 0x00000000        0xc ./source/displayLed.o
  .debug_info    0x00000000      0xb18 ./source/displayLed.o
  .debug_abbrev  0x00000000      0x26f ./source/displayLed.o
@@ -559,7 +682,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/displayLed.o
  .debug_macro   0x00000000       0x29 ./source/displayLed.o
  .debug_line    0x00000000      0x3a1 ./source/displayLed.o
- .debug_str     0x00000000     0x6ea7 ./source/displayLed.o
+ .debug_str     0x00000000     0x6e9b ./source/displayLed.o
  .comment       0x00000000       0x7f ./source/displayLed.o
  .debug_frame   0x00000000      0x18c ./source/displayLed.o
  .ARM.attributes
@@ -623,8 +746,8 @@ Discarded input sections
                 0x00000000       0x32 ./source/displayManager.o
  .text.GetBrightnees
                 0x00000000       0x18 ./source/displayManager.o
- .bss.pos.5662  0x00000000        0x4 ./source/displayManager.o
- .debug_info    0x00000000      0xa7c ./source/displayManager.o
+ .bss.pos.5663  0x00000000        0x4 ./source/displayManager.o
+ .debug_info    0x00000000      0xa82 ./source/displayManager.o
  .debug_abbrev  0x00000000      0x27a ./source/displayManager.o
  .debug_aranges
                 0x00000000       0x68 ./source/displayManager.o
@@ -654,7 +777,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x29 ./source/displayManager.o
  .debug_macro   0x00000000       0x16 ./source/displayManager.o
  .debug_line    0x00000000      0x3af ./source/displayManager.o
- .debug_str     0x00000000     0x6e4c ./source/displayManager.o
+ .debug_str     0x00000000     0x6e45 ./source/displayManager.o
  .comment       0x00000000       0x7f ./source/displayManager.o
  .debug_frame   0x00000000      0x154 ./source/displayManager.o
  .ARM.attributes
@@ -696,6 +819,124 @@ Discarded input sections
  .debug_frame   0x00000000       0x98 ./source/displaySegment.o
  .ARM.attributes
                 0x00000000       0x39 ./source/displaySegment.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .group         0x00000000        0xc ./source/door.o
+ .text          0x00000000        0x0 ./source/door.o
+ .data          0x00000000        0x0 ./source/door.o
+ .bss           0x00000000        0x0 ./source/door.o
+ .text.doorInit
+                0x00000000       0x18 ./source/door.o
+ .text.openDoorTemporally
+                0x00000000       0x1c ./source/door.o
+ .text.closeAfterTimeOut
+                0x00000000       0x12 ./source/door.o
+ .text.openDoor
+                0x00000000       0x10 ./source/door.o
+ .text.closeDoor
+                0x00000000       0x10 ./source/door.o
+ .text.toggleDoor
+                0x00000000        0xe ./source/door.o
+ .debug_info    0x00000000      0x96f ./source/door.o
+ .debug_abbrev  0x00000000      0x1cd ./source/door.o
+ .debug_aranges
+                0x00000000       0x48 ./source/door.o
+ .debug_ranges  0x00000000       0x38 ./source/door.o
+ .debug_macro   0x00000000      0x146 ./source/door.o
+ .debug_macro   0x00000000      0xa5a ./source/door.o
+ .debug_macro   0x00000000       0x10 ./source/door.o
+ .debug_macro   0x00000000      0x34e ./source/door.o
+ .debug_macro   0x00000000       0x22 ./source/door.o
+ .debug_macro   0x00000000       0x3a ./source/door.o
+ .debug_macro   0x00000000       0x17 ./source/door.o
+ .debug_macro   0x00000000       0x22 ./source/door.o
+ .debug_macro   0x00000000       0x52 ./source/door.o
+ .debug_macro   0x00000000       0x8d ./source/door.o
+ .debug_macro   0x00000000       0x35 ./source/door.o
+ .debug_macro   0x00000000       0x9c ./source/door.o
+ .debug_macro   0x00000000       0x16 ./source/door.o
+ .debug_macro   0x00000000      0x10e ./source/door.o
+ .debug_macro   0x00000000       0x8d ./source/door.o
+ .debug_macro   0x00000000       0x57 ./source/door.o
+ .debug_macro   0x00000000       0x58 ./source/door.o
+ .debug_macro   0x00000000       0x1f ./source/door.o
+ .debug_macro   0x00000000       0x43 ./source/door.o
+ .debug_macro   0x00000000       0x20 ./source/door.o
+ .debug_macro   0x00000000      0x18e ./source/door.o
+ .debug_macro   0x00000000      0x330 ./source/door.o
+ .debug_macro   0x00000000       0x16 ./source/door.o
+ .debug_macro   0x00000000       0x29 ./source/door.o
+ .debug_line    0x00000000      0x2cb ./source/door.o
+ .debug_str     0x00000000     0x6dab ./source/door.o
+ .comment       0x00000000       0x7f ./source/door.o
+ .debug_frame   0x00000000       0xb8 ./source/door.o
+ .ARM.attributes
+                0x00000000       0x39 ./source/door.o
+ .group         0x00000000        0xc ./source/encoder.o
+ .group         0x00000000        0xc ./source/encoder.o
+ .group         0x00000000        0xc ./source/encoder.o
+ .group         0x00000000        0xc ./source/encoder.o
+ .group         0x00000000        0xc ./source/encoder.o
+ .group         0x00000000        0xc ./source/encoder.o
+ .text          0x00000000        0x0 ./source/encoder.o
+ .data          0x00000000        0x0 ./source/encoder.o
+ .bss           0x00000000        0x0 ./source/encoder.o
+ .bss.encoderInitialized
+                0x00000000        0x1 ./source/encoder.o
+ .bss.encoderQueue
+                0x00000000      0x320 ./source/encoder.o
+ .text.initEncoder
+                0x00000000       0x78 ./source/encoder.o
+ .text.pullEncoderEvent
+                0x00000000       0x6c ./source/encoder.o
+ .text.pushEncoderEvent
+                0x00000000       0x5c ./source/encoder.o
+ .text.isEncoderEventValid
+                0x00000000       0x2c ./source/encoder.o
+ .text.rotationCallback
+                0x00000000       0x6e ./source/encoder.o
+ .text.initEncoderQueue
+                0x00000000       0x20 ./source/encoder.o
+ .text.buttonCallback
+                0x00000000       0x64 ./source/encoder.o
+ .debug_info    0x00000000      0x2ae ./source/encoder.o
+ .debug_abbrev  0x00000000      0x1ab ./source/encoder.o
+ .debug_aranges
+                0x00000000       0x50 ./source/encoder.o
+ .debug_ranges  0x00000000       0x58 ./source/encoder.o
+ .debug_macro   0x00000000       0x70 ./source/encoder.o
+ .debug_macro   0x00000000      0xa5a ./source/encoder.o
+ .debug_macro   0x00000000      0x34e ./source/encoder.o
+ .debug_macro   0x00000000       0x22 ./source/encoder.o
+ .debug_macro   0x00000000       0x3a ./source/encoder.o
+ .debug_macro   0x00000000       0x10 ./source/encoder.o
+ .debug_macro   0x00000000       0x22 ./source/encoder.o
+ .debug_line    0x00000000      0x1bc ./source/encoder.o
+ .debug_str     0x00000000     0x3aa2 ./source/encoder.o
+ .comment       0x00000000       0x7f ./source/encoder.o
+ .debug_frame   0x00000000      0x10c ./source/encoder.o
+ .ARM.attributes
+                0x00000000       0x39 ./source/encoder.o
  .group         0x00000000        0xc ./source/encoderEvent.o
  .group         0x00000000        0xc ./source/encoderEvent.o
  .group         0x00000000        0xc ./source/encoderEvent.o
@@ -771,7 +1012,7 @@ Discarded input sections
                 0x00000000       0x18 ./source/encoderHal.o
  .text.encoderTimerRoutine
                 0x00000000       0x2c ./source/encoderHal.o
- .debug_info    0x00000000      0xa68 ./source/encoderHal.o
+ .debug_info    0x00000000      0xa6e ./source/encoderHal.o
  .debug_abbrev  0x00000000      0x26b ./source/encoderHal.o
  .debug_aranges
                 0x00000000       0x48 ./source/encoderHal.o
@@ -800,7 +1041,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x29 ./source/encoderHal.o
  .debug_macro   0x00000000       0x40 ./source/encoderHal.o
  .debug_line    0x00000000      0x2ec ./source/encoderHal.o
- .debug_str     0x00000000     0x6f5c ./source/encoderHal.o
+ .debug_str     0x00000000     0x6f55 ./source/encoderHal.o
  .comment       0x00000000       0x7f ./source/encoderHal.o
  .debug_frame   0x00000000       0xd8 ./source/encoderHal.o
  .ARM.attributes
@@ -875,7 +1116,7 @@ Discarded input sections
  .text          0x00000000        0x0 ./source/timer.o
  .data          0x00000000        0x0 ./source/timer.o
  .bss           0x00000000        0x0 ./source/timer.o
- .bss.timers    0x00000000       0x60 ./source/timer.o
+ .bss.timers    0x00000000       0x70 ./source/timer.o
  .text.timerInit
                 0x00000000       0x78 ./source/timer.o
  .text.timerStart
@@ -890,9 +1131,9 @@ Discarded input sections
                 0x00000000       0x2c ./source/timer.o
  .text.timer_isr
                 0x00000000       0x70 ./source/timer.o
- .bss.yaInit.5608
+ .bss.yaInit.5609
                 0x00000000        0x1 ./source/timer.o
- .debug_info    0x00000000      0xafd ./source/timer.o
+ .debug_info    0x00000000      0xb03 ./source/timer.o
  .debug_abbrev  0x00000000      0x277 ./source/timer.o
  .debug_aranges
                 0x00000000       0x50 ./source/timer.o
@@ -921,7 +1162,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x29 ./source/timer.o
  .debug_macro   0x00000000       0x10 ./source/timer.o
  .debug_line    0x00000000      0x31a ./source/timer.o
- .debug_str     0x00000000     0x6e17 ./source/timer.o
+ .debug_str     0x00000000     0x6e10 ./source/timer.o
  .comment       0x00000000       0x7f ./source/timer.o
  .debug_frame   0x00000000      0x11c ./source/timer.o
  .ARM.attributes
@@ -1033,6 +1274,13 @@ Discarded input sections
  .debug_macro   0x00000000       0x48 ./SDK/CMSIS/system_MK64F12.o
  .debug_macro   0x00000000     0xe07b ./SDK/CMSIS/system_MK64F12.o
  .debug_macro   0x00000000     0x122b ./SDK/CMSIS/system_MK64F12.o
+ .text          0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
+ .data          0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
+ .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
+ .text.memcpy   0x00000000        0x4 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
+ .comment       0x00000000       0x7f c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
+ .ARM.attributes
+                0x00000000       0x39 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
  .text          0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(fpprintf.o)
  .data          0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(fpprintf.o)
  .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(fpprintf.o)
@@ -1178,13 +1426,6 @@ Discarded input sections
  .comment       0x00000000       0x7f c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(ftell.o)
  .ARM.attributes
                 0x00000000       0x39 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(ftell.o)
- .text          0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
- .data          0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
- .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
- .text.memcpy   0x00000000        0x4 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
- .comment       0x00000000       0x7f c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
- .ARM.attributes
-                0x00000000       0x39 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(memcpy.o)
  .text          0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(__init_alloc.o)
  .data          0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(__init_alloc.o)
  .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_10.2.0_759/ide/tools/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libcr_c.a(__init_alloc.o)
@@ -1306,6 +1547,9 @@ Linker script and memory map
 
 LOAD ./source/AdminID.o
 LOAD ./source/App.o
+LOAD ./source/CardReader.o
+LOAD ./source/CardReaderDecoder.o
+LOAD ./source/CardReaderHAL.o
 LOAD ./source/EncoderHandler.o
 LOAD ./source/FSM.o
 LOAD ./source/FSMTABLE.o
@@ -1315,6 +1559,8 @@ LOAD ./source/boardLed.o
 LOAD ./source/displayLed.o
 LOAD ./source/displayManager.o
 LOAD ./source/displaySegment.o
+LOAD ./source/door.o
+LOAD ./source/encoder.o
 LOAD ./source/encoderEvent.o
 LOAD ./source/encoderHal.o
 LOAD ./source/gpio.o
@@ -2047,22 +2293,22 @@ OUTPUT(Entrega Final.axf elf32-littlearm)
  .debug_line    0x00000ccf      0x6d8 ./SDK/startup/startup_mk64f12.o
  .debug_line    0x000013a7      0x1c7 ./SDK/CMSIS/system_MK64F12.o
 
-.debug_str      0x00000000    0x7c942
- .debug_str     0x00000000    0x7b5c8 ./source/App.o
-                              0x7b86b (size before relaxing)
- .debug_str     0x0007b5c8       0x69 ./source/SysTick.o
+.debug_str      0x00000000    0x7c980
+ .debug_str     0x00000000    0x7b5bc ./source/App.o
+                              0x7b85f (size before relaxing)
+ .debug_str     0x0007b5bc       0xb3 ./source/SysTick.o
                               0x771bb (size before relaxing)
- .debug_str     0x0007b631      0x86a ./source/gpio.o
+ .debug_str     0x0007b66f      0x86a ./source/gpio.o
                               0x77918 (size before relaxing)
- .debug_str     0x0007be9b      0x21f ./SDK/startup/hardware.o
+ .debug_str     0x0007bed9      0x21f ./SDK/startup/hardware.o
                               0x771f6 (size before relaxing)
- .debug_str     0x0007c0ba       0x1b ./SDK/startup/main.o
+ .debug_str     0x0007c0f8       0x1b ./SDK/startup/main.o
                               0x76fca (size before relaxing)
- .debug_str     0x0007c0d5       0x36 ./SDK/startup/semihost_hardfault.o
+ .debug_str     0x0007c113       0x36 ./SDK/startup/semihost_hardfault.o
                                0x2d34 (size before relaxing)
- .debug_str     0x0007c10b      0x7d5 ./SDK/startup/startup_mk64f12.o
+ .debug_str     0x0007c149      0x7d5 ./SDK/startup/startup_mk64f12.o
                                0x35a2 (size before relaxing)
- .debug_str     0x0007c8e0       0x62 ./SDK/CMSIS/system_MK64F12.o
+ .debug_str     0x0007c91e       0x62 ./SDK/CMSIS/system_MK64F12.o
                               0x77105 (size before relaxing)
 
 .comment        0x00000000       0x7e

@@ -6,6 +6,9 @@
 C_SRCS += \
 ../source/AdminID.c \
 ../source/App.c \
+../source/CardReader.c \
+../source/CardReaderDecoder.c \
+../source/CardReaderHAL.c \
 ../source/EncoderHandler.c \
 ../source/FSM.c \
 ../source/FSMTABLE.c \
@@ -15,6 +18,8 @@ C_SRCS += \
 ../source/displayLed.c \
 ../source/displayManager.c \
 ../source/displaySegment.c \
+../source/door.c \
+../source/encoder.c \
 ../source/encoderEvent.c \
 ../source/encoderHal.c \
 ../source/gpio.c \
@@ -23,6 +28,9 @@ C_SRCS += \
 OBJS += \
 ./source/AdminID.o \
 ./source/App.o \
+./source/CardReader.o \
+./source/CardReaderDecoder.o \
+./source/CardReaderHAL.o \
 ./source/EncoderHandler.o \
 ./source/FSM.o \
 ./source/FSMTABLE.o \
@@ -32,6 +40,8 @@ OBJS += \
 ./source/displayLed.o \
 ./source/displayManager.o \
 ./source/displaySegment.o \
+./source/door.o \
+./source/encoder.o \
 ./source/encoderEvent.o \
 ./source/encoderHal.o \
 ./source/gpio.o \
@@ -40,6 +50,9 @@ OBJS += \
 C_DEPS += \
 ./source/AdminID.d \
 ./source/App.d \
+./source/CardReader.d \
+./source/CardReaderDecoder.d \
+./source/CardReaderHAL.d \
 ./source/EncoderHandler.d \
 ./source/FSM.d \
 ./source/FSMTABLE.d \
@@ -49,6 +62,8 @@ C_DEPS += \
 ./source/displayLed.d \
 ./source/displayManager.d \
 ./source/displaySegment.d \
+./source/door.d \
+./source/encoder.d \
 ./source/encoderEvent.d \
 ./source/encoderHal.d \
 ./source/gpio.d \
