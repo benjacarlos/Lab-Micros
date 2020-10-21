@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "fsm.h"
 #include "fsmtable.h"
 #include "FSM_actions.h"
