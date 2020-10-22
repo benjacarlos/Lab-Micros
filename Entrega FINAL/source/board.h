@@ -1,18 +1,17 @@
-/***************************************************************************//**
-  @file     board.h
-  @brief    Board management
-  @author   Nicolás Magliola
- ******************************************************************************/
+/*
+ * 	file: board.h
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
+ */
 
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
 /*******************************************************************************
- * INCLUDE HEADER FILES
+ * 								HEADERS
  ******************************************************************************/
 
 #include "gpio.h"
-
 
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE

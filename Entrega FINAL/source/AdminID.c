@@ -1,28 +1,26 @@
 /*
- * AdminID.c
- *
- *  Created on: 2 oct. 2020
- *  Author: Grupo 5 Lab. de Microprocesadores
+ * 	file: AdminID.c
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
-
 /*******************************************************************************
- * 						INCLUDE HEADER FILES
+ * 								HEADERS
  ******************************************************************************/
 
 #include "AdminID.h"
 #include <stdbool.h>
 
 /*******************************************************************************
- * 						VARIABLES LOCALES
+ * 							VARIABLES ESTATICAS
  ******************************************************************************/
 
 static dataBase_t dataBase; // arreglo de usuarios, el maximo se coloca en el header
 
 
 /*******************************************************************************
- 	 	 	 	 	 	 	 FUNCIONES
- *******************************************************************************/
+ * 								FUNCIONES
+ ******************************************************************************/
 
 
 void initDataBase(void)

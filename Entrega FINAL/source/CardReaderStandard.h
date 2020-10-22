@@ -1,13 +1,15 @@
 /*
- * CardReaderStandard.h
- *
- *  Created on: Oct 12, 2020
- *      Author: Agus
+ * 	file: CardReaderStandard.h
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
 #ifndef CARDREADERSTANDARD_H_
 #define CARDREADERSTANDARD_H_
 
+/******************************************************************************
+ *							  DEFINICIONES
+ ******************************************************************************/
 
 #define TRACK_NUM 3
 
@@ -17,7 +19,6 @@
 #define PARITY_TRACK1 IMPAR
 #define PARITY_TRACK2 IMPAR
 #define PARITY_TRACK3 IMPAR
-
 
 #define DATA_OFFSET_ASCII_TRACK1 32
 #define DATA_OFFSET_ASCII_TRACK2 48
@@ -46,7 +47,6 @@
 #define N_OF_FIELDS_SEPARATORS_TRACK1 2
 #define N_OF_FORMAT_CODE_TRACK1 1
 
-
 //track2
 #define START_SENTINEL_TRACK2 ';' - DATA_OFFSET_ASCII_TRACK2 //1011
 #define FIELD_SEPARATOR_TRACK2 '=' - DATA_OFFSET_ASCII_TRACK2 //1101
@@ -55,7 +55,6 @@
 #define MAX_VALUE_TRACK2 'Z' - DATA_OFFSET_ASCII_TRACK2
 #define N_OF_FIELDS_SEPARATORS_TRACK2 1
 #define N_OF_FORMAT_CODE_TRACK2 0
-
 
 //track3
 #define START_SENTINEL_TRACK3 START_SENTINEL_TRACK2

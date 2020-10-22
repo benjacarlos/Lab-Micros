@@ -1,20 +1,20 @@
 /*
- * displayHardware.c
- *
- *  Created on: 13 Oct 2020
- *      Author: Grupo 5
+ * 	file: displaySegment.c
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
+/*******************************************************************************
+ * 								HEADERS
+ ******************************************************************************/
 
-/**************************************************************************
- * 							HEADERS INCLUIDOS
- **************************************************************************/
 #include "displaySegment.h"
 #include "gpio.h"
 #include <stdbool.h>
-/**************************************************************************
- * 						VARIABLES Y DEFINICIONES
- **************************************************************************/
+
+/******************************************************************************
+ *						  ARREGLOS Y MATRICES
+ ******************************************************************************/
 
 // Display de 7 Segmentos
 
@@ -37,11 +37,11 @@
 //};
 
 
-
 static const unsigned char num_array[]=
 {		//0		1	 2		3	 4		5	 6		7	 8		9
 		0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F
 };
+
 static const unsigned char abc_array[]=
 {		//A		B	  C		D	  E		F	  G		H	 I		J
 		0x77, 0x7F, 0x39, 0x5E, 0x79, 0x71, 0x3D, 0x76, 0x30, 0x1E,
@@ -51,11 +51,19 @@ static const unsigned char abc_array[]=
 		0x3E, 0x2A, 0x6A, 0x14, 0x6E, 0x1B
 };
 
+/*******************************************************************************
+ * 							VARIABLES ESTATICAS
+ ******************************************************************************/
+
 // Flag de Inicializacion
 static bool initialized = false;
 
 // Cantidad de displays
 enum {FIRST_DIGIT,SECOND_DIGIT,THIRD_DIGIT, FOURTH_DIGIT, NUMBER_OF_DIGITS};
+
+/******************************************************************************
+ *							  DEFINICIONES
+ ******************************************************************************/
 
 // Pines de Salida K64 hacia el display
 #define CSEGA PORTNUM2PIN(PC,3)// PTC3
@@ -87,17 +95,20 @@ enum {FIRST_DIGIT,SECOND_DIGIT,THIRD_DIGIT, FOURTH_DIGIT, NUMBER_OF_DIGITS};
 #define SEL0_MASK 0x01
 #define SEL1_MASK 0x02
 
-/**************************************************************************
- * 								FUNCIONES
- **************************************************************************/
+/******************************************************************************
+ *						DECLARO FUNCIONES LOCALES
+ ******************************************************************************/
+
 // Funcion para prender los leds de cada segmento correspondiente al valor dado
 void setDigit(const unsigned char val, unsigned int select_line);
-
 void SelectDigit(unsigned int sel_line);
-
 
 // Funcion de seleccion de display a la cual imprimir
 void setDisplayPos(unsigned int pos);
+
+/*******************************************************************************
+ * 								FUNCIONES
+ ******************************************************************************/
 
 void InitSegmentDisplay(void)
 {

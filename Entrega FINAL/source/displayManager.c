@@ -1,9 +1,12 @@
 /*
- * displayManager.c
- *
- *  Created on: 14 Oct 2020
- *      Author: benja
+ * 	file: displayManager.c
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
+
+/*******************************************************************************
+ * 								HEADERS
+ ******************************************************************************/
 
 #include "displayManager.h"
 #include "timer.h"
@@ -13,15 +16,15 @@
 #include "displayLed.h"
 
 /******************************************************************************
- *									DEFINICIONES
+ *							  DEFINICIONES
  ******************************************************************************/
 #define DISPLAY_SIZE 4
 #define STRING_TIME 325 //Delay en ms entre cada shifteo
 #define FPS 60 //Frames per second
 #define MS_BETWEEN_SYMBOLS ( (1000/FPS)/(DISPLAY_SIZE) )
 
-/******************************************************************************
- *									VARIABLES
+/*******************************************************************************
+ * 							VARIABLES ESTATICAS
  ******************************************************************************/
 static const char* current_string;
 static int string_pos;
@@ -32,12 +35,16 @@ static unsigned char display_counter;
 static bool initialized = false;
 
 /******************************************************************************
- *								FUNCIONES LOCALES
+ *						DECLARO FUNCIONES LOCALES
  ******************************************************************************/
 void ledDisplayCallback (void);
 unsigned int GetStringSize(const char* str);
 void GenerateDisplayEv(void);
 void ShiftLeft(void);
+
+/*******************************************************************************
+ * 								FUNCIONES
+ ******************************************************************************/
 
 void InitDisplay(void)
 {

@@ -1,33 +1,31 @@
 /*
- * AdminID.h
- *
- *  Created on: 2 oct. 2020
- *  Author: Grupo 5 Lab. de Microprocesadores
+ * 	file: AdminID.h
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
 #ifndef SOURCES_ADMINID_H_
 #define SOURCES_ADMINID_H_
 
-
 /*******************************************************************************
- * INCLUDE HEADER FILES
+ * 								HEADERS
  ******************************************************************************/
 
 #include <stdint.h>
 #include <stdbool.h>
 #include "User.h"
 
-
-/*******************************************************************
-		ESTRUCTUTRAS,  ENUMERACIONES  Y  TYPEDEFS
-*******************************************************************/
-
+/******************************************************************************
+ *							  DEFINICIONES
+ ******************************************************************************/
 
 #define MAX_USERS 20	// Cantidad máxima usada en el servidor
 
-
 typedef enum { EXITO , ID_YA_EN_USO , DATABASE_LLENO , ID_NO_ENCONTRADO }estado;
 
+/******************************************************************************
+ *							  ESTRUCTURAS
+ ******************************************************************************/
 
 typedef struct{
 	char ID[TAMANO_ID];		//	string "ID" del usuario, puede ser menor
@@ -41,10 +39,9 @@ typedef struct{
 	int top;
 }dataBase_t;
 
-
-/*******************************************************************
- 	 	 	 	 FUNCIONES
- *********************************************************************/
+/******************************************************************************
+ *						DECLARO FUNCIONES DEL HEADER
+ ******************************************************************************/
 
 void initDataBase(void);
 
