@@ -1,22 +1,24 @@
 /*
- *
- *
- *  Created on: 15 oct. 2020
- *  GRUPO 5
+ * 	file: encoderEvent.c
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
+/*******************************************************************************
+ * 								HEADERS
+ ******************************************************************************/
 
 #include "encoderEvent.h"
 
 /******************************************************************************
- *								DEFINICIONES
+ *							  DEFINICIONES
  ******************************************************************************/
 
 typedef enum {A, B, C, CANT_TOTAL_SIGNALS}encoder_signal;
 
 
 /*******************************************************************************
- * 								VARIABLES
+ * 							VARIABLES ESTATICAS
  ******************************************************************************/
 
 static encoder_t encoder;

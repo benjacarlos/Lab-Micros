@@ -1,26 +1,29 @@
 /*
- * encoderHal.h
- *
- *  Created on: 14 oct. 2020
- *  Author: Paulo
+ * 	file: encoderHal.h
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
 #ifndef SOURCES_ENCODERHAL_H_
 #define SOURCES_ENCODERHAL_H_
 
+/*******************************************************************************
+ * 								HEADERS
+ ******************************************************************************/
+
 #include <stdbool.h>
 #include <stdint.h>
 
-/******************************************************************************************
- *  				TIPOS DE DATOS, CONSTANTES Y VARIABLES GLOBALES
- ******************************************************************************************/
+/******************************************************************************
+ *							  DEFINICIONES
+ ******************************************************************************/
+
 typedef enum {A, B, C, ENC_SIGNAL_COUNT}encoderSignal;
 typedef void (*callback_ptr)(void);
 
-
-/********************************************************************************************
- * 										FUNCIONES
- ********************************************************************************************/
+/******************************************************************************
+ *						DECLARO FUNCIONES DEL HEADER
+ ******************************************************************************/
 
 void initEncoderHal(void (*funcallback)(void));
 void setButtonCallback(void (*funcallback)(void));

@@ -1,8 +1,7 @@
 /*
- * encoToDeco.h
- *
- *  Created on: 15 oct. 2020
- *      Author: Paulo
+ * 	file: encoderEvent.h
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
 #ifndef SOURCES_ENCODEREVENT_H_
@@ -11,14 +10,14 @@
 
 
 /*******************************************************************************
- * 						INCLUIR HEADER
+ * 								HEADERS
  ******************************************************************************/
 
 #include <stdbool.h>
 #include <stdint.h>
 
-/*******************************************************************************
- * 						DEFICIONES
+/******************************************************************************
+ *							  DEFINICIONES
  ******************************************************************************/
 
 #define LOW 0
@@ -28,14 +27,18 @@
 
 typedef enum {COUNT_UP, COUNT_DOWN, NO_CHANGE, RESET}counter_type; // ERROR se por si hay cambios rápidos de velocidad
 
+/******************************************************************************
+ *							  ESTRUCTURAS
+ ******************************************************************************/
+
 typedef struct{
 	_Bool prev_data[CANT_SIGNALS]; //estados de las señales en el instante anterior del encoder
 	_Bool curr_data[CANT_SIGNALS]; //estados de las señales en el instante actual del encoder
 }encoder_t;
 
 
-/*******************************************************************************
- * 						FUNCIONES
+/******************************************************************************
+ *						DECLARO FUNCIONES DEL HEADER
  ******************************************************************************/
 
 void resetData(void);						// seteo tanto las señales de A como de B

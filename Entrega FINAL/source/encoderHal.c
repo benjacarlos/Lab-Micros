@@ -1,39 +1,40 @@
 /*
- * encoderHal.c
- *
- *
- *  Author: Paulo
+ * 	file: encoderHal.c
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
+
+/*******************************************************************************
+ * 								HEADERS
+ ******************************************************************************/
 
 #include "encoderHal.h"
 #include "timer.h"
 #include "gpio.h"
 
-
-/**************************************************************************
- * 									DEFINICIONES
- **************************************************************************/
+/******************************************************************************
+ *							  DEFINICIONES
+ ******************************************************************************/
+//	Asignacion de puertos
 #define SIGNAL_PINA PORTNUM2PIN(PD,1)	// PTD3
 #define SIGNAL_PINB PORTNUM2PIN(PD,3)	// PTD1
 #define SIGNAL_PINC PORTNUM2PIN(PD,2)	// PTD2
-
-
+// Determino frecuencias de interrupciones
 #define BUTTON_FREQUENCY 	100 		// 100 milisegundos
 #define ROTATION_FREQUENCY 	15			// 10 milisegundos
-
-
+// Defino un puntero para el callback
 typedef void (*callback_t)(void);
 
 /*******************************************************************************
- *								VARIABLES ESTATICAS
- *******************************************************************************/
+ * 							VARIABLES ESTATICAS
+ ******************************************************************************/
 
 static _Bool inicioEncoder = false;
 static uint8_t encoderTimerCount;
 
-/*******************************************************************************
- *								FUNCIONES LOCALES
- *******************************************************************************/
+/******************************************************************************
+ *						DECLARO FUNCIONES LOCALES
+ ******************************************************************************/
 
 void encoderTimerRoutine(void);	// idea no utilizada
 

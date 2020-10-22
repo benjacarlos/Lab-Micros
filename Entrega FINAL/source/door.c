@@ -1,22 +1,37 @@
 /*
- * door.c
- *
- *  Created on: Oct 21, 2020
- *      Author: Agus
+ *	file: door.c
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
+/*******************************************************************************
+ * 								HEADERS
+ ******************************************************************************/
 
 #include "door.h"
 #include "gpio.h"
 #include "timer.h"
 #include <stdint.h>
 
-#define PIN_LED_GREEN PORTNUM2PIN(PE,26)
+/******************************************************************************
+ *							  DEFINICIONES
+ ******************************************************************************/
 
+#define PIN_LED_GREEN PORTNUM2PIN(PE,26)
 #define LED_ON      LOW
 #define LEND_OFF	HIGH
 
+
+/******************************************************************************
+ *						DECLARO FUNCIONES LOCALES
+ ******************************************************************************/
+
 void closeAfterTimeOut(void);
+
+
+/******************************************************************************
+ *						DEFINO LAS FUNCIONES
+ ******************************************************************************/
 
 void doorInit(void)
 {

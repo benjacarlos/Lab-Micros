@@ -1,20 +1,19 @@
 /*
- * encoder.c
- *
- *  Created on: 14 oct. 2020
- *  GRUPO 5
+ * 	file: encoder.h
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
 /*******************************************************************************
- * INCLUIR HEADER
+ * 								HEADERS
  ******************************************************************************/
+
 #include "encoder.h"
 #include "encoderEvent.h"
 #include "encoderHal.h"
 
-
 /******************************************************************************
- *									DEFINICIONES
+ *							  DEFINICIONES
  ******************************************************************************/
 
 #define ENCODER_EVENTS	200
@@ -22,18 +21,16 @@
 #define BACK_COUNT		200			// entre .5 y 2 segundos para que sea evento = BACK
 #define ENTER_COUNT		5
 
-
 /*******************************************************************************
- * 								VARIABLES
+ * 							VARIABLES ESTATICAS
  ******************************************************************************/
+
 _Bool encoderInitialized = false;
 static encoderQueue_t encoderQueue[ENCODER_EVENTS];
-
 
 /*******************************************************************************
  * 								FUNCIONES
  ******************************************************************************/
-
 
 //	Inicio el encoder
 void initEncoder()
@@ -53,8 +50,6 @@ void initEncoder()
 		encoderInitialized = true;
 	}
 }
-
-
 
 
 encoderUd_t pullEncoderEvent(void)
@@ -94,7 +89,6 @@ void pushEncoderEvent(encoderUd_t newEvent)
 	}
 	return;
 }
-
 
 
 //	Verifico si la cola de eventos del encoder esta vacía
@@ -145,7 +139,6 @@ void initEncoderQueue(void)
 }
 
 
-
 void buttonCallback(void)
 {
 	updateData(readEncoder(C), C);
@@ -172,7 +165,4 @@ void buttonCallback(void)
 		}
 	}
 }
-
-
-
 
