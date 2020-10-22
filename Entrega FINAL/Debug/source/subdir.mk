@@ -23,6 +23,8 @@ C_SRCS += \
 ../source/encoder.c \
 ../source/encoderEvent.c \
 ../source/encoderHal.c \
+../source/fsmState_Aprovado.c \
+../source/fsmState_Denied.c \
 ../source/fsmState_IdIn.c \
 ../source/fsmState_Menu.c \
 ../source/fsmState_PinIn.c \
@@ -50,6 +52,8 @@ OBJS += \
 ./source/encoder.o \
 ./source/encoderEvent.o \
 ./source/encoderHal.o \
+./source/fsmState_Aprovado.o \
+./source/fsmState_Denied.o \
 ./source/fsmState_IdIn.o \
 ./source/fsmState_Menu.o \
 ./source/fsmState_PinIn.o \
@@ -77,6 +81,8 @@ C_DEPS += \
 ./source/encoder.d \
 ./source/encoderEvent.d \
 ./source/encoderHal.d \
+./source/fsmState_Aprovado.d \
+./source/fsmState_Denied.d \
 ./source/fsmState_IdIn.d \
 ./source/fsmState_Menu.d \
 ./source/fsmState_PinIn.d \

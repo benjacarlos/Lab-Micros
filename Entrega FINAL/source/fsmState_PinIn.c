@@ -7,11 +7,13 @@
 
 #include "fsmState_PinIn.h"
 #include "fsmState_Menu.h"
-#include "fsmState_IdIn.h"
+#include "fsmState_Denied.h"
+#include "fsmState_Aprovado.h"
 
 #include "displayManager.h"
 #include "encoder.h"
 #include "AdminId.h"
+#include "timerqueue.h"
 
 
 #define PIN_OPTIONS	13
@@ -30,9 +32,9 @@ static const char pinStrings[PIN_OPTIONS] = {'0','1','2','3','4','5','6','7','8'
 static char PINstring[STRING_CANT];
 
 
-static int tryNro = 0;
+static long unsigned int getBlockedTime(void);
 
-
+void blockedCallback(void);
 
 static void createPINString(UserData_t * ud);
 
@@ -51,6 +53,30 @@ static void createPINString(UserData_t * ud)
 	}
 	PINstring[i] = '\0';
 }
+
+void blockedCallback()
+{
+	pushTimerEvent(UNBLOCKED);
+	timerDisable(UNBLOCKED);
+	timerRestart(INACTIVITY);
+}
+
+
+static int tryNro = 0;
+static long unsigned int f1=0;
+static long unsigned int f2=1;
+
+static long unsigned int getBlockedTime(void)
+{
+	static long unsigned int f3;
+	f3 = f2+f1;
+	f1 = f2;
+	f2 = f3;
+	return f3 * BLOCKED_TIME;
+}
+
+
+
 
 
 state_t PinInRoutine_Input(UserData_t * ud)
@@ -115,11 +141,11 @@ state_t PinInRoutine_Input(UserData_t * ud)
 						{
 
 							//Paso a usuaria aprobado
-//							nextState.name = USER_APPROVED;
-//							tryNro = 0;
-//							nextState.routines[INPUT_EV] = &UAinputEvHandler;
-//							nextState.routines[TIMER_EV] = &UAtimerEvHandler;
-//							nextState.routines[KEYCARD_EV] = &UAkeycardEvHandler;
+							nextState.name = APROVADO;
+							tryNro = 0;
+							nextState.ev_handlers[INPUT_EV] = &AprovadoRoutine_Input;
+							nextState.ev_handlers[TIMER_EV] = &AprovadoRoutine_Timer;
+							nextState.ev_handlers[KEYCARD_EV] = &AprovadoRoutine_Card;
 							PrintMessage("USER APPROVED", true);
 						}
 						else
@@ -134,12 +160,12 @@ state_t PinInRoutine_Input(UserData_t * ud)
 							else
 							{
 								//Paso a usuaria bloqueado
-//								nextState.name = BLOCKED;
-//								nextState.routines[INPUT_EV] = &BinputEvHandler;
-//								nextState.routines[TIMER_EV] = &BtimerEvHandler;
-//								nextState.routines[KEYCARD_EV] = &BkeycardEvHandler;
-//								PrintMessage("USER BLOCKED", true);
-//								SetTimer(UNBLOCKED,getBlockedTime(),blockedCallback);
+								nextState.name = DENIED;
+								nextState.ev_handlers[INPUT_EV] = &DeniedRoutine_Input;
+								nextState.ev_handlers[TIMER_EV] = &DeniedRoutine_Timer;
+								nextState.ev_handlers[KEYCARD_EV] = &DeniedRoutine_Card;
+								PrintMessage("USER BLOCKED", true);
+								timerStart(UNBLOCKED, getBlockedTime(), blockedCallback);
 							}
 						}
 					}
@@ -159,12 +185,13 @@ state_t PinInRoutine_Input(UserData_t * ud)
 						if(validPIN)
 						{
 							//Paso a usuaria aprobado
-//							nextState.name = USER_APPROVED;
-//							tryNro = 0;
-//							nextState.routines[INPUT_EV] = &UAinputEvHandler;
-//							nextState.routines[TIMER_EV] = &UAtimerEvHandler;
-//							nextState.routines[KEYCARD_EV] = &UAkeycardEvHandler;
-							PrintMessage("USER APPROVED", true);
+							nextState.name = APROVADO;
+							tryNro = 0;
+							nextState.ev_handlers[INPUT_EV] = &AprovadoRoutine_Input;
+							nextState.ev_handlers[TIMER_EV] = &AprovadoRoutine_Timer;
+							nextState.ev_handlers[KEYCARD_EV] = &AprovadoRoutine_Card;
+							PrintMessage("APROVADO ENTRANDO", true);
+							int a = 0;
 						}
 						else
 						{
@@ -178,12 +205,12 @@ state_t PinInRoutine_Input(UserData_t * ud)
 						    else
 						    {
 						    	//Paso a usuaria bloqueado
-//						    	nextState.name = BLOCKED;
-//								nextState.routines[INPUT_EV] = &BinputEvHandler;
-//								nextState.routines[TIMER_EV] = &BtimerEvHandler;
-//								nextState.routines[KEYCARD_EV] = &BkeycardEvHandler;
-//								PrintMessage("USER BLOCKED", true);
-//								SetTimer(UNBLOCKED,getBlockedTime(),blockedCallback);
+						    	nextState.name = DENIED;
+								nextState.ev_handlers[INPUT_EV] = &DeniedRoutine_Input;
+								nextState.ev_handlers[TIMER_EV] = &DeniedRoutine_Timer;
+								nextState.ev_handlers[KEYCARD_EV] = &DeniedRoutine_Card;
+								PrintMessage("USER BLOCKED", true);
+								timerStart(UNBLOCKED, getBlockedTime(), blockedCallback);
 						    }
 						}
 					}
@@ -256,6 +283,9 @@ state_t PinInRoutine_Card(UserData_t * ud)
 		nextState.name = PIN_IN;
 
 		//configuracion eventos funciones siguientes
+		nextstate.ev_handlers[INPUT_EV] = &PinInRoutine_Input;
+		nextstate.ev_handlers[TIMER_EV] = &PinInRoutine_Timer;
+		nextstate.ev_handlers[KEYCARD_EV] = &PinInRoutine_Card;
 	}
 	else{
 		// show message in display

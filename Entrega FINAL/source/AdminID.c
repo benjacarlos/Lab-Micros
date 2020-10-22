@@ -98,23 +98,6 @@ estado eliminoUsuario(user_t userToDelete)
 
 
 
-//{
-//	// check si id esta en la lista
-//	int posicion = buscoID( userToDelete.ID[TAMANO_ID] );
-//	if( posicion < MAX_USERS+1 )
-//	{
-//		// si encuentro el ID lo borro
-//		user_t topUser = dataBase.list[dataBase.top];	// guardo el ultimo usuario de la lista
-//		dataBase.list[posicion] = topUser; 				// sobreescribo sobre el usuario q quiero eliminar
-//		dataBase.top -= 1; 								// decremento el puntero
-//		return EXITO;
-//	}
-//	else
-//	{
-//		return ID_NO_ENCONTRADO;
-//	}
-//}
-
 
 //	Función que busca la posicion del ID
 _Bool buscoID(char userID[TAMANO_ID])
@@ -188,10 +171,6 @@ category_t verificoCategory(char usersID[TAMANO_ID])
 	return dataBase.list[i].categoria;
 }
 
-// checks if ID is on list
-	//int posicion = buscoID( usersID[TAMANO_ID] );
-	//return dataBase.list[posicion].categoria;  // devuelvo la categoria del ID
-//}
 
 
 bool cambioCategory(char usersID[TAMANO_ID], category_t nuevaCategory){
@@ -231,18 +210,6 @@ _Bool verificoID(char usersID[TAMANO_ID])
 	return IDfound;
 }
 
-
-
-//{
-//// checks if ID is on list
-//	bool IDfound = buscoID(usersID[TAMANO_ID]);
-////	int posicion = buscoID(usersID[TAMANO_ID]);
-////	if (posicion < MAX_USERS + 1)
-////	{
-////		IDfound = true;
-////	}
-//	return IDfound;
-//}
 
 
 
