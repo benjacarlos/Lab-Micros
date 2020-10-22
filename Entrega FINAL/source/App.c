@@ -10,7 +10,7 @@
 
 #include <stdbool.h>
 #include "AdminID.h"
-//fsm
+#include "fsm.h"
 #include "EventQueue.h"
 
 
@@ -47,12 +47,12 @@ void inactivity_callback(void);
  *******************************************************************************
  ******************************************************************************/
 
-//fsm
-//nextstate
+static fsm_t fsm;
+static state_t nextstate;
 
 static UserData_t userData;
 
-static _Bool changeState = false;
+static _Bool changestate = false;
 static event_t event;
 
 /*******************************************************************************
@@ -76,6 +76,7 @@ void App_Init (void)
 
    //FSm inits + database
    initDataBase();
+   fsmInit(&fsm);
 
    //user data init
    userDataReset(true, true, true, true, &userData);
@@ -87,7 +88,40 @@ void App_Init (void)
 /* Función que se llama constantemente en un ciclo infinito */
 void App_Run (void)
 {
-
+	event = getEvent(&userData); // get new event
+	switch(event)
+	{
+		case INPUT_EV:
+			timerRestart(INACTIVITY);
+			nextstate = (fsm.presentstate.ev_handlers[INPUT_EV])(&userData); // action routine
+			if(nextstate.name != STAY)
+			{
+				changestate = true;
+			}
+			break;
+		case TIMER_EV:
+			nextstate = (fsm.presentstate.ev_handlers[TIMER_EV])(&userData); // action routine
+			if(nextstate.name != STAY)
+			{
+				changestate = true;
+			}
+			break;
+		case KEYCARD_EV:
+			timerRestart(INACTIVITY);
+			nextstate = (fsm.presentstate.ev_handlers[KEYCARD_EV])(&userData); // action routine
+			if(nextstate.name != STAY)
+			{
+				changestate = true;
+			}
+			break;
+		default:
+			break;
+	}
+	if(changestate)
+	{
+		fsm.presentstate = nextstate;
+		changestate = false;
+	}
 }
 
 
