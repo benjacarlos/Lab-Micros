@@ -37,6 +37,37 @@ void initDataBase(void)
 
 }
 
+estado eliminoIDusuario(char usersID[TAMANO_ID])
+{
+	// checks if ID is on list
+	bool IDfound = false;
+	int i,j; //position where ID is, if found
+	for(i=0 ; i< (dataBase.top + 1) ; ++i){
+		bool same = true;
+		for(j=0 ; j<TAMANO_ID ; j++){
+			if(dataBase.list[i].ID[j] != usersID[j]){
+				same = false;
+			}
+		}
+		if(same){
+			IDfound = true;
+			break;
+		}
+	}
+	if(IDfound)
+	{
+		// if on list, user is deleted
+		user_t topUser = dataBase.list[dataBase.top];
+		dataBase.list[i] = topUser; // overwrites user to be removed
+		dataBase.top -= 1; // decrements top pointer
+		return EXITO;
+	}
+	else
+	{
+		return ID_NO_ENCONTRADO;
+	}
+}
+
 
 estado agregoUsuario(user_t newUser)
 {

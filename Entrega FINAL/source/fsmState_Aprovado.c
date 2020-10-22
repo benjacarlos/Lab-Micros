@@ -9,6 +9,7 @@
 #include "fsmState_Menu.h"
 #include "fsmState_PinIn.h"
 #include "fsmState_ChangePin.h"
+#include "fsmState_Admin.h"
 
 
 #include "door.h"
@@ -83,9 +84,9 @@ state_t AprovadoRoutine_Input(UserData_t * ud)
 						nextState.name = MODO_ADMIN;
 
 						//proximo estado: admin
-//						nextState.routines[INPUT_EV] = &AMinputEvHandler;
-//						nextState.routines[TIMER_EV] = &AMtimerEvHandler;
-//						nextState.routines[KEYCARD_EV] = &AMkeycardEvHandler;
+						nextState.ev_handlers[INPUT_EV] = &AdminRoutine_Input;
+						nextState.ev_handlers[TIMER_EV] = &AdminRoutine_Timer;
+						nextState.ev_handlers[KEYCARD_EV] = &AdminRoutine_Card;
 						PrintMessage("ADMIN MENU", true);
 					}
 					else{
