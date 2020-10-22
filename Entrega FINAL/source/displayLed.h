@@ -22,7 +22,7 @@ void SetDisplayBrightness(int pos, int brightness);
 void SetDisplayLed(int pos, bool on_off);
 bool GetDisplayLedBlink(int pos);
 
-//Pongo en on off a los leds convenientes
+//Prendo y apago los leds del displey convenientes
 void setDisplayLedPos(int pos, bool on_off);
 //Verifico caracteristicas del led y updateo el led
 void showDisplayLeds(int pos);

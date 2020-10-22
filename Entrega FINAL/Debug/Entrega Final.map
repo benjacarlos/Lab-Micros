@@ -273,7 +273,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x29 ./source/EncoderHandler.o
  .debug_macro   0x00000000       0x16 ./source/EncoderHandler.o
  .debug_line    0x00000000      0x375 ./source/EncoderHandler.o
- .debug_str     0x00000000     0x6e43 ./source/EncoderHandler.o
+ .debug_str     0x00000000     0x6e68 ./source/EncoderHandler.o
  .comment       0x00000000       0x7f ./source/EncoderHandler.o
  .debug_frame   0x00000000       0xe8 ./source/EncoderHandler.o
  .ARM.attributes
@@ -477,7 +477,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/FSMTABLE.o
  .debug_macro   0x00000000      0x16f ./source/FSMTABLE.o
  .debug_line    0x00000000      0x37a ./source/FSMTABLE.o
- .debug_str     0x00000000     0x811d ./source/FSMTABLE.o
+ .debug_str     0x00000000     0x8142 ./source/FSMTABLE.o
  .comment       0x00000000       0x7f ./source/FSMTABLE.o
  .ARM.attributes
                 0x00000000       0x39 ./source/FSMTABLE.o
@@ -578,7 +578,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/FSM_actions.o
  .debug_macro   0x00000000      0x16f ./source/FSM_actions.o
  .debug_line    0x00000000      0x3b9 ./source/FSM_actions.o
- .debug_str     0x00000000     0x758c ./source/FSM_actions.o
+ .debug_str     0x00000000     0x75b1 ./source/FSM_actions.o
  .comment       0x00000000       0x7f ./source/FSM_actions.o
  .debug_frame   0x00000000      0x174 ./source/FSM_actions.o
  .ARM.attributes
@@ -638,7 +638,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x3a ./source/boardLed.o
  .debug_macro   0x00000000       0x34 ./source/boardLed.o
  .debug_line    0x00000000      0x100 ./source/boardLed.o
- .debug_str     0x00000000     0x39d8 ./source/boardLed.o
+ .debug_str     0x00000000     0x39fd ./source/boardLed.o
  .comment       0x00000000       0x7f ./source/boardLed.o
  .debug_frame   0x00000000       0x50 ./source/boardLed.o
  .ARM.attributes
@@ -884,6 +884,36 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/encoderHal.o
  .debug_macro   0x00000000       0x29 ./source/encoderHal.o
  .debug_macro   0x00000000       0x40 ./source/encoderHal.o
+ .group         0x00000000        0xc ./source/fsmState_AddUser.o
+ .text          0x00000000        0x0 ./source/fsmState_AddUser.o
+ .data          0x00000000        0x0 ./source/fsmState_AddUser.o
+ .bss           0x00000000        0x0 ./source/fsmState_AddUser.o
+ .debug_info    0x00000000       0x21 ./source/fsmState_AddUser.o
+ .debug_abbrev  0x00000000       0x13 ./source/fsmState_AddUser.o
+ .debug_aranges
+                0x00000000       0x18 ./source/fsmState_AddUser.o
+ .debug_macro   0x00000000       0x11 ./source/fsmState_AddUser.o
+ .debug_macro   0x00000000      0xa5a ./source/fsmState_AddUser.o
+ .debug_line    0x00000000       0x3d ./source/fsmState_AddUser.o
+ .debug_str     0x00000000     0x2d34 ./source/fsmState_AddUser.o
+ .comment       0x00000000       0x7f ./source/fsmState_AddUser.o
+ .ARM.attributes
+                0x00000000       0x39 ./source/fsmState_AddUser.o
+ .group         0x00000000        0xc ./source/fsmState_Admin.o
+ .text          0x00000000        0x0 ./source/fsmState_Admin.o
+ .data          0x00000000        0x0 ./source/fsmState_Admin.o
+ .bss           0x00000000        0x0 ./source/fsmState_Admin.o
+ .debug_info    0x00000000       0x21 ./source/fsmState_Admin.o
+ .debug_abbrev  0x00000000       0x13 ./source/fsmState_Admin.o
+ .debug_aranges
+                0x00000000       0x18 ./source/fsmState_Admin.o
+ .debug_macro   0x00000000       0x11 ./source/fsmState_Admin.o
+ .debug_macro   0x00000000      0xa5a ./source/fsmState_Admin.o
+ .debug_line    0x00000000       0x3b ./source/fsmState_Admin.o
+ .debug_str     0x00000000     0x2d32 ./source/fsmState_Admin.o
+ .comment       0x00000000       0x7f ./source/fsmState_Admin.o
+ .ARM.attributes
+                0x00000000       0x39 ./source/fsmState_Admin.o
  .group         0x00000000        0xc ./source/fsmState_Aprovado.o
  .group         0x00000000        0xc ./source/fsmState_Aprovado.o
  .group         0x00000000        0xc ./source/fsmState_Aprovado.o
@@ -1746,6 +1776,8 @@ LOAD ./source/door.o
 LOAD ./source/encoder.o
 LOAD ./source/encoderEvent.o
 LOAD ./source/encoderHal.o
+LOAD ./source/fsmState_AddUser.o
+LOAD ./source/fsmState_Admin.o
 LOAD ./source/fsmState_Aprovado.o
 LOAD ./source/fsmState_ChangePin.o
 LOAD ./source/fsmState_Denied.o
@@ -3071,7 +3103,7 @@ OUTPUT(Entrega Final.axf elf32-littlearm)
  .debug_macro   0x0001436a       0x29 ./SDK/startup/startup_mk64f12.o
  .debug_macro   0x00014393       0x80 ./SDK/CMSIS/system_MK64F12.o
 
-.debug_line     0x00000000     0x52c7
+.debug_line     0x00000000     0x52c8
  .debug_line    0x00000000      0x44b ./source/AdminID.o
  .debug_line    0x0000044b      0x473 ./source/App.o
  .debug_line    0x000008be      0x11f ./source/CardReader.o
@@ -3083,84 +3115,84 @@ OUTPUT(Entrega Final.axf elf32-littlearm)
  .debug_line    0x0000153e      0x3a1 ./source/displayLed.o
  .debug_line    0x000018df      0x3bd ./source/displayManager.o
  .debug_line    0x00001c9c      0x179 ./source/displaySegment.o
- .debug_line    0x00001e15      0x2cb ./source/door.o
- .debug_line    0x000020e0      0x1bc ./source/encoder.o
- .debug_line    0x0000229c      0x16e ./source/encoderEvent.o
- .debug_line    0x0000240a      0x2f0 ./source/encoderHal.o
- .debug_line    0x000026fa      0x3ac ./source/fsmState_Aprovado.o
- .debug_line    0x00002aa6      0x3eb ./source/fsmState_ChangePin.o
- .debug_line    0x00002e91      0x328 ./source/fsmState_Denied.o
- .debug_line    0x000031b9      0x3c9 ./source/fsmState_IdIn.o
- .debug_line    0x00003582      0x36d ./source/fsmState_Menu.o
- .debug_line    0x000038ef      0x457 ./source/fsmState_PinIn.o
- .debug_line    0x00003d46      0x374 ./source/gpio.o
- .debug_line    0x000040ba      0x31a ./source/timer.o
- .debug_line    0x000043d4      0x2b2 ./source/timerqueue.o
- .debug_line    0x00004686      0x1d4 ./SDK/startup/hardware.o
- .debug_line    0x0000485a      0x175 ./SDK/startup/main.o
- .debug_line    0x000049cf       0x59 ./SDK/startup/semihost_hardfault.o
- .debug_line    0x00004a28      0x6d8 ./SDK/startup/startup_mk64f12.o
- .debug_line    0x00005100      0x1c7 ./SDK/CMSIS/system_MK64F12.o
+ .debug_line    0x00001e15      0x2cc ./source/door.o
+ .debug_line    0x000020e1      0x1bc ./source/encoder.o
+ .debug_line    0x0000229d      0x16e ./source/encoderEvent.o
+ .debug_line    0x0000240b      0x2f0 ./source/encoderHal.o
+ .debug_line    0x000026fb      0x3ac ./source/fsmState_Aprovado.o
+ .debug_line    0x00002aa7      0x3eb ./source/fsmState_ChangePin.o
+ .debug_line    0x00002e92      0x328 ./source/fsmState_Denied.o
+ .debug_line    0x000031ba      0x3c9 ./source/fsmState_IdIn.o
+ .debug_line    0x00003583      0x36d ./source/fsmState_Menu.o
+ .debug_line    0x000038f0      0x457 ./source/fsmState_PinIn.o
+ .debug_line    0x00003d47      0x374 ./source/gpio.o
+ .debug_line    0x000040bb      0x31a ./source/timer.o
+ .debug_line    0x000043d5      0x2b2 ./source/timerqueue.o
+ .debug_line    0x00004687      0x1d4 ./SDK/startup/hardware.o
+ .debug_line    0x0000485b      0x175 ./SDK/startup/main.o
+ .debug_line    0x000049d0       0x59 ./SDK/startup/semihost_hardfault.o
+ .debug_line    0x00004a29      0x6d8 ./SDK/startup/startup_mk64f12.o
+ .debug_line    0x00005101      0x1c7 ./SDK/CMSIS/system_MK64F12.o
 
-.debug_str      0x00000000    0x7e969
- .debug_str     0x00000000     0x6c9a ./source/AdminID.o
-                               0x6ef8 (size before relaxing)
- .debug_str     0x00006c9a    0x74d3d ./source/App.o
-                              0x7bb1b (size before relaxing)
- .debug_str     0x0007b9d7       0xc4 ./source/CardReader.o
-                               0x390f (size before relaxing)
- .debug_str     0x0007ba9b      0x817 ./source/CardReaderDecoder.o
-                               0x43cc (size before relaxing)
- .debug_str     0x0007c2b2      0x1f5 ./source/CardReaderHAL.o
-                               0x3e01 (size before relaxing)
- .debug_str     0x0007c4a7       0x59 ./source/EventQueue.o
-                               0x6f27 (size before relaxing)
- .debug_str     0x0007c500       0x2a ./source/FSM.o
-                               0x6fae (size before relaxing)
- .debug_str     0x0007c52a      0x20b ./source/SysTick.o
-                              0x771af (size before relaxing)
- .debug_str     0x0007c735      0x1c2 ./source/displayLed.o
-                               0x6e9b (size before relaxing)
- .debug_str     0x0007c8f7      0x194 ./source/displayManager.o
-                               0x6e97 (size before relaxing)
- .debug_str     0x0007ca8b      0x244 ./source/displaySegment.o
-                               0x3afd (size before relaxing)
- .debug_str     0x0007cccf       0x97 ./source/door.o
-                               0x6db5 (size before relaxing)
- .debug_str     0x0007cd66      0x19c ./source/encoder.o
-                               0x3a89 (size before relaxing)
- .debug_str     0x0007cf02       0x9a ./source/encoderEvent.o
-                               0x3912 (size before relaxing)
- .debug_str     0x0007cf9c      0x137 ./source/encoderHal.o
-                               0x6f5f (size before relaxing)
- .debug_str     0x0007d0d3       0xfd ./source/fsmState_Aprovado.o
-                               0x70b6 (size before relaxing)
- .debug_str     0x0007d1d0      0x14b ./source/fsmState_ChangePin.o
-                               0x7133 (size before relaxing)
- .debug_str     0x0007d31b       0x6b ./source/fsmState_Denied.o
-                               0x6ff3 (size before relaxing)
- .debug_str     0x0007d386       0xfa ./source/fsmState_IdIn.o
-                               0x7116 (size before relaxing)
- .debug_str     0x0007d480       0x48 ./source/fsmState_Menu.o
-                               0x706e (size before relaxing)
- .debug_str     0x0007d4c8       0xc5 ./source/fsmState_PinIn.o
-                               0x71ab (size before relaxing)
- .debug_str     0x0007d58d      0x7a5 ./source/gpio.o
-                              0x77925 (size before relaxing)
- .debug_str     0x0007dd32      0x140 ./source/timer.o
-                               0x6e1a (size before relaxing)
- .debug_str     0x0007de72       0x58 ./source/timerqueue.o
-                               0x6d1d (size before relaxing)
- .debug_str     0x0007deca      0x217 ./SDK/startup/hardware.o
-                              0x771ea (size before relaxing)
- .debug_str     0x0007e0e1       0x1b ./SDK/startup/main.o
-                              0x76fbe (size before relaxing)
- .debug_str     0x0007e0fc       0x36 ./SDK/startup/semihost_hardfault.o
-                               0x2d28 (size before relaxing)
- .debug_str     0x0007e132      0x7d5 ./SDK/startup/startup_mk64f12.o
-                               0x3596 (size before relaxing)
- .debug_str     0x0007e907       0x62 ./SDK/CMSIS/system_MK64F12.o
-                              0x770f9 (size before relaxing)
+.debug_str      0x00000000    0x7e98e
+ .debug_str     0x00000000     0x6cbf ./source/AdminID.o
+                               0x6f1d (size before relaxing)
+ .debug_str     0x00006cbf    0x74d3d ./source/App.o
+                              0x7bb40 (size before relaxing)
+ .debug_str     0x0007b9fc       0xc4 ./source/CardReader.o
+                               0x3934 (size before relaxing)
+ .debug_str     0x0007bac0      0x817 ./source/CardReaderDecoder.o
+                               0x43f1 (size before relaxing)
+ .debug_str     0x0007c2d7      0x1f5 ./source/CardReaderHAL.o
+                               0x3e26 (size before relaxing)
+ .debug_str     0x0007c4cc       0x59 ./source/EventQueue.o
+                               0x6f4c (size before relaxing)
+ .debug_str     0x0007c525       0x2a ./source/FSM.o
+                               0x6fd3 (size before relaxing)
+ .debug_str     0x0007c54f      0x20b ./source/SysTick.o
+                              0x771d4 (size before relaxing)
+ .debug_str     0x0007c75a      0x1c2 ./source/displayLed.o
+                               0x6ec0 (size before relaxing)
+ .debug_str     0x0007c91c      0x194 ./source/displayManager.o
+                               0x6ebc (size before relaxing)
+ .debug_str     0x0007cab0      0x244 ./source/displaySegment.o
+                               0x3b22 (size before relaxing)
+ .debug_str     0x0007ccf4       0x97 ./source/door.o
+                               0x6dda (size before relaxing)
+ .debug_str     0x0007cd8b      0x19c ./source/encoder.o
+                               0x3aae (size before relaxing)
+ .debug_str     0x0007cf27       0x9a ./source/encoderEvent.o
+                               0x3937 (size before relaxing)
+ .debug_str     0x0007cfc1      0x137 ./source/encoderHal.o
+                               0x6f84 (size before relaxing)
+ .debug_str     0x0007d0f8       0xfd ./source/fsmState_Aprovado.o
+                               0x70db (size before relaxing)
+ .debug_str     0x0007d1f5      0x14b ./source/fsmState_ChangePin.o
+                               0x7158 (size before relaxing)
+ .debug_str     0x0007d340       0x6b ./source/fsmState_Denied.o
+                               0x7018 (size before relaxing)
+ .debug_str     0x0007d3ab       0xfa ./source/fsmState_IdIn.o
+                               0x713b (size before relaxing)
+ .debug_str     0x0007d4a5       0x48 ./source/fsmState_Menu.o
+                               0x7093 (size before relaxing)
+ .debug_str     0x0007d4ed       0xc5 ./source/fsmState_PinIn.o
+                               0x71d0 (size before relaxing)
+ .debug_str     0x0007d5b2      0x7a5 ./source/gpio.o
+                              0x7794a (size before relaxing)
+ .debug_str     0x0007dd57      0x140 ./source/timer.o
+                               0x6e3f (size before relaxing)
+ .debug_str     0x0007de97       0x58 ./source/timerqueue.o
+                               0x6d42 (size before relaxing)
+ .debug_str     0x0007deef      0x217 ./SDK/startup/hardware.o
+                              0x7720f (size before relaxing)
+ .debug_str     0x0007e106       0x1b ./SDK/startup/main.o
+                              0x76fe3 (size before relaxing)
+ .debug_str     0x0007e121       0x36 ./SDK/startup/semihost_hardfault.o
+                               0x2d4d (size before relaxing)
+ .debug_str     0x0007e157      0x7d5 ./SDK/startup/startup_mk64f12.o
+                               0x35bb (size before relaxing)
+ .debug_str     0x0007e92c       0x62 ./SDK/CMSIS/system_MK64F12.o
+                              0x7711e (size before relaxing)
 
 .comment        0x00000000       0x7e
  .comment       0x00000000       0x7e ./source/AdminID.o

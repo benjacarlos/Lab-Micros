@@ -42,9 +42,9 @@ enum {DISPLAY_LED, BOARD_LED, WHERE_LED};
 static bool initialized = false;
 
 static bool blinking[LED_DISPLAY_MAX];				//blinking (true) or not (false)
-static bool blink_cleared[LED_DISPLAY_MAX];		//status of the blinking (showing:true, not showing: false)
-static int brightness[LED_DISPLAY_MAX];			//brightness level, from MIN_BRIGHT to MAX_BRIGHT
-static bool led_displaying[LED_DISPLAY_MAX];			//leds buffer. Initialized at leds_init()
+static bool blink_cleared[LED_DISPLAY_MAX];		//estado si debe blink
+static int brightness[LED_DISPLAY_MAX];			//control de intensidad
+static bool led_displaying[LED_DISPLAY_MAX];			//on off del led
 static int bright_counter[LED_DISPLAY_MAX];
 
 
