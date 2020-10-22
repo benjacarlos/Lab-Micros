@@ -32,6 +32,7 @@ void setButtonCallback(void (*funcallback)(void));
 bool readEncoder(encoderSignal);
 void resetEncoderTimerCount(void);
 uint8_t getEncoderTimerCount(void);
-void encoderTimerRoutine(void);
+
+
 
 #endif /* SOURCES_ENCODERHAL_H_ */
