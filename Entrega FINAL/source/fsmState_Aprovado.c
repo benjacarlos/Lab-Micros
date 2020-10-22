@@ -8,6 +8,7 @@
 #include "fsmState_Aprovado.h"
 #include "fsmState_Menu.h"
 #include "fsmState_PinIn.h"
+#include "fsmState_ChangePin.h"
 
 
 #include "door.h"
@@ -69,9 +70,9 @@ state_t AprovadoRoutine_Input(UserData_t * ud)
 					nextState.name = CHANGE_PIN_MODE;
 
 					//proximo estado cambio pin
-//					nextState.routines[INPUT_EV] = &CPinputEvHandler;
-//					nextState.routines[TIMER_EV] = &CPtimerEvHandler;
-//					nextState.routines[KEYCARD_EV] = &CPkeycardEvHandler;
+					nextState.ev_handlers[INPUT_EV] = &pinChangeRoutine_Input;
+					nextState.ev_handlers[TIMER_EV] = &pinChangeRoutine_Timer;
+					nextState.ev_handlers[KEYCARD_EV] = &pinChangeRoutine_Card;
 					PrintMessage("ENTER NEW PIN", true);
 					break;
 				case ADMIN_OPTION:

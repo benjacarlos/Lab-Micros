@@ -283,9 +283,9 @@ state_t PinInRoutine_Card(UserData_t * ud)
 		nextState.name = PIN_IN;
 
 		//configuracion eventos funciones siguientes
-		nextstate.ev_handlers[INPUT_EV] = &PinInRoutine_Input;
-		nextstate.ev_handlers[TIMER_EV] = &PinInRoutine_Timer;
-		nextstate.ev_handlers[KEYCARD_EV] = &PinInRoutine_Card;
+		nextState.ev_handlers[INPUT_EV] = &PinInRoutine_Input;
+		nextState.ev_handlers[TIMER_EV] = &PinInRoutine_Timer;
+		nextState.ev_handlers[KEYCARD_EV] = &PinInRoutine_Card;
 	}
 	else{
 		// show message in display
