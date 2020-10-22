@@ -26,4 +26,5 @@ bool GetDisplayLedBlink(int pos);
 void setDisplayLedPos(int pos, bool on_off);
 //Verifico caracteristicas del led y updateo el led
 void showDisplayLeds(int pos);
+
 #endif /* SOURCES_DISPLAYLED_H_ */

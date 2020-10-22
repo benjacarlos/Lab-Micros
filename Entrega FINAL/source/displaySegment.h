@@ -7,7 +7,7 @@
 #ifndef DISPLAYSEGMENT_H_
 #define DISPLAYSEGMENT_H_
 
-// Seteo IO del display con el K64
+//Seteo IO del display con el K64
 void InitSegmentDisplay(void);
 //Imprime el caracter en posicion
 void PrintChar(const char c,unsigned int pos);

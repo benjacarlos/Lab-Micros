@@ -19,7 +19,8 @@ void InitDisplay(void);
 //Borra el contenido del display
 void ClearDisplay(void);
 
-//Imprime el string que recibe en el display con opcion de que el mensaje sea en movimiento o no
+//Imprime el string que recibe en el display con opcion de que el mensaje
+//sea en movimiento o no
 void PrintMessage(const char* string, bool moving_string);
 
 //Cambia la luminosidad del display
