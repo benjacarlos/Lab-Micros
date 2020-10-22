@@ -53,6 +53,6 @@ void userDataReset(_Bool resetID, _Bool resetPIN, _Bool resetCategory, _Bool res
 		ud->category = NONE;
 	}
 	if(resetOption){
-		ud->option = -1;
+		ud->choice = -1;
 	}
 }

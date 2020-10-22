@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include "EventQueue.h"
 
-typedef enum {MENU, STATES_N, STAY}state_name;
+typedef enum {MENU, ID_IN, PIN_IN, CHANGE_BRIGTHNESS, STATES_N, STAY}state_name;
 
 
 //debe definirse asi para no tener problemas en la estructura.

@@ -26,7 +26,7 @@ typedef struct{
 	encoderUd_t encoderUd;
 	char received_ID[TAMANO_ID]; //String con el ID recibido del usuario.
 	char received_PIN[PIN_MAXIMO]; //String con el PIN recibido del usuario.
-	int option; // Si usuario emitio un pedido
+	int choice; // Si usuario emitio un pedido
 	category_t category;
 }UserData_t;
 
