@@ -15,13 +15,16 @@
 /******************************************************************************
  *							  DEFINICIONES
  ******************************************************************************/
+
 //	Asignacion de puertos
 #define SIGNAL_PINA PORTNUM2PIN(PD,1)	// PTD3
 #define SIGNAL_PINB PORTNUM2PIN(PD,3)	// PTD1
 #define SIGNAL_PINC PORTNUM2PIN(PD,2)	// PTD2
+
 // Determino frecuencias de interrupciones
 #define BUTTON_FREQUENCY 	100 		// 100 milisegundos
 #define ROTATION_FREQUENCY 	15			// 10 milisegundos
+
 // Defino un puntero para el callback
 typedef void (*callback_t)(void);
 
@@ -39,8 +42,8 @@ static uint8_t encoderTimerCount;
 void encoderTimerRoutine(void);	// idea no utilizada
 
 /*******************************************************************************
- *									FUNCIONES
- *******************************************************************************/
+ * 								FUNCIONES
+ ******************************************************************************/
 
 void initEncoderHal(void (*funcallback)(void))
 {

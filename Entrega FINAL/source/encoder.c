@@ -1,5 +1,5 @@
 /*
- * 	file: encoder.h
+ * 	file: encoder.c
  *  Trabajo Práctico 1 - Interrupciones
  *  GRUPO 5 - Laboratorio de Microprocesadores
  */

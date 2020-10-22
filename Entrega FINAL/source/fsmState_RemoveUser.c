@@ -1,14 +1,14 @@
 /*
- * fsmState_AddUser.c
+ * fsmState_RemoveUser.c
  *
  *  Created on: Oct 22, 2020
  *      Author: Agus
  */
 
-#include "fsmState_AddUser.h"
-#include "fsmState_AddPin.h"
+
+#include "fsmState_RemoveUser.h"
 #include "fsmState_Menu.h"
-#include "fsmState_PinIn.h"
+#include "fsmstate_PinIn.h"
 
 #include "AdminID.h"
 #include "displayManager.h"
@@ -30,7 +30,8 @@ static void createIDString(UserData_t * ud);
 static void createIDString(UserData_t * ud)
 {
 	int i=0;
-	while(ud->received_ID[i] != '\0'){
+	while(ud->received_ID[i] != '\0')
+	{
 		IDstring[i] = ud->received_ID[i];
 		i++;
 	}
@@ -43,8 +44,8 @@ static void createIDString(UserData_t * ud)
 
 }
 
-
-state_t AddUSerRoutine_Input(UserData_t * ud){
+state_t removeUserRoutine_Input(UserData_t * ud)
+{
 	state_t nextState;
 	nextState.name = STAY;
 	int j = 0;
@@ -73,8 +74,7 @@ state_t AddUSerRoutine_Input(UserData_t * ud){
 			PrintMessage(IDstring, false);
 			break;
 		case ENTER: // Selects current option
-			while(ud->received_ID[j] != '\0')
-			{
+			while(ud->received_ID[j] != '\0'){
 				j++;
 			}
 			switch(ud->choice)
@@ -102,19 +102,23 @@ state_t AddUSerRoutine_Input(UserData_t * ud){
 						createIDString(ud);
 						PrintMessage(IDstring, false);
 					}
-					if(j == TAMANO_ID){ // id entered and not taken, we ask for PIN
-						if(!verificoID(ud->received_ID))
-						{ // ID not taken
-							nextState.name = ADD_PIN;
+					if(j == TAMANO_ID)
+					{ // delete user
 
-							nextState.ev_handlers[INPUT_EV] = &AddPinRoutine_Input;
-							nextState.ev_handlers[TIMER_EV] = &AddPinRoutine_Timer;
-							nextState.ev_handlers[KEYCARD_EV] = &AddPinRoutine_Card;
-							PrintMessage("VALID NEW USER ID - ENTER NEW PIN", true);
-						}
-						else{
-							PrintMessage("ID ALREADY TAKEN", true);
-							userDataReset(true ,false ,false ,true ,ud);
+						switch(eliminoIDusuario(ud->received_ID))
+						{
+							case EXITO:
+								PrintMessage("USER REMOVED", true);
+								nextState.name = MENU;
+
+								nextState.ev_handlers[INPUT_EV] = &MenuRoutine_Input;
+								nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
+								nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
+								break;
+							case ID_NO_ENCONTRADO:
+								PrintMessage("USER NOT FOUND", true);
+								userDataReset(true ,false ,false ,true ,ud);
+								break;
 						}
 					}
 					break;
@@ -124,7 +128,6 @@ state_t AddUSerRoutine_Input(UserData_t * ud){
 		case CANCEL:
 			userDataReset(true ,true ,true ,true ,ud);
 			nextState.name = MENU;
-
 			nextState.ev_handlers[INPUT_EV] = &MenuRoutine_Input;
 			nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
 			nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
@@ -134,37 +137,36 @@ state_t AddUSerRoutine_Input(UserData_t * ud){
 	return nextState;
 }
 
-
-state_t AddUSerRoutine_Timer(UserData_t * ud)
+state_t removeUserRoutine_Timer(UserData_t * ud)
 {
+	state_t nextState;
+	nextState.name = STAY;
+	if(ud->timerUd == DISPLAY)
 	{
-		state_t nextState;
-		nextState.name = STAY;
-		if(ud->timerUd == DISPLAY){
-			UpdateDisplay();
-		}
-		if(ud->timerUd == INACTIVITY)
-		{
-			userDataReset(true ,false ,false ,true ,ud);
-			nextState.name = MENU;
-
-			nextState.ev_handlers[INPUT_EV] = &MenuRoutine_Input;
-			nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
-			nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
-			PrintMessage("MENU", false);
-			//resetear timer
-		}
-		return nextState;
+		UpdateDisplay();
 	}
+	if(ud->timerUd == INACTIVITY)
+	{
+		userDataReset(true ,false ,false ,true ,ud);
+
+		nextState.name = MENU;
+		nextState.ev_handlers[INPUT_EV] = &MenuRoutine_Input;
+		nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
+		nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
+		PrintMessage("MENU", false);
+		//resetear timer
+	}
+	return nextState;
 }
 
-state_t AddUSerRoutine_Card(UserData_t * ud)
+state_t removeUserRoutine_Card(UserData_t * ud)
 {
 	state_t nextState;
 	nextState.name = STAY;
 	char cardID[TAMANO_ID];
 	int i;
-	for(i=0;i<TAMANO_ID;++i){
+	for(i=0;i<TAMANO_ID;++i)
+	{
 		cardID[i] = ud->magnetLectorUd.track_string[i];
 	}
 	bool IDExists = verificoID(cardID);
@@ -173,16 +175,17 @@ state_t AddUSerRoutine_Card(UserData_t * ud)
 		ud->category = verificoCategory(ud->received_ID);
 		PrintMessage("VALID ID - ENTER PIN", true);
 		int i;
-		for(i=0;i<TAMANO_ID;++i){
+		for(i=0;i<TAMANO_ID;++i)
+		{
 			ud->received_ID[i] = cardID[i];
 		}
 		userDataReset(false, false, false, true, ud);
 
 		nextState.name = PIN_IN;
+
 		nextState.ev_handlers[INPUT_EV] = &PinInRoutine_Input;
 		nextState.ev_handlers[TIMER_EV] = &PinInRoutine_Timer;
 		nextState.ev_handlers[KEYCARD_EV] = &PinInRoutine_Card;
-
 		PrintMessage("ENTER PIN", false);
 	}
 	else{
@@ -191,4 +194,3 @@ state_t AddUSerRoutine_Card(UserData_t * ud)
 	}
 	return nextState;
 }
-

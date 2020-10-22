@@ -1,19 +1,21 @@
 /*
- * CardReader.c
- *
- *  Created on: Oct 12, 2020
- *      Author: Grupo 5
+ * 	file: CardReader.c
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
+/*******************************************************************************
+ * 								HEADERS
+ ******************************************************************************/
 
 #include <CardReader.h>
 #include "CardReaderHAL.h"
 #include "CardReaderDecoder.h"
-
 #include <stdbool.h>
 
-
-
+/*******************************************************************************
+ * 								FUNCIONES
+ ******************************************************************************/
 
 void Cardreader_Init(void)
 {

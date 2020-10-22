@@ -23,6 +23,7 @@ C_SRCS += \
 ../source/encoder.c \
 ../source/encoderEvent.c \
 ../source/encoderHal.c \
+../source/fsmState_AddPin.c \
 ../source/fsmState_AddUser.c \
 ../source/fsmState_Admin.c \
 ../source/fsmState_Aprovado.c \
@@ -31,6 +32,7 @@ C_SRCS += \
 ../source/fsmState_IdIn.c \
 ../source/fsmState_Menu.c \
 ../source/fsmState_PinIn.c \
+../source/fsmState_RemoveUser.c \
 ../source/gpio.c \
 ../source/timer.c \
 ../source/timerqueue.c 
@@ -55,6 +57,7 @@ OBJS += \
 ./source/encoder.o \
 ./source/encoderEvent.o \
 ./source/encoderHal.o \
+./source/fsmState_AddPin.o \
 ./source/fsmState_AddUser.o \
 ./source/fsmState_Admin.o \
 ./source/fsmState_Aprovado.o \
@@ -63,6 +66,7 @@ OBJS += \
 ./source/fsmState_IdIn.o \
 ./source/fsmState_Menu.o \
 ./source/fsmState_PinIn.o \
+./source/fsmState_RemoveUser.o \
 ./source/gpio.o \
 ./source/timer.o \
 ./source/timerqueue.o 
@@ -87,6 +91,7 @@ C_DEPS += \
 ./source/encoder.d \
 ./source/encoderEvent.d \
 ./source/encoderHal.d \
+./source/fsmState_AddPin.d \
 ./source/fsmState_AddUser.d \
 ./source/fsmState_Admin.d \
 ./source/fsmState_Aprovado.d \
@@ -95,6 +100,7 @@ C_DEPS += \
 ./source/fsmState_IdIn.d \
 ./source/fsmState_Menu.d \
 ./source/fsmState_PinIn.d \
+./source/fsmState_RemoveUser.d \
 ./source/gpio.d \
 ./source/timer.d \
 ./source/timerqueue.d 

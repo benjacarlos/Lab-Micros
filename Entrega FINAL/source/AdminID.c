@@ -1,28 +1,26 @@
 /*
- * AdminID.c
- *
- *  Created on: 2 oct. 2020
- *  Author: Grupo 5 Lab. de Microprocesadores
+ * 	file: AdminID.c
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
-
 /*******************************************************************************
- * 						INCLUDE HEADER FILES
+ * 								HEADERS
  ******************************************************************************/
 
 #include "AdminID.h"
 #include <stdbool.h>
 
 /*******************************************************************************
- * 						VARIABLES LOCALES
+ * 							VARIABLES ESTATICAS
  ******************************************************************************/
 
 static dataBase_t dataBase; // arreglo de usuarios, el maximo se coloca en el header
 
 
 /*******************************************************************************
- 	 	 	 	 	 	 	 FUNCIONES
- *******************************************************************************/
+ * 								FUNCIONES
+ ******************************************************************************/
 
 
 void initDataBase(void)
@@ -35,6 +33,37 @@ void initDataBase(void)
 	agregoUsuario(newAdmin);
 	agregoUsuario(newUser);
 
+}
+
+estado eliminoIDusuario(char usersID[TAMANO_ID])
+{
+	// checks if ID is on list
+	bool IDfound = false;
+	int i,j; //position where ID is, if found
+	for(i=0 ; i< (dataBase.top + 1) ; ++i){
+		bool same = true;
+		for(j=0 ; j<TAMANO_ID ; j++){
+			if(dataBase.list[i].ID[j] != usersID[j]){
+				same = false;
+			}
+		}
+		if(same){
+			IDfound = true;
+			break;
+		}
+	}
+	if(IDfound)
+	{
+		// if on list, user is deleted
+		user_t topUser = dataBase.list[dataBase.top];
+		dataBase.list[i] = topUser; // overwrites user to be removed
+		dataBase.top -= 1; // decrements top pointer
+		return EXITO;
+	}
+	else
+	{
+		return ID_NO_ENCONTRADO;
+	}
 }
 
 

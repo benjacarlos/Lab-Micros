@@ -1,16 +1,33 @@
 /*
- * CardReaderDecoder.c
- *
- *  Created on: Oct 18, 2020
- *      Author: Agus
+ * 	file: CardReaderDecoder.c
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
+/*******************************************************************************
+ * 								HEADERS
+ ******************************************************************************/
 
 #include "CardReaderStandard.h"
 #include "CardReaderDecoder.h"
 #include <stdbool.h>
 #include <stddef.h>
 
+/******************************************************************************
+ *							  DEFINICIONES
+ ******************************************************************************/
+
+
+#define MAX_DATA_LEN DATA_LEN
+#define NO_TRACK 255
+#define TRACK1 0
+#define TRACK2 1
+#define TRACK3 2
+#define SEPARATOR_CHAR '/'
+
+/******************************************************************************
+ *							  ESTRUCTURAS
+ ******************************************************************************/
 
 typedef struct{
 
@@ -44,26 +61,21 @@ const trackdata_t track1 = {BITS_TRACK1, CHAR_SIZE_TRACK1, CHARS_NUM_TRACK1, PAR
 
 //track3
 
+/*******************************************************************************
+ * 							VARIABLES ESTATICAS
+ ******************************************************************************/
 
 const trackdata_t * trackarray[] = {&track1};
 
-#define MAX_DATA_LEN DATA_LEN
-
-#define NO_TRACK 255
-#define TRACK1 0
-#define TRACK2 1
-#define TRACK3 2
-
-#define SEPARATOR_CHAR '/'
-
+/******************************************************************************
+ *						DECLARO FUNCIONES LOCALES
+ ******************************************************************************/
 
 uint8_t getShapedTrack(CardEncodedData_t * dataIn);
 
 bool identifySymbol(CardEncodedData_t * dataIn, UINT_T indexStart, UINT_T indexLimit, CardEncodedData_t symbol, uint8_t symbolSize, UINT_T * indexFounded, uint8_t step);
 
 void shapeTrack(CardEncodedData_t * dataIn, UINT_T indexStart, UINT_T indexEnd);
-
-
 
 /**
  * @brief Decodifica la data que estaba en la cola
@@ -74,9 +86,9 @@ void shapeTrack(CardEncodedData_t * dataIn, UINT_T indexStart, UINT_T indexEnd);
 bool decodeTrack(CardEncodedData_t * dataIn, CardDecodedData_t * dataOut, const trackdata_t * trackData);
 
 
-
-
-
+/*******************************************************************************
+ * 								FUNCIONES
+ ******************************************************************************/
 
 bool dataParser(CardEncodedData_t * dataIn, CardDecodedData_t * dataOut, int * foundTrack)
 {
@@ -100,7 +112,6 @@ bool dataParser(CardEncodedData_t * dataIn, CardDecodedData_t * dataOut, int * f
 	return out;
 
 }
-
 
 
 uint8_t getShapedTrack(CardEncodedData_t * dataIn)
@@ -173,6 +184,7 @@ bool identifySymbol(CardEncodedData_t * dataIn, UINT_T indexStart, UINT_T indexL
     return found_symbol;
 }
 
+
 void shapeTrack(CardEncodedData_t * dataIn, UINT_T indexStart, UINT_T indexEnd)
 {
     UINT_T i;
@@ -184,7 +196,6 @@ void shapeTrack(CardEncodedData_t * dataIn, UINT_T indexStart, UINT_T indexEnd)
         }
     }
 }
-
 
 
 bool decodeTrack(CardEncodedData_t * dataIn, CardDecodedData_t * dataOut, const trackdata_t * trackData)
