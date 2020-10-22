@@ -143,6 +143,8 @@ void gpioToggle (pin_t pin);
 bool gpioRead (pin_t pin);
 
 
+void setPassiveFilter(pin_t pin);
+
 void gpioWrite (pin_t pin, _Bool value);
 
 

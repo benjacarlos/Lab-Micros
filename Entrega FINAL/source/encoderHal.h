@@ -24,6 +24,7 @@ typedef void (*callback_ptr)(void);
 
 void initEncoderHal(void (*funcallback)(void));
 void setButtonCallback(void (*funcallback)(void));
+
 // funciones para el encoder genéricos
 bool readEncoder(encoderSignal);
 void resetEncoderTimerCount(void);

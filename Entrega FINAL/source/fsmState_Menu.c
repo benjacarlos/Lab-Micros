@@ -6,6 +6,7 @@
  */
 
 #include "fsmState_menu.h"
+#include "fsmState_IdIn.h"
 
 #include "displayManager.h"
 #include "encoder.h"
@@ -22,8 +23,8 @@ static const char * menuStrings[MENU_OPTIONS] = {"INPT", "BRGT"};
 
 state_t MenuRoutine_Input(UserData_t * ud)
 {
-	state_t nextState;
-	nextState.name = STAY; //por defecto se queda
+	state_t nextstate;
+	nextstate.name = STAY; //por defecto se queda
 
 	switch(ud->encoderUd.input)
 		{
@@ -40,7 +41,8 @@ state_t MenuRoutine_Input(UserData_t * ud)
 				PrintMessage(menuStrings[ud->choice], false);
 				break;
 			case DOWN:
-				if(ud->choice > INITIAL){
+				if(ud->choice > INITIAL)
+				{
 					ud->choice -= INCREMENT;
 				}
 				else{
@@ -54,14 +56,17 @@ state_t MenuRoutine_Input(UserData_t * ud)
 				{
 					case ENTER_ENCODER_ID:
 						userDataReset(false, false, false, true, ud);
-						nextState.name = ID_IN;
+						nextstate.name = ID_IN;
 
 						//Configuracion handlers para siguiente estado
+						nextstate.ev_handlers[INPUT_EV] = &IDInRoutine_Input;
+						nextstate.ev_handlers[TIMER_EV] = &IDInMenuRoutine_Timer;
+						nextstate.ev_handlers[KEYCARD_EV] = &IDInMenuRoutine_Card;
 						PrintMessage("ENTER ID", true);
 						break;
 					case BRIGHTNESS:
 						userDataReset(false, false, false, true, ud);
-						nextState.name = CHANGE_BRIGTHNESS;
+						nextstate.name = CHANGE_BRIGTHNESS;
 
 						//Configuracion handlers para siguiente estado
 						PrintMessage("SELECT BRIGHTNESS", true);
@@ -72,7 +77,7 @@ state_t MenuRoutine_Input(UserData_t * ud)
 				break;
 		}
 
-	return nextState;
+	return nextstate;
 }
 
 
@@ -113,7 +118,7 @@ state_t MenuRoutine_Card(UserData_t * ud)
 
 		userDataReset(false, false, false, true, ud);
 
-		nextState.name = PIN_IN;
+		nextState.name = ID_IN;
 
 		//Configuracion handlers para siguiente estado
 	}

@@ -26,7 +26,7 @@
 #define CANT_SIGNALS	3	//
 #define STATES 2			// quiero 2 estados para checkear lo q recibe el encoder rotativo
 
-typedef enum {COUNT_UP, COUNT_DOWN, NO_CHANGE, ERROR}counter_type; // ERROR se por si hay cambios rápidos de velocidad
+typedef enum {COUNT_UP, COUNT_DOWN, NO_CHANGE, RESET}counter_type; // ERROR se por si hay cambios rápidos de velocidad
 
 typedef struct{
 	_Bool prev_data[CANT_SIGNALS]; //estados de las señales en el instante anterior del encoder

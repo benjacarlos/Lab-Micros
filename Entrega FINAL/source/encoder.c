@@ -17,7 +17,7 @@
  *									DEFINICIONES
  ******************************************************************************/
 
-#define ENCODER_EVENTS	100
+#define ENCODER_EVENTS	200
 // VALOR/1000 es los segundos de las señales
 #define BACK_COUNT		200			// entre .5 y 2 segundos para que sea evento = BACK
 #define ENTER_COUNT		5
@@ -45,11 +45,10 @@ void initEncoder()
 		initEncoderQueue();			//inicializo queue de encoder
 
 		// inicializo 2 encoder_t con las señales en el instante actual y el anterior (A y B)
-		int n;
-		int k;
-		for( n=0 ; n<STATES ; n++ )					// son 2 encoder_t
-			for( k=0 ; k<ENC_SIGNAL_COUNT ; k++ )	// reciben las señales A ,B y C
+		for(int n=0 ; n < STATES ; n++ )					// son 2 encoder_t
+			for(int k=0 ; k < ENC_SIGNAL_COUNT ; k++ )	// reciben las señales A ,B y C
 				updateData(readEncoder(k), k);
+
 		// se inicializo el encoder
 		encoderInitialized = true;
 	}
@@ -79,14 +78,16 @@ encoderUd_t pullEncoderEvent(void)
 	return popEvent;
 }
 
-void pushEncoderEvent(encoderUd_t newEvent){
-	if(encoderQueue->top == ENCODER_EVENTS-1)
+void pushEncoderEvent(encoderUd_t newEvent)
+{
+	if(encoderQueue->top == ENCODER_EVENTS - 1)
 	{ // event overflow
 		encoderQueue->top = 0;
 		encoderQueue[encoderQueue->top].event = newEvent;
 		encoderQueue->isEmpty = false;
 	}
-	else{
+	else
+	{
 		encoderQueue->top += 1;
 		encoderQueue[encoderQueue->top].event = newEvent;
 		encoderQueue->isEmpty = false;
@@ -108,22 +109,24 @@ void rotationCallback(void)
 {
 	updateData(readEncoder(A), A);
 	updateData(readEncoder(B), B);
+
 	encoderUd_t eventEncoderQueue;
-	eventEncoderQueue.isValid = true;
+	eventEncoderQueue.isValid = false;
+
 	counter_type event = encoderRot();
 
 
 	if(event == COUNT_UP)
 	{
 		eventEncoderQueue.input = UP;
+		eventEncoderQueue.isValid = true;
 		pushEncoderEvent(eventEncoderQueue);
-		resetData();
 	}
 	else if(event == COUNT_DOWN)
 	{
 		eventEncoderQueue.input = DOWN;
+		eventEncoderQueue.isValid = true;
 		pushEncoderEvent(eventEncoderQueue);
-		resetData();
 	}
 	else
 	{

@@ -55,7 +55,7 @@ estado cambioPIN(char usersID[TAMANO_ID], char usersNewPIN[PIN_MAXIMO]);			// ca
 //falta remover id??
 
 // funciones para corroborar acciones
-int buscoID (char userID[TAMANO_ID]);											// busco el ID que quiero devuelve la posicion de este
+_Bool buscoID (char userID[TAMANO_ID]);											// busco el ID que quiero devuelve la posicion de este
 category_t verificoCategory(char usersID[TAMANO_ID]);							// verifico la categoria del usuario
 bool cambioCategory(char usersID[TAMANO_ID], category_t nuevaCategory);			// cambio la categoria del usuario
 bool verificoID(char usersID[TAMANO_ID]);										// verifico el ID del usuario

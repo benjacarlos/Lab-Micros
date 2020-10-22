@@ -142,6 +142,17 @@ void setPCRmux(PORT_Type * p2port, uint8_t numPin, uint8_t mux)
 
 }
 
+void setPassiveFilter(pin_t pin)
+{
+	uint8_t port = PIN2PORT(pin);
+	uint8_t numPin = PIN2NUM(pin);
+
+	PORT_Type * portPointer[] = PORT_BASE_PTRS;
+	uint32_t maskPFE = (HIGH << PORT_PCR_PFE_SHIFT);
+	(portPointer[port]->PCR)[numPin] = ((portPointer[port]->PCR)[numPin] | maskPFE);
+}
+
+
 void setPCRpullEnable(PORT_Type * portPointer, uint8_t pinNum)
 {
 	uint32_t maskPE = (HIGH << PORT_PCR_PE_SHIFT);

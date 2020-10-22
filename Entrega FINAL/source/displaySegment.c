@@ -2,7 +2,7 @@
  * displayHardware.c
  *
  *  Created on: 13 Oct 2020
- *      Author: Grupo 6
+ *      Author: Grupo 5
  */
 
 
@@ -35,6 +35,8 @@
 ///*  x     y     z     */
 //    0x00, 0x6E, 0x00
 //};
+
+
 
 static const unsigned char num_array[]=
 {		//0		1	 2		3	 4		5	 6		7	 8		9
@@ -89,7 +91,10 @@ enum {FIRST_DIGIT,SECOND_DIGIT,THIRD_DIGIT, FOURTH_DIGIT, NUMBER_OF_DIGITS};
  * 								FUNCIONES
  **************************************************************************/
 // Funcion para prender los leds de cada segmento correspondiente al valor dado
-void setDigit(const unsigned char val);
+void setDigit(const unsigned char val, unsigned int select_line);
+
+void SelectDigit(unsigned int sel_line);
+
 
 // Funcion de seleccion de display a la cual imprimir
 void setDisplayPos(unsigned int pos);
@@ -115,28 +120,28 @@ void InitSegmentDisplay(void)
 		}
 }
 
-void PrintChar(const char c,unsigned int pos)
+void PrintChar(const char c, unsigned int pos)
 {
 	if( pos< NUMBER_OF_DIGITS )
 	{
-		setDisplayPos(pos);
+		//setDisplayPos(pos);
 		if( (c >= '0') && (c <= '9') ) //Se desea imprimir un numero
-			setDigit(num_array[c-'0']);
+			setDigit(num_array[c-'0'], pos);
 		else if( (c >= 'A') && (c <= 'Z') ) //Se desea imprimir una letra
-			setDigit(abc_array[c-'A']);
+			setDigit(abc_array[c-'A'], pos);
 		else if( (c >= 'a') && (c <= 'z') ) //Se desea imprimir una letra
-			setDigit(abc_array[c-'a']);
+			setDigit(abc_array[c-'a'], pos);
 		else //Casos especiales
 		{
 			if(c == ' ') //Espacio en blanco
-				setDigit(SPACE);
+				setDigit(SPACE, pos);
 			else if(c == '-') //Guion
-				setDigit(G_MASK);
+				setDigit(G_MASK, pos);
 		}
 	}
 }
 
-void setDigit(const unsigned char val)
+void setDigit(const unsigned char val, unsigned int select_line)
 {
 	//Aplico mascara para cada segmento del display
 	//Segmento g
@@ -203,7 +208,37 @@ void setDigit(const unsigned char val)
 		gpioWrite(CSEGA, LOW);
 	}
 
+	SelectDigit(select_line);
 }
+
+void SelectDigit(unsigned int sel_line)
+{
+	switch(sel_line) //Traduzco el valor de la linea de seleccion
+			{					//a los bits correspondientes.
+				case FIRST_DIGIT:
+					gpioWrite(SEL0, LOW);
+					gpioWrite(SEL1, LOW);
+					break;
+				case SECOND_DIGIT:
+					gpioWrite(SEL0, HIGH);
+					gpioWrite(SEL1, LOW);
+					break;
+				case THIRD_DIGIT:
+					gpioWrite(SEL0, LOW);
+					gpioWrite(SEL1, HIGH);
+					break;
+				case FOURTH_DIGIT:
+					gpioWrite(SEL0, HIGH);
+					gpioWrite(SEL1, HIGH);
+					break;
+				default:
+					//Entrada invalida
+					break;
+
+
+			}
+}
+
 
 void setDisplayPos(unsigned int pos)
 {

@@ -7,6 +7,7 @@
 
 #include "displayManager.h"
 #include "timer.h"
+#include "timerqueue.h"
 #include <stdint.h>
 #include "displaySegment.h"
 #include "displayLed.h"
@@ -27,7 +28,7 @@ static int string_pos;
 static int display_pos;
 static int string_size;
 static unsigned char brigthness;
-//static unsigned char display_counter; //cuantos llamados faltan para pasar al proximo simbolo
+static unsigned char display_counter;
 static bool initialized = false;
 
 /******************************************************************************
@@ -47,8 +48,9 @@ void InitDisplay(void)
 
 		ClearDisplay();
 
+		InitializeTimerQueue();
 		timerInit();
-		timerStart(DISPLAY, MS_BETWEEN_SYMBOLS/(MAX_BRIGHTNESS+1), &UpdateDisplay);
+		timerStart(DISPLAY, MS_BETWEEN_SYMBOLS/MAX_BRIGHTNESS, &GenerateDisplayEv);
 		timerStart(MESSAGE,STRING_TIME, &ShiftLeft);//Setteo el timer con la velocidad de movimiento del string.
 		timerStart(LED, LED_MS, &ledDisplayCallback);
 		timerDisable(MESSAGE); //Por default asumo que se desea un mensaje que nose mueva a traves del display.
@@ -56,6 +58,7 @@ void InitDisplay(void)
 		brigthness=MAX_BRIGHTNESS;
 		SetBrightness(brigthness); //Por default comienza con la intensidad del display al maximo.
 		initialized = true;
+		display_counter = 0;
 	}
 }
 
@@ -110,6 +113,54 @@ void SetBrightness(unsigned char brightness_factor)
 
 void UpdateDisplay(void)
 {
+	++display_counter;
+	if(display_counter == MAX_BRIGHTNESS)
+	{
+		display_counter = 0; //Paso al proximo simbolo y reinicio el contador
+		string_pos++;
+		display_pos++;
+		if(display_pos == DISPLAY_SIZE)
+		{
+			string_pos -= DISPLAY_SIZE;
+			display_pos -= DISPLAY_SIZE;
+		}
+		if(string_pos < 0)
+		{
+			PrintChar(' ',display_pos); //Imprimo espacio en blanco
+		}
+		else
+		{
+			if(string_pos > string_size)
+			{
+				PrintChar(' ',display_pos);
+				if(string_pos == (string_size + DISPLAY_SIZE) ) //Si se mostro todo el mensaje, vuelve a pasarlo.
+				{
+					string_pos = 0;
+					display_pos = DISPLAY_SIZE-1;
+				}
+			}
+			else if(current_string[string_pos] == '\0')
+			{
+				string_size = string_pos;
+				PrintChar(' ',display_pos);
+			}
+			else
+			{
+				PrintChar(current_string[string_pos],display_pos);
+			}
+		}
+
+	}
+	else if( display_counter>= brigthness )
+	{
+		PrintChar(' ',display_pos); //Imprimo espacio en blanco
+		return;
+	}
+
+}
+
+
+/*{
 	string_pos++;
 	display_pos++;
 	if(display_pos == DISPLAY_SIZE)
@@ -142,7 +193,7 @@ void UpdateDisplay(void)
 			PrintChar(current_string[string_pos],display_pos);
 		}
 	}
-}
+}*/
 
 void ShiftLeft(void)
 {
@@ -160,11 +211,6 @@ void ledDisplayCallback (void)
 
 }
 
-void GenerateDisplayEv(void)
-{
-	//fsm evento display para update
-	return;
-}
 
 unsigned int GetStringSize(const char* str)
 {
@@ -176,3 +222,9 @@ unsigned int GetStringSize(const char* str)
 unsigned char GetBrightnees(void){
 	return brigthness;
 }
+
+void GenerateDisplayEv(void)
+{
+	pushTimerEvent(DISPLAY);
+}
+

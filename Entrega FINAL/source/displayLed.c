@@ -15,7 +15,7 @@
  *									DEFINICIONES
  ******************************************************************************/
 //Leds del display 1, 2, 3, el 0 no tiene led
-#define STATUS0 PORTNUM2PIN(PD,2)//PTD2
+#define STATUS0 PORTNUM2PIN(PB,2)//PTD2
 #define STATUS1 PORTNUM2PIN(PC,4)//PTC4
 
    //Leds del board (incluidos en board.h)

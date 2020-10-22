@@ -13,13 +13,13 @@
 /**************************************************************************
  * 									DEFINICIONES
  **************************************************************************/
-#define SIGNAL_PINA PORTNUM2PIN(PD,3)	// PTD3
-#define SIGNAL_PINB PORTNUM2PIN(PD,1)	// PTD1
+#define SIGNAL_PINA PORTNUM2PIN(PD,1)	// PTD3
+#define SIGNAL_PINB PORTNUM2PIN(PD,3)	// PTD1
 #define SIGNAL_PINC PORTNUM2PIN(PD,2)	// PTD2
 
 
 #define BUTTON_FREQUENCY 	100 		// 100 milisegundos
-#define ROTATION_FREQUENCY 	10			// 10 milisegundos
+#define ROTATION_FREQUENCY 	15			// 10 milisegundos
 
 
 typedef void (*callback_t)(void);
@@ -46,11 +46,18 @@ void initEncoderHal(void (*funcallback)(void))
 	if(!inicioEncoder)
 	{
 		gpioMode(SIGNAL_PINA, INPUT_PULLUP);		// Seteo los puertos D1, D2 y D3 como INPUT_PULLUP
+		setPassiveFilter(SIGNAL_PINA);
+
 		gpioMode(SIGNAL_PINB, INPUT_PULLUP);
+		setPassiveFilter(SIGNAL_PINB);
+
 		gpioMode(SIGNAL_PINC, INPUT_PULLUP);
+		setPassiveFilter(SIGNAL_PINC);
+
+
 
 		// inicio el timer para encoder
-		encoderTimerCount = 0;// Inicio el Timer del encoder
+		encoderTimerCount = 0;
 		timerInit();
 		timerStart(ROTATION_TIMER, ROTATION_FREQUENCY, funcallback);
 		timerStart(BUTTON_TIMER, BUTTON_FREQUENCY, &encoderTimerRoutine);
