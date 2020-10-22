@@ -1,14 +1,21 @@
 /*
- * Cardreader.h
- *
- *  Created on: Oct 12, 2020
- *      Author: Agus
+ * 	file: CardReader.h
+ *  Trabajo Práctico 1 - Interrupciones
+ *  GRUPO 5 - Laboratorio de Microprocesadores
  */
 
 #ifndef CARDREADER_H_
 #define CARDREADER_H_
 
+/******************************************************************************
+ *							  DEFINICIONES
+ ******************************************************************************/
+
 #define MAX_TRACK_LEN 200
+
+/******************************************************************************
+ *							  ESTRUCTURAS
+ ******************************************************************************/
 
 typedef struct{
 
@@ -18,6 +25,9 @@ typedef struct{
 
 }readerData_t;
 
+/******************************************************************************
+ *						DECLARO FUNCIONES DEL HEADER
+ ******************************************************************************/
 
 void Cardreader_Init(void);
 
