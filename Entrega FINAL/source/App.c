@@ -1,7 +1,7 @@
 /***************************************************************************//**
   @file     App.c
   @brief    Application functions
-  @author   Nicolás Magliola
+  @author   Grupo 5
  ******************************************************************************/
 
 /*******************************************************************************
@@ -33,13 +33,13 @@
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
-#define INACTIVITY_T 80000
+#define AFK_T 80000
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
  ******************************************************************************/
 
-void inactivity_callback(void);
+void AFK_callback(void);
 
 /*******************************************************************************
  *******************************************************************************
@@ -67,7 +67,7 @@ void App_Init (void)
 {
    //Input_Output inits
    timerInit();
-   timerStart(INACTIVITY, INACTIVITY_T, inactivity_callback);
+   timerStart(AFK, AFK_T, AFK_callback);
    initEncoder();
    InitDisplay();
    Cardreader_Init();
@@ -85,14 +85,14 @@ void App_Init (void)
 }
 
 
-/* Función que se llama constantemente en un ciclo infinito */
+/* Función que se llama constantemente en un ciclo infinito ---->>> aplcia mi maquina de estados*/
 void App_Run (void)
 {
-	event = getEvent(&userData); // get new event
+	event = getEvent(&userData); // tomo el nuevo evento y luego cambio de estado dependiendo del switch
 	switch(event)
 	{
 		case INPUT_EV:
-			timerRestart(INACTIVITY);
+			timerRestart(AFK);
 			nextstate = (fsm.presentstate.ev_handlers[INPUT_EV])(&userData); // action routine
 			if(nextstate.name != STAY)
 			{
@@ -107,7 +107,7 @@ void App_Run (void)
 			}
 			break;
 		case KEYCARD_EV:
-			timerRestart(INACTIVITY);
+			timerRestart(AFK);
 			nextstate = (fsm.presentstate.ev_handlers[KEYCARD_EV])(&userData); // action routine
 			if(nextstate.name != STAY)
 			{
@@ -131,9 +131,9 @@ void App_Run (void)
  *******************************************************************************
  ******************************************************************************/
 
-void inactivity_callback(void)
+void AFK_callback(void)
 {
-	pushTimerEvent(INACTIVITY);
+	pushTimerEvent(AFK);
 }
 /*******************************************************************************
  ******************************************************************************/

@@ -48,6 +48,7 @@ void initDataBase(void);
 // funciones para usuarios
 estado agregoUsuario(user_t newUser);											// agregar un nuevo usuario
 estado eliminoUsuario(user_t userToDelete);										// borrar usuario
+estado eliminoIDusuario(char usersID[TAMANO_ID]);
 estado cambioPIN(char usersID[TAMANO_ID], char usersNewPIN[PIN_MAXIMO]);			// cambio de PIN
 //falta remover id??
 

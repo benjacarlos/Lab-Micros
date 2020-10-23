@@ -1,7 +1,6 @@
 /*
  * fsmState_RemoveUser.c
  *
- *  Created on: Oct 22, 2020
  *      Author: Agus
  */
 
@@ -15,6 +14,7 @@
 #include "displayManager.h"
 #include "encoder.h"
 
+typedef enum {ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,ERASE_LAST,ERASE_ALL}idOption_name;
 
 state_t removeUserRoutine_Input(UserData_t * ud)
 {
@@ -123,7 +123,7 @@ state_t removeUserRoutine_Timer(UserData_t * ud)
 	{
 		UpdateDisplay();
 	}
-	if(ud->timerUd == INACTIVITY)
+	if(ud->timerUd == AFK)
 	{
 		userDataReset(true ,false ,false ,true ,ud);
 

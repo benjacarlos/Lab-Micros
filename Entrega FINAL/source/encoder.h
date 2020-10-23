@@ -21,7 +21,7 @@
 #define LOW 	0
 #define HIGH	1
 
-typedef enum { UP , DOWN , ENTER , BACK, CANCEL}encoder_type;	//
+typedef enum {UP, DOWN, ENTER, CANCEL}encoder_type;	//
 
 /******************************************************************************
  *							  ESTRUCTURAS

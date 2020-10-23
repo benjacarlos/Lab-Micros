@@ -1,7 +1,6 @@
 /*
  * fsmState_IdIn.c
  *
- *  Created on: Oct 21, 2020
  *      Author: Agus
  */
 
@@ -15,6 +14,7 @@
 #include "fsmState_IdIn.h"
 #include "fsmState_PinIn.h"
 
+typedef enum {ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,ERASE_LAST,ERASE_ALL}idOption_name;
 
 state_t IDInRoutine_Input(UserData_t * ud)
 {
@@ -74,6 +74,7 @@ state_t IDInRoutine_Input(UserData_t * ud)
 				case ERASE_ALL:
 					userDataReset(true ,false ,false ,true ,ud);
 					createIDString(ud);
+					string = getstring();
 					PrintMessage(string, false);
 					break;
 				default:
@@ -138,7 +139,7 @@ state_t IDInMenuRoutine_Timer(UserData_t * ud)
 		UpdateDisplay();
 	}
 
-	if(ud->timerUd == INACTIVITY)
+	if(ud->timerUd == AFK)
 	{
 		userDataReset(true ,false ,false ,true ,ud);
 		nextstate.name = MENU;

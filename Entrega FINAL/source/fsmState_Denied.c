@@ -1,7 +1,6 @@
 /*
  * fsmState_Denied.c
  *
- *  Created on: Oct 22, 2020
  *      Author: Agus
  */
 
@@ -18,6 +17,7 @@ state_t DeniedRoutine_Input(UserData_t * ud)
 	state_t nextState;
 	nextState.name = STAY;
 	return nextState;
+	//sigo en denied
 
 }
 
@@ -30,11 +30,11 @@ state_t DeniedRoutine_Timer(UserData_t * ud)
 	{
 		UpdateDisplay();
 	}
-	if(ud->timerUd == UNBLOCKED)
+	if(ud->timerUd == UNBLOCKED) //BLOCKEEEEED BY JAMEEEEES (EASTER EGG )
 	{
 		userDataReset(false ,true ,false ,true ,ud);
 
-
+		//proximo estado pin-in
 		nextState.name = PIN_IN;
 		nextState.ev_handlers[INPUT_EV] = & PinInRoutine_Input;
 		nextState.ev_handlers[TIMER_EV] = & PinInRoutine_Timer;

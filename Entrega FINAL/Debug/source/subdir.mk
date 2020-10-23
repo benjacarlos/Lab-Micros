@@ -24,6 +24,7 @@ C_SRCS += \
 ../source/fsmState_AddUser.c \
 ../source/fsmState_Admin.c \
 ../source/fsmState_Aprovado.c \
+../source/fsmState_Brightness.c \
 ../source/fsmState_ChangePin.c \
 ../source/fsmState_Denied.c \
 ../source/fsmState_IdIn.c \
@@ -57,6 +58,7 @@ OBJS += \
 ./source/fsmState_AddUser.o \
 ./source/fsmState_Admin.o \
 ./source/fsmState_Aprovado.o \
+./source/fsmState_Brightness.o \
 ./source/fsmState_ChangePin.o \
 ./source/fsmState_Denied.o \
 ./source/fsmState_IdIn.o \
@@ -90,6 +92,7 @@ C_DEPS += \
 ./source/fsmState_AddUser.d \
 ./source/fsmState_Admin.d \
 ./source/fsmState_Aprovado.d \
+./source/fsmState_Brightness.d \
 ./source/fsmState_ChangePin.d \
 ./source/fsmState_Denied.d \
 ./source/fsmState_IdIn.d \

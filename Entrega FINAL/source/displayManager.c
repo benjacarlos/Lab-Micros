@@ -19,8 +19,8 @@
  *							  DEFINICIONES
  ******************************************************************************/
 #define DISPLAY_SIZE 4
-#define STRING_TIME 325 //Delay en ms entre cada shifteo
-#define FPS 60 //Frames per second
+#define STRING_TIME 350 //Delay en ms entre cada shifteo
+#define FPS 60 //Marcos por segundo
 #define MS_BETWEEN_SYMBOLS ( (1000/FPS)/(DISPLAY_SIZE) )
 
 /*******************************************************************************
@@ -55,7 +55,7 @@ void InitDisplay(void)
 
 		ClearDisplay();
 
-		InitializeTimerQueue();
+		timerqueueInit();
 		timerInit();
 		timerStart(DISPLAY, MS_BETWEEN_SYMBOLS/MAX_BRIGHTNESS, &GenerateDisplayEv);
 		timerStart(MESSAGE,STRING_TIME, &ShiftLeft);//Setteo el timer con la velocidad de movimiento del string.
@@ -63,7 +63,6 @@ void InitDisplay(void)
 		timerDisable(MESSAGE); //Por default asumo que se desea un mensaje que nose mueva a traves del display.
 
 		brigthness=MAX_BRIGHTNESS;
-		SetBrightness(brigthness); //Por default comienza con la intensidad del display al maximo.
 		initialized = true;
 		display_counter = 0;
 	}
@@ -111,11 +110,10 @@ void PrintMessage(const char* string, bool moving_string)
 
 void SetBrightness(unsigned char brightness_factor)
 {
-	for (int i = 0; i < LED_DISPLAY_MAX; i++)
-	{
-		SetDisplayBrightness(i, brightness_factor);
-	}
-	brigthness=brightness_factor;
+	if( (brightness_factor >= MIN_BRIGHTNESS) && (brightness_factor <= MAX_BRIGHTNESS) )
+		{
+			brigthness = brightness_factor;
+		}
 }
 
 void UpdateDisplay(void)
@@ -167,41 +165,6 @@ void UpdateDisplay(void)
 }
 
 
-/*{
-	string_pos++;
-	display_pos++;
-	if(display_pos == DISPLAY_SIZE)
-	{
-		string_pos -= DISPLAY_SIZE;
-		display_pos -= DISPLAY_SIZE;
-	}
-	if(string_pos < 0)
-	{
-		PrintChar(' ',display_pos); //Imprimo espacio en blanco
-	}
-	else
-	{
-		if(string_pos > string_size)
-		{
-			PrintChar(' ',display_pos);
-			if(string_pos == (string_size + DISPLAY_SIZE) ) //Si se mostro  el mensaje, vuelve a pasarlo.
-			{
-				string_pos = 0;
-				display_pos = DISPLAY_SIZE-1;
-			}
-		}
-		else if(current_string[string_pos] == '\0')
-		{
-			string_size = string_pos;
-			PrintChar(' ',display_pos);
-		}
-		else
-		{
-			PrintChar(current_string[string_pos],display_pos);
-		}
-	}
-}*/
-
 void ShiftLeft(void)
 {
 	string_pos++;
@@ -226,7 +189,8 @@ unsigned int GetStringSize(const char* str)
 	return --size;
 }
 
-unsigned char GetBrightnees(void){
+unsigned char GetBrightnees(void)
+{
 	return brigthness;
 }
 

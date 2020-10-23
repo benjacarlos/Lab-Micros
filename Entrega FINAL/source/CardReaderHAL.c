@@ -7,10 +7,12 @@
 /*******************************************************************************
  * 								HEADERS
  ******************************************************************************/
+#include <stddef.h>
+
 
 #include "CardReaderHAL.h"
 #include "gpio.h"
-#include <stddef.h>
+
 
 /******************************************************************************
  *							  DEFINICIONES
@@ -18,7 +20,7 @@
 
 #define DATA_PIN PORTNUM2PIN(PC, 5)  //cable azul
 #define CLK_PIN PORTNUM2PIN(PC, 7) //cable verde
-#define ENABLE_PIN PORTNUM2PIN(PC, 0) //cable amarillo
+#define ENABLE_PIN PORTNUM2PIN(PC, 9) //cable amarillo
 
 /******************************************************************************
  *							  ESTRUCTURAS
@@ -47,7 +49,7 @@ void Queue_Init(void);
  * 							VARIABLES ESTÁTICAS
  ******************************************************************************/
 
-static bool read_enable = false;
+static _Bool read_enable = false;
 
 static uint8_t save_items = 0;
 static uint32_t data_counter = 0;
@@ -72,6 +74,7 @@ void CardReaderHW_Init(void)
 
 		read_enable = false;
 	}
+	//Se inicializa cola (buffer del lector)
 	Queue_Init();
 
 }

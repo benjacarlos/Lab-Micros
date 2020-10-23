@@ -1,12 +1,12 @@
 /*
  * fsmState_Menu.c
  *
- *  Created on: Oct 21, 2020
  *      Author: Grupo 5
  */
 
 #include "fsmState_menu.h"
 #include "fsmState_IdIn.h"
+#include "fsmState_Brightness.h"
 
 #include "displayManager.h"
 #include "encoder.h"
@@ -69,6 +69,11 @@ state_t MenuRoutine_Input(UserData_t * ud)
 						nextstate.name = CHANGE_BRIGTHNESS;
 
 						//Configuracion handlers para siguiente estado
+						nextstate.ev_handlers[INPUT_EV] = &brightnessRoutine_Input;
+						nextstate.ev_handlers[TIMER_EV] = &brightnessRoutine_Timer;
+						nextstate.ev_handlers[KEYCARD_EV] = &brightnessRoutine_Card;
+
+
 						PrintMessage("SELECT BRIGHTNESS", true);
 						break;
 				}

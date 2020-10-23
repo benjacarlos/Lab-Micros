@@ -1,7 +1,7 @@
 /*
  * fsmState_PinIn.c
  *
- *  Created on: Oct 22, 2020
+
  *      Author: Agus
  */
 
@@ -18,7 +18,7 @@
 
 
 #define BLOCKED_TIME	60000UL // 1 min in ms
-
+typedef enum {ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,BLANK,ERASE_LAST,ERASE_ALL}idOption_name;
 
 static long unsigned int getBlockedTime(void);
 
@@ -29,7 +29,7 @@ void blockedCallback()
 {
 	pushTimerEvent(UNBLOCKED);
 	timerDisable(UNBLOCKED);
-	timerRestart(INACTIVITY);
+	timerRestart(AFK);
 }
 
 
@@ -218,7 +218,7 @@ state_t PinInRoutine_Timer(UserData_t * ud)
 	{
 		UpdateDisplay();
 	}
-	if(ud->timerUd == INACTIVITY)
+	if(ud->timerUd == AFK)
 	{
 		userDataReset(true ,false ,false ,true ,ud);
 		nextState.name = MENU;

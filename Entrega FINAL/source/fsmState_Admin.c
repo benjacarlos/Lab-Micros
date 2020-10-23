@@ -1,7 +1,6 @@
 /*
  * fsmState_Admin.c
  *
- *  Created on: Oct 22, 2020
  *      Author: Agus
  */
 
@@ -21,7 +20,7 @@
 
 typedef enum {ADD_USER,DELETE_USER,MENU_OPTIONS}option_name;
 
-const char * menuStrings[MENU_OPTIONS] = {"ADD","DLT"};
+const char * menuStrings[MENU_OPTIONS] = {"ADD","REMV"};
 
 state_t AdminRoutine_Input(UserData_t * ud)
 {
@@ -29,32 +28,36 @@ state_t AdminRoutine_Input(UserData_t * ud)
 	nextState.name = STAY;
 	switch(ud->encoderUd.input)
 	{
-		case UP: // change current option
-			if(ud->choice < (MENU_OPTIONS-1)){
+		case UP:
+			if(ud->choice < (MENU_OPTIONS-1))
+			{
 				ud->choice += INCREMENT;
 			}
 			else{
 				ud->choice = INITIAL;
 			}
-			// show option to user
 			PrintMessage(menuStrings[ud->choice], false);
 			break;
-		case DOWN: // change current option
-			if(ud->choice > INITIAL){
+		case DOWN:
+			if(ud->choice > INITIAL)
+			{
 				ud->choice -= INCREMENT;
 			}
-			else{
-				ud->choice = (MENU_OPTIONS - 1); //last option
+			else
+			{
+				ud->choice = (MENU_OPTIONS - 1);
 			}
-			// show option to user
+
 			PrintMessage(menuStrings[ud->choice], false);
 			break;
-		case ENTER: // Selects current option
+		case ENTER:
 			switch(ud->choice)
 			{
 				case ADD_USER:
 					userDataReset(true ,true ,true ,true ,ud);
 					nextState.name = ADD_USER_MODE;
+
+					//configuracion siguiente estado: add-user
 					nextState.ev_handlers[INPUT_EV] = &AddUSerRoutine_Input;
 					nextState.ev_handlers[TIMER_EV] = &AddUSerRoutine_Timer;
 					nextState.ev_handlers[KEYCARD_EV] = &AddUSerRoutine_Card;
@@ -63,6 +66,8 @@ state_t AdminRoutine_Input(UserData_t * ud)
 				case DELETE_USER:
 					userDataReset(true ,true ,true ,true ,ud);
 					nextState.name = REMOVE_USER_MODE;
+
+					//configuracion siguiente estado: remove user
 					nextState.ev_handlers[INPUT_EV] = &removeUserRoutine_Input;
 					nextState.ev_handlers[TIMER_EV] = &removeUserRoutine_Timer;
 					nextState.ev_handlers[KEYCARD_EV] = &removeUserRoutine_Card;
@@ -73,6 +78,8 @@ state_t AdminRoutine_Input(UserData_t * ud)
 		case CANCEL:
 			userDataReset(true ,true ,true ,true ,ud);
 			nextState.name = MENU;
+
+			//configuracion siguiente estado menu principal
 			nextState.ev_handlers[INPUT_EV] = &MenuRoutine_Input;
 			nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
 			nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
@@ -86,17 +93,20 @@ state_t AdminRoutine_Timer(UserData_t * ud)
 {
 	state_t nextState;
 	nextState.name = STAY;
-	if(ud->timerUd == DISPLAY){
+	if(ud->timerUd == DISPLAY)
+	{
 		UpdateDisplay();
 	}
-	if(ud->timerUd == INACTIVITY){
+	if(ud->timerUd == AFK){
 		userDataReset(true ,false ,false ,true ,ud);
 		nextState.name = MENU;
+
+		//configuracion siguiente estado menu principal
 		nextState.ev_handlers[INPUT_EV] = &MenuRoutine_Input;
 		nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
 		nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
 		PrintMessage("MENU", false);
-		//resetear timer
+
 	}
 	return nextState;
 }
@@ -107,16 +117,18 @@ state_t AdminRoutine_Card(UserData_t * ud)
 	nextState.name = STAY;
 	char cardID[TAMANO_ID];
 	int i;
-	for(i=0;i<TAMANO_ID;++i){
+	for(i=0;i<TAMANO_ID;++i)
+	{
 		cardID[i] = ud->magnetLectorUd.track_string[i];
 	}
 	bool IDExists = verificoID(cardID);
-	if(IDExists){
-		// show message in display
+	if(IDExists)
+	{
 		ud->category = verificoCategory(ud->received_ID);
 		PrintMessage("VALID ID - ENTER PIN", true);
 		int i;
-		for(i=0;i<TAMANO_ID;++i){
+		for(i=0;i<TAMANO_ID;++i)
+		{
 			ud->received_ID[i] = cardID[i];
 		}
 		userDataReset(false, true, true, true, ud);
@@ -126,8 +138,8 @@ state_t AdminRoutine_Card(UserData_t * ud)
 		nextState.ev_handlers[KEYCARD_EV] = &PinInRoutine_Card;
 		PrintMessage("ENTER PIN", true);
 	}
-	else{
-		// show message in display
+	else
+	{
 		PrintMessage("INVALID ID", true);
 	}
 	return nextState;

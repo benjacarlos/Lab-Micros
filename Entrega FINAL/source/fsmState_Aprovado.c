@@ -1,7 +1,6 @@
 /*
  * fsmState_Aprovado.c
  *
- *  Created on: Oct 22, 2020
  *      Author: Agus
  */
 
@@ -21,7 +20,7 @@
 #define INITIAL	0
 
 typedef enum {GRANT_ACCESS,CHANGE_PIN,ADMIN_OPTION,MENU_OPTIONS}option_name;
-static const char * menuStrings[MENU_OPTIONS] = {"OPEN","PIN","ADM"};
+static const char * menuStrings[MENU_OPTIONS] = {"OPEN","PIN","ADMN"};
 
 state_t AprovadoRoutine_Input(UserData_t * ud)
 {
@@ -30,7 +29,7 @@ state_t AprovadoRoutine_Input(UserData_t * ud)
 	char category;
 	switch(ud->encoderUd.input)
 	{
-		case UP: // change current option
+		case UP:
 			if(ud->choice < (MENU_OPTIONS-1))
 			{
 				ud->choice += INCREMENT;
@@ -38,21 +37,21 @@ state_t AprovadoRoutine_Input(UserData_t * ud)
 			else{
 				ud->choice = INITIAL;
 			}
-			// show option to user
+
 			PrintMessage(menuStrings[ud->choice], false);
 			break;
-		case DOWN: // change current option
+		case DOWN:
 			if(ud->choice > INITIAL)
 			{
 				ud->choice -= INCREMENT;
 			}
 			else{
-				ud->choice = (MENU_OPTIONS-1); //last option
+				ud->choice = (MENU_OPTIONS-1);
 			}
-			// show option to user
+
 			PrintMessage(menuStrings[ud->choice], false);
 			break;
-		case ENTER: // Selects current option
+		case ENTER:
 			switch(ud->choice)
 			{
 				case GRANT_ACCESS:
@@ -114,15 +113,16 @@ state_t AprovadoRoutine_Timer(UserData_t * ud)
 	{
 		UpdateDisplay();
 	}
-	if(ud->timerUd == INACTIVITY)
+	if(ud->timerUd == AFK)
 	{
 		userDataReset(true ,true ,false ,true ,ud);
 		nextState.name = MENU;
+
+		//configuracion siguiente estado: menu principal
 		nextState.ev_handlers[INPUT_EV] = &MenuRoutine_Input;
 		nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
 		nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
 		PrintMessage("MENU", false);
-		//resetear timer
 	}
 	return nextState;
 }

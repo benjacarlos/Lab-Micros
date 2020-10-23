@@ -1,7 +1,6 @@
 /*
  * fsmState_ChangePin.c
  *
- *  Created on: Oct 22, 2020
  *      Author: Agus
  */
 
@@ -14,29 +13,32 @@
 #include "encoder.h"
 #include "AdminId.h"
 
+typedef enum {ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,BLANK,ERASE_LAST,ERASE_ALL}idOption_name;
 
 state_t pinChangeRoutine_Input(UserData_t * ud)
 {
 	state_t nextState;
-	nextState.name = STAY;
+	nextState.name = STAY;//por defecto comienza con stay
+
 	char* string;
 	int j = 0;
 	switch(ud->encoderUd.input)
 	{
-		case UP: // change current option
+		case UP:
 			if(ud->choice < LAST_OPTION_PIN)
 			{
 				ud->choice += INCREMENT;
 			}
-			else{
+			else
+			{
 				ud->choice = INITIAL;
 			}
-			// show option to user
+
 			createPINString(ud);
 			string = getpin();
 			PrintMessage(string, false);
 			break;
-		case DOWN: // change current option
+		case DOWN:
 			if(ud->choice > INITIAL)
 			{
 				ud->choice -= INCREMENT;
@@ -44,12 +46,12 @@ state_t pinChangeRoutine_Input(UserData_t * ud)
 			else{
 				ud->choice = LAST_OPTION_PIN;
 			}
-			// show option to user
+
 			createPINString(ud);
 			string = getpin();
 			PrintMessage(string, false);
 			break;
-		case ENTER: // Selects current option
+		case ENTER:
 			while(ud->received_PIN[j] != '\0')
 			{
 				j++;
@@ -61,6 +63,7 @@ state_t pinChangeRoutine_Input(UserData_t * ud)
 					{
 						ud->received_ID[j-1] = '\0';
 					}
+
 					userDataReset(false ,false ,false ,true ,ud);
 					createPINString(ud);
 					string = getpin();
@@ -86,8 +89,9 @@ state_t pinChangeRoutine_Input(UserData_t * ud)
 						userDataReset(true ,true ,true ,true ,ud);
 					}
 					break;
-				default: // number
-					if((ud->choice >= INITIAL) && (j < PIN_MAXIMO)){
+				default:
+					if((ud->choice >= INITIAL) && (j < PIN_MAXIMO))
+					{
 						ud->received_PIN[j] = INT2CHAR(ud->choice);
 						j++;
 						userDataReset(false ,false ,false ,true ,ud);
@@ -96,9 +100,9 @@ state_t pinChangeRoutine_Input(UserData_t * ud)
 						PrintMessage(string, false);
 					}
 					if(j == PIN_MAXIMO)
-					{ // replace PIN
+					{
 							nextState.name = MENU;
-
+							//proximo estado menu principal
 							nextState.ev_handlers[INPUT_EV] = &MenuRoutine_Input;
 							nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
 							nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
@@ -118,7 +122,7 @@ state_t pinChangeRoutine_Input(UserData_t * ud)
 			nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
 			nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
 			PrintMessage("MENU", false);
-			break; // Cancels selection and back to menu
+			break;
 	}
 	return nextState;
 }
@@ -133,15 +137,13 @@ state_t pinChangeRoutine_Timer(UserData_t * ud)
 	{
 		UpdateDisplay();
 	}
-	if(ud->timerUd == INACTIVITY)
+	if(ud->timerUd == AFK)
 	{
 		userDataReset(true ,true ,false ,true ,ud);
 		nextState.name = MENU;
 		nextState.ev_handlers[INPUT_EV] = &MenuRoutine_Input;
 		nextState.ev_handlers[TIMER_EV] = &MenuRoutine_Timer;
 		nextState.ev_handlers[KEYCARD_EV] = &MenuRoutine_Card;
-		PrintMessage("MENU", false);
-		//resetear timer
 	}
 	return nextState;
 }
@@ -150,6 +152,7 @@ state_t pinChangeRoutine_Card(UserData_t * ud)
 {
 	state_t nextState;
 	nextState.name = STAY;
+
 	char cardID[TAMANO_ID];
 	int i;
 	for(i=0;i < TAMANO_ID;++i)
@@ -159,7 +162,6 @@ state_t pinChangeRoutine_Card(UserData_t * ud)
 	bool IDExists = verificoID(cardID);
 	if(IDExists)
 	{
-		// show message in display
 		ud->category = verificoCategory(ud->received_ID);
 		PrintMessage("VALID ID - ENTER PIN", true);
 		int i;
@@ -175,8 +177,8 @@ state_t pinChangeRoutine_Card(UserData_t * ud)
 		nextState.ev_handlers[KEYCARD_EV] = &PinInRoutine_Card;
 		PrintMessage("ENTER PIN", false);
 	}
-	else{
-		// show message in display
+	else
+	{
 		PrintMessage("INVALID ID", true);
 	}
 	return nextState;

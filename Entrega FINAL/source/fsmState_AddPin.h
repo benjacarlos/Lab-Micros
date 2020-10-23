@@ -1,7 +1,6 @@
 /*
  * fsmState_AddPin.h
  *
- *  Created on: Oct 22, 2020
  *      Author: Agus
  */
 

@@ -1,7 +1,6 @@
 /*
  * timerqueue.c
  *
- *  Created on: Oct 21, 2020
  *      Author: Grupo 5
  */
 
@@ -18,7 +17,7 @@ static timerQueue_t queue;
  * 						FUNCIONES DEL HEADER
  **********************************************************************/
 
-void InitializeTimerQueue(void)
+void timerqueueInit(void)
 {
 	static _Bool yaInit = false;
 	if(!yaInit)

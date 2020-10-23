@@ -1,7 +1,6 @@
 /*
  * fsmState_IdIn.h
  *
- *  Created on: Oct 21, 2020
  *      Author: Agus
  */
 

@@ -76,7 +76,7 @@ encoderUd_t pullEncoderEvent(void)
 void pushEncoderEvent(encoderUd_t newEvent)
 {
 	if(encoderQueue->top == ENCODER_EVENTS - 1)
-	{ // event overflow
+	{
 		encoderQueue->top = 0;
 		encoderQueue[encoderQueue->top].event = newEvent;
 		encoderQueue->isEmpty = false;
@@ -159,7 +159,7 @@ void buttonCallback(void)
 		}
 		else 										//si es menos de BACK_COUNT o mas de ENTER_COUNT el evento es BACK
 		{
-			eventEncoderQueue.event.input = BACK;
+			eventEncoderQueue.event.input = CANCEL;
 			eventEncoderQueue.event.isValid = true;
 			pushEncoderEvent(eventEncoderQueue.event);
 		}

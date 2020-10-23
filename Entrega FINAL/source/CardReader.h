@@ -21,7 +21,7 @@ typedef struct{
 
 	char track_string[MAX_TRACK_LEN];
 	int track_id;
-	_Bool isValid; //ver mejor nombre
+	_Bool isValid;
 
 }readerData_t;
 

@@ -1,7 +1,6 @@
 /*
  * prueba.c
  *
- *  Created on: Sep 3, 2020
  *      Author: Agus
  */
 

@@ -1,7 +1,7 @@
 /*
  * User.h
  *
- *  Created on: Oct 21, 2020
+ *  Created on: Oct 15, 2020
  *      Author: Agus
  */
 
@@ -19,14 +19,14 @@
 
 typedef enum { MASTER , ADMIN , BASIC ,  NONE }category_t;
 
-//L siguiente estructura tiene la informacion que hace de unterfaz entre los evento, los drivers y la FSM
+//La siguiente estructura tiene la informacion que hace de unterfaz entre los evento, los drivers y la FSM
 typedef struct{
 	timerData_t timerUd;
 	readerData_t magnetLectorUd;
 	encoderUd_t encoderUd;
 	char received_ID[TAMANO_ID]; //String con el ID recibido del usuario.
 	char received_PIN[PIN_MAXIMO]; //String con el PIN recibido del usuario.
-	int choice; // Si usuario emitio un pedido
+	int choice; // es lo que el usuario eligió, sirve para saber que updatear en el display
 	category_t category;
 }UserData_t;
 

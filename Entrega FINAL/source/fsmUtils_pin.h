@@ -1,7 +1,6 @@
 /*
  * fsmUtils_pin.h
  *
- *  Created on: Oct 22, 2020
  *      Author: Agus
  */
 
@@ -20,7 +19,7 @@
 #define INT2CHAR(x)	((char)(x+48))
 
 
-typedef enum {ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,BLANK,ERASE_LAST,ERASE_ALL}idOption_name;
+//typedef enum {ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,BLANK,ERASE_LAST,ERASE_ALL}idOption_name;
 
 
 void createPINString(UserData_t * ud);
