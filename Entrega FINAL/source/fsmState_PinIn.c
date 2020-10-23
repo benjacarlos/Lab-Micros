@@ -14,45 +14,16 @@
 #include "encoder.h"
 #include "AdminId.h"
 #include "timerqueue.h"
+#include "fsmUtils_pin.h"
 
 
-#define PIN_OPTIONS	13
-#define LAST_OPTION_PIN	(PIN_OPTIONS - 1)
-#define INCREMENT	1
-#define INITIAL	0
-#define MAX_TRIES 3
-#define HIDDEN '-'
-#define STRING_CANT	(PIN_MAXIMO + 1)
-#define INT2CHAR(x)	((char)(x+48))
 #define BLOCKED_TIME	60000UL // 1 min in ms
-
-
-typedef enum {ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,BLANK,ERASE_LAST,ERASE_ALL}idOption_name;
-static const char pinStrings[PIN_OPTIONS] = {'0','1','2','3','4','5','6','7','8','9',' ','L','A'};
-static char PINstring[STRING_CANT];
 
 
 static long unsigned int getBlockedTime(void);
 
 void blockedCallback(void);
 
-static void createPINString(UserData_t * ud);
-
-static void createPINString(UserData_t * ud)
-{
-	int i=0;
-	while(ud->received_PIN[i] != '\0')
-	{
-		PINstring[i] = HIDDEN;
-		i++;
-	}
-	if(ud->choice != -1)
-	{
-		PINstring[i] = pinStrings[ud->choice];
-		i++;
-	}
-	PINstring[i] = '\0';
-}
 
 void blockedCallback()
 {
@@ -83,6 +54,7 @@ state_t PinInRoutine_Input(UserData_t * ud)
 {
 	state_t nextState;
 	nextState.name = STAY;
+	char* string;
 	int j = 0;
 	bool validPIN = false;
 	switch(ud->encoderUd.input)
@@ -97,7 +69,8 @@ state_t PinInRoutine_Input(UserData_t * ud)
 			}
 			// show option to user
 			createPINString(ud);
-			PrintMessage(PINstring, false);
+			string = getpin();
+			PrintMessage(string, false);
 			break;
 		case DOWN: // change current option
 			if(ud->choice > INITIAL)
@@ -109,7 +82,8 @@ state_t PinInRoutine_Input(UserData_t * ud)
 			}
 			// show option to user
 			createPINString(ud);
-			PrintMessage(PINstring, false);
+			string = getpin();
+			PrintMessage(string, false);
 			break;
 		case ENTER: // Selects current option
 			while(ud->received_PIN[j] != '\0')
@@ -125,12 +99,14 @@ state_t PinInRoutine_Input(UserData_t * ud)
 					}
 					userDataReset(false ,false ,false ,true ,ud);
 					createPINString(ud);
-					PrintMessage(PINstring, false);
+					string = getpin();
+					PrintMessage(string, false);
 					break;
 				case ERASE_ALL:
 					userDataReset(false ,true ,false ,true ,ud);
 					createPINString(ud);
-					PrintMessage(PINstring, false);
+					string = getpin();
+					PrintMessage(string, false);
 					break;
 				case BLANK:
 					if(j == PIN_MINIMO)
@@ -177,7 +153,8 @@ state_t PinInRoutine_Input(UserData_t * ud)
 						j++;
 						userDataReset(false ,false ,false ,true ,ud);
 						createPINString(ud);
-						PrintMessage(PINstring, false);
+						string = getpin();
+						PrintMessage(string, false);
 					}
 					if(j == PIN_MAXIMO)
 					{
@@ -191,7 +168,6 @@ state_t PinInRoutine_Input(UserData_t * ud)
 							nextState.ev_handlers[TIMER_EV] = &AprovadoRoutine_Timer;
 							nextState.ev_handlers[KEYCARD_EV] = &AprovadoRoutine_Card;
 							PrintMessage("APROVADO ENTRANDO", true);
-							int a = 0;
 						}
 						else
 						{

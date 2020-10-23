@@ -9,44 +9,19 @@
 #include "fsmState_AddPin.h"
 #include "fsmState_Menu.h"
 #include "fsmState_PinIn.h"
+#include "fsmUtils_ID.h"
 
 #include "AdminID.h"
 #include "displayManager.h"
 #include "encoder.h"
 
-#define ID_OPTIONS	12
-#define LAST_OPTION_ID	(ID_OPTIONS-1)
-#define INCREMENT	1
-#define INITIAL	0
-#define STRING_CANT	(TAMANO_ID+1)
-#define INT2CHAR(x)	((char)(x+48))
 
-typedef enum {ZERO,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,ERASE_LAST,ERASE_ALL}idOption_name;
-static const char idStrings[ID_OPTIONS] = {'0','1','2','3','4','5','6','7','8','9','L','A'};
-static char IDstring[STRING_CANT];
-
-static void createIDString(UserData_t * ud);
-
-static void createIDString(UserData_t * ud)
-{
-	int i=0;
-	while(ud->received_ID[i] != '\0'){
-		IDstring[i] = ud->received_ID[i];
-		i++;
-	}
-	if(ud->choice != -1)
-	{
-		IDstring[i] = idStrings[ud->choice];
-		i++;
-	}
-	IDstring[i] = '\0';
-
-}
 
 
 state_t AddUSerRoutine_Input(UserData_t * ud){
 	state_t nextState;
 	nextState.name = STAY;
+	char* string;
 	int j = 0;
 	switch(ud->encoderUd.input)
 	{
@@ -59,7 +34,8 @@ state_t AddUSerRoutine_Input(UserData_t * ud){
 			}
 			// show option to user
 			createIDString(ud);
-			PrintMessage(IDstring, false);
+			string = getstring();
+			PrintMessage(string, false);
 			break;
 		case DOWN: // change current option
 			if(ud->choice > INITIAL){
@@ -70,7 +46,8 @@ state_t AddUSerRoutine_Input(UserData_t * ud){
 			}
 			// show option to user
 			createIDString(ud);
-			PrintMessage(IDstring, false);
+			string = getstring();
+			PrintMessage(string, false);
 			break;
 		case ENTER: // Selects current option
 			while(ud->received_ID[j] != '\0')
@@ -86,12 +63,14 @@ state_t AddUSerRoutine_Input(UserData_t * ud){
 					}
 					userDataReset(false ,false ,false ,true ,ud);
 					createIDString(ud);
-					PrintMessage(IDstring, false);
+					string = getstring();
+					PrintMessage(string, false);
 					break;
 				case ERASE_ALL:
 					userDataReset(true ,false ,false ,true ,ud);
 					createIDString(ud);
-					PrintMessage(IDstring, false);
+					string = getstring();
+					PrintMessage(string, false);
 					break;
 				default: // number
 					if((ud->choice >= INITIAL) && (j < TAMANO_ID))
@@ -100,7 +79,8 @@ state_t AddUSerRoutine_Input(UserData_t * ud){
 						j++;
 						userDataReset(false ,false ,false ,true ,ud);
 						createIDString(ud);
-						PrintMessage(IDstring, false);
+						string = getstring();
+						PrintMessage(string, false);
 					}
 					if(j == TAMANO_ID){ // id entered and not taken, we ask for PIN
 						if(!verificoID(ud->received_ID))
@@ -164,11 +144,13 @@ state_t AddUSerRoutine_Card(UserData_t * ud)
 	nextState.name = STAY;
 	char cardID[TAMANO_ID];
 	int i;
-	for(i=0;i<TAMANO_ID;++i){
+	for(i=0;i<TAMANO_ID;++i)
+	{
 		cardID[i] = ud->magnetLectorUd.track_string[i];
 	}
 	bool IDExists = verificoID(cardID);
-	if(IDExists){
+	if(IDExists)
+	{
 		// show message in display
 		ud->category = verificoCategory(ud->received_ID);
 		PrintMessage("VALID ID - ENTER PIN", true);

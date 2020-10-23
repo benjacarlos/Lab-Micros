@@ -30,6 +30,8 @@ C_SRCS += \
 ../source/fsmState_Menu.c \
 ../source/fsmState_PinIn.c \
 ../source/fsmState_RemoveUser.c \
+../source/fsmUtils_ID.c \
+../source/fsmUtils_pin.c \
 ../source/gpio.c \
 ../source/timer.c \
 ../source/timerqueue.c 
@@ -61,6 +63,8 @@ OBJS += \
 ./source/fsmState_Menu.o \
 ./source/fsmState_PinIn.o \
 ./source/fsmState_RemoveUser.o \
+./source/fsmUtils_ID.o \
+./source/fsmUtils_pin.o \
 ./source/gpio.o \
 ./source/timer.o \
 ./source/timerqueue.o 
@@ -92,6 +96,8 @@ C_DEPS += \
 ./source/fsmState_Menu.d \
 ./source/fsmState_PinIn.d \
 ./source/fsmState_RemoveUser.d \
+./source/fsmUtils_ID.d \
+./source/fsmUtils_pin.d \
 ./source/gpio.d \
 ./source/timer.d \
 ./source/timerqueue.d 

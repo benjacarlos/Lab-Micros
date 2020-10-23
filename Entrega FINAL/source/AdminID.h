@@ -21,7 +21,7 @@
 
 #define MAX_USERS 20	// Cantidad máxima usada en el servidor
 
-typedef enum { EXITO , ID_YA_EN_USO , DATABASE_LLENO , ID_NO_ENCONTRADO }estado;
+typedef enum {EXITO , ID_YA_EN_USO , DATABASE_LLENO , ID_NO_ENCONTRADO }estado;
 
 /******************************************************************************
  *							  ESTRUCTURAS
