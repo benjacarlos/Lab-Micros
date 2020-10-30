@@ -25,6 +25,8 @@
 #include <stdint.h>
 
 #define __CORE_CLOCK__  100000000U
+#define UART_HAL_DEFAULT_BAUDRATE 0
+
 #define __FOREVER__     for(;;)
 #define __ISR__         void __attribute__ ((interrupt))
 

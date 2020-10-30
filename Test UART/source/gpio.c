@@ -39,6 +39,8 @@ gpio_funs irq_data;
 
 pinIrqFun_t irqFuns[PORTS_N][PINS_N];
 
+
+
 void gpioMode (pin_t pin, uint8_t mode)
 {
 	uint8_t port = PIN2PORT(pin);
@@ -68,6 +70,7 @@ void gpioMode (pin_t pin, uint8_t mode)
 			setGPIOddr(gpioPortPointer[port], pinNum, (uint32_t) mode);
 		}
 }
+
 
 
 void gpioToggle (pin_t pin)
