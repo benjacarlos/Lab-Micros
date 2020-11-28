@@ -8,6 +8,7 @@
 #include "accelerometro.h"
 #include "timer.h"
 #include "timerqueue.h"
+
 /******************************************************************************
  *									DEFINICIONES
  ******************************************************************************/
@@ -123,7 +124,7 @@ static void handling_read()
 		i2c_master_int_get_new_data(I2C0_INT_MOD, reading_buffer, ACCEL_DATA_PACK_LEN);
 
 		//Primer byte ignorado
-		//accelerometro data : serial... 14 bits
+		//accelerometer data : serial... 14 bits
 		last_read_data_acc.x = (int16_t)((reading_buffer[1] << 8) | reading_buffer[2])>> 2;
 		last_read_data_acc.y = (int16_t)((reading_buffer[3] << 8) | reading_buffer[4])>> 2;
 		last_read_data_acc.z = (int16_t)((reading_buffer[5] << 8) | reading_buffer[6])>> 2;
