@@ -16,11 +16,14 @@
 #include <stdlib.h>
 
 
+
 /*******************************************************************************
  *  CONSTANTES Y MACROS
  ******************************************************************************/
+#define TIMER_HZ_RELOAD(x) ( SYSTICK_ISR_FREQUENCY_HZ/(x) - 1 )
 
-typedef enum {AFK, DISPLAY, MESSAGE, LED, ROTATION_TIMER, BUTTON_TIMER, DOOR, UNBLOCKED, TIMERS_CANT}timerData_t; //Aca van los diferentes timers utilizados (inactividad, display, rotacion encoder, etc)
+typedef enum {AFK, DISPLAY, MESSAGE, LED, ROTATION_TIMER, BUTTON_TIMER, DOOR, UNBLOCKED,
+			ACCEL_R, ACCEL_RC, TIMERS_CANT}timerData_t; //Aca van los diferentes timers utilizados (inactividad, display, rotacion encoder, etc)
 
 /*******************************************************************************
  * ESTRUCTURAS Y TYPEDEF
