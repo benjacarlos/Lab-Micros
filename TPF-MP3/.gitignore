@@ -1,0 +1,8 @@
+*.mk
+*.axf
+*.map
+*.ld
+*.d
+*.o
+/.metadata/
+/.mcuxpressoide_packages_support/
