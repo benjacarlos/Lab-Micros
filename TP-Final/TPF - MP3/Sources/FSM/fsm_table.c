@@ -1,25 +1,14 @@
 /***************************************************************************/ /**
   @file     fsm_Table.c
   @brief    FSM Table
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo
  ******************************************************************************/
 
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
-#include <fsm/States/effects_state.h>
 #include <stdio.h>
 #include "fsm.h"
-#include "fsm_table.h"
-#include "States/init_state.h"
-#include "States/idle_state.h"
-#include "States/file_selection_state.h"
-#include "States/player_state.h"
-#include "States/effects_state.h"
-
-#include "audio_manager.h"
-
-#include "queue.h"
 
 
 /*******************************************************************************
@@ -32,9 +21,9 @@ static void do_nothing(void);
  ******************************************************************************/
 /*Foward Declarations*/
 extern STATE init[];
-extern STATE idle[];
-extern STATE effects[];
-extern STATE player[];
+extern STATE idle[];	//saving power (sleep mode)
+extern STATE effects[];	//equalizer
+extern STATE play[];	//play song
 extern STATE file_selection[];
 
 
@@ -52,19 +41,71 @@ STATE init[]=
 
  STATE idle[]=
 {
-	{PP_EV,					idle, 					Idle_OnUserInteraction},
-	{NEXT_EV,				idle, 					Idle_OnUserInteraction},
-	{PREV_EV,				idle, 					Idle_OnUserInteraction},
-	{STOP_EV,				idle, 					Idle_OnUserInteraction},
+	{PP_EV,					idle, 					Idle_StartUp},
+	{NEXT_EV,				idle, 					do_nothing},
+	{PREV_EV,				idle, 					do_nothing},
+	{STOP_EV,				idle, 					do_nothing},
 
-	{ENCODER_PRESS_EV,		idle, 					Idle_OnUserInteraction},
-	{ENCODER_RIGHT_EV,		idle, 					Idle_OnUserInteraction},
-	{ENCODER_LEFT_EV,		idle, 					Idle_OnUserInteraction},
+	{ENCODER_PRESS_EV,		idle, 					do_nothing},
+	{ENCODER_RIGHT_EV,		idle, 					do_nothing},
+	{ENCODER_LEFT_EV,		idle, 					do_nothing},
 
 	{START_EV,				file_selection, 		FileSelection_InitState},
-	{SD_IN_EV, 				idle, 					Idle_OnUserInteraction},
-  	{FIN_TABLA, 			idle, 					do_nothing}
+	{SD_IN_EV, 				idle, 					Idle_StartUp},
+
+	{FIN_TABLA, 			idle, 					do_nothing}
 };
+
+ /*** Play State ***/
+ STATE play[] =
+ {
+ 	{PP_EV, 				play, 					Play_ToggleMusic}, //play pausa
+ 	{STOP_EV, 				play, 					Play_Stop},
+ 	{NEXT_EV, 				play, 					Play_PlayNextSong},
+ 	{PREV_EV, 				play, 					Play_PlayPreviousSong},
+
+ 	{ENCODER_PRESS_EV,		file_selection, 		FileSelection_InitState},
+ 	{ENCODER_RIGHT_EV,		play, 					Play_VolumeInc},
+ 	{ENCODER_LEFT_EV,		play,					Play_VolumeDec},
+
+ 	{ENCODER_LKP_EV,		idle, 					Idle_InitState}, //sleep
+
+ 	{SD_OUT_EV, 			idle, 					Idle_InitState},
+ 	{TIMEOUT_EV,			idle,	 				Idle_InitState},
+
+ 	{FILL_BUFFER_EV, 		play,					Audio_updateAll},
+
+	{NEXT_SONG_EV, 			play,					Play_PlayNextSong},
+	//maybe para node (?
+	//{PREV_SONG_EV, 			play,					Play_PlayPreviousSong},
+
+
+ 	{FIN_TABLA, 			play, 				do_nothing}
+ };
+
+ /*** File Selection State ***/
+ STATE file_selection[] =
+ {
+ 	{PP_EV, 				file_selection, 		FileSelection_SelectFile},
+ 	{NEXT_EV, 				file_selection, 		FileSelection_NextFile},
+ 	{PREV_EV, 				file_selection,			FileSelection_PreviousFile},
+
+ 	{ENCODER_PRESS_EV,		effects, 				Effects_InitState}, //Change mode
+ 	{ENCODER_RIGHT_EV,		file_selection, 		FileSelection_NextFile},
+ 	{ENCODER_LEFT_EV,		file_selection,			FileSelection_PreviousFile},
+
+ 	{ENCODER_LKP_EV,		idle, 					Idle_InitState}, //turn off
+ 	/*LKP = Long Key Press*/
+ 	{SD_OUT_EV, 			idle, 					Idle_InitState},
+ 	{TIMEOUT_EV,			idle,					Idle_InitState},
+
+ 	{FILE_SELECTED_EV, 		play, 					Play_InitState},
+
+ 	{FILL_BUFFER_EV, 		file_selection,			Audio_updateAll},
+ 	{NEXT_SONG_EV, 			file_selection,			FileSelection_PlayNextSong},
+
+ 	{FIN_TABLA, 			file_selection, 		do_nothing}
+ };
 
 /*** Equalizador State ***/
 
@@ -75,7 +116,7 @@ STATE effects[] =
 	{NEXT_EV, 				effects, 				Effects_NextOption},
 	{PREV_EV, 				effects,				Effects_PreviousOption},
 
-	{ENCODER_PRESS_EV,		player,					Player_InitState}, // Change mode
+	{ENCODER_PRESS_EV,		play,					Play_InitState}, // Change mode
 	{ENCODER_RIGHT_EV,		effects, 				Effects_NextOption},
 	{ENCODER_LEFT_EV,		effects,				Effects_PreviousOption},
 
@@ -83,67 +124,19 @@ STATE effects[] =
 
 	{TIMEOUT_EV, 			idle, 					Idle_InitState},
 	{SD_OUT_EV, 			idle, 					Idle_InitState},
-	{CHANGE_MODE_EV,		player,					Player_InitState},
+	//que no cambie de estado al seleccionar, sino que pueda ir probando en el menu de efectos
+	//{CHANGE_MODE_EV,		play,					Play_InitState},
 
 	{FILL_BUFFER_EV, 		effects,			    Audio_updateAll},
-	{NEXT_SONG_EV, 			effects,			    FileSelection_PlayNextSong},
-	{PREV_SONG_EV, 			effects,			    FileSelection_PlayPrevSong},
+	{NEXT_SONG_EV, 			effects,			    Effects_PlayNextSong},
 
 	{FIN_TABLA, 			effects, 				do_nothing}
 };
 
 
-/*** File Selection State ***/
-STATE file_selection[] =
-{
-	{PP_EV, 				file_selection, 		FileSelection_SelectFile},
-	//{STOP_EV, 				player, 				Player_Stop},
-	{NEXT_EV, 				file_selection, 		FileSelection_NextFile},
-	{PREV_EV, 				file_selection,			FileSelection_PreviousFile},
 
-	{ENCODER_PRESS_EV,		effects, 				Effects_InitState}, // Change mode
-	{ENCODER_RIGHT_EV,		file_selection, 		FileSelection_NextFile},
-	{ENCODER_LEFT_EV,		file_selection,			FileSelection_PreviousFile},
 
-	{ENCODER_LKP_EV,		idle, 					Idle_InitState}, // turn off
-	/*LKP = Long Key Press*/
-	{SD_OUT_EV, 			idle, 					Idle_InitState},
-	{TIMEOUT_EV,			idle,					Idle_InitState},
 
-	{FILE_SELECTED_EV, 		player, 				Player_InitState},
-	//{CHANGE_MODE_EV, 		effects, 				Effects_InitState},
-
-	{FILL_BUFFER_EV, 		file_selection,			Audio_updateAll},
-	{NEXT_SONG_EV, 			file_selection,			FileSelection_PlayNextSong},
-	{PREV_SONG_EV, 			file_selection,			FileSelection_PlayPrevSong},
-
-	{FIN_TABLA, 			file_selection, 		do_nothing}
-};
-
-/*** Player State ***/
-STATE player[] =
-{
-	{PP_EV, 				player, 				Player_ToggleMusic}, //play pausa
-	{STOP_EV, 				player, 				Player_Stop},
-	{NEXT_EV, 				player, 				Player_PlayNextSong},
-	{PREV_EV, 				player, 				Player_PlayPreviousSong},
-
-	{ENCODER_PRESS_EV,		file_selection, 		FileSelection_InitState},
-	{ENCODER_RIGHT_EV,		player, 				Player_IncVolume},
-	{ENCODER_LEFT_EV,		player,					Player_DecVolume},
-
-	{ENCODER_LKP_EV,		idle, 					Idle_InitState}, // turn off
-
-	//{CHANGE_MODE_EV, 		file_selection, 		FileSelection_InitState},
-	{SD_OUT_EV, 			idle, 					Idle_InitState},
-	{TIMEOUT_EV,			idle,	 				Idle_InitState},//??
-
-	{FILL_BUFFER_EV, 		player,					Audio_updateAll},
-	{NEXT_SONG_EV, 			player,					Player_PlayNextSong},
-	{PREV_SONG_EV, 			player,					Player_PlayPreviousSong},
-
-	{FIN_TABLA, 			player, 				do_nothing}
-};
 
 
 /*******************************************************************************
@@ -172,6 +165,5 @@ void FSM_StartInitState()
 /*Dummy function*/
 static void do_nothing(void)
 {
-	volatile char foo = 0;
-	foo++;
+	return;
 }

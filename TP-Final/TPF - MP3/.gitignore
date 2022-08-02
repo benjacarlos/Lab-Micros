@@ -4,6 +4,6 @@
 *.ld
 *.d
 *.o
-/.metadata/
-/.mcuxpressoide_packages_support/
-/Debug/
+*/.metadata/
+*/.mcuxpressoide_packages_support/
+*/Debug/

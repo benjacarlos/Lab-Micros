@@ -1,20 +1,29 @@
 /***************************************************************************/ /**
-  @file     fsm_table.h
-  @brief    FSM Table header.
-  @author   Grupo
+  @file     Idle_state.h
+  @brief    Idle state
+  @author   Grupo 2 - Lab de Micros
  ******************************************************************************/
-#ifndef FSMTABLE_H_
-#define FSMTABLE_H_
+#ifndef IDLE_STATE_H
+#define IDLE_STATE_H
 
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
-#include "fsm.h"
+#include <stdint.h>
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
-STATE *FSM_GetInitState(void);
-void FSM_StartInitState();
+/**
+ * @brief Initializes the idle state
+ */
+void Idle_InitState(void);
 
-#endif /* FSMTABLE_H_ */
+/**
+ * @brief Stop showing the time when the user interacts with the system.
+ */
+void Idle_OnUserInteraction(void);
+
+void Idle_UpdateTime(void);
+
+#endif /* IDLE_STATE_H */
