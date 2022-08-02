@@ -6,3 +6,4 @@
 *.o
 /.metadata/
 /.mcuxpressoide_packages_support/
+/Debug/
