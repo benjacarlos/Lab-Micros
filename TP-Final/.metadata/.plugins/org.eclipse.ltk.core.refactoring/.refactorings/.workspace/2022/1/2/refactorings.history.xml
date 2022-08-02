@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="将资源“SDProject”重命名为“MP3Player”" description="重命名资源“SDProject”" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/SDProject" name="MP3Player" stamp="1641101678658" updateReferences="true"/>
-</session>
