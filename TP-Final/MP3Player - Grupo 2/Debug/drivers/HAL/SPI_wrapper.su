@@ -1,0 +1,4 @@
+SPI_wrapper.c:99:6:SPI_Config	56	static
+SPI_wrapper.c:38:6:SPI_Init	16	static
+SPI_wrapper.c:113:6:SPI_Send	48	static
+SPI_wrapper.c:177:6:SPI0_IRQHandler	16	static

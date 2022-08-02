@@ -1,0 +1,7 @@
+memory_manager.c:95:13:Mm_Callback	0	static
+memory_manager.c:53:6:Mm_Init	8	static
+memory_manager.c:70:6:Mm_IsSDPresent	0	static
+memory_manager.c:75:6:Mm_SDConnection	0	static
+memory_manager.c:83:6:Mm_SDDesconnection	0	static
+memory_manager.c:115:6:Mm_OnDesconection	16	static
+memory_manager.c:124:6:Mm_OnConnection	16	static

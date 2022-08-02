@@ -1,0 +1,5 @@
+memory_manager.c:61:6:Mm_Init	280	static
+memory_manager.c:89:13:Mm_Callback	16	static
+memory_manager.c:107:13:Mm_OnDesconection	288	static
+memory_manager.c:116:13:Mm_OnConnection	688	static
+memory_manager.c:148:13:Mm_ScanFiles	368	static

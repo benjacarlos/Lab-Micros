@@ -1,0 +1,4 @@
+queue.c:26:6:initQueue	0	static
+queue.c:42:6:emitEvent	4	static
+queue.c:79:6:queueIsEmpty	0	static
+queue.c:66:11:getEvent	8	static

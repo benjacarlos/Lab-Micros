@@ -1,0 +1,6 @@
+time_service.c:107:19:TimeService_GetCurrentDateTime	16	static
+time_service.c:126:6:TimeService_Enable	8	static
+time_service.c:134:6:TimeService_Disable	8	static
+time_service.c:166:13:TimeService_FinishInit	8	static
+time_service.c:47:6:TimeService_Init	32	static
+time_service.c:148:6:RTC_Seconds_IRQHandler	8	static

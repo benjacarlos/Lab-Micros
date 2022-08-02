@@ -1,0 +1,5 @@
+vumeterRefresh.c:24:6:vumeterRefresh_init	8	static
+vumeterRefresh.c:92:6:vumeterRefresh_write_to_matrix	20	static
+vumeterRefresh.c:31:5:vumeterRefresh_fft	128	static
+vumeterRefresh.c:127:6:vumeterRefresh_draw_display	8	static
+vumeterRefresh.c:114:6:vumeterRefresh_clean_display	16	static

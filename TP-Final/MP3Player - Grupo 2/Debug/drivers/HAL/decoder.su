@@ -1,0 +1,14 @@
+decoder.c:396:6:decoder_ToBuffer	40	static
+decoder.c:102:6:decoder_MP3DecoderInit	8	static
+decoder.c:156:18:decoder_MP3DecodedFrame	64	static
+decoder.c:248:6:decoder_MP3GetLastFrameChannelCount	0	static
+decoder.c:260:6:decoder_MP3GetTagData	16	static
+decoder.c:272:6:decoder_hasID3	0	static
+decoder.c:276:6:decoder_shutDown	8	static
+decoder.c:296:6:decoder_getFileTitle	16	static
+decoder.c:313:6:decoder_getFileAlbum	16	static
+decoder.c:328:6:decoder_getFileArtist	16	static
+decoder.c:343:6:decoder_getFileYear	16	static
+decoder.c:358:6:decoder_getFileTrackNum	16	static
+decoder.c:433:6:decoder_readID3Tag	16	static
+decoder.c:115:6:decoder_MP3LoadFile	8	static

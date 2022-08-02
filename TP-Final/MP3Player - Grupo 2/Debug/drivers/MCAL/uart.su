@@ -1,0 +1,17 @@
+uart.c:119:6:UART_attach_callback	0	static
+uart.c:124:6:UART_is_rx_msg	0	static
+uart.c:131:9:UART_get_rx_msg_length	0	static
+uart.c:137:9:UART_read_msg	20	static
+uart.c:152:9:UART_write_msg	64	static
+uart.c:168:6:UART_is_tx_msg_complete	0	static
+uart.c:173:15:UART_Recieve_Data	0	static
+uart.c:179:6:UART_Send_Data	0	static
+uart.c:192:6:UART_set_baud_rate	16	static
+uart.c:210:6:UART_set_parity	0	static
+uart.c:65:6:UART_init	88	static
+uart.c:219:6:UART_rx_tx_irq_handler	24	static
+uart.c:258:9:UART0_RX_TX_IRQHandler	8	static
+uart.c:263:9:UART1_RX_TX_IRQHandler	8	static
+uart.c:268:9:UART2_RX_TX_IRQHandler	8	static
+uart.c:273:9:UART3_RX_TX_IRQHandler	8	static
+uart.c:278:9:UART4_RX_TX_IRQHandler	8	static

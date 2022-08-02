@@ -1,0 +1,10 @@
+Timer.c:215:12:getArrayEffectiveLength	0	static
+Timer.c:38:6:Timer_Init	8	static
+Timer.c:50:5:Timer_AddCallback	32	static
+Timer.c:62:12:Timer_Delete	24	static
+Timer.c:230:13:Timer_PISR	24	static
+Timer.c:98:12:Timer_Pause	24	static
+Timer.c:119:12:Timer_Resume	24	static
+Timer.c:140:12:Timer_Reset	24	static
+Timer.c:161:12:Timer_ChangePeriod	24	static
+Timer.c:187:7:Timer_GetCallbackProgress	16	static

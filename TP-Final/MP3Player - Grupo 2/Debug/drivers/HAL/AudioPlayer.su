@@ -1,0 +1,10 @@
+AudioPlayer.c:428:13:Edma_Callback	32	static
+AudioPlayer.c:99:6:AudioPlayer_Init	40	static
+AudioPlayer.c:130:6:AudioPlayer_UpdateSampleRate	32	static
+AudioPlayer.c:94:6:AudioPlayer_DEMOMode	8	static
+AudioPlayer.c:117:6:AudioPlayer_LoadSongInfo	8	static
+AudioPlayer.c:289:18:AudioPlayer_UpdateBackBuffer	8	static
+AudioPlayer.c:301:6:AudioPlayer_IsBackBufferFree	0	static
+AudioPlayer.c:306:6:AudioPlayer_Play	40	static
+AudioPlayer.c:339:6:AudioPlayer_Pause	0	static
+AudioPlayer.c:344:6:AudioPlayer_Stop	0	static

@@ -1,0 +1,12 @@
+file_system_manager.c:35:6:FileSystem_isMp3File	8	static
+file_system_manager.c:48:6:FileSystem_AddFile	24	static
+file_system_manager.c:208:13:FileSystem_ScanHelper	352	static
+file_system_manager.c:29:6:FileSystem_ScanFiles	208	static
+file_system_manager.c:56:11:FileSystem_GetFirstFile	280	static
+file_system_manager.c:66:11:FileSystem_GetNextFile	8	static
+file_system_manager.c:76:11:FileSystem_GetPreviousFile	8	static
+file_system_manager.c:86:7:FileSystem_GetFileName	528	static
+file_system_manager.c:105:6:FileSystem_PrintFiles	280	static
+file_system_manager.c:123:5:FileSystem_GetFilesCount	0	static
+file_system_manager.c:128:11:FileSystem_ResetFiles	8	static
+file_system_manager.c:133:6:FileSystem_Test	808	static

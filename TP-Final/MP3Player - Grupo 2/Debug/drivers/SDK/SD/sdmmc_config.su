@@ -1,0 +1,4 @@
+sdmmc_config.c:32:6:BOARD_SDCardGetDetectStatus	8	static
+sdmmc_config.c:37:6:BOARD_SDDetectCallback	8	static
+sdmmc_config.c:46:6:BOARD_SDCardDetectInit	16	static
+sdmmc_config.c:95:6:BOARD_SD_Config	24	static

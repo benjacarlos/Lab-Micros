@@ -1,0 +1,6 @@
+matrix_display.c:214:13:md_dmaCallback	8	static
+matrix_display.c:226:13:md_timerCallback	32	static
+matrix_display.c:70:6:md_Init	64	static
+matrix_display.c:127:6:md_writeBuffer	40	static
+matrix_display.c:191:9:md_makeColor	8	static
+matrix_display.c:198:6:md_setBrightness	0	static

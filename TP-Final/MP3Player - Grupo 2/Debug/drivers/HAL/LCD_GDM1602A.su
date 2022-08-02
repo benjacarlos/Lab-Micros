@@ -1,0 +1,15 @@
+LCD_GDM1602A.c:286:13:sendBlock	24	static
+LCD_GDM1602A.c:316:13:initRoutineTimerCallback	24	static
+LCD_GDM1602A.c:337:13:initRoutineSPICallback	8	static
+LCD_GDM1602A.c:98:6:LCD_Init	16	static
+LCD_GDM1602A.c:120:6:LCD_UpdateClock	8	static
+LCD_GDM1602A.c:125:6:LCD_isInit	0	static
+LCD_GDM1602A.c:130:6:LCD_writeData	8	static
+LCD_GDM1602A.c:135:6:LCD_setCursor	8	static
+LCD_GDM1602A.c:147:6:LCD_writeDataInPos	8	static
+LCD_GDM1602A.c:156:6:LCD_writeStrInPos	16	static
+LCD_GDM1602A.c:345:13:shifttingCallback	56	static
+LCD_GDM1602A.c:168:6:LCD_clearRow	16	static
+LCD_GDM1602A.c:183:6:LCD_stopMove	0	static
+LCD_GDM1602A.c:188:6:LCD_clearDisplay	16	static
+LCD_GDM1602A.c:210:6:LCD_writeShiftingStr	32	static

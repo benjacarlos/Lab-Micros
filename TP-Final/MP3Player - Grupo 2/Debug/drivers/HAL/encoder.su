@@ -1,0 +1,3 @@
+encoder.c:67:6:lookForMoves	8	static
+encoder.c:37:6:Encoder_Init	8	static
+encoder.c:51:8:Encoder_GetMove	0	static

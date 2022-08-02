@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;mp3_player_eq&apos;" deleteContents="false" description="Delete resource &apos;mp3_player_eq&apos;" element1="/mp3_player_eq" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1644872410718"/>
+</session>_ = 'Apache 2.0'
+__copyright__ = 'Copyright 2020 Kenneth Reitz'
+__cake__ = u'\u2728 \U0001f370 \u2728'

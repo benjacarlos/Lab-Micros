@@ -1,0 +1,13 @@
+power_mode_switch.c:61:6:APP_SetClockVlpr	16	static
+power_mode_switch.c:81:6:APP_SetClockRunFromVlpr	24	static
+power_mode_switch.c:118:6:APP_PowerPreSwitchHook	24	static
+power_mode_switch.c:147:6:APP_PowerPostSwitchHook	32	static
+power_mode_switch.c:268:6:APP_GetWakeupConfig	24	static
+power_mode_switch.c:292:6:APP_SetWakeupConfig	0	static
+power_mode_switch.c:307:6:APP_ShowPowerMode	8	static
+power_mode_switch.c:327:6:APP_CheckPowerMode	8	static
+power_mode_switch.c:381:6:APP_PowerModeSwitch	16	static
+power_mode_switch.c:503:13:SetMode	16	static
+power_mode_switch.c:475:6:PowerMode_Init	8	static
+power_mode_switch.c:492:6:PowerMode_SetVLPRMode	8	static
+power_mode_switch.c:497:6:PowerMode_SetRunMode	8	static
