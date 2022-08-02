@@ -4,4 +4,5 @@
 *.ld
 *.d
 *.o
-TP-Final/.metadata/
+**/.metadata/*
+**/.plugins/*
