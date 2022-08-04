@@ -19,8 +19,15 @@
 /*******************************************************************************
  *  CONSTANTES Y MACROS
  ******************************************************************************/
+#define TIMER_TICK_MS       1
+#define TIMER_MS2TICKS(ms)  ((ms)/TIMER_TICK_MS)
 
-enum {INACTIVITY, DISPLAY, TIMERS_CANT}; //Aca van los diferentes timers utilizados (inactividad, display, rotacion encoder, etc)
+#define TIMERS_MAX_CANT     16
+#define TIMER_INVALID_ID    255
+
+enum { IDLE_T, PLAY_T, EFFECTS_T, FILE_SELECT_T, TIMERS_CANT}; //Aca van los diferentes timers utilizados (inactividad, display, rotacion encoder, etc)
+
+enum { TIM_MODE_SINGLESHOT, TIM_MODE_PERIODIC, CANT_TIM_MODES }; //Diferentes cantidades de modos
 
 /*******************************************************************************
  * ESTRUCTURAS Y TYPEDEF
@@ -35,49 +42,80 @@ typedef void (*tim_callback_t)(void);
 
 
 /*******************************************************************************
- * FUNCIONES (SERVICIOS)
+ * VARIABLE PROTOTYPES WITH GLOBAL SCOPE
+ ******************************************************************************/
+
+/*******************************************************************************
+ * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
 
 /**
- * @brief Inicializa timers y perifericos necesarios
+ * @brief Initialise timer and corresponding peripheral
  */
 void timerInit(void);
 
 
-/**
- * @brief Comienza un nuevo timer
- * @param id ID del timer a iniciar
- * @param period timepo hasta que expire el timer EN MILISEGUNDOS
- * @param callback callback que se llama cuando expira
- */
-void timerStart(tim_id_t id, ttick_t period, tim_callback_t callback);
+// Non-Blocking services ////////////////////////////////////////////////
 
 /**
- * @brief devuelve contador del timer
- * @param id indice del timer que quiero reiniciar
- * @return cuanto transcurrio del contador del timer (en ms)
+ * @brief Request a timer
+ * @return ID of the timer to use
  */
-ttick_t timerGetCnt(tim_id_t id);
+tim_id_t timerGetId(void);
+
 
 /**
- * @brief reinicia un timer
- * @param id indice del timer que quiero reiniciar
+ * @brief Begin to run a new timer
+ * @param id ID of the timer to start
+ * @param ticks time until timer expires, in ticks
+ * @param mode SINGLESHOT or PERIODIC
+ * @param callback Function to be call when timer expires
+ */
+void timerStart(tim_id_t id, ttick_t ticks, uint8_t mode, tim_callback_t callback);
+
+
+/**
+ * @brief Finish to run a timer
+ * @param id ID of the timer to stop
+ */
+void timerPause(tim_id_t id);
+
+
+/**
+ * @brief Resume the timer
+ * @param id ID of the timer to stop
+ */
+void timerResume(tim_id_t id);
+
+/**
+ * @brief Restart the timer
+ * @param id ID of the timer to restart
  */
 void timerRestart(tim_id_t id);
 
+/**
+ * @brief Returns whether the timer is running or not
+ * @param id ID of the timer
+ * @return 1 = timer running
+ */
+bool timerRunning(tim_id_t id);
+
 
 /**
- * @brief Activa un timer
- * @param id indice del timer que quiero activar
+ * @brief Verify if a timer has run timeout
+ * @param id ID of the timer to check for expiration
+ * @return 1 = timer expired
  */
-void timerEnable(tim_id_t id);
+bool timerExpired(tim_id_t id);
 
+
+// Blocking services ////////////////////////////////////////////////
 
 /**
- * @brief Desactiva un timer
- * @param id indice del timer que quiero desactivar
+ * @brief Wait the specified time. Use internal timer
+ * @param ticks time to wait in ticks
  */
-void timerDisable(tim_id_t id);
+void timerDelay(ttick_t ticks);
 
 
 /*******************************************************************************

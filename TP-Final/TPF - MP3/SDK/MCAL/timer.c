@@ -56,70 +56,117 @@ static timer_t timers[TIMERS_CANT]; // Arreglo global con timers que se iniciali
 
 /*******************************************************************************
  *******************************************************************************
-                       FUNCIONES DEL HEADER
+                        GLOBAL FUNCTION DEFINITIONS
  *******************************************************************************
  ******************************************************************************/
 
 void timerInit(void)
 {
-    static bool yaInit = false; //variable estática que indica si se inicializó el módulo de timers
+    static bool yaInit = false;
     if (yaInit)
         return;
 
-    for (int i = 0; i < TIMERS_CANT; i++)
-    {
-    	(timers + i)->period = UINT32_MAX ; //aca deberia poner un valor por defecto maximo
-    	(timers + i)->cnt = 0;
-    	(timers + i)->callback  = NULL;
-    	(timers + i)->state = false;
-    }
-
-    SysTick_Init(&timer_isr); // init peripheral
+    systickInit(timer_isr); // init peripheral
 
     yaInit = true;
 }
 
 
-void timerStart(tim_id_t id, ttick_t ticks, tim_callback_t callback)
+tim_id_t timerGetId(void)
 {
-	timerDisable(id); //se desactiva el timer para realizar cambios
-
-
-	if(ticks > MS_LIMIT)
-	{
-		(timers + id)->period = MS_TO_TICKS_MAX(ticks);
-	}
-	else
-	{
-		(timers + id)->period = MS_TO_TICKS(ticks);
-	}
-
-	(timers + id)->cnt = 0;
-	(timers + id)->callback = callback;
-	timerEnable(id);
-
+    if (timers_cant >= TIMERS_MAX_CANT)
+    {
+        return TIMER_INVALID_ID;
+    }
+    else
+    {
+        return timers_cant++;
+    }
 }
 
-ttick_t timerGetCnt(tim_id_t id)
+
+void timerStart(tim_id_t id, ttick_t ticks, uint8_t mode, tim_callback_t callback)
 {
-	return (timers + id)->cnt;
+    if ((id < timers_cant) && (mode < CANT_TIM_MODES))
+    {
+        // disable timer
+        timers[id].running = 0;
+
+        // configure timer
+        timers[id].period = ticks;
+        timers[id].cnt = ticks;
+        timers[id].callback = callback;
+        timers[id].mode = mode;
+        timers[id].expired = 0;
+
+        // enable timer
+        timers[id].running = 1;
+    }
+}
+
+void timerResume(tim_id_t id)
+{
+    if (id < timers_cant)
+    {
+        // Si esta pausado el timer
+        if (!timers[id].running)
+        {
+            // Reanudo el timer
+            timers[id].cnt = timers[id].period;
+            timers[id].running = 1;
+        }
+    }
+}
+
+void timerPause(tim_id_t id)
+{
+    if (id < timers_cant)
+    {
+        // Apago el timer
+        timers[id].running = 0;
+
+        // y bajo el flag
+        timers[id].expired = 0;
+    }
 }
 
 void timerRestart(tim_id_t id)
 {
-	(timers + id)->cnt = 0;
+    if (id < timers_cant)
+    {
+        // disable timer
+        timers[id].running = 0;
+
+        // configure timer
+        timers[id].cnt = timers[id].period;
+        timers[id].expired = 0;
+
+        // enable timer
+        timers[id].running = 1;
+    }
 }
 
-void timerEnable(tim_id_t id)
+bool timerRunning(tim_id_t id)
 {
-	(timers + id)->state = true;
+    return timers[id].running;
 }
 
-void timerDisable(tim_id_t id)
+bool timerExpired(tim_id_t id)
 {
-	(timers + id)->state = false;
+    // Verifico si expiró el timer
+    bool hasExpired = timers[id].expired;
+
+    // y bajo el flag
+    timers[id].expired = 0;
+
+    return hasExpired;
 }
 
+void timerDelay(ttick_t ticks)
+{
+    timerStart(TIMER_ID_INTERNAL, ticks, TIM_MODE_SINGLESHOT, NULL);
+    while (!timerExpired(TIMER_ID_INTERNAL));
+}
 
 /*******************************************************************************
  *******************************************************************************
@@ -129,20 +176,41 @@ void timerDisable(tim_id_t id)
 
 static void timer_isr(void)
 {
+    // decremento los timers activos
+    uint8_t timerIndex;
+    for (timerIndex = 0 ; timerIndex < timers_cant ; timerIndex++)
+    {
+        timer_t* currentTimer = &timers[timerIndex];
+        if (currentTimer->running)
+        {
+            currentTimer->cnt--;
+            // si hubo timeout!
+            if (currentTimer->cnt == 0)
+            {
+            	// Important: first update state so that if timerStart()
+				// is called in the callback, this block doesn't deletes
+            	// the configuration
+                // 1) update state
+                if (currentTimer->mode == TIM_MODE_SINGLESHOT)
+                {
+                    currentTimer->expired = 1;
+                    currentTimer->running = 0;
+                }
+                else
+                {
+                    currentTimer->cnt = currentTimer->period;
+                    currentTimer->expired = 1;
+                }
 
-	for (int i = 0; i < TIMERS_CANT; i++)
-	{
-		if( (timers + i)->state)
-		{
-			if( ++((timers + i)->cnt) >=  ((timers + i)->period)) //incremento el contador y veo si hubo timeout
-			{
-				(timers + i)->cnt = 0;
-				((timers + i)->callback)();  //se llama el callback
-			}
+            	// 2) execute action: callback or set flag
+                if (currentTimer->callback)
+                {
+                    currentTimer->callback();
+                }
 
-		}
-	}
+            }
+        }
+    }
 }
-
 
 /******************************************************************************/

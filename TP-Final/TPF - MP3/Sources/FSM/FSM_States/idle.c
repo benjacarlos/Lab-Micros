@@ -12,7 +12,7 @@
 //#include "power_mode_switch.h"
 //#include "LCD_GDM1602A.h"
 //#include "time_service.h"
-//#include "Timer.h"
+#include "timer.h"
 //#include "memory_manager.h"
 //#include "SysTick.h"
 //#include "audio_manager.h"
@@ -30,7 +30,6 @@ typedef enum
 /*******************************************************************************
  * PRIVATE VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
-//int timeCallbackId = -1;
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
@@ -62,10 +61,9 @@ static void emitStartEv(void);
 void Idle_InitState(void)
 {
 	Audio_deinit();
-
 	LCD_clearDisplay();
-	timeCallbackId = Timer_AddCallback(changePowerMode, 1000, true); //Delay until related stuff is finished
 
+	timerStart(IDLE_T, 1000, TIM_MODE_SINGLESHOT, setSleepMode);
 }
 
 void Idle_StartUp(void)
