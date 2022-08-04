@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include "fsm.h"
 
-#include "States/play_state.h"
+#include "FSM_States/play.h"
 
 
 /*******************************************************************************
