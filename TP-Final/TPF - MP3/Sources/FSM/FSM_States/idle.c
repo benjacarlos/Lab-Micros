@@ -30,27 +30,23 @@ typedef enum
 /*******************************************************************************
  * PRIVATE VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
-int timeCallbackId = -1;
+//int timeCallbackId = -1;
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
  ******************************************************************************/
-/**
- * @brief Shows the current time on the display.
- */
-static void showTime(void);
 
 /**
- * @brief Changes the energy consumption mode of the device.
- * @param EnergyConsumptionMode_t energy mode.
+ * @brief Changes the operation mode of the device.
+ * @param OpMode_t operation mode.
  */
-static void setEnergyConsumptionMode(EnergyConsumptionMode_t energyConsumptionMode);
+static void setOperationMode(OpMode_t OpMode);
 
 
 /*
- *@brief Callback after init idle to change to low power mode
+ *@brief Callback after init idle to change to sleep mode
  */
-static void changePowerMode(void);
+static void setSleepMode(void);
 
 /*
  *@brief Callback after changing to high power mode
@@ -72,11 +68,11 @@ void Idle_InitState(void)
 
 }
 
-void Idle_OnUserInteraction(void)
+void Idle_StartUp(void)
 {
 	if (!Mm_IsSDPresent())
 		return;
-	setEnergyConsumptionMode(HIGH_CONSUMPTION);
+	setOperationMode(OPERATION_MODE);
 
 	if(timeCallbackId != -1)
 	{
@@ -90,7 +86,7 @@ void Idle_OnUserInteraction(void)
 
 }
 
-void Idle_UpdateTime()
+void Idle_Update()
 {
 	TimeServiceDate_t date = TimeService_GetCurrentDateTime();
 
