@@ -25,7 +25,7 @@ typedef enum
   PRESS_EV,	//a botton press
 
   /* BUTTONS NAMES */
-  PP_EV, //play/pausa
+  PP_EV, //play & pause
   STOP_EV,
   NEXT_EV,
   PREV_EV,

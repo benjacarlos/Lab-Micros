@@ -1,31 +1,31 @@
 /***************************************************************************/ /**
-  @file     idle_state.c
+  @file     idle.c
   @brief    Idle state functions.
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo
  ******************************************************************************/
 
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
-#include "idle_state.h"
+#include "idle.h"
 #include "queue.h"
-#include "power_mode_switch.h"
-#include "LCD_GDM1602A.h"
-#include "time_service.h"
-#include "Timer.h"
-#include "memory_manager.h"
-#include "SysTick.h"
-#include "audio_manager.h"
-#include "LCD_GDM1602A.h"
+//#include "power_mode_switch.h"
+//#include "LCD_GDM1602A.h"
+//#include "time_service.h"
+//#include "Timer.h"
+//#include "memory_manager.h"
+//#include "SysTick.h"
+//#include "audio_manager.h"
+//#include "LCD_GDM1602A.h"
 
 /*********************************************************
  * 		LOCAL STRUCTS AND ENUMS
  ********************************************************/
 typedef enum
 {
-  LOW_CONSUMPTION,
-  HIGH_CONSUMPTION,
-} EnergyConsumptionMode_t;
+  SLEEP_MODE,
+  OPERATION_MODE,
+} OpMode_t;
 
 /*******************************************************************************
  * PRIVATE VARIABLES WITH FILE LEVEL SCOPE

@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
-  @file     Idle_state.h
+  @file     Idle.h
   @brief    Idle state
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo
  ******************************************************************************/
 #ifndef IDLE_STATE_H
 #define IDLE_STATE_H
@@ -22,8 +22,11 @@ void Idle_InitState(void);
 /**
  * @brief Stop showing the time when the user interacts with the system.
  */
-void Idle_OnUserInteraction(void);
+void Idle_StartUp(void);
 
-void Idle_UpdateTime(void);
+/**
+ * @brief Update screen time and insert SD card message
+ */
+void Idle_Update(void);
 
 #endif /* IDLE_STATE_H */
