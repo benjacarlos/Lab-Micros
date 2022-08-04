@@ -72,15 +72,9 @@ void Idle_StartUp(void)
 		return;
 	setOperationMode(OPERATION_MODE);
 
-	if(timeCallbackId != -1)
-	{
-		Timer_Delete(timeCallbackId);
-		timeCallbackId = -1;
-	}
-	TimeService_Disable();
+	//TimeService_Disable();
 
-
-	timeCallbackId = Timer_AddCallback(emitStartEv, 3000, true); //Delay until clock stabilizes
+	timerStart(IDLE_T, 3000, TIM_MODE_SINGLESHOT, emitStartEv); //Delay until clock stabilizes
 
 }
 
@@ -93,7 +87,7 @@ void Idle_Update()
 	snprintf(dateString, sizeof(dateString), "   %02hd-%02hd-%04hd     ", date.day, date.month, date.year);
 	snprintf(timeString, sizeof(timeString), "    %02hd:%02hd:%02hd      ", date.hour,date.minute, date.second);
 
-	//LCD_writeStrInPos ("Poner SD para que utilizar MP3", x, y, z)
+	//LCD_writeStrInPos ("Insert MP3 to use MP3", x, y, z)
 	LCD_writeStrInPos(timeString, 15, 0, 0);
 	LCD_writeStrInPos(dateString, 15, 1, 0);
 }
@@ -105,13 +99,12 @@ void Idle_Update()
  *******************************************************************************
  ******************************************************************************/
 
-static void changePowerMode(void)
+static void setSleepMode(void)
 {
-	setEnergyConsumptionMode(LOW_CONSUMPTION);
-	timeCallbackId = -1;
+	setOperationMode(SLEEP_MODE);
 
 	LCD_UpdateClock();
-	TimeService_Enable();
+	//TimeService_Enable();
 	SysTick_UpdateClk();
 }
 
