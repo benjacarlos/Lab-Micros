@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     fsm_Table.c
   @brief    FSM Table
-  @author   Grupo
+  @author   Grupo 5
  ******************************************************************************/
 
 /*******************************************************************************
@@ -9,6 +9,8 @@
  ******************************************************************************/
 #include <stdio.h>
 #include "fsm.h"
+
+#include "States/play_state.h"
 
 
 /*******************************************************************************
@@ -61,8 +63,8 @@ STATE init[]=
  {
  	{PP_EV, 				play, 					Play_ToggleMusic}, //play pausa
  	{STOP_EV, 				play, 					Play_Stop},
- 	{NEXT_EV, 				play, 					Play_PlayNextSong},
- 	{PREV_EV, 				play, 					Play_PlayPreviousSong},
+ 	{NEXT_EV, 				play, 					Play_NextSong},
+ 	{PREV_EV, 				play, 					Play_PreviousSong},
 
  	{ENCODER_PRESS_EV,		file_selection, 		FileSelection_InitState},
  	{ENCODER_RIGHT_EV,		play, 					Play_VolumeInc},
@@ -75,7 +77,7 @@ STATE init[]=
 
  	{FILL_BUFFER_EV, 		play,					Audio_updateAll},
 
-	{NEXT_SONG_EV, 			play,					Play_PlayNextSong},
+	{NEXT_SONG_EV, 			play,					Play_NextSong},
 	//maybe para node (?
 	//{PREV_SONG_EV, 			play,					Play_PlayPreviousSong},
 
