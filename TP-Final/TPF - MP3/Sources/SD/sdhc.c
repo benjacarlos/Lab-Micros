@@ -1,6 +1,6 @@
 	/*******************************************************************************
   @file     sdhc.c
-  @brief    Secure Digital Host Controller peripheral driver
+  @brief    Secure Digital High Capacity
   @author   Grupo 5
  ******************************************************************************/
 
