@@ -13,8 +13,8 @@
 //#include "audio_manager.h"
 
 #include "file_selection.h"
-#include "queue.h"
-//#include "AudioPlayer.h"
+
+#include "../../Queue/ev_queue.h"
 #include "timer.h"
 //#include "LCD_GDM1602A.h"
 

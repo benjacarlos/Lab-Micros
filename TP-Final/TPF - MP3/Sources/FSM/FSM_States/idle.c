@@ -8,10 +8,8 @@
  * INCLUDE HEADER FILES
  ******************************************************************************/
 #include "idle.h"
-#include "queue.h"
-//#include "power_mode_switch.h"
-//#include "LCD_GDM1602A.h"
-//#include "time_service.h"
+
+#include "../../Queue/ev_queue.h"
 #include "timer.h"
 //#include "memory_manager.h"
 //#include "SysTick.h"

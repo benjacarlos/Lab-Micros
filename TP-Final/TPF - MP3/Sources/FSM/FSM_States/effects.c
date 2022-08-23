@@ -8,8 +8,9 @@
  * INCLUDE HEADER FILES
  ******************************************************************************/
 #include "States/effects.h"
+
+#include "../../Queue/ev_queue.h"
 #include "LCD_GDM1602A.h"
-#include "queue.h"
 #include "timer.h"
 #include "equalizer.h"
 

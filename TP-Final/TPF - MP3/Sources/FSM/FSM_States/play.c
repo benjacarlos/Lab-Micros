@@ -12,17 +12,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "queue.h"
-
-//#include "audio_manager.h"
-//#include "LCD_GDM1602A.h"
-
-//#include "vumeterRefresh.h"
-
-//#include "AudioPlayer.h"
-//#include "ff.h"
-//#include "file_system_manager.h"
-
+#include "../../Queue/ev_queue.h"
 #include "timer.h"
 
 /*******************************************************************************
