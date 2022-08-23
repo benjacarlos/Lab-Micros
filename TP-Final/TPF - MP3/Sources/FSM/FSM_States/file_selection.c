@@ -27,6 +27,7 @@
  ******************************************************************************/
 
 #define TITLE_TIME 5000
+#define SPACE_CHARACTER	(0x20)
 
 /*******************************************************************************
  * VARIABLES WITH FILE LEVEL SCOPE
@@ -146,7 +147,7 @@ static void printFileInfo(void)
 	uint8_t mod = len%DISPLAY_COLUMNS;
 	len += (DISPLAY_COLUMNS-mod);
 
-	memset(path, 0x20, 50);
+	memset(path, SPACE_CHARACTER, 50);
 	memcpy(path, name, strlen(name));
 	LCD_writeShiftingStr(path,  len, 0, MIDIUM);
 
