@@ -116,15 +116,15 @@ static void emitStartEv(void)
 	emitEvent(START_EV);
 }
 
-static void setEnergyConsumptionMode(EnergyConsumptionMode_t energyConsumptionMode)
+static void setOperationMode(OpMode_t OpMode)
 {
-	  switch (energyConsumptionMode)
+	  switch (OpMode)
 	  {
-	  case LOW_CONSUMPTION:
+	  case SLEEP_MODE:
 		  PowerMode_SetVLPRMode();
 		break;
 
-	  case HIGH_CONSUMPTION:
+	  case OPERATION_MODE:
 		  PowerMode_SetRunMode();
 		break;
 
