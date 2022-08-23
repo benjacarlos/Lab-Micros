@@ -38,7 +38,6 @@
  ******************************************************************************/
 
 static bool showingVol = false;
-static int volumeTimerID = -1;
 
 /*******************************************************************************
  * 	LOCAL FUNCTION DEFINITIONS
@@ -159,11 +158,11 @@ static void showVolume(void)
 	if(!showingVol)
 	{
 		LCD_clearDisplay();
-		volumeTimerID = Timer_AddCallback(stopShowingVolume, VOLUME_TIME, true);
+		timerStart(PLAY_T, VOLUME_TIME, TIM_MODE_SINGLESHOT, stopShowingVolume);
 	}
 	else
 	{
-		Timer_Reset(volumeTimerID);
+		timerRestart(PLAY_T);
 	}
 
 	char str2wrt[11] = "Volumen: --";
