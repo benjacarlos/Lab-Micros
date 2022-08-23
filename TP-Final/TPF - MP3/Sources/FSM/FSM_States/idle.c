@@ -110,7 +110,6 @@ static void setSleepMode(void)
 
 static void emitStartEv(void)
 {
-	timeCallbackId = -1;
 	LCD_UpdateClock();
 	SysTick_UpdateClk();
 	emitEvent(START_EV);
