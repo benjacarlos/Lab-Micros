@@ -32,7 +32,6 @@
  * VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
 static bool showingTitle;
-static int titleTimerID = -1;
 
 /*******************************************************************************
  * 	LOCAL FUNCTION DEFINITIONS
@@ -119,7 +118,7 @@ static void showTitle(void)
 	LCD_writeStrInPos("Elegir Archivo  ", 16, 0, 0);
 	LCD_clearRow(1);
 	showingTitle = true;
-	titleTimerID = Timer_AddCallback(&stopShowingTitle, TITLE_TIME, true);
+	timerStart(FILE_SELECT_T, TITLE_TIME, TIM_MODE_SINGLESHOT, &stopShowingTitle);
 }
 
 static void stopShowingTitle(void)
@@ -132,8 +131,7 @@ static void stopShowingTitle(void)
 
 static void userInteractionStopsTitle(void)
 {
-	Timer_Delete(titleTimerID);
-	titleTimerID = -1;
+	timerPause(FILE_SELECT_T);
 	stopShowingTitle();
 }
 
