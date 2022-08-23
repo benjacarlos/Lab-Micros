@@ -14,14 +14,14 @@
 
 #include "queue.h"
 
-#include "audio_manager.h"
-#include "LCD_GDM1602A.h"
+//#include "audio_manager.h"
+//#include "LCD_GDM1602A.h"
 
-#include "vumeterRefresh.h"
+//#include "vumeterRefresh.h"
 
-#include "AudioPlayer.h"
-#include "ff.h"
-#include "file_system_manager.h"
+//#include "AudioPlayer.h"
+//#include "ff.h"
+//#include "file_system_manager.h"
 
 #include "timer.h"
 
@@ -168,6 +168,7 @@ static void showVolume(void)
 	char str2wrt[11] = "Volumen: --";
 
 	char vol = Audio_getVolume();
+	// Convert number to ASCI value
 	str2wrt[9] = vol/10 != 0? ZERO_CHARACTER + vol/10 : ' ';
 	str2wrt[10] = ZERO_CHARACTER + (char)vol%10;
 

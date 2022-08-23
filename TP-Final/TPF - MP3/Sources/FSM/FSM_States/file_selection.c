@@ -10,17 +10,15 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "audio_manager.h"
+//#include "audio_manager.h"
 
 #include "file_selection.h"
 #include "queue.h"
 //#include "AudioPlayer.h"
 #include "timer.h"
-#include "LCD_GDM1602A.h"
-//#include "memory_manager.h"
-//#include "file_system_manager.h"
-//#include "decoder.h"
-#include "power_mode_switch.h"
+//#include "LCD_GDM1602A.h"
+
+//#include "power_mode_switch.h"
 
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
