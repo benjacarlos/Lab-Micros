@@ -82,6 +82,7 @@ static int16_t * activeBuffer = buffers[0];
 static int16_t * backBuffer= buffers[1];
 static bool backBufferFree = false;
 static bool pause = false, stop = false;
+// Inicializamos el DAC con un valor máximo que no puede representar
 static int16_t mute[DAC_DATL_COUNT] = {2048U};
 
 
@@ -98,16 +99,17 @@ void AudioPlayer_DEMOMode(void)
 
 void AudioPlayer_Init(void)
 {
+	// Initialize buffer for DAC
 	for(uint8_t i = 0; i < DAC_DATL_COUNT; i++)
 	{
 		mute[i] = 0;
 	}
 
-	/* Initialize DMAMUX. */
+	/* Initialize the MUX of the DMA. */
 	DMAMUX_Configuration();
-	/* Initialize EDMA. */
+	/* Initialize EDMA for transfer a chunk of memory. */
 	EDMA_Configuration();
-	/* Initialize the HW trigger source. */
+	/* Initialize the HW trigger source from when to transfer the buffer to the DAC. */
 	// Lo de PDB se hace directamente en update sample rate porque esta relacionado.
 	PDB_Configuration();
 	/* Initialize DAC. */
