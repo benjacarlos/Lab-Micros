@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     queue.c
   @brief    Event queue functions.
-  @author   Grupo
+  @author   Grupo 5
  ******************************************************************************/
 
 /*******************************************************************************
@@ -15,7 +15,18 @@
  ******************************************************************************/
 
 event_queue_t eventQueue;
-event_t queue[QUEUE_SIZE];
+event_t ev_queue[QUEUE_SIZE];
+
+/*******************************************************************************
+ * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
+ ******************************************************************************/
+
+/**
+ * @brief Checks if the event queue is empty.
+ * @return bool indicating whether the event queue is empty or not. false: empty. true: empty.
+ */
+static bool queueIsEmpty(void);
+
 
 /*******************************************************************************
  *******************************************************************************
@@ -27,23 +38,26 @@ void initQueue(void)
 {
   int i;
 
-  event_t *tempaux = queue;
+  event_t *temp = ev_queue;
 
+  //Inicializar la cola de eventos para poder ser escrita y leida
   for (i = 0; i < QUEUE_SIZE; i++)
   {
-    tempaux++->ack = true; //debo hacer esto para asegurarme de que todas las celdas de la cola esten habilitadas para ser escritas
+    temp++->ack = true;
   }
 
-  eventQueue.queue = queue; //la cola de eventos
-  eventQueue.p2get = queue; //los punteros para leer y escribir estan en el mismo lugar (cola vacia)
-  eventQueue.p2write = queue;
+  eventQueue.queue = ev_queue; // cola de eventos
+
+  //los punteros para leer y escribir estan en el mismo lugar donde la cola esta vacia
+  eventQueue.p2get = ev_queue;
+  eventQueue.p2write = ev_queue;
 }
 
 bool emitEvent(EventType type)
 {
   event_t *temp = eventQueue.p2write;
 
-  if (eventQueue.p2write->ack == false) // si en la cola de eventos no hay mas lugar -> error
+  if (eventQueue.p2write->ack == false) // verifico si hay mas lugar en la cola
   {
     return false;
   }
@@ -58,25 +72,35 @@ bool emitEvent(EventType type)
   {
     (eventQueue.p2write)++; // sino avanza una posicion
   }
-  temp->p2NextEv = (struct EVENT *)eventQueue.p2write; // guardo en el evento anterior un puntero al evento actual para no tener que problems con el movimiento en get_event
+
+  temp->NextEv = (struct EVENT *)eventQueue.p2write; // guardo en el evento anterior un puntero al evento actual para no tener que problems con el movimiento en get_event
   temp->ack = false;                                   // marco el lugar como ocupado
+
   return true;
 }
 
 EventType getEvent()
 {
-  EventType retval;
-  if (queueIsEmpty())
+  EventType eventT;
+  if (queueIsEmpty()) // verifico si la cola esta vacia
   {
-    return NONE_EV; // si la cola esta vacia -> error
+    return NONE_EV;
   }
-  retval = eventQueue.p2get->type; // guardo el tipo y muevo el puntero
-  eventQueue.p2get->ack = true;
-  eventQueue.p2get = (event_t *)eventQueue.p2get->p2NextEv;
-  return retval;
+  eventT = eventQueue.p2get->type; // guardo el tipo de evento y muevo el puntero
+  eventQueue.p2get->ack = true; //pop the event from queue
+  eventQueue.p2get = (event_t *)eventQueue.p2get->NextEv;
+
+  return eventT;
 }
 
-bool queueIsEmpty(void)
+
+/*******************************************************************************
+ *******************************************************************************
+                        LOCAL FUNCTION DEFINITIONS
+ *******************************************************************************
+ ******************************************************************************/
+
+static bool queueIsEmpty(void)
 {
   return (eventQueue.p2get == eventQueue.p2write && eventQueue.p2get->ack == true); // si ambos punteros estan en la misma posicion y el evento al que apunta read ya ha sido leido entonces la cola esta vacia
 }

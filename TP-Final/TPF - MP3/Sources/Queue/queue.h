@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     queue.h
   @brief	queue header
-  @author   Grupo
+  @author   Grupo 5
  ******************************************************************************/
 #ifndef EVENTQUEUE_H
 #define EVENTQUEUE_H
@@ -91,11 +91,5 @@ bool emitEvent(EventType type);
  * @return EventType identifying the next event in the queue.
  */
 EventType getEvent(void);
-
-/**
- * @brief Checks if the event queue is empty.
- * @return bool indicating whether the event queue is empty or not. false: empty. true: empty.
- */
-bool queueIsEmpty(void);
 
 #endif
