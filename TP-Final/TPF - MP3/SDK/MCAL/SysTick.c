@@ -1,6 +1,6 @@
 /***************************************************************************//**
   @file     SysTick.h
-  @brief    SysTick driver
+  @brief    SysTick System Timer driver
   @author   Grupo 5
  ******************************************************************************/
 
@@ -23,8 +23,6 @@
 #define SYSTICK_MS2TICKS(x)			((x) / SYSTICK_TICK_MS)
 
 #define MAX_AMOUT_OF_ISR	5
-
-//#define CLK 100000000U //100MHz
 
 
 /*******************************************************************************
