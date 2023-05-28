@@ -15,7 +15,6 @@
 #include <stdint.h>
 
 #include "fsm_table.h"
-
 #include "ev_queue.h"
 
 /*******************************************************************************
@@ -58,6 +57,8 @@ void App_Init(void)
 {
 	// Acá van todas las inicializaciones
 
+	// Init event Queue
+	initQueue();
 	// Init state of MP3
 	presentState = FSM_GetInitState();
 }
