@@ -15,6 +15,5 @@
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
  ******************************************************************************/
 STATE *FSM_GetInitState(void);
-void FSM_StartInitState();
 
 #endif /* FSMTABLE_H_ */
