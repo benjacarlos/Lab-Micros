@@ -16,6 +16,7 @@
 
 #include "fsm_table.h"
 #include "ev_queue.h"
+#include "spectrometer.h"
 
 /*******************************************************************************
  *******************************************************************************
@@ -57,6 +58,8 @@ void App_Init(void)
 {
 	// Acá van todas las inicializaciones
 
+	// Init Timers
+	timerInit();
 	// Init event Queue
 	initQueue();
 	// Init state of MP3
