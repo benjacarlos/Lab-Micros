@@ -14,7 +14,7 @@
  ******************************************************************************/
 /*!brief sdmmc dma buffer */
 SDK_ALIGN(uint32_t s_sdmmcHostDmaBuffer[BOARD_SDMMC_HOST_DMA_DESCRIPTOR_BUFFER_SIZE],
-          SDMMCHOST_DMA_DESCRIPTOR_BUFFER_ALIGN_SIZE);
+		SDMMCHOST_DMA_DESCRIPTOR_BUFFER_ALIGN_SIZE);
 #if defined(SDIO_ENABLED) || defined(SD_ENABLED)
 static sd_detect_card_t s_cd;
 #endif

@@ -14,7 +14,7 @@
 #ifdef MMC_ENABLED
 #include "fsl_mmc.h"
 #endif
-#include "clock_config.h"
+//#include "clock_config.h"
 #include "fsl_sdmmc_host.h"
 #include "fsl_sdmmc_common.h"
 
