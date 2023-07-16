@@ -14,8 +14,8 @@
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
-#define DFT_SIZE 		1024 //Number of sample use to get good spectral resolution
-#define DFT_OUT_SIZE 	DFT_SIZE/2 //Number of sample the useful half of the frequency spectrum
+#define DFT_SIZE 		1024 			//Number of sample use to get good spectral resolution
+#define DFT_OUT_SIZE 	DFT_SIZE/2 		//Number of sample the useful half of the frequency spectrum
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE

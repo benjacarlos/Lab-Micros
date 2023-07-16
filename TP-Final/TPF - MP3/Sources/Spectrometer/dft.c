@@ -28,7 +28,7 @@
 // Structure for floating-point RFFT/RIFFT function (DFT floating point function)
 static arm_rfft_fast_instance_f32 dft_fast_instance;
 // To store DFT table output
-static float32_t output_dft[SAMPLE_LENGTH];
+static float32_t output_dft[SAMPLE_SIZE];
 
 /*******************************************************************************
  *******************************************************************************
