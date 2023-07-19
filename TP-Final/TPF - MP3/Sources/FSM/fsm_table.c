@@ -67,8 +67,8 @@ STATE init[]=
  	{PREV_EV, 				play, 					Play_PreviousSong},
 
  	{ENCODER_PRESS_EV,		file_selection, 		FileSelection_InitState},
- 	{ENCODER_RIGHT_EV,		play, 					Play_VolumeInc},
- 	{ENCODER_LEFT_EV,		play,					Play_VolumeDec},
+ 	{ENCODER_RIGHT_EV,		play, 					Play_IncVolume},
+ 	{ENCODER_LEFT_EV,		play,					Play_DecVolume},
 
  	{ENCODER_LKP_EV,		idle, 					Idle_InitState}, //sleep
 

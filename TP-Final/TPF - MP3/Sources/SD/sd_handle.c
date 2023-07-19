@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
-  @file     memory_manager.h
-  @brief    Memory System header
-  @author   Grupo 2 - Lab de Micros
+  @file     sd_handle.h
+  @brief    SD Memory System
+  @author   Grupo 5
  ******************************************************************************/
 
 /*******************************************************************************
@@ -19,6 +19,7 @@
 #include "diskio.h"
 #include "sdmmc_config.h"
 
+#include "MK64F12.h"
 #include "sd_handle.h"
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE

@@ -66,6 +66,8 @@ typedef struct _sd_card
     sd_max_current_t maxCurrent;                                 /*!< card current limit */
     sdmmc_operation_voltage_t operationVoltage;                  /*!< card operation voltage */
     sdmmc_osa_mutex_t lock;                                      /*!< card access lock */
+
+    bool initReady;												 /*!< card init status */
 } sd_card_t;
 
 /*************************************************************************************************
