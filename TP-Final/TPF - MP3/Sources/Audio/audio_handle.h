@@ -4,8 +4,6 @@
   @author   Grupo 5
  ******************************************************************************/
 
-//A REVISAR TODAVIDA
-
 
 #ifndef SOURCES_AUDIO_AUDIO_HANDLE_H_
 #define SOURCES_AUDIO_AUDIO_HANDLE_H_

@@ -4,27 +4,24 @@
   @author   Grupo 5
  ******************************************************************************/
 
-//A REVISAR TODAVIDA
 
 /******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
-
-
 
 #include <stdint.h>
 
 #include "audio_handle.h"
 #include "sd_file.h"
 #include "sd_handle.h"
-//#include "AudioPlayer.h"
+#include "AudioPlay.h"
 //#include "vumeterRefresh.h"
-//#include "decoder.h"
+#include "mp3decoder.h"
 #include "equalizer.h"
 
 #include "fsl_common.h"
 #include "ev_queue.h"
-//#include "esp_comunication.h"
+
 
 /******************************************************************************
  * DEFINES
@@ -50,6 +47,8 @@ static float effects_in[BUFFER_SIZE], effects_out[BUFFER_SIZE];
 
 static uint8_t vol = 15;
 static char vol2send = 15 + 40;
+
+static mp3decoder_tag_data_t* AudioTagData;
 /******************************************************************************
  *
  ******************************************************************************/
@@ -57,7 +56,7 @@ void Audio_init(void)
 {
 	if(!init)
 	{
-		Mm_OnConnection(); //Init the SD;
+		SDHandle_OnConnection(); //Init the SD;
 		SD_File_Scan(); // Build file system tree
 		currFile = SD_File_GetFirst();
 		maxFile = SD_File_GetFilesCount();
@@ -69,14 +68,13 @@ void Audio_deinit(void)
 {
 	AudioPlayer_Stop();
 
-
-	decoder_shutDown();
+	MP3DecoderShutDown();
 
 	SDHandle_OnDesconection();
 
 	SD_File_ResetFiles();
 
-	vumeterRefresh_clean_display();
+	xx vumeterRefresh_clean_display();
 
 	playing = false;
 	init = false;
@@ -96,51 +94,45 @@ void Audio_playNextFile(void)
 {
 	playingFile = SD_File_GetNext(playingFile);
 
-	decoder_MP3LoadFile(playingFile.path);
+	MP3LoadFile(playingFile.path);
 	/* Primeros dos buffer constante, no hay sonido */
 	memset(g_bufferRead, 0x08, sizeof(g_bufferRead));
 
 	/* Podria buscar el sample rate y mandarlo */
-	AudioPlayer_LoadSongInfo(g_bufferRead, 44100);
+	AudioPlay_LoadSongInfo(g_bufferRead, 44100);
 
 	Audio_updateBuffer();
 
-	char * name = Audio_getCurrentName();
-	esp_Send(1, name, strlen(name));
 }
 
 void Audio_playPrevFile(void)
 {
 	playingFile = SD_File_GetPrevious(playingFile);
 
-	decoder_MP3LoadFile(playingFile.path);
+	MP3LoadFile(playingFile.path);
 	/* Primeros dos buffer constante, no hay sonido */
 	memset(g_bufferRead, 0x08, sizeof(g_bufferRead));
 
 	/* Podria buscar el sample rate y mandarlo */
-	AudioPlayer_LoadSongInfo(g_bufferRead, 44100);
+	AudioPlay_LoadSongInfo(g_bufferRead, 44100);
 
 	Audio_updateBuffer();
 
-	char * name = Audio_getCurrentName();
-	esp_Send(1, name, strlen(name));
 }
 
 void Audio_selectFile(void)
 {
 	playingFile = currFile;
 
-	decoder_MP3LoadFile(playingFile.path);
+	MP3LoadFile(playingFile.path);
 	/* Primeros dos buffer constante, no hay sonido */
 	memset(g_bufferRead, 0x08, sizeof(g_bufferRead));
 
 	/* Podria buscar el sample rate y mandarlo */
-	AudioPlayer_LoadSongInfo(g_bufferRead, 44100);
+	AudioPlay_LoadSongInfo(g_bufferRead, 44100);
 
 	Audio_updateBuffer();
 
-	char * name = Audio_getCurrentName();
-	esp_Send(1, name, strlen(name));
 }
 
 char * Audio_getCurrentName(void)
@@ -155,14 +147,14 @@ void Audio_updateBuffer(void)
 	uint16_t sampleCount = 0;
 	uint8_t channelCount = 1;
 
-	AudioPlayer_UpdateBackBuffer(g_bufferRead);
+	AudioPlay_UpdateBackBuffer(g_bufferRead);
 
 	/* Clean buffers to rewrite */
 	memset(g_bufferRead, 0, sizeof(g_bufferRead));
 	memset(decoder_buffer, 0, sizeof(decoder_buffer));
 
 	/* Fetch the new frame */
-	decoder_return_t check = decoder_MP3DecodedFrame(decoder_buffer, 2*BUFFER_SIZE, &sampleCount);
+	mp3decoder_result_t check = MP3DecodedFrame(decoder_buffer, 2*BUFFER_SIZE, &sampleCount);
 	/* Get the amount of channels in the frame */
 	decoder_MP3GetLastFrameChannelCount(&channelCount);
 
@@ -174,7 +166,7 @@ void Audio_updateBuffer(void)
 	}
 
 	/* aca van los efectos */
-	equalizer_equalize(effects_in, effects_out);
+	xx equalizer_equalize(effects_in, effects_out);
 
 	/* Scale to 12 bits, to fit in the DAC */
 	coef = (vol*1.0)/MAX_VOLUME;
@@ -183,7 +175,7 @@ void Audio_updateBuffer(void)
 		g_bufferRead[index] = (effects_out[index]*coef+1)*2048;
 	}
 
-	if (check == DECODER_END_OF_FILE)
+	if (check == MP3DECODER_FILE_END)
 	{
 		/* Por las dudas completo la salida para tener 0V */
 		for (uint32_t index = (sampleCount / channelCount); index < BUFFER_SIZE ; index++)
@@ -195,12 +187,12 @@ void Audio_updateBuffer(void)
 
 	}
 
-	vumeterRefresh_fft(effects_out, 44100.0, 80, 10000);
+	xx vumeterRefresh_fft(effects_out, 44100.0, 80, 10000);
 }
 
 void Audio_showFFT(void)
 {
-	vumeterRefresh_draw_display();
+	xx vumeterRefresh_draw_display();
 }
 
 void Audio_updateAll(void)
@@ -211,33 +203,37 @@ void Audio_updateAll(void)
 
 void Audio_play(void)
 {
-	AudioPlayer_Play();
+	AudioPlay_Play();
 	playing = true;
 }
 
 void Audio_toggle(void)
 {
 	if(playing)
-		AudioPlayer_Pause();
+		AudioPlay_Pause();
 	else
-		AudioPlayer_Play();
+		AudioPlay_Play();
 
 	playing = !playing;
 }
 
 void Audio_stop(void)
 {
-	decoder_MP3LoadFile(currFile.path);
-	AudioPlayer_Pause();
+	MP3LoadFile(currFile.path);
+	AudioPlay_Pause();
 	playing = false;
 }
 
 char * Audio_getName(void)
 {
 	char * ret;
-	if(!decoder_getFileTitle(&ret))
+	if(!MP3GetTagData(AudioTagData)) //If no id3 read file name
 	{
 		ret = SD_File_GetFileName(playingFile);
+	}
+	else
+	{
+		ret = AudioTagData->title;
 	}
 	return ret;
 }
@@ -245,9 +241,13 @@ char * Audio_getName(void)
 char * Audio_getArtist(void)
 {
 	char * ret;
-	if(!decoder_getFileArtist(&ret))
+	if(!MP3GetTagData(AudioTagData))
 	{
-		ret = "-";
+		ret = '-';
+	}
+	else
+	{
+		ret = AudioTagData->artist;
 	}
 	return ret;
 }
@@ -255,21 +255,30 @@ char * Audio_getArtist(void)
 char * Audio_getAlbum(void)
 {
 	char * ret;
-	if(!decoder_getFileAlbum(&ret))
-	{
-		ret = "-";
-	}
+	if(!MP3GetTagData(AudioTagData))
+		{
+			ret = '-';
+		}
+		else
+		{
+			ret = AudioTagData->album;
+		}
+		return ret;
 	return ret;
 }
 
 char * Audio_getYear(void)
 {
 	char * ret;
-	if(!decoder_getFileYear(&ret))
-	{
-		ret = "-";
-	}
-	return ret;
+	if(!MP3GetTagData(AudioTagData))
+		{
+			ret = '-';
+		}
+		else
+		{
+			ret = AudioTagData->year;
+		}
+		return ret;
 }
 
 void Audio_IncVolume(void)
