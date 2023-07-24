@@ -21,21 +21,21 @@
 #define GAINS_LEVELS			8		// Equal to display heights
 
 // Default values
-#define DEFAULT_GAIN			NO_GAIN		// 0 dB
+#define DEFAULT_GAIN			GAIN_LV4
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
-
+// Revisar acorde a los filtros correspondientes
 typedef enum {
-	MINUS_10DB,		// -10 dB
-	MINUS_6DB,		// -8  dB
-	MINUS_4DB,		// -4  dB
-	NO_GAIN,		//  0  dB
-	PLUS_2DB,		//  2  dB
-	PLUS_4DB,		//  4  dB
-	PLUS_8DB,		//  8  dB
-	PLUS_10DB		//  10 dB
+	GAIN_LV1,
+	GAIN_LV2,
+	GAIN_LV3,
+	GAIN_LV4,
+	GAIN_LV5,
+	GAIN_LV6,
+	GAIN_LV7,
+	GAIN_LV8
 } gains_id_t;
 
 /*******************************************************************************
