@@ -17,7 +17,7 @@
 #include "AudioPlay.h"
 //#include "vumeterRefresh.h"
 #include "mp3decoder.h"
-#include "equalizer.h"
+//#include "equalizer.h"
 
 #include "fsl_common.h"
 #include "ev_queue.h"
@@ -156,7 +156,7 @@ void Audio_updateBuffer(void)
 	/* Fetch the new frame */
 	mp3decoder_result_t check = MP3DecodedFrame(decoder_buffer, 2*BUFFER_SIZE, &sampleCount);
 	/* Get the amount of channels in the frame */
-	decoder_MP3GetLastFrameChannelCount(&channelCount);
+	MP3DecoderGetLastFrameChannelCount(&channelCount);
 
 	/* Scale from int16 to float[-1;1] */
 	float coef = 1.0/32768.0;
