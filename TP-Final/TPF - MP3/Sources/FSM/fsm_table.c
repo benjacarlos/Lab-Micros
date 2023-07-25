@@ -10,8 +10,15 @@
 #include <stdio.h>
 #include "fsm.h"
 
+#include "FSM_States/idle.h"
 #include "FSM_States/play.h"
+#include "FSM_States/effects.h"
+#include "FSM_States/file_selection.h"
+#include "FSM_States/init.h"
 
+#include "audio_handle.h"
+
+#include "ev_queue.h"
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
@@ -130,7 +137,7 @@ STATE effects[] =
 	//{CHANGE_MODE_EV,		play,					Play_InitState},
 
 	{FILL_BUFFER_EV, 		effects,			    Audio_updateAll},
-	{NEXT_SONG_EV, 			effects,			    Effects_PlayNextSong},
+	{NEXT_SONG_EV, 			effects,			    FileSelection_PlayNextSong},
 
 	{FIN_TABLA, 			effects, 				do_nothing}
 };

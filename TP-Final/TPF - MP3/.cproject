@@ -35,6 +35,18 @@
 								<option id="gnu.c.compiler.option.misc.other.1652512857" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections" valueType="string"/>
 								<option id="gnu.c.compiler.option.optimization.flags.528773346" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" value="-fno-common" valueType="string"/>
 								<option id="com.crt.advproject.gcc.hdrlib.1875751500" name="Library headers" superClass="com.crt.advproject.gcc.hdrlib"/>
+								<option id="gnu.c.compiler.option.include.paths.185484008" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/fatfs/source}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/MCAL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Queue}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Audio}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Audio/Decode/helix}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Audio/Decode/id3}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Audio}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/FSM/FSM_States}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/CMSIS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/board}&quot;"/>
+								</option>
 								<inputType id="com.crt.advproject.compiler.input.1545382451" superClass="com.crt.advproject.compiler.input"/>
 							</tool>
 							<tool id="com.crt.advproject.gas.exe.debug.17878564" name="MCU Assembler" superClass="com.crt.advproject.gas.exe.debug">
@@ -42,6 +54,9 @@
 								<option id="com.crt.advproject.gas.arch.2032054477" name="Architecture" superClass="com.crt.advproject.gas.arch" value="com.crt.advproject.gas.target.cm3" valueType="enumerated"/>
 								<option id="gnu.both.asm.option.flags.crt.1194498864" name="Assembler flags" superClass="gnu.both.asm.option.flags.crt" value="-c -x assembler-with-cpp -D__REDLIB__ -DDEBUG -D__CODE_RED" valueType="string"/>
 								<option id="com.crt.advproject.gas.hdrlib.2138506384" name="Library headers" superClass="com.crt.advproject.gas.hdrlib"/>
+								<option id="gnu.both.asm.option.include.paths.1927450579" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/board}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.146784396" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="com.crt.advproject.assembler.input.421854341" name="Additional Assembly Source Files" superClass="com.crt.advproject.assembler.input"/>
 							</tool>
@@ -65,6 +80,10 @@
 									<listOptionValue builtIn="false" value="-print-memory-usage"/>
 								</option>
 								<option id="com.crt.advproject.link.gcc.hdrlib.872013090" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib"/>
+								<option id="com.crt.advproject.link.gcc.multicore.slave.418387487" name="Multicore configuration" superClass="com.crt.advproject.link.gcc.multicore.slave"/>
+								<option id="gnu.c.link.option.libs.1494648242" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="arm_cortexM4lf_math"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1368358503" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -148,9 +167,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="TP1-Interrupciones.com.crt.advproject.projecttype.exe.2011083712" name="Executable" projectType="com.crt.advproject.projecttype.exe"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="com.crt.config">
 		<projectStorage>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
@@ -199,4 +215,13 @@
 	<storageModule moduleId="com.crt.advproject"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.16284359;com.crt.advproject.config.exe.debug.16284359.;com.crt.advproject.gcc.exe.debug.678070685;com.crt.advproject.compiler.input.1545382451">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.crt.advproject.GCCManagedMakePerProjectProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.16284359;com.crt.advproject.config.exe.debug.16284359.;com.crt.advproject.gas.exe.debug.17878564;com.crt.advproject.assembler.input.421854341">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.crt.advproject.GCCManagedMakePerProjectProfile"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
 </cproject>
