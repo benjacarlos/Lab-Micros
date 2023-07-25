@@ -35,7 +35,7 @@ static float32_t outputFft[DFT_OUT_SIZE];
 // Spectrometer bins matrix
 static int spectrometerMatrix[NUMBER_OF_BANDS];
 // Spectrometer display matrix
-static colors_t auxMatrix[VUMETER_HEIGHT * NUMBER_OF_BANDS];
+static colors_t auxMatrix[SPECTROMETER_HEIGHT * NUMBER_OF_BANDS];
 
 /*******************************************************************************
  *******************************************************************************

@@ -147,35 +147,35 @@ void equalizer_init(void)
     /* Initialize the state and coefficient buffers for all Biquad cascade IIR sections*/
 	arm_biquad_cascade_df1_init_q31(&S1, IIR_STAGES,
 	          (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*0 + COEF_PER_FILTER*DEFAULT_GAIN],
-	          &biquadStateBandQ31[0][0], 1);
+	          &stateVars[0][0], 1);
 
 	arm_biquad_cascade_df1_init_q31(&S1, IIR_STAGES,
 	          (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*1 + COEF_PER_FILTER*DEFAULT_GAIN],
-	          &biquadStateBandQ31[1][0], 1);
+	          &stateVars[1][0], 1);
 
 	arm_biquad_cascade_df1_init_q31(&S1, IIR_STAGES,
 	          (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*2 + COEF_PER_FILTER*DEFAULT_GAIN],
-	          &biquadStateBandQ31[2][0], 1);
+	          &stateVars[2][0], 1);
 
 	arm_biquad_cascade_df1_init_q31(&S1, IIR_STAGES,
 	          (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*3 + COEF_PER_FILTER*DEFAULT_GAIN],
-	          &biquadStateBandQ31[3][0], 1);
+	          &stateVars[3][0], 1);
 
 	arm_biquad_cascade_df1_init_q31(&S1, IIR_STAGES,
 	          (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*4 + COEF_PER_FILTER*DEFAULT_GAIN],
-	          &biquadStateBandQ31[4][0], 1);
+	          &stateVars[4][0], 1);
 
 	arm_biquad_cascade_df1_init_q31(&S1, IIR_STAGES,
 	          (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*5 + COEF_PER_FILTER*DEFAULT_GAIN],
-	          &biquadStateBandQ31[5][0], 1);
+	          &stateVars[5][0], 1);
 
 	arm_biquad_cascade_df1_init_q31(&S1, IIR_STAGES,
 	          (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*6 + COEF_PER_FILTER*DEFAULT_GAIN],
-	          &biquadStateBandQ31[6][0], 1);
+	          &stateVars[6][0], 1);
 
 	arm_biquad_cascade_df1_init_q31(&S1, IIR_STAGES,
 	          (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*7 + COEF_PER_FILTER*DEFAULT_GAIN],
-	          &biquadStateBandQ31[7][0], 1);
+	          &stateVars[7][0], 1);
 }
 
 /**
