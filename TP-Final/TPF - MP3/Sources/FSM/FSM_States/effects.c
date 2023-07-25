@@ -7,7 +7,7 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
-#include "States/effects.h"
+#include "FSM_States/effects.h"
 
 #include "../../Queue/ev_queue.h"
 #include "LCD_GDM1602A.h"
