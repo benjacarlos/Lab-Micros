@@ -36,6 +36,7 @@
 								<option id="gnu.c.compiler.option.optimization.flags.528773346" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" value="-fno-common" valueType="string"/>
 								<option id="com.crt.advproject.gcc.hdrlib.1875751500" name="Library headers" superClass="com.crt.advproject.gcc.hdrlib"/>
 								<option id="gnu.c.compiler.option.include.paths.185484008" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/fsl}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/fatfs/source}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/MCAL}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Queue}&quot;"/>
