@@ -10,6 +10,7 @@
 #define _FSL_CLOCK_H_
 
 #include "fsl_common.h"
+#include "MK64F12.h"
 
 /*! @addtogroup clock */
 /*! @{ */
