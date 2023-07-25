@@ -62,7 +62,7 @@ bool emitEvent(EventType type)
     return false;
   }
 
-  eventQueue.p2write->type = type; // guardo el ID del evento
+  eventQueue.p2write->eType = type; // guardo el ID del evento
 
   if ((eventQueue.p2write) == ((eventQueue.queue) + (QUEUE_SIZE - 1))) // movimiento del puntero de write
   {
@@ -86,7 +86,7 @@ EventType getEvent()
   {
     return NONE_EV;
   }
-  eventT = eventQueue.p2get->type; // guardo el tipo de evento y muevo el puntero
+  eventT = eventQueue.p2get->eType; // guardo el tipo de evento y muevo el puntero
   eventQueue.p2get->ack = true; //pop the event from queue
   eventQueue.p2get = (event_t *)eventQueue.p2get->NextEv;
 
