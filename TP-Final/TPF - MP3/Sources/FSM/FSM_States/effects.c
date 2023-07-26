@@ -21,8 +21,8 @@
 #define TITLE_TIME 2000
 #define OPTIONS_COUNT 6
 #define OPTION_VALUES_ARRAY_SIZE	NUMBER_OF_FILTERS
-#define MAX_BAND_GAIN	GAINS_LEVELS
-#define	MIN_BAND_GAIN	-GAINS_LEVELS
+#define MAX_BAND_GAIN	MAX_GAIN
+#define	MIN_BAND_GAIN	-MAX_GAIN
 
 
 /*******************************************************************************
