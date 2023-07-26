@@ -32,7 +32,9 @@
 
 void equalizer_init(void);
 void equalizer_data(float32_t* input, float32_t * output);
-void equalizer_set_band_gain (uint8_t band, int32_t gain);
-uint32_t equalizer_get_band_gain (uint8_t band);
+
+void equalizer_set_band_gain (int32_t band, int32_t gain);
+
+int32_t equalizer_get_band_gain (int32_t band);
 
 #endif /* EQUALIZER_H_ */

@@ -237,7 +237,7 @@ static const q31_t coeffTable[NUMBER_OF_FILTERS * IIR_COEFFS * GAINS_LEVELS] = {
 };
 
 // Gains table
-static uint32_t bandsGain[NUMBER_OF_FILTERS]= {DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, };
+static int32_t bandsGain[NUMBER_OF_FILTERS]= {DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, DEFAULT_GAIN, };
 
 // Filters state variables used by ARM for filtering with DSP module.
 static q63_t biquadStateBandQ63 [2][4 * 2];
@@ -346,9 +346,9 @@ void equalizer_set_band_gain (int32_t band, int32_t gain)
 	    if(band < 3 )
 	    {
 	    	// Initialize filter with new gain
-	         arm_biquad_cas_df1_32x64_init_q31(hpFilter[band - 1], IIR_STAGES,
-	            (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*(band-1) + COEF_PER_FILTER*(gain + MAX_GAIN)],
-	            &biquadStateBandQ63[band - 1][0], 2);
+	    	arm_biquad_cas_df1_32x64_init_q31(hpFilter[band - 1], IIR_STAGES,
+	    			(q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*(band-1) + COEF_PER_FILTER*(gain + MAX_GAIN)],
+					&biquadStateBandQ63[band - 1][0], 2);
 	    }
 	    else
 	    {
@@ -366,13 +366,7 @@ void equalizer_set_band_gain (int32_t band, int32_t gain)
  * @param band selected band in which to change gain (between 1 and NUMBER_OF_FILTERS)
  * @return gain gain in dB of filter use
  */
-uint32_t equalizer_get_band_gain (int32_t band)
+int32_t equalizer_get_band_gain (int32_t band)
 {
-	uint32_t gain;
-	// If band is not valid value then we get gain of first filter
-	if (band > NUMBER_OF_FILTERS)
-		gain = bandsGain[0];
-	else
-		gain = bandsGain[band-1];
-	return gain;
+	return bandsGain[band-1];
 }
