@@ -45,11 +45,13 @@
 								<option id="gnu.c.compiler.option.optimization.flags.528773346" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fno-common" valueType="string"/>
 								<option id="com.crt.advproject.gcc.hdrlib.1875751500" name="Library headers" superClass="com.crt.advproject.gcc.hdrlib" useByScannerDiscovery="false"/>
 								<option id="gnu.c.compiler.option.include.paths.185484008" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/WS2812}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Spectrometer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Equalizer}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/FSM}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Audio/Decode}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/SD/sdmmc/sdhc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/SD}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/SD}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/fatfs/template/sd}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/fatfs/source/fsl_sd_disk}&quot;"/>
@@ -112,6 +114,9 @@
 								</option>
 								<option defaultValue="com.crt.advproject.heapAndStack.mcuXpressoStyle" id="com.crt.advproject.link.memory.heapAndStack.style.373047986" name="Heap and Stack placement" superClass="com.crt.advproject.link.memory.heapAndStack.style" useByScannerDiscovery="false" value="com.crt.advproject.heapAndStack.mcuXpressoStyle" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.fpu.1112962886" name="Floating point" superClass="com.crt.advproject.link.fpu" useByScannerDiscovery="false" value="com.crt.advproject.link.fpu.fpv4.hard" valueType="enumerated"/>
+								<option id="gnu.c.link.option.paths.522781995" superClass="gnu.c.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/libs}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1368358503" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>

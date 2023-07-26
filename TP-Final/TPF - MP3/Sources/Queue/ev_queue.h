@@ -92,4 +92,9 @@ bool emitEvent(EventType type);
  */
 EventType getEvent(void);
 
+/**
+ * @brief Checks if the event queue is empty.
+ * @return bool indicating whether the event queue is empty or not. false: empty. true: empty.
+ */
+bool queueIsEmpty(void);
 #endif

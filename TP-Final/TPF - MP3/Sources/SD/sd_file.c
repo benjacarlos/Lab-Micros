@@ -29,7 +29,7 @@ void SD_File_Scan(void)
 {
 	char path_temp[FILE_ARRAY_SIZE] = {0U};
 
-	FileSystem_ScanHelper(path_temp);
+	SD_File_ScanHelper(path_temp);
 }
 
 bool SD_File_isFileMp3(char *path)
@@ -243,7 +243,7 @@ static void SD_File_ScanHelper(char * path)
 			int i = strlen(path);
 			char * fn = fileInformation.fname;
 			*(path+i) = '/'; strcpy(path+i+1, fn);
-			FileSystem_ScanHelper(path);
+			SD_File_ScanHelper(path);
 			*(path+i) = 0;
 		}
 		else
@@ -252,8 +252,8 @@ static void SD_File_ScanHelper(char * path)
 			char * fn = fileInformation.fname;
 			*(path+i) = '/'; strcpy(path+i+1, fn);
 
-			if (FileSystem_isMp3File(path))
-				FileSystem_AddFile(path);
+			if (SD_File_isFileMp3(path))
+				SD_File_Add(path);
 
 			*(path+i) = 0;
 		}

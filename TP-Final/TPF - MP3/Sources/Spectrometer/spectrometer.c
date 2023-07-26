@@ -106,9 +106,9 @@ void spectrometer_dft(float32_t * inputSignal, float32_t sampleRate, int lowerFr
 	average = (average+1)%AVERAGE;
 	if(average == 0)
 	{
-		vumeterRefresh_write_to_matrix(vumeterMatrix);
+		spectrometer_write_to_matrix(spectrometerMatrix);
 		for(int j = 0; j <  NUMBER_OF_BANDS; j++)
-			 vumeterMatrix[j] = 0;
+			spectrometerMatrix[j] = 0;
 	}
 }
 
@@ -146,7 +146,7 @@ void spectrometer_clean_display()
 		{
 			auxMatrix[j*8 + i] = CLEAN;
 		}
-		vumeterMatrix[i] = 0;
+		spectrometerMatrix[i] = 0;
 	}
-	vumeterRefresh_draw_display();
+	spectrometer_draw_display();
 }

@@ -61,16 +61,16 @@ void getEvents(void)
 		emitEvent(START_EV);
 	}
 
-	if(Mm_SDConnection())
+	if(SDHandle_SDConnection())
 	{
 		emitEvent(SD_IN_EV);
 	}
-	if(Mm_SDDesconnection())
+	if(SDHandle_SDDesconnection())
 	{
 		emitEvent(SD_OUT_EV);
 	}
 
-	if (AudioPlayer_IsBackBufferFree())
+	if (AudioPlay_IsBackBufferFree())
 	{
 		emitEvent(FILL_BUFFER_EV);
 	}
@@ -123,27 +123,27 @@ void App_Init(void)
 	SysTick_Init();
 	Timer_Init();
 
-	Mm_Init();	  //Memory manager
+	SDHandle_Init();	  //Memory manager
 	LCD_Init();   //LCD Driver
 	md_Init();	  //NeoPixel matrix
 
-	decoder_MP3DecoderInit(); // Init decoder
+	MP3DecoderInit(); // Init decoder
 
-	AudioPlayer_Init();	//Audio Player
+	AudioPlay_Init();	//Audio Player
 	vumeterRefresh_init(); // FFT
 	equalizer_init();
 
-	TimeService_Init(Idle_UpdateTime);
+	TimeService_Init(Idle_Update);
 
 	Encoder_Init();
 	buttonsInit();
-	buttonConfiguration(PIN_SW_A, LKP, 20); //20*50=1seg
-	buttonConfiguration(PIN_SW_B, LKP, 20);
-	buttonConfiguration(PIN_SW_C, LKP, 20);
-	buttonConfiguration(PIN_SW_D, LKP, 20);
-	buttonConfiguration(ENCODER_SW, LKP, 20);
+//	buttonConfiguration(PIN_SW_A, LKP, 20); //20*50=1seg
+//	buttonConfiguration(PIN_SW_B, LKP, 20);
+//	buttonConfiguration(PIN_SW_C, LKP, 20);
+//	buttonConfiguration(PIN_SW_D, LKP, 20);
+//	buttonConfiguration(ENCODER_SW, LKP, 20);
 
-	esp_Init();
+//	esp_Init();
 	initQueue();
 	currentState = FSM_GetInitState();
 

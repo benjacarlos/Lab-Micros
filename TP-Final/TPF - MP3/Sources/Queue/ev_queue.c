@@ -21,11 +21,6 @@ event_t ev_queue[QUEUE_SIZE];
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
  ******************************************************************************/
 
-/**
- * @brief Checks if the event queue is empty.
- * @return bool indicating whether the event queue is empty or not. false: empty. true: empty.
- */
-static bool queueIsEmpty(void);
 
 
 /*******************************************************************************
@@ -93,14 +88,7 @@ EventType getEvent()
   return eventT;
 }
 
-
-/*******************************************************************************
- *******************************************************************************
-                        LOCAL FUNCTION DEFINITIONS
- *******************************************************************************
- ******************************************************************************/
-
-static bool queueIsEmpty(void)
+bool queueIsEmpty(void)
 {
   return (eventQueue.p2get == eventQueue.p2write && eventQueue.p2get->ack == true); // si ambos punteros estan en la misma posicion y el evento al que apunta read ya ha sido leido entonces la cola esta vacia
 }

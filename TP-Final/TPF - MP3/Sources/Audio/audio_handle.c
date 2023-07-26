@@ -66,7 +66,7 @@ void Audio_init(void)
 
 void Audio_deinit(void)
 {
-	AudioPlayer_Stop();
+	AudioPlay_Stop();
 
 	MP3DecoderShutDown();
 
@@ -285,14 +285,14 @@ void Audio_IncVolume(void)
 {
 	vol += (vol >= MAX_VOLUME)? 0 : 1;
 	vol2send = vol+40;
-	esp_Send(2, &vol2send, 1);
+//	esp_Send(2, &vol2send, 1);
 }
 
 void Audio_DecVolume(void)
 {
 	vol -= (vol > 0) ? 1 : 0;
 	vol2send = vol+40;
-	esp_Send(2, &vol2send, 1);
+//	esp_Send(2, &vol2send, 1);
 }
 
 char Audio_getVolume(void)

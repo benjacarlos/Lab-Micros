@@ -143,7 +143,7 @@ bool MP3LoadFile(const char* filename)
   if (openFile(filename))
   {
     dec.fileOpened = true;
-    dec.fileSize = currentFileSize();
+    dec.fileSize = FileSize();
     dec.bytesRem = dec.fileSize;
 
     // read ID3 tag and update pointers
@@ -335,7 +335,7 @@ size_t FileSize()
 
 
 
-void decoder_readID3Tag(void)
+void readID3Tag(void)
 {
     // checks if the file has ID3 Tag inside with the ID3 library
     if (has_ID3_tag(dec.mp3File))
@@ -364,7 +364,7 @@ void decoder_readID3Tag(void)
         unsigned int tagSize = get_ID3_size(dec.mp3File);
 
         // we moves the position according to the tagSize
-        fileSeek(tagSize);
+        f_lseek(dec.mp3File, tagSize);
         dec.bytesRem -= tagSize;
 
     }
@@ -389,4 +389,28 @@ void ToBuffer()
         dec.bottom += bytesRead;
     }
 
+}
+
+size_t readFile(void* buf, size_t count)
+{
+    size_t read=0, test, i, j = count%512;
+    char * testBuff = buf;
+    FRESULT fr;
+    for(i = 0; i < count/512;i++)
+    {
+    	fr = f_read(dec.mp3File, testBuff, 512, &test);
+    	if (fr != FR_OK)
+    	     break;
+    	testBuff += 512;
+    	read += test;
+    }
+
+    if(fr == FR_OK && j != 0)
+    {
+    	fr = f_read(dec.mp3File, testBuff, j, &test);
+    	if (fr == FR_OK)
+    		read += test;
+    }
+
+    return fr == FR_OK?read:0;
 }

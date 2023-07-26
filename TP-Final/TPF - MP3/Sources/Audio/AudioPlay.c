@@ -112,7 +112,7 @@ void AudioPlay_LoadSongInfo(uint16_t * firstSongFrame, uint16_t sampleRate)
 	backBufferFree = true;
 	g_index = 0U;
 
-	AudioPlayer_UpdateSampleRate(sampleRate);
+	AudioPlay_UpdateSampleRate(sampleRate);
 }
 
 
