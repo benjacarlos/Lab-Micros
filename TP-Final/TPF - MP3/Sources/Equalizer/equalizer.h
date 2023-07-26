@@ -18,26 +18,13 @@
  ******************************************************************************/
 
 // Numbers of frequency equalizer filters and levels of gains
-#define NUMBER_OF_FILTERS     	8		// Equal to display width
-#define GAINS_LEVELS			8		// Equal to display heights
+#define NUMBER_OF_FILTERS     	8								// Equal to display width
+#define GAINS_LEVELS			(MAX_GAIN + MIN_GAIN + 1)		// Equal to display heights
+#define MAX_GAIN 				10								// Máx value of positive gains (10 dB)
+#define MIN_GAIN 				10								// Min value of negative gains (- 10 dB)
 
 // Default values
-#define DEFAULT_GAIN			GAIN_LV4
-
-/*******************************************************************************
- * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
- ******************************************************************************/
-// Revisar acorde a los filtros correspondientes
-typedef enum {
-	GAIN_LV1,
-	GAIN_LV2,
-	GAIN_LV3,
-	GAIN_LV4,
-	GAIN_LV5,
-	GAIN_LV6,
-	GAIN_LV7,
-	GAIN_LV8
-} gains_id_t;
+#define DEFAULT_GAIN			0 		// 0 dB
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES WITH GLOBAL SCOPE

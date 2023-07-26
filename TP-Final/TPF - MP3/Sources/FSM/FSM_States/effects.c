@@ -10,7 +10,7 @@
 #include "effects.h"
 
 #include "../../Queue/ev_queue.h"
-//#include "LCD_GDM1602A.h"
+#include "LCD_GDM1602A.h"
 #include "Timer.h"
 #include "equalizer.h"
 #include "spectrometer.h"
