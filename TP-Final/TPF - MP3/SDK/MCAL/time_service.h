@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     time_service.h
   @brief    Time Service Header
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 
 #ifndef HAL_TIME_SERVICE_H_
