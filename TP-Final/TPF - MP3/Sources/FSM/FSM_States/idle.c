@@ -10,11 +10,12 @@
 #include "idle.h"
 
 #include "../../Queue/ev_queue.h"
-#include "timer.h"
+#include "power_mode_switch.h"
+#include "Timer.h"
 #include "time_service.h"
-//#include "memory_manager.h"
-//#include "SysTick.h"
-//#include "audio_manager.h"
+#include "audio_handle.h"
+#include "sd_handle.h"
+#include "SysTick.h"
 //#include "LCD_GDM1602A.h"
 
 /*********************************************************
@@ -29,6 +30,7 @@ typedef enum
 /*******************************************************************************
  * PRIVATE VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
+int timeCallbackId = -1;
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
@@ -62,18 +64,25 @@ void Idle_InitState(void)
 	Audio_deinit();
 	LCD_clearDisplay();
 
-	timerStart(IDLE_T, 1000, TIM_MODE_SINGLESHOT, setSleepMode);
+	timeCallbackId = Timer_AddCallback(setSleepMode, 1000, true); //Delay until related stuff is finished
+
 }
 
 void Idle_StartUp(void)
 {
-	if (!Mm_IsSDPresent())
+	if (!SDHandle_IsSDPresent())
 		return;
 	setOperationMode(OPERATION_MODE);
 
-	//TimeService_Disable();
+	if(timeCallbackId != -1)
+	{
+		Timer_Delete(timeCallbackId);
+		timeCallbackId = -1;
+	}
+	TimeService_Disable();
 
-	timerStart(IDLE_T, 3000, TIM_MODE_SINGLESHOT, emitStartEv); //Delay until clock stabilizes
+
+	timeCallbackId = Timer_AddCallback(emitStartEv, 3000, true); //Delay until clock stabilizes
 
 }
 
@@ -103,14 +112,14 @@ static void setSleepMode(void)
 	setOperationMode(SLEEP_MODE);
 
 	LCD_UpdateClock();
-	//TimeService_Enable();
-	//SysTick_UpdateClk();
+	TimeService_Enable();
+	SysTick_UpdateClk();
 }
 
 static void emitStartEv(void)
 {
 	LCD_UpdateClock();
-	//SysTick_UpdateClk();
+	SysTick_UpdateClk();
 	emitEvent(START_EV);
 }
 

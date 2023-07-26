@@ -1,268 +1,167 @@
-/*
- * prueba.c
- *
- *      Author: Agus
- */
+/*******************************************************************************
+  @file     gpio.c
+  @brief    Gpio Driver
+  @author   Grupo 2 - Lab de Micros
+ ******************************************************************************/
 
-#include "MK64F12.h"
-#include "MK64F12_features.h"
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
 #include "gpio.h"
+#include "MK64F12.h"
+#include "core_cm4.h"
 #include "hardware.h"
 
+#include "board.h"
 
-#ifndef GPIO_MUX
-#define GPIO_MUX     001
-#endif
+/*******************************************************************************
+ * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
+ ******************************************************************************/
+#define PORT2_SIM_SCGC5_MASK(p) (SIM_SCGC5_PORTA_MASK << (((p) >> 5) & 0x07))
 
-#ifndef PORTS_N
-#define PORTS_N 5
-#define PINS_N 32
-#endif
+/*******************************************************************************
+ * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
+ ******************************************************************************/
+void interruptHandler(uint8_t port);
 
-_Bool validPin(pin_t pin);
+/*******************************************************************************
+ * PRIVATE VARIABLES WITH FILE LEVEL SCOPE
+ ******************************************************************************/
+static PORT_Type *ports[] = PORT_BASE_PTRS;
+static GPIO_Type *gpioPorts[] = GPIO_BASE_PTRS;
+static void (*callbacks[5][32])(void);
 
-void setPCRmux(PORT_Type * p2port, uint8_t numPin, uint8_t mux);
+/*******************************************************************************
+ *                        GLOBAL FUNCTION DEFINITIONS
+ ******************************************************************************/
 
-void setPCRpullEnable(PORT_Type * portPointer, uint8_t pinNum);
-
-void setPCRpullUp(PORT_Type * portPointer, uint8_t numPin);
-
-void setPCRpullDown(PORT_Type * portPointer, uint8_t numPin);
-
-void setGPIOddr(GPIO_Type * p2port, uint8_t numPin, uint32_t mode);
-
-void setPCRirqc(PORT_Type * p2port, uint8_t numPin, uint8_t irqMode);
-
-void setGPIOdataOut(GPIO_Type * gpioPortPointer, uint8_t numPin, _Bool value);
-
-gpio_funs irq_data;
-
-pinIrqFun_t irqFuns[PORTS_N][PINS_N];
-
-
-
-void gpioMode (pin_t pin, uint8_t mode)
+void gpioMode(pin_t pin, uint8_t mode)
 {
+
+	SIM->SCGC5 |= PORT2_SIM_SCGC5_MASK(pin);
+
 	uint8_t port = PIN2PORT(pin);
-	uint8_t pinNum = PIN2NUM(pin);
+	uint8_t num = PIN2NUM(pin);
 
-	PORT_Type * portPointer[] = PORT_BASE_PTRS;
-	GPIO_Type * gpioPortPointer[] = GPIO_BASE_PTRS;
+	ports[port]->PCR[num] = 0x0;
+	ports[port]->PCR[num] |= PORT_PCR_MUX(1); //Set MUX to GPIO
 
-	if (validPin(pin))
+	if (mode == OUTPUT) // Output
 	{
-			setPCRmux(portPointer[port], pinNum, GPIO_MUX);
-
-			if(mode == INPUT_PULLUP || mode == INPUT_PULLDOWN)
+		ports[port]->PCR[num] &= ~PORT_PCR_PE(0);
+		gpioPorts[port]->PDDR |= (1 << num);
+	}
+	else // Input
+	{
+		if (mode == INPUT)
+		{
+			ports[port]->PCR[num] &= ~PORT_PCR_PE(0);
+		}
+		else
+		{
+			ports[port]->PCR[num] |= PORT_PCR_PE(1);
+			if (mode == INPUT_PULLUP)
 			{
-				setPCRpullEnable(portPointer[port], pinNum);
-				if (mode == INPUT_PULLUP)
-				{
-					setPCRpullUp(portPointer[port], pinNum);
-				}
-				else
-				{
-					setPCRpullDown(portPointer[port], pinNum);
-				}
-				mode = INPUT;
-
+				ports[port]->PCR[num] |= PORT_PCR_PS(1);
 			}
-			setGPIOddr(gpioPortPointer[port], pinNum, (uint32_t) mode);
+			else
+			{
+				ports[port]->PCR[num] &= ~PORT_PCR_PS(0);
+			}
 		}
-}
-
-
-
-void gpioToggle (pin_t pin)
-{
-	uint8_t port = PIN2PORT(pin);
-	uint8_t pinNum = PIN2NUM(pin);
-
-	GPIO_Type * gpioPortPointer[] = GPIO_BASE_PTRS;
-
-
-	uint32_t writemask = ((uint32_t)(1<<pinNum));
-	uint32_t deletemask = ~writemask;
-
-	gpioPortPointer[port]->PTOR = gpioPortPointer[port]->PTOR & deletemask;
-	gpioPortPointer[port]->PTOR = gpioPortPointer[port]->PTOR | writemask;
-}
-
-
-_Bool gpioRead (pin_t pin)
-{
-	uint8_t port = PIN2PORT(pin);
-	uint8_t pinNum = PIN2NUM(pin);
-
-	GPIO_Type * gpioPortPointer[] = GPIO_BASE_PTRS;
-
-	uint32_t readmask = (uint32_t)(1 << pinNum);
-	return ((gpioPortPointer[port]->PDIR) & readmask);
-}
-
-
-void gpioWrite (pin_t pin, _Bool value)
-{
-	uint8_t port = PIN2PORT(pin);
-	uint8_t numPin = PIN2NUM(pin);
-	GPIO_Type * gpioPortPointer[] = GPIO_BASE_PTRS;
-	uint32_t maskPin = (uint32_t)(1 << numPin);
-
-
-	if((gpioPortPointer[port]->PDDR) & maskPin)
-	{
-		setGPIOdataOut(gpioPortPointer[port], numPin, value);
+		gpioPorts[port]->PDDR &= ~(1 << num);
 	}
 }
 
-
-void setGPIOdataOut(GPIO_Type * gpioPortPointer, uint8_t numPin, _Bool value)
-{
-	uint32_t maskDataOut = (uint32_t)(value << numPin);
-	uint32_t mask2delete = ~((uint32_t)(1 << numPin));
-	gpioPortPointer->PDOR = (gpioPortPointer->PDOR & mask2delete);
-	gpioPortPointer->PDOR = (gpioPortPointer->PDOR | maskDataOut);
-}
-
-_Bool validPin(pin_t pin)
-{
-	_Bool valid = false;
-	if((pin >= PORTNUM2PIN(PA,0)) && (pin <= PORTNUM2PIN(PE,31)))
-	{
-		valid = true;
-	}
-
-	return valid;
-}
-
-void setPCRmux(PORT_Type * p2port, uint8_t numPin, uint8_t mux)
-{
-	uint32_t currentPCR = (p2port->PCR)[numPin];
-	currentPCR = (currentPCR) & (~PORT_PCR_MUX_MASK);
-	currentPCR = currentPCR | PORT_PCR_MUX(mux);
-	(p2port->PCR)[numPin] = currentPCR;
-
-}
-
-void setPassiveFilter(pin_t pin)
+void gpioToggle(pin_t pin)
 {
 	uint8_t port = PIN2PORT(pin);
-	uint8_t numPin = PIN2NUM(pin);
-
-	PORT_Type * portPointer[] = PORT_BASE_PTRS;
-	uint32_t maskPFE = (HIGH << PORT_PCR_PFE_SHIFT);
-	(portPointer[port]->PCR)[numPin] = ((portPointer[port]->PCR)[numPin] | maskPFE);
+	uint8_t num = PIN2NUM(pin);
+	gpioPorts[port]->PTOR |= (1 << num);
 }
 
-
-void setPCRpullEnable(PORT_Type * portPointer, uint8_t pinNum)
+bool gpioRead(pin_t pin)
 {
-	uint32_t maskPE = (HIGH << PORT_PCR_PE_SHIFT);
-	(portPointer->PCR)[pinNum] = ((portPointer->PCR)[pinNum] | maskPE);
+	uint8_t port = PIN2PORT(pin);
+	uint8_t num = PIN2NUM(pin);
+	bool ret = (bool)(gpioPorts[port]->PDIR & (1 << num));
+	return ret;
 }
 
-
-void setPCRpullUp(PORT_Type * portPointer, uint8_t numPin)
+void gpioWrite(pin_t pin, bool value)
 {
-	uint32_t maskPE = (HIGH << PORT_PCR_PS_SHIFT);
-	(portPointer->PCR)[numPin] = ((portPointer->PCR)[numPin] | maskPE);
+	uint8_t port = PIN2PORT(pin);
+	uint8_t num = PIN2NUM(pin);
+	gpioPorts[port]->PDOR = (gpioPorts[port]->PDOR & ~(1 << num)) | (value << num);
 }
 
-void setPCRpullDown(PORT_Type * portPointer, uint8_t numPin)
+bool gpioIRQ(pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
 {
-	uint32_t maskPE = (HIGH << PORT_PCR_PE_SHIFT);
-	(portPointer->PCR)[numPin] = ((portPointer->PCR)[numPin] & (~maskPE));
+	uint8_t port = PIN2PORT(pin);
+	uint8_t num = PIN2NUM(pin);
+
+	ports[port]->PCR[num] |= PORT_PCR_IRQC(irqMode);
+	NVIC_EnableIRQ(PORTA_IRQn + port);
+
+	callbacks[port][num] = irqFun;
+	bool result = NVIC_GetEnableIRQ(PORTA_IRQn + port); // not implemented yet
+	return result;
 }
 
-void setGPIOddr(GPIO_Type * p2port, uint8_t pinNum, uint32_t mode)
+bool PORT_ClearInterruptFlag(pin_t pin)
 {
-	uint32_t maskDDR = (mode << pinNum);
-	p2port->PDDR = ((p2port->PDDR) | maskDDR);
+	uint8_t port = PIN2PORT(pin);
+	uint8_t num = PIN2NUM(pin);
+	ports[port]->PCR[num] |= PORT_PCR_ISF_MASK;
+	return true;
 }
 
-bool gpioIRQ (pin_t pin, uint8_t irqMode, pinIrqFun_t irqFun)
+/*******************************************************************************
+ *                       LOCAL FUNCTION DEFINITIONS
+ ******************************************************************************/
+
+void interruptHandler(uint8_t port)
 {
-	_Bool out = false;
+	gpioToggle(TP);
 
-	uint8_t port;
-	uint8_t pinNum;
-
-	IRQn_Type p2portsIRQ[] = PORT_IRQS;
-	PORT_Type * portPointer[] = PORT_BASE_PTRS;
-
-	if(validPin(pin))
-	{
-
-		port = PIN2PORT(pin);
-		pinNum = PIN2NUM(pin);
-
-		if (irqMode != GPIO_IRQ_CANT_MODES)
-		{
-			setPCRirqc(portPointer[port], pinNum, irqMode);
-			irqFuns[port][pinNum] = irqFun;
-
-			out = true;
-		}
-
-		NVIC_EnableIRQ(p2portsIRQ[port]);
-	}
-
-	return out;
-
-}
-
-void setPCRirqc(PORT_Type * p2port, uint8_t pinNum, uint8_t irqMode)
-{
-	uint32_t currentPCR = (p2port->PCR)[pinNum];
-	currentPCR = currentPCR & (~PORT_PCR_IRQC_MASK);
-	currentPCR = currentPCR | PORT_PCR_IRQC(irqMode);
-	(p2port->PCR)[pinNum] = currentPCR;
-}
-
-
-void IRQHandler(uint8_t port)
-{
-	_Bool foundirq = false;
 	int i;
-	uint32_t currentPCR;
-	PORT_Type * portPointer[] = PORT_BASE_PTRS;
-
-	for(i = 0; (i < PINS_N) && (!foundirq); i++)
+	uint32_t isfr = ports[port]->ISFR;
+	for (i = 0; i < 32; i++)
 	{
-		if( ((portPointer[port])->PCR[i]) & PORT_PCR_ISF_MASK )
+		if (callbacks[port][i] && (isfr & 0x1))
 		{
-			foundirq = true;
-			irqFuns[port][i]();
-
-			currentPCR = portPointer[port]->PCR[i];
-			currentPCR = currentPCR & (~PORT_PCR_ISF_MASK);
-			portPointer[port]->PCR[i] = currentPCR | PORT_PCR_ISF(HIGH);
+			ports[port]->PCR[i] |= PORT_PCR_ISF_MASK;
+			callbacks[port][i]();
+			break;
 		}
+		isfr >>= 1;
 	}
-}
 
+	gpioToggle(TP);
+
+}
 
 __ISR__ PORTA_IRQHandler(void)
 {
-	IRQHandler(PA);
+	interruptHandler(0);
 }
 
 __ISR__ PORTB_IRQHandler(void)
 {
-	IRQHandler(PB);
+	interruptHandler(1);
 }
 
 __ISR__ PORTC_IRQHandler(void)
 {
-	IRQHandler(PC);
+	interruptHandler(2);
 }
 
 __ISR__ PORTD_IRQHandler(void)
 {
-	IRQHandler(PD);
+	interruptHandler(3);
 }
 
 __ISR__ PORTE_IRQHandler(void)
 {
-	IRQHandler(PE);
+	interruptHandler(4);
 }

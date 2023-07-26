@@ -13,8 +13,9 @@
 #include <string.h>
 
 #include "../../Queue/ev_queue.h"
-#include "timer.h"
-
+#include "Timer.h"
+#include "audio_handle.h"
+#include "sd_handle.h"
 
 //#include LCD
 /*******************************************************************************
@@ -30,6 +31,7 @@
  ******************************************************************************/
 
 static bool showingVol = false;
+static int volumeTimerID = -1;
 
 /*******************************************************************************
  * 	LOCAL FUNCTION DEFINITIONS
@@ -129,9 +131,9 @@ static void printFileInfo(void)
 
 	// Print name
 	uint16_t len = strlen(name);
-	len += (DISPLAY_COLUMNS-(len%DISPLAY_COLUMNS));
+//	len += (DISPLAY_COLUMNS-(len%DISPLAY_COLUMNS));
 	memcpy(path, name, strlen(name));
-	LCD_writeShiftingStr(path,  len, 0, MIDIUM);
+//	LCD_writeShiftingStr(path,  len, 0, MIDIUM);
 
 	// Print extra data
 	len = 0;
@@ -140,8 +142,8 @@ static void printFileInfo(void)
 		memcpy(info + len, gather[k], strlen(gather[k]));
 		len += strlen(gather[k]);
 	}
-	len += (DISPLAY_COLUMNS-(len%DISPLAY_COLUMNS));
-	LCD_writeShiftingStr(info,  len, 1, MIDIUM);
+//	len += (DISPLAY_COLUMNS-(len%DISPLAY_COLUMNS));
+//	LCD_writeShiftingStr(info,  len, 1, MIDIUM);
 
 }
 
@@ -150,11 +152,11 @@ static void showVolume(void)
 	if(!showingVol)
 	{
 		LCD_clearDisplay();
-		timerStart(PLAY_T, VOLUME_TIME, TIM_MODE_SINGLESHOT, stopShowingVolume);
+		volumeTimerID = Timer_AddCallback(stopShowingVolume, VOLUME_TIME, true);
 	}
 	else
 	{
-		timerRestart(PLAY_T);
+		Timer_Reset(volumeTimerID);
 	}
 
 	char str2wrt[11] = "Volumen: --";

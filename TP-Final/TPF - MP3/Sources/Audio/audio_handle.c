@@ -229,7 +229,7 @@ char * Audio_getName(void)
 	char * ret;
 	if(!MP3GetTagData(AudioTagData)) //If no id3 read file name
 	{
-		ret = SD_File_GetFileName(playingFile);
+		ret = SD_File_GetName(playingFile);
 	}
 	else
 	{

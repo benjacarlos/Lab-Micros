@@ -16,9 +16,10 @@
 
 #include "../../Queue/ev_queue.h"
 #include "timer.h"
+#include "audio_handle.h"
 //#include "LCD_GDM1602A.h"
 
-//#include "power_mode_switch.h"
+#include "power_mode_switch.h"
 
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
