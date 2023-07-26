@@ -109,7 +109,7 @@ void getEvents(void)
 		emitEvent(move > 0? ENCODER_RIGHT_EV:ENCODER_LEFT_EV);
 	}
 
-	esp_Read();
+//	esp_Read();
 
 }
 
