@@ -17,7 +17,7 @@
 #include "../../Queue/ev_queue.h"
 #include "fsm_table.h"
 
-//#include "LCD_GDM1602A.h"
+#include "LCD_GDM1602A.h"
 #include "sd_handle.h"
 
 
@@ -32,8 +32,8 @@
 //#include "vumeterRefresh.h"
 #include "mp3decoder.h"
 
-//#include "button.h"
-//#include "encoder.h"
+#include "button.h"
+#include "encoder.h"
 #include "power_mode_switch.h"
 #include "time_service.h"
 #include "equalizer.h"
@@ -137,11 +137,11 @@ void App_Init(void)
 
 	Encoder_Init();
 	buttonsInit();
-//	buttonConfiguration(PIN_SW_A, LKP, 20); //20*50=1seg
-//	buttonConfiguration(PIN_SW_B, LKP, 20);
-//	buttonConfiguration(PIN_SW_C, LKP, 20);
-//	buttonConfiguration(PIN_SW_D, LKP, 20);
-//	buttonConfiguration(ENCODER_SW, LKP, 20);
+	buttonConfiguration(PIN_SW_A, LKP, 20); //20*50=1seg
+	buttonConfiguration(PIN_SW_B, LKP, 20);
+	buttonConfiguration(PIN_SW_C, LKP, 20);
+	buttonConfiguration(PIN_SW_D, LKP, 20);
+	buttonConfiguration(ENCODER_SW, LKP, 20);
 
 //	esp_Init();
 	initQueue();
