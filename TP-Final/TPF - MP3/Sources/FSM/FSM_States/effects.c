@@ -20,9 +20,9 @@
  ******************************************************************************/
 #define TITLE_TIME 2000
 #define OPTIONS_COUNT 6
-#define OPTION_VALUES_ARRAY_SIZE	NUMBER_OF_FILTERS
-#define MAX_BAND_GAIN	GAINS_LEVELS
-#define	MIN_BAND_GAIN	-GAINS_LEVELS
+#define OPTION_VALUES_ARRAY_SIZE	NUMBER_OF_BANDS
+#define MAX_BAND_GAIN	MAX_GAIN
+#define	MIN_BAND_GAIN	-MAX_GAIN
 
 
 /*******************************************************************************
@@ -41,7 +41,6 @@ typedef enum
  * GLOBAL VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
 static bool showingTitle;
-static int titleTimerID = -1;
 static uint8_t currentOptionIndex = 0;
 static char * frequencyBandsTitles [] = {"80Hz Band       ",
 										 "160Hz Band      ",
@@ -225,8 +224,7 @@ static void showTitle(void)
 	//LCD_clearRow(0);
 	LCD_writeStrInPos("Efectos         ", 16, 0, 0);
 	showingTitle = true;
-	titleTimerID = Timer_AddCallback(&stopShowingTitle, TITLE_TIME, true);
-
+	timerStart(EFFECTS_T,TITLE_TIME, TIM_MODE_SINGLESHOT, &stopShowingTitle);
 }
 
 static void stopShowingTitle(void)
@@ -238,8 +236,7 @@ static void stopShowingTitle(void)
 
 static void userInteractionStopsTitle(void)
 {
-	Timer_Delete(titleTimerID);
-	titleTimerID = -1;
+	timerPause(EFFECTS_T);
 	stopShowingTitle();
 }
 
