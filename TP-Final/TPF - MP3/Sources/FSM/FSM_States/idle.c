@@ -62,7 +62,7 @@ static void emitStartEv(void);
 void Idle_InitState(void)
 {
 	Audio_deinit();
-	LCD_clearDisplay();
+//	LCD_clearDisplay();
 
 	timeCallbackId = Timer_AddCallback(setSleepMode, 1000, true); //Delay until related stuff is finished
 
@@ -96,8 +96,8 @@ void Idle_Update()
 	snprintf(timeString, sizeof(timeString), "    %02hd:%02hd:%02hd      ", date.hour,date.minute, date.second);
 
 	//LCD_writeStrInPos ("Insert MP3 to use MP3", x, y, z)
-	LCD_writeStrInPos(timeString, 15, 0, 0);
-	LCD_writeStrInPos(dateString, 15, 1, 0);
+//	LCD_writeStrInPos(timeString, 15, 0, 0);
+//	LCD_writeStrInPos(dateString, 15, 1, 0);
 }
 
 
@@ -111,14 +111,14 @@ static void setSleepMode(void)
 {
 	setOperationMode(SLEEP_MODE);
 
-	LCD_UpdateClock();
+//	LCD_UpdateClock();
 	TimeService_Enable();
 	SysTick_UpdateClk();
 }
 
 static void emitStartEv(void)
 {
-	LCD_UpdateClock();
+//	LCD_UpdateClock();
 	SysTick_UpdateClk();
 	emitEvent(START_EV);
 }

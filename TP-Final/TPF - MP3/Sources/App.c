@@ -55,7 +55,7 @@
 void getEvents(void)
 {
 	static bool Lcd_Done = false;
-	if(!Lcd_Done && LCD_isInit())
+	if(!Lcd_Done)//(!Lcd_Done && LCD_isInit())
 	{
 		Lcd_Done = true;
 		emitEvent(START_EV);

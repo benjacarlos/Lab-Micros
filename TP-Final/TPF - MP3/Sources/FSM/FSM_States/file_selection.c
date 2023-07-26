@@ -10,8 +10,6 @@
 #include <stdbool.h>
 #include <string.h>
 
-//#include "audio_manager.h"
-
 #include "file_selection.h"
 
 #include "../../Queue/ev_queue.h"
@@ -72,8 +70,9 @@ static void printFileInfo(void);
 
 void FileSelection_InitState(void)
 {
+	printf("Llegue\n\n");
 	//PowerMode_SetRunMode();
-	showTitle(); //Shows the state's title.
+//	showTitle(); //Shows the state's title.
 	Audio_init();
 }
 
