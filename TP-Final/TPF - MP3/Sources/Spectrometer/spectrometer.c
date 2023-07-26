@@ -146,7 +146,7 @@ void spectrometer_clean_display()
 		{
 			auxMatrix[j*8 + i] = CLEAN;
 		}
-		vumeterMatrix[i] = 0;
+		spectrometerMatrix[i] = 0;
 	}
-	vumeterRefresh_draw_display();
+	spectrometer_draw_display();
 }
