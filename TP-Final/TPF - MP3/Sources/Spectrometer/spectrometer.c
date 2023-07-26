@@ -142,7 +142,7 @@ void spectrometer_clean_display()
 {
 	for(int i = 0; i < NUMBER_OF_BANDS; i++)
 	{
-		for(int j = 0; j < VUMETER_HEIGHT; j++)
+		for(int j = 0; j < SPECTROMETER_HEIGHT; j++)
 		{
 			auxMatrix[j*8 + i] = CLEAN;
 		}
