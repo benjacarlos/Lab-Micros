@@ -234,7 +234,7 @@ void equalizer_set_band_gain (uint8_t band, gains_id_t gain)
 			// Initialize filter with new gain
 			arm_biquad_cascade_df1_init_q31(Filters[band-1], IIR_STAGES,
 				          (q31_t *) &coeffTable[COEF_PER_FILTER*GAINS_LEVELS*(band-1) + COEF_PER_FILTER*gain],
-				          &biquadStateBandQ31[band-1][0], 1);
+				          &stateVars[band-1][0], 1);
 		}
 	}
 }

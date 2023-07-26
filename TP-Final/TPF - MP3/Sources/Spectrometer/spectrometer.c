@@ -9,6 +9,7 @@
  ******************************************************************************/
 #include "spectrometer.h"
 #include "dft.h"
+#include "matrix_leds.h"
 
 /*******************************************************************************
  *******************************************************************************
@@ -17,8 +18,8 @@
  ******************************************************************************/
 
 // Width and height of frequency bands that hardware can display
-#define NUMBER_OF_BANDS     	8
-#define SPECTROMETER_HEIGHT     8
+#define NUMBER_OF_BANDS     	MATRIX_WIDTH
+#define SPECTROMETER_HEIGHT     MATRIX_HEIGHT
 // Value of spectrum amplitude consider noise and max amplitude possible between SPECTROMETER_HEIGHT
 #define NOISE               5
 #define MAX_AMPLITUDE       50
