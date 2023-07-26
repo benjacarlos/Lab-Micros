@@ -10,19 +10,24 @@
 
 #include "timer.h"
 #include "SysTick.h"
+#include <string.h>
 
 
 /*******************************************************************************
  * CONSTANTES Y MACROS USANDO DEFINE
  ******************************************************************************/
 
-#define NULL 0
-
 #define MS_TO_TICKS(ms) ((ms * SYSTICK_ISR_FREQUENCY_HZ)/1000UL )
 #define MS_TO_TICKS_MAX(ms) ((ms / 1000UL) * SYSTICK_ISR_FREQUENCY_HZ)
 #define MS_LIMIT 1000000
 
+#if TIMER_TICK_MS != (1000U/SYSTICK_ISR_FREQUENCY_HZ)
+#error Las frecuencias no coinciden!!
+#endif // TIMER_TICK_MS != (1000U/SYSTICK_ISR_FREQUENCY_HZ)
 
+#define TIMER_DEVELOPMENT_MODE    1
+
+#define TIMER_ID_INTERNAL   0
 /*******************************************************************************
  * STRUCTURAS Y TYPEDEFS
  ******************************************************************************/
@@ -31,7 +36,7 @@ typedef struct {
 	ttick_t             period;    // periodo con el que se llama al callback (medido en ticks de systick)
 	ttick_t             cnt;       // tiempo transcurrido desde ultimo llamado
     tim_callback_t      callback;  // funcion callback asignada
-    uint8_t             state        : 1; //enable o disable
+    uint8_t             mode        : 1; //enable o disable
     uint8_t             running     : 1;
     uint8_t             expired     : 1;
     uint8_t             unused      : 5;
@@ -51,8 +56,8 @@ static void timer_isr(void);
  * VARIABLES ESTÁTICAS
  ******************************************************************************/
 
-static timer_t timers[TIMERS_CANT]; // Arreglo global con timers que se inicializaron
-
+static timer_t timers[TIMERS_MAX_CANT]; // Arreglo global con timers que se inicializaron
+static tim_id_t timers_cant = TIMER_ID_INTERNAL+1;
 
 /*******************************************************************************
  *******************************************************************************

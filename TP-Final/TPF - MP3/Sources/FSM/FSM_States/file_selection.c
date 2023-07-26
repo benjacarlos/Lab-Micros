@@ -142,11 +142,11 @@ static void printFileInfo(void)
 	char path[50];
 
 	uint8_t len = strlen(name);
-	uint8_t mod = len%DISPLAY_COLUMNS;
-	len += (DISPLAY_COLUMNS-mod);
+//	uint8_t mod = len%DISPLAY_COLUMNS;
+//	len += (DISPLAY_COLUMNS-mod);
 
 	memset(path, SPACE_CHARACTER, 50);
 	memcpy(path, name, strlen(name));
-	LCD_writeShiftingStr(path,  len, 0, MIDIUM);
+//	LCD_writeShiftingStr(path,  len, 0, MIDIUM);
 
 }

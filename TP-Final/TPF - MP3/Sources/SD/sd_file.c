@@ -27,50 +27,9 @@ static void SD_File_ScanHelper(char * path);
  ******************************************************************************/
 void SD_File_Scan(void)
 {
-	char buffer[FILE_ARRAY_SIZE] = {0U};
+	char path_temp[FILE_ARRAY_SIZE] = {0U};
 
-	//Starting scann
-	FRESULT error;
-	DIR directory; /* Directory object */
-	FILINFO fileInformation;
-
-	if (f_opendir(&directory, path))
-	{
-		printf("Open directory failed.\r\n");
-		return;
-	}
-	for (;;)
-	{
-		error = f_readdir(&directory, &fileInformation);
-		if ((error != FR_OK) || (fileInformation.fname[0U] == 0U))
-		{
-			break;
-		}
-		if (fileInformation.fname[0] == '.')
-		{
-			continue;
-		}
-		if (fileInformation.fattrib & AM_DIR)
-		{
-			int i = strlen(path);
-			char * fn = fileInformation.fname;
-			*(path+i) = '/'; strcpy(path+i+1, fn);
-			SD_File_ScanHelper(path);
-			*(path+i) = 0;
-		}
-		else
-		{
-			int i = strlen(path);
-			char * fn = fileInformation.fname;
-			*(path+i) = '/'; strcpy(path+i+1, fn);
-
-			if (SD_File_isMp3File(path))
-				SD_File_AddFile(path);
-
-			*(path+i) = 0;
-		}
-	}
-	f_closedir(&directory);
+	FileSystem_ScanHelper(path_temp);
 }
 
 bool SD_File_isFileMp3(char *path)
@@ -172,6 +131,16 @@ Mp3File_t SD_File_ResetFiles(void)
 	return SD_File_GetFirstFile();
 }
 
+Mp3File_t SD_File_GetFirstFile(void)
+{
+	if (filesCount == 0)
+	{
+		Mp3File_t nullFile = {.index = -1, .path = ""};
+		return nullFile;
+	}
+	return files[0];
+}
+
 //void SD_File_Test(void)
 //{
 //	/*TEST*/
@@ -247,4 +216,47 @@ Mp3File_t SD_File_ResetFiles(void)
 /*************************************************************************************
  * 		LOCAL FUNCTIONS DECLARATIONS
  ************************************************************************************/
+static void SD_File_ScanHelper(char * path)
+{
+	FRESULT error;
+	DIR directory; /* Directory object */
+	FILINFO fileInformation;
 
+	if (f_opendir(&directory, path))
+	{
+		printf("Open directory failed.\r\n");
+		return;
+	}
+	for (;;)
+	{
+		error = f_readdir(&directory, &fileInformation);
+		if ((error != FR_OK) || (fileInformation.fname[0U] == 0U))
+		{
+			break;
+		}
+		if (fileInformation.fname[0] == '.')
+		{
+			continue;
+		}
+		if (fileInformation.fattrib & AM_DIR)
+		{
+			int i = strlen(path);
+			char * fn = fileInformation.fname;
+			*(path+i) = '/'; strcpy(path+i+1, fn);
+			FileSystem_ScanHelper(path);
+			*(path+i) = 0;
+		}
+		else
+		{
+			int i = strlen(path);
+			char * fn = fileInformation.fname;
+			*(path+i) = '/'; strcpy(path+i+1, fn);
+
+			if (FileSystem_isMp3File(path))
+				FileSystem_AddFile(path);
+
+			*(path+i) = 0;
+		}
+	}
+	f_closedir(&directory);
+}

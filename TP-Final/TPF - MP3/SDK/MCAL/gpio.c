@@ -4,8 +4,8 @@
  *      Author: Agus
  */
 
-#include "SDK/CMSIS/MK64F12.h"
-#include "SDK/CMSIS/MK64F12_features.h"
+#include "MK64F12.h"
+#include "MK64F12_features.h"
 #include "gpio.h"
 #include "hardware.h"
 

@@ -74,7 +74,7 @@ void Audio_deinit(void)
 
 	SD_File_ResetFiles();
 
-	xx vumeterRefresh_clean_display();
+//	xx vumeterRefresh_clean_display();
 
 	playing = false;
 	init = false;
@@ -166,7 +166,7 @@ void Audio_updateBuffer(void)
 	}
 
 	/* aca van los efectos */
-	xx equalizer_equalize(effects_in, effects_out);
+//	xx equalizer_equalize(effects_in, effects_out);
 
 	/* Scale to 12 bits, to fit in the DAC */
 	coef = (vol*1.0)/MAX_VOLUME;
@@ -187,12 +187,12 @@ void Audio_updateBuffer(void)
 
 	}
 
-	xx vumeterRefresh_fft(effects_out, 44100.0, 80, 10000);
+//	xx vumeterRefresh_fft(effects_out, 44100.0, 80, 10000);
 }
 
 void Audio_showFFT(void)
 {
-	xx vumeterRefresh_draw_display();
+//	xx vumeterRefresh_draw_display();
 }
 
 void Audio_updateAll(void)

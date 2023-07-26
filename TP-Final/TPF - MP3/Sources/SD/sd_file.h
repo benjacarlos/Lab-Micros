@@ -89,7 +89,7 @@ int SD_File_GetFilesCount(void);
  * */
 Mp3File_t SD_File_ResetFiles(void);
 
-
+Mp3File_t SD_File_GetFirstFile(void);
 ///*
 // * @brief Runs tests on each function of the SD_File's driver.
 // * */

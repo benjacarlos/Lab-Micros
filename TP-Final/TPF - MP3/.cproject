@@ -45,6 +45,10 @@
 								<option id="gnu.c.compiler.option.optimization.flags.528773346" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fno-common" valueType="string"/>
 								<option id="com.crt.advproject.gcc.hdrlib.1875751500" name="Library headers" superClass="com.crt.advproject.gcc.hdrlib" useByScannerDiscovery="false"/>
 								<option id="gnu.c.compiler.option.include.paths.185484008" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/FSM}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/Audio/Decode}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/SD/sdmmc/sdhc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/Sources/SD}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/fatfs/template/sd}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/fatfs/source/fsl_sd_disk}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TPF - MP3/SDK/Drivers/SD/sdmmc/osa}&quot;"/>

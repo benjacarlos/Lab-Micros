@@ -10,6 +10,7 @@
 
 #include <string.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include "mp3decoder.h"
 #include "ff.h"
 #include "pub/mp3dec.h"
@@ -35,7 +36,7 @@ typedef struct
   MP3FrameInfo  lastFrameInfo;                                  // current MP3 frame info
 
   // MP3 file
-  FILE*         mp3File;                                        // MP3 file object
+  FIL*         mp3File;                                        // MP3 file object
   uint32_t      fileSize;                                       // file size
   uint32_t      bytesRem;                                 // Encoded MP3 bytes remaining to be processed by either offset or decodeMP3
   bool          fileOpened;                                     // true if there is a loaded file
@@ -110,7 +111,7 @@ static mp3decoder_context_t dec;
 
 void MP3DecoderInit(void)
 {
-  dec.dec.helixDecoder = MP3InitDecoder();
+  dec.helixDecoder = MP3InitDecoder();
   dec.mp3File = NULL;
   dec.fileOpened = false;
   dec.bottom = 0;
@@ -134,7 +135,7 @@ bool MP3LoadFile(const char* filename)
     dec.bottom = 0;
     dec.top = 0;
     dec.fileSize = 0;
-    dec.bytesRemaining = 0;
+    dec.bytesRem = 0;
     dec.hasID3Tag = false;
   }
 
@@ -205,7 +206,7 @@ mp3decoder_result_t MP3DecodedFrame(short* outBuffer, uint16_t bufferSize, uint1
         // check samples in next frame
         MP3FrameInfo nextFrameInfo;
         // with this function we store the nextFrameInfo data in our struct
-        int err = MP3GetNextFrameInfo(dec.dec.helixDecoder, &nextFrameInfo, dec.mp3FrameBuffer + dec.top);
+        int err = MP3GetNextFrameInfo(dec.helixDecoder, &nextFrameInfo, dec.mp3FrameBuffer + dec.top);
         if (err == 0)
         {
             if (nextFrameInfo.outputSamps > bufferSize)
@@ -217,7 +218,7 @@ mp3decoder_result_t MP3DecodedFrame(short* outBuffer, uint16_t bufferSize, uint1
         uint8_t* decPointer = dec.mp3FrameBuffer + dec.top;
         int bytesLeft = dec.bottom - dec.top;
         // the next funtion autodecrements fileSize with bytes decoded and updated bytesLeft
-        int res = MP3Decode(dec.helixDecoder, &decPointer, &(bytesLeft), outBuffer, DECODER_NORMAL_MODE);
+        int res = MP3Decode(dec.helixDecoder, &decPointer, &(bytesLeft), outBuffer, MP3DECODER_MODE_NORMAL);
 
         // if everithing worked okey
         if (res == ERR_MP3_NONE)

@@ -11,6 +11,7 @@
 
 #include "../../Queue/ev_queue.h"
 #include "timer.h"
+#include "time_service.h"
 //#include "memory_manager.h"
 //#include "SysTick.h"
 //#include "audio_manager.h"
