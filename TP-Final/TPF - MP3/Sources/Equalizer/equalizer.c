@@ -366,7 +366,7 @@ void equalizer_set_band_gain (int32_t band, int32_t gain)
  * @param band selected band in which to change gain (between 1 and NUMBER_OF_FILTERS)
  * @return gain gain in dB of filter use
  */
-uint32_t equalizer_get_band_gain (int32_t band)
+int32_t equalizer_get_band_gain (int32_t band)
 {
 	uint32_t gain;
 	// If band is not valid value then we get gain of first filter
