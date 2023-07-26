@@ -113,7 +113,7 @@ void SD_File_PrintFiles(bool completePath)
 		}
 		else
 		{
-			char *fileName = SD_File_GetFileName(files[i]);
+			char *fileName = SD_File_GetName(files[i]);
 			printf("Track: %d -> %s\n", i, fileName);
 		}
 	}

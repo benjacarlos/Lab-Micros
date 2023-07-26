@@ -130,7 +130,7 @@ void App_Init(void)
 	MP3DecoderInit(); // Init decoder
 
 	AudioPlay_Init();	//Audio Player
-	vumeterRefresh_init(); // FFT
+	spectrometer_init(); // FFT
 	equalizer_init();
 
 	TimeService_Init(Idle_Update);

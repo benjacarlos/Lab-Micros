@@ -15,9 +15,9 @@
 #include "sd_file.h"
 #include "sd_handle.h"
 #include "AudioPlay.h"
-//#include "vumeterRefresh.h"
+#include "spectrometer.h"
 #include "mp3decoder.h"
-//#include "equalizer.h"
+#include "equalizer.h"
 
 #include "fsl_common.h"
 #include "ev_queue.h"
@@ -74,7 +74,7 @@ void Audio_deinit(void)
 
 	SD_File_ResetFiles();
 
-//	xx vumeterRefresh_clean_display();
+	spectrometer_clean_display();
 
 	playing = false;
 	init = false;
@@ -166,7 +166,7 @@ void Audio_updateBuffer(void)
 	}
 
 	/* aca van los efectos */
-//	xx equalizer_equalize(effects_in, effects_out);
+	equalizer_data(effects_in, effects_out);
 
 	/* Scale to 12 bits, to fit in the DAC */
 	coef = (vol*1.0)/MAX_VOLUME;
@@ -187,12 +187,12 @@ void Audio_updateBuffer(void)
 
 	}
 
-//	xx vumeterRefresh_fft(effects_out, 44100.0, 80, 10000);
+	spectrometer_dft(effects_out, 44100.0, 80, 10000);
 }
 
 void Audio_showFFT(void)
 {
-//	xx vumeterRefresh_draw_display();
+	spectrometer_draw_display();
 }
 
 void Audio_updateAll(void)

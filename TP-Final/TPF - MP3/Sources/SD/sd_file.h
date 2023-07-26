@@ -25,7 +25,7 @@ typedef struct
  * @brief Scan all mp3 files in the storage device
  * @param path: base dir to start searching
  */
-void SD_File_ScanFiles();
+void SD_File_Scan();
 
 /*
  * @brief Detects if a file's path corresponds to a .mp3 file.

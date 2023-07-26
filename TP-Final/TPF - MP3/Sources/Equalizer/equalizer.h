@@ -44,7 +44,7 @@ typedef enum {
  ******************************************************************************/
 
 void equalizer_init(void);
-void equalize_data(float32_t* input, float32_t * output);
+void equalizer_data(float32_t* input, float32_t * output);
 void equalizer_set_band_gain (uint8_t band, gains_id_t gain);
 uint32_t equalizer_get_band_gain (uint8_t band);
 

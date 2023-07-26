@@ -183,7 +183,7 @@ void equalizer_init(void)
  * @param input  pointer to an array of size FRAME_SIZE with input data
  * @param output pointer to an array of size FRAME_SIZE that will be overwritten
  */
-void equalize_data(float32_t* input, float32_t * output)
+void equalizer_data(float32_t* input, float32_t * output)
 {
 	q31_t inQ31[BLOCKSIZE];
 	q31_t outQ31[BLOCKSIZE];
