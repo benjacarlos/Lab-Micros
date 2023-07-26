@@ -102,21 +102,51 @@ void spectrometer_dft(float32_t * inputSignal, float32_t sampleRate, int lowerFr
 	    currentBinFreq = nextBinFreq;
 	    nextBinFreq *= freqMultiplierPerBand;
 	}
-	// To implement for refresh display function
+	// Refresh display
+	average = (average+1)%AVERAGE;
+	if(average == 0)
+	{
+		vumeterRefresh_write_to_matrix(vumeterMatrix);
+		for(int j = 0; j <  NUMBER_OF_BANDS; j++)
+			 vumeterMatrix[j] = 0;
+	}
 }
 
 void spectrometer_write_to_matrix(int * vumeterMatrix)
 {
-    // To implement
-
+	for(int i = 0; i < NUMBER_OF_BANDS; i++)
+	{
+		for(int j = 0; j<SPECTROMETER_HEIGHT; j++)
+		{
+			if(vumeterMatrix[i] > j)
+			{
+				if(j >= 7)
+					auxMatrix[ (NUMBER_OF_BANDS - i - 1) + j * 8] = RED;
+				else if(j >= 4)
+					auxMatrix[ (NUMBER_OF_BANDS - i - 1) + j * 8] = YELLOW;
+				else
+					auxMatrix[ (NUMBER_OF_BANDS - i - 1) + j * 8] = GREEN;
+			}
+			else
+				auxMatrix[(NUMBER_OF_BANDS - i - 1) + j * 8] = CLEAN;
+		}
+	}
 }
 
 void spectrometer_draw_display()
 {
-	// To implement
+	md_writeBuffer(auxMatrix);
 }
 
 void spectrometer_clean_display()
 {
-    // To implement
+	for(int i = 0; i < NUMBER_OF_BANDS; i++)
+	{
+		for(int j = 0; j < VUMETER_HEIGHT; j++)
+		{
+			auxMatrix[j*8 + i] = CLEAN;
+		}
+		vumeterMatrix[i] = 0;
+	}
+	vumeterRefresh_draw_display();
 }
