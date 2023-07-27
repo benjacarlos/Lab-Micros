@@ -43,11 +43,10 @@ int vumeterRefresh_fft(float32_t * inputSignal, float32_t sampleRate, int lowerF
     	volatile float32_t temp = output[2*j]*output[2*j] + output[2*j+1]*output[2*j+1];
     	arm_sqrt_f32(temp, &outputFft[j]);
     }
-    //arm_cmplx_mag_f32(output, outputFft, SAMPLE_LENGTH);
-    outputFft[0] = 0; //Removing DC
-    ///GPIOC->PDOR &= ~(1 << 17);
 
-    //unsigned int binFreq[NUMBER_OF_BANDS];
+    outputFft[0] = 0; //Removing DC
+
+
     volatile float32_t currentBinFreq = lowerFreqBand;
     volatile float32_t nextBinFreq = lowerFreqBand * freqMultiplierPerBand;
     volatile float32_t currentCenterBin;
@@ -75,7 +74,7 @@ int vumeterRefresh_fft(float32_t * inputSignal, float32_t sampleRate, int lowerF
         currentBinFreq = nextBinFreq;
         nextBinFreq *= freqMultiplierPerBand;
     }
-    //
+    // Frecuency off FFT shown in display
     average = (average+1)%AVERAGE;
     if(average == 0)
     {
@@ -83,7 +82,7 @@ int vumeterRefresh_fft(float32_t * inputSignal, float32_t sampleRate, int lowerF
     	for(int j = 0; j <  NUMBER_OF_BANDS; j++)
     		 vumeterMatrix[j] = 0;
     }
-    return 0;//???
+    return 0;
 }
 
 void vumeterRefresh_write_to_matrix(int * vumeterMatrix)
