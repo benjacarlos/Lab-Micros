@@ -19,7 +19,7 @@
 
 #include "fsl_common.h"
 #include "queue.h"
-#include "esp_comunication.h"
+
 
 /******************************************************************************
  * DEFINES
@@ -100,8 +100,7 @@ void Audio_playNextFile(void)
 
 	Audio_updateBuffer();
 
-	char * name = Audio_getCurrentName();
-	esp_Send(1, name, strlen(name));
+
 }
 
 void Audio_playPrevFile(void)
@@ -117,8 +116,7 @@ void Audio_playPrevFile(void)
 
 	Audio_updateBuffer();
 
-	char * name = Audio_getCurrentName();
-	esp_Send(1, name, strlen(name));
+
 }
 
 void Audio_selectFile(void)
@@ -134,8 +132,7 @@ void Audio_selectFile(void)
 
 	Audio_updateBuffer();
 
-	char * name = Audio_getCurrentName();
-	esp_Send(1, name, strlen(name));
+
 }
 
 char * Audio_getCurrentName(void)
@@ -271,14 +268,14 @@ void Audio_IncVolume(void)
 {
 	vol += (vol >= MAX_VOLUME)? 0 : 1;
 	vol2send = vol+40;
-	esp_Send(2, &vol2send, 1);
+
 }
 
 void Audio_DecVolume(void)
 {
 	vol -= (vol > 0) ? 1 : 0;
 	vol2send = vol+40;
-	esp_Send(2, &vol2send, 1);
+
 }
 
 char Audio_getVolume(void)
