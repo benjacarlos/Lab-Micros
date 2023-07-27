@@ -2,7 +2,7 @@
 /***************************************************************************/ /**
   @file     file_system_manager.c
   @brief    File System functions
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 
 #include <file_system_manager.h>

@@ -1,7 +1,7 @@
 /*******************************************************************************
   @file     file_selection_state.h
   @brief   	File Selection state header
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  **********/
 #ifndef FILE_SELECTION_STATE_H
 #define FILE_SELECTION_STATE_H

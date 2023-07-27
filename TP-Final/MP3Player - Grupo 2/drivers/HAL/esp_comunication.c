@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     esp_comunication.c
   @brief    Controlador de mesajer usando UART
-  @author   Grupo 2
+  @author   Grupo 5
  ******************************************************************************/
 
 #include <stdio.h>

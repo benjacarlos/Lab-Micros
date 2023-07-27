@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     queue.h
   @brief
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 #ifndef EVENTQUEUE_H
 #define EVENTQUEUE_H

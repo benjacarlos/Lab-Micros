@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     effects_state.h
   @brief    Effects state
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 #ifndef EFFECTS_STATE_H
 #define EFFECTS_STATE_H

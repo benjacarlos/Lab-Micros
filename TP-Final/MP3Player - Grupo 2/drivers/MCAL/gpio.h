@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     gpio.h
   @brief    Simple GPIO Pin services, similar to Arduino
-  @author   Nicolás Magliola, Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 
 #ifndef _GPIO_H_

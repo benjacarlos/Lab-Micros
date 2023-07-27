@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     audio_manager.c
   @brief    Audio manager, to wrap file related function and decoding stuff
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 
 /******************************************************************************
@@ -189,7 +189,7 @@ void Audio_updateBuffer(void)
 		emitEvent(NEXT_SONG_EV);
 
 	}
-
+	// 44.1 kHz is standard sample rate in music
 	vumeterRefresh_fft(effects_out, 44100.0, 80, 10000);
 }
 

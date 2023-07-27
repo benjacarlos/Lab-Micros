@@ -78,7 +78,8 @@ int vumeterRefresh_fft(float32_t * inputSignal, float32_t sampleRate, int lowerF
 
         currentBinFreq = nextBinFreq;
         nextBinFreq *= freqMultiplierPerBand;
-    } 
+    }
+    //
     average = (average+1)%AVERAGE;
     if(average == 0)
     {

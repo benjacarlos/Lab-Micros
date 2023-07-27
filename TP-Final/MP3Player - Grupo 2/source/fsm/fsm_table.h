@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     fsm_table.h
   @brief    FSM Table header.
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 #ifndef FSMTABLE_H_
 #define FSMTABLE_H_

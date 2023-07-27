@@ -1,7 +1,7 @@
 /***************************************************************************//**
  @file     AudioPlayer.c
  @brief    Audio Reproductor using the DAC with PDB.
- @author   Grupo 2
+ @author   Grupo 5
 ******************************************************************************/
 /*
  * Basado en ejemplo del SDK de DAC con PDB:

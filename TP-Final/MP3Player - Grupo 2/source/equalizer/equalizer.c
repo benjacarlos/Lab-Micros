@@ -1,9 +1,8 @@
-/*
- * equalizer.c
- *
- *  Created on: Mar 8, 2019
- *      Author: Grupo 2
- */
+/***************************************************************************
+  @file     equalizer.c
+  @brief    ...
+  @author   Grupo 5
+ ******************************************************************************/
 #include "math_helper.h"
 #include "equalizer.h"
 

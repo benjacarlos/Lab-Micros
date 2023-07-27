@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     audio_manager.c
   @brief    Audio manager, to wrap file related function and decoding stuff
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 
 #ifndef AUDIO_MANAGER_AUDIO_MANAGER_H_

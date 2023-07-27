@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     esp_comunication.h
   @brief    Controlador de mesajer usando UART
-  @author   Grupo 2
+  @author   Grupo 5
  ******************************************************************************/
 #ifndef ESP_COMMUNICATION_H_
 #define ESP_COMMUNICATION_H_

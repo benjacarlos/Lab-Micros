@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     effects_state.c
   @brief    Effects state functions.
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 
 /*******************************************************************************
@@ -12,6 +12,7 @@
 #include "queue.h"
 #include "Timer.h"
 #include "equalizer.h"
+#include <stdio.h>
 
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
@@ -95,6 +96,7 @@ void Effects_InitState(void)
 	LCD_stopMove(0);
 	showTitle();
 	currentOptionIndex = 0;
+	printf("Modo Efecto Inicializado\n\n");
 }
 
 void Effects_NextOption(void)

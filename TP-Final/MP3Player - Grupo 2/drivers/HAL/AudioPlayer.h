@@ -1,7 +1,7 @@
 /***************************************************************************//**
  @file     AudioPlayer.h
  @brief    Audio Reproductor using the DAC with PDB.
- @author   Grupo 2
+ @author   Grupo 5
 ******************************************************************************/
 
 #ifndef _AUDIO_PLAYER_H_

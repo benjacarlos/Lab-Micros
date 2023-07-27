@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     file_system_manager.h
   @brief    File System header
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 
 #ifndef FILE_SYSTEM_MANAGER_H_

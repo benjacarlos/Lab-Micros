@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     timer.h
   @brief    Timer Header
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 #ifndef TIMER_H_
 #define TIMER_H_

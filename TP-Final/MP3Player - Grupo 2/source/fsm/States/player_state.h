@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     Player_state.h
   @brief    Player state header.
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 
 #ifndef PLAYER_STATE_H

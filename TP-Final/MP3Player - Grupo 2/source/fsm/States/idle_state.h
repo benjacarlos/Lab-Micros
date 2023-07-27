@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     Idle_state.h
   @brief    Idle state
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 #ifndef IDLE_STATE_H
 #define IDLE_STATE_H

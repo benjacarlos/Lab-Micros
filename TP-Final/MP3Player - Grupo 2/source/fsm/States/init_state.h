@@ -1,7 +1,7 @@
 /***************************************************************************/ /**
   @file     init_state.h
   @brief    Init state functions.
-  @author   Grupo 2 - Lab de Micros
+  @author   Grupo 5
  ******************************************************************************/
 
 #ifndef FSM_STATES_INIT_STATE_H_
