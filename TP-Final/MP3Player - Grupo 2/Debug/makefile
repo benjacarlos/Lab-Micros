@@ -41,25 +41,25 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: MP3Player\ -\ Grupo\ 2.axf
+all: MP3Player.axf
 
 # Tool invocations
-MP3Player\ -\ Grupo\ 2.axf: $(OBJS) $(USER_OBJS)
+MP3Player.axf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -L"C:\WK\ITBA - Me\Lab. de Micros\Lab-Micros\TP-Final\MP3Player - Grupo 2\libs" -Xlinker -Map="MP3Player - Grupo 2.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T SDProject_Debug.ld -o "MP3Player - Grupo 2.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -L"C:\Users\Juan Martin\Documents\Visual Code\Lab-Micros\TP-Final\MP3Player - Grupo 2\libs" -Xlinker -Map="MP3Player.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T SDProject_Debug.ld -o "MP3Player.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) "MP3Player - Grupo 2.axf"
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) MP3Player.axf
 	-@echo ' '
 
 post-build:
 	-@echo 'Performing post-build steps'
-	-arm-none-eabi-size "MP3Player - Grupo 2.axf"; # arm-none-eabi-objcopy -v -O binary "MP3Player - Grupo 2.axf" "MP3Player - Grupo 2.bin" ; # checksum -p MK64FN1M0xxx12 -d "MP3Player - Grupo 2.bin";
+	-arm-none-eabi-size "MP3Player.axf"; # arm-none-eabi-objcopy -v -O binary "MP3Player.axf" "MP3Player.bin" ; # checksum -p MK64FN1M0xxx12 -d "MP3Player.bin";
 	-@echo ' '
 
 .PHONY: all clean dependents post-build

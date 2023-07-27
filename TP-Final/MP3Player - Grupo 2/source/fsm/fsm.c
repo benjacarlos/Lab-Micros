@@ -23,9 +23,9 @@ STATE *fsm(STATE *p_tabla_estado, event evento_actual)
           && p_tabla_estado->evento != FIN_TABLA)
       ++p_tabla_estado;
 
-   gpioToggle(TP2);
+   //gpioToggle(TP2);
    (*p_tabla_estado->p_rut_accion)();               /*rutina de accion corresondiente*/
-   gpioToggle(TP2);
+   //gpioToggle(TP2);
 
    p_tabla_estado = p_tabla_estado->proximo_estado; /*siguiente estado*/
 
