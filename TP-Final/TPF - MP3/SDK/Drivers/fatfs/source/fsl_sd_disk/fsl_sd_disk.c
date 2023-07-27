@@ -52,7 +52,7 @@ DRESULT sd_disk_write(BYTE pdrv, const BYTE* buff, LBA_t sector, UINT count)
 
 DRESULT sd_disk_read(BYTE pdrv, BYTE* buff, LBA_t sector, UINT count)
 {
-    if (pdrv != SDDISK)
+    if (pdrv != SDDISK )
     {
         return RES_PARERR;
     }
@@ -129,28 +129,23 @@ DSTATUS sd_disk_status(BYTE pdrv)
 
 DSTATUS sd_disk_initialize(BYTE pdrv)
 {
-    static bool isCardInitialized = false;
-
-    if (pdrv != SDDISK)
+    if (pdrv != SDDISK )
     {
         return STA_NOINIT;
     }
 
-    /* demostrate the normal flow of card re-initialization. If re-initialization is not neccessary, return RES_OK directly will be fine */
-    if(isCardInitialized)
+    if(!g_sd.isHostReady)
     {
-        SD_Deinit(&g_sd);
+        return STA_NOINIT;
     }
 
-    if (kStatus_Success != SD_Init(&g_sd))
+    if (kStatus_Success != SD_CardInit(&g_sd))
     {
-        SD_Deinit(&g_sd);
+        SD_CardDeinit(&g_sd);
         memset(&g_sd, 0U, sizeof(g_sd));
         return STA_NOINIT;
     }
 
-    isCardInitialized = true;
-
-    return RES_OK;
+    return 0;
 }
 #endif /* SD_DISK_ENABLE */
