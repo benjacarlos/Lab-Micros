@@ -19,8 +19,6 @@ static float32_t outputFft[SAMPLE_LENGTH / 2];
 static int vumeterMatrix[NUMBER_OF_BANDS];
 static colors_t auxMatrix[VUMETER_HEIGHT * NUMBER_OF_BANDS];
 
-static float32_t fpowf(float32_t base, uint16_t n); //Fast exponenciation
-
 void vumeterRefresh_init()
 {
     arm_rfft_fast_init_f32(&rfft_fast_instance, SAMPLE_LENGTH);
@@ -59,8 +57,6 @@ int vumeterRefresh_fft(float32_t * inputSignal, float32_t sampleRate, int lowerF
     volatile float32_t temp;
     for (size_t i = 0; i < NUMBER_OF_BANDS; i++)
     {
-        //currentBinFreq = lowerFreqBand * fpowf(freqMultiplierPerBand, i);
-        //nextBinFreq = lowerFreqBand * fpowf(freqMultiplierPerBand, i+1);
 
         currentCenterBin = currentBinFreq * inv_binWidth;
         nextCenterBin = nextBinFreq * inv_binWidth;
@@ -128,19 +124,4 @@ void vumeterRefresh_clean_display()
 void vumeterRefresh_draw_display()
 {
     md_writeBuffer(auxMatrix);
-}
-
-float32_t fpowf(float32_t base, uint16_t n)
-{
-	float ans = 1;
-	while(n > 0)
-	{
-		if(n%2)
-		{
-			ans *= base;
-		}
-		n = n/2;
-		base *= base;
-	}
-	return ans;
 }
