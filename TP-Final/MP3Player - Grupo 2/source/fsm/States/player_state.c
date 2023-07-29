@@ -10,6 +10,7 @@
 #include <fsm/States/player_state.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "queue.h"
 #include "audio_manager.h"
@@ -21,6 +22,8 @@
 #include "ff.h"
 #include "file_system_manager.h"
 #include "Timer.h"
+
+#include "config_main.h"
 
 #define VOLUME_TIME		(5000U)
 /*******************************************************************************
@@ -45,17 +48,26 @@ static void stopShowingVolume(void);
 void Player_InitState(void)
 {
 	printFileInfo();
+#ifdef DEBUG_PRINT
+	printf("\n\nModo Player\n\n");
+#endif
 }
 
 void Player_ToggleMusic(void)
 {
 	Audio_toggle();
+#ifdef DEBUG_PRINT
+	printf("Music toggle\n");
+#endif
 }
 
 
 void Player_Stop(void)
 {
 	Audio_stop();
+#ifdef DEBUG_PRINT
+	printf("Music stop\n");
+#endif
 }
 
 void Player_PlayNextSong(void)
@@ -64,6 +76,9 @@ void Player_PlayNextSong(void)
 	Audio_selectFile();
 	Audio_play();
 	printFileInfo();
+#ifdef DEBUG_PRINT
+	printf("Next song\n");
+#endif
 }
 
 void Player_PlayPreviousSong(void)
@@ -72,6 +87,9 @@ void Player_PlayPreviousSong(void)
 	Audio_selectFile();
 	Audio_play();
 	printFileInfo();
+#ifdef DEBUG_PRINT
+	printf("Previous song\n");
+#endif
 }
 
 void Player_IncVolume(void)
@@ -108,9 +126,9 @@ static void printFileInfo(void)
 	len += (DISPLAY_COLUMNS-(len%DISPLAY_COLUMNS));
 	memcpy(path, name, strlen(name));
 	LCD_writeShiftingStr(path,  len, 0, MIDIUM);
-
-
-
+#ifdef DEBUG_PRINT
+	printf("%s\n", name);
+#endif
 	len = 0;
 	for(int k = 0; k < sizeof(gather)/sizeof(gather[0]); k++)
 	{
@@ -141,6 +159,9 @@ static void showVolume(void)
 	str2wrt[10] = 0x30 + (char)vol%10;
 
 	LCD_writeStrInPos(str2wrt, sizeof(str2wrt)/sizeof(str2wrt[0]), 0, 0);
+#ifdef DEBUG_PRINT
+	printf("%s\n", str2wrt);
+#endif
 	showingVolume = true;
 }
 

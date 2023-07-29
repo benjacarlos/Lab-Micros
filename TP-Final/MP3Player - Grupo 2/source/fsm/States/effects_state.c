@@ -13,6 +13,7 @@
 #include "Timer.h"
 #include "equalizer.h"
 #include <stdio.h>
+#include "config_main.h"
 
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
@@ -96,7 +97,6 @@ void Effects_InitState(void)
 	LCD_stopMove(0);
 	showTitle();
 	currentOptionIndex = 0;
-	printf("Modo Efecto Inicializado\n\n");
 }
 
 void Effects_NextOption(void)
@@ -226,6 +226,9 @@ static void showTitle(void)
 	LCD_writeStrInPos("Efectos         ", 16, 0, 0);
 	showingTitle = true;
 	titleTimerID = Timer_AddCallback(&stopShowingTitle, TITLE_TIME, true);
+#ifdef DEBUG_PRINT
+	printf("\n\nModo Efectos\n\n");
+#endif
 }
 
 static void stopShowingTitle(void)
@@ -251,6 +254,10 @@ static void showCustomBandSetting(void)
 	int writtenChars = sprintf(bandGainText, "%ddB", currentBandValue);
 	bandGainText[writtenChars] = ' ';
 	LCD_writeStrInPos(bandGainText, 16, 1, 0);
+#ifdef DEBUG_PRINT
+	printf("%s Gain:%d \n",frequencyBandsTitles[currentBand] ,currentBandValue );
+#endif
+
 }
 
 static void setCurrentOption(void)
@@ -261,21 +268,39 @@ static void setCurrentOption(void)
     {
     case DEFAULT:
 		LCD_writeStrInPos("DEFAULT             ", 16, 0, 0);
+#ifdef DEBUG_PRINT
+		printf("Efecto: DEFAULT\n");
+#endif
 		break;
     case ROCK:
     	LCD_writeStrInPos("ROCK                ", 16, 0, 0);
+#ifdef DEBUG_PRINT
+    	printf("Efecto: ROCK\n");
+#endif
         break;
     case JAZZ:
     	LCD_writeStrInPos("JAZZ                ", 16, 0, 0);
+#ifdef DEBUG_PRINT
+    	printf("Efecto: JAZZ\n");
+#endif
         break;
     case POP:
     	LCD_writeStrInPos("POP                 ", 16, 0, 0);
+#ifdef DEBUG_PRINT
+    	printf("Efecto: POP\n");
+#endif
         break;
     case CLASSIC:
 		LCD_writeStrInPos("CLASSIC             ", 16, 0, 0);
+#ifdef DEBUG_PRINT
+		printf("Efecto: CLASSIC\n");
+#endif
 		break;
     case CUSTOM:
     	LCD_writeStrInPos("CUSTOM              ", 16, 0, 0);
+#ifdef DEBUG_PRINT
+    	printf("Efecto: CUSTOM\n");
+#endif
 		break;
     }
 }

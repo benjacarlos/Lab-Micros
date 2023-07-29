@@ -15,18 +15,17 @@
  ******************************************************************************/
 #include <stdbool.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "audio_manager.h"
 
 #include "file_selection_state.h"
 #include "queue.h"
-//#include "AudioPlayer.h"
 #include "Timer.h"
 #include "LCD_GDM1602A.h"
-//#include "memory_manager.h"
-//#include "file_system_manager.h"
-//#include "decoder.h"
 #include "power_mode_switch.h"
+
+#include "config_main.h"
 
 /*******************************************************************************
  * GLOBAL VARIABLES WITH FILE LEVEL SCOPE
@@ -118,6 +117,9 @@ static void showTitle(void)
 	LCD_clearRow(1);
 	showingTitle = true;
 	titleTimerID = Timer_AddCallback(&stopShowingTitle, TITLE_TIME, true);
+#ifdef DEBUG_PRINT
+	printf("\n\nElegir Archivo\n\n");
+#endif
 }
 
 static void stopShowingTitle(void)
@@ -149,5 +151,8 @@ static void printFileInfo(void)
 	memset(path, 0x20, 50);
 	memcpy(path, name, strlen(name));
 	LCD_writeShiftingStr(path,  len, 0, MIDIUM);
+#ifdef DEBUG_PRINT
+	printf("Archivo: %s\n",path);
+#endif
 
 }

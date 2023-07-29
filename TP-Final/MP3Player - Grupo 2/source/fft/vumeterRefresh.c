@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "fsl_device_registers.h"
 #include "vumeterRefresh.h"
+#include "config_main.h"
 
 
 #define SAMPLE_LENGTH       FFT_SIZE
