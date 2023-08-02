@@ -28,7 +28,7 @@
 
 #define ENABLE(x)  				(((x) & 1)<<1								)
 #define RS(x)					( (x) & 1									)
-#define VAL(x)					(((x) & 0xF)<<4								)
+#define VAL(x)					(((x) & 0xF)<<2								)
 
 #define BLOCK(e, rs, v) 		(ENABLE(e) | RS(rs) | VAL(v)				)
 
