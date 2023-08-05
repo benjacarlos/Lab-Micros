@@ -5,11 +5,19 @@
   @author   Grupo 5
  ******************************************************************************/
 
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
+
 #include <file_system_manager.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "ff.h"
+
+/*******************************************************************************
+ * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
+ ******************************************************************************/
 
 #define FILE_ARRAY_SIZE 200
 
@@ -20,12 +28,16 @@
 Mp3File_t files[FILE_ARRAY_SIZE] = {};
 int filesCount = 0;
 
-static void FileSystem_ScanHelper(char * path);
 /*******************************************************************************
- *******************************************************************************
-                        GLOBAL FUNCTION DEFINITIONS
- *******************************************************************************
+ * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
+static void FileSystem_ScanHelper(char * path);
+
+/*******************************************************************************
+                        GLOBAL FUNCTION DEFINITIONS
+ ******************************************************************************/
+
 void FileSystem_ScanFiles(void)
 {
 	char buffer[FILE_ARRAY_SIZE] = {0U};
@@ -205,6 +217,7 @@ void FileSystem_Test(void)
 /*************************************************************************************
  * 		LOCAL FUNCTIONS DECLARATIONS
  ************************************************************************************/
+
 static void FileSystem_ScanHelper(char * path)
 {
 	FRESULT error;
