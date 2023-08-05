@@ -4,12 +4,19 @@
   @author   Grupo 5
  ******************************************************************************/
 
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
 
 #include "queue.h"
 #include "States/init_state.h"
 #include "States/idle_state.h"
 #include "memory_manager.h"
 #include "power_mode_switch.h"
+
+/*******************************************************************************
+                        GLOBAL FUNCTION DEFINITIONS
+ ******************************************************************************/
 
 void Init_StartAll(void)
 {
@@ -23,6 +30,6 @@ void Init_StartAll(void)
 		//The sd is present but the event has been fetch while not able to handle
 		emitEvent(SD_IN_EV);
 	}
-	// Start the idle state, not best practise to do here ( ͡° ͜ʖ ͡°)
+	// Start the idle state
 	Idle_InitState();
 }

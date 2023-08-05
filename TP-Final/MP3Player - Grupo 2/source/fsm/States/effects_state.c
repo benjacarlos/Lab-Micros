@@ -7,6 +7,7 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+
 #include "States/effects_state.h"
 #include "LCD_GDM1602A.h"
 #include "queue.h"
@@ -18,6 +19,7 @@
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
+
 #define TITLE_TIME 2000
 #define OPTIONS_COUNT 6
 #define OPTION_VALUES_ARRAY_SIZE	NUMBER_OF_BANDS
@@ -37,9 +39,11 @@ typedef enum
 	CLASSIC,
 	CUSTOM
 } options_t;
+
 /*******************************************************************************
  * GLOBAL VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
 static bool showingTitle;
 static int titleTimerID = -1;
 static uint8_t currentOptionIndex = 0;
@@ -56,15 +60,16 @@ static uint8_t currentBand = 0;
 static int32_t currentBandValue = 0;
 
 int optionValues[5][OPTION_VALUES_ARRAY_SIZE] =
-	{{0, 0, 0, 0,  0, 0, 0, 0}, 	//default
-	 {0, 0, 1, 3,-10,-2,-1, 3}, 	//rock
-	 {0, 0, 2, 5, -6,-2,-1, 2},		//jazz
-	 {0, 0, 0, 0,  2, 2, 3,-3},		//pop
-	 {0, 0,-1,-6,  0, 1, 1, 3}		//classic
+	{{0, 0, 0, 0,  0, 0, 0, 0}, 	// Default
+	 {0, 0, 1, 3,-10,-2,-1, 3}, 	// Rock
+	 {0, 0, 2, 5, -6,-2,-1, 2},		// Jazz
+	 {0, 0, 0, 0,  2, 2, 3,-3},		// Pop
+	 {0, 0,-1,-6,  0, 1, 1, 3}		// Classic
 };
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
 /**
  * @brief Show the title of the state on the display. If the user interacts with the system, the title will stop showing.
  */
@@ -87,6 +92,7 @@ static void setCurrentOption(void);
  * @brief Shows the current band and its gain in the display.
  */
 static void showCustomBandSetting(void);
+
 /*******************************************************************************
  * FUNCTIONS WITH GLOBAL SCOPE
  ******************************************************************************/
@@ -212,17 +218,15 @@ void Effects_SetEffect(char option)
 		equalizer_set_band_gain(i+1, optionValues[currentOptionIndex][i]);
 	}
 }
+
 /*******************************************************************************
- *******************************************************************************
                         LOCAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
+
 static void showTitle(void)
 {
 	LCD_stopMove(0);
 	LCD_stopMove(1);
-	//LCD_clearDisplay();
-	//LCD_clearRow(0);
 	LCD_writeStrInPos("Efectos         ", 16, 0, 0);
 	showingTitle = true;
 	titleTimerID = Timer_AddCallback(&stopShowingTitle, TITLE_TIME, true);
@@ -247,7 +251,6 @@ static void userInteractionStopsTitle(void)
 
 static void showCustomBandSetting(void)
 {
-	//LCD_clearDisplay();
 	LCD_writeStrInPos(frequencyBandsTitles[currentBand], 16, 0, 0);
 
 	char bandGainText[16] = "                ";
@@ -262,7 +265,6 @@ static void showCustomBandSetting(void)
 
 static void setCurrentOption(void)
 {
-    //LCD_clearDisplay();
 	LCD_stopMove(0);
     switch (currentOptionIndex)
     {

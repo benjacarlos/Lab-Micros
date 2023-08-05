@@ -7,6 +7,7 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+
 #include <fsm/States/player_state.h>
 #include <stdbool.h>
 #include <string.h>
@@ -25,10 +26,16 @@
 
 #include "config_main.h"
 
+/*******************************************************************************
+ * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
+ ******************************************************************************/
+
 #define VOLUME_TIME		(5000U)
+
 /*******************************************************************************
  * GLOBAL VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
 static bool showingVolume = false;
 static int volumeTimerID = -1;
 
@@ -39,10 +46,9 @@ static int volumeTimerID = -1;
 static void printFileInfo(void);
 static void showVolume(void);
 static void stopShowingVolume(void);
+
 /*******************************************************************************
- *******************************************************************************
                         GLOBAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
 
 void Player_InitState(void)
@@ -94,23 +100,22 @@ void Player_PlayPreviousSong(void)
 
 void Player_IncVolume(void)
 {
-	// algo de mostrar en el display por un tiempo
+	// Show volume value for a short period of time
 	Audio_IncVolume();
 	showVolume();
 }
 
 void Player_DecVolume(void)
 {
-	// algo de mostrar en el display por un tiempo
+	// Show volume value for a short period of time
 	Audio_DecVolume();
 	showVolume();
 }
 
 /*******************************************************************************
- *******************************************************************************
                         LOCAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
+
 static void printFileInfo(void)
 {
 	char path[50], data[400];

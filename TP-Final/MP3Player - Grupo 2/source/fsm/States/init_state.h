@@ -8,7 +8,7 @@
 #define FSM_STATES_INIT_STATE_H_
 
 /*
- * Do some weird stuff to work
+ * Initialazation of FSM states
  */
 void Init_StartAll(void);
 

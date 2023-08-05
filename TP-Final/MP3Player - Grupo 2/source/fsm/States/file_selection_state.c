@@ -1,4 +1,4 @@
-/***************************************************************************/ /**
+/*******************************************************************************
   @file     file_selection_state.c
   @brief    File Selection State Functions
   @author   Grupo 5
@@ -13,6 +13,7 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
@@ -30,6 +31,7 @@
 /*******************************************************************************
  * GLOBAL VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
 static bool showingTitle;
 static int titleTimerID = -1;
 
@@ -52,11 +54,6 @@ static void stopShowingTitle(void);
 static void userInteractionStopsTitle(void);
 
 /**
- * @brief Fetches the files that exist in the current SD.
- */
-static void initialFileFetching(void);
-
-/**
  * @brief Prints the file's name and artist
  */
 static void printFileInfo(void);
@@ -69,8 +66,7 @@ static void printFileInfo(void);
 
 void FileSelection_InitState(void)
 {
-	//PowerMode_SetRunMode();
-	showTitle(); //Shows the state's title.
+	showTitle(); 	// Shows the state's title.
 	Audio_init();
 }
 
@@ -125,9 +121,7 @@ static void showTitle(void)
 static void stopShowingTitle(void)
 {
 	showingTitle = false;
-	//LCD_clearDisplay();
 	printFileInfo();
-	//showFiles();
 }
 
 static void userInteractionStopsTitle(void)
@@ -139,8 +133,6 @@ static void userInteractionStopsTitle(void)
 
 static void printFileInfo(void)
 {
-	//LCD_clearDisplay();
-
 	char * name = Audio_getCurrentName();
 	char path[50];
 

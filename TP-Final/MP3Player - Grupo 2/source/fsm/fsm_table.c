@@ -1,4 +1,4 @@
-/***************************************************************************/ /**
+/*******************************************************************************
   @file     fsm_Table.c
   @brief    FSM Table
   @author   Grupo 5
@@ -7,6 +7,7 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+
 #include <fsm/States/effects_state.h>
 #include <stdio.h>
 #include "fsm.h"
@@ -21,16 +22,16 @@
 
 #include "queue.h"
 
-
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
 static void do_nothing(void);
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
-/*Foward Declarations*/
+
 extern STATE init[];
 extern STATE idle[];
 extern STATE effects[];
@@ -81,7 +82,7 @@ STATE effects[] =
 
 	{ENCODER_LKP_EV,		idle, 					Idle_InitState}, // turn off
 
-	{TIMEOUT_EV, 			idle, 					Idle_InitState},
+	{TIMEOUT_EV, 			idle, 					Idle_InitState},	// return to default menu because of inactivity
 	{SD_OUT_EV, 			idle, 					Idle_InitState},
 	{CHANGE_MODE_EV,		player,					Player_InitState},
 
@@ -97,7 +98,6 @@ STATE effects[] =
 STATE file_selection[] =
 {
 	{PP_EV, 				file_selection, 		FileSelection_SelectFile},
-	//{STOP_EV, 				player, 				Player_Stop},
 	{NEXT_EV, 				file_selection, 		FileSelection_NextFile},
 	{PREV_EV, 				file_selection,			FileSelection_PreviousFile},
 
@@ -108,10 +108,9 @@ STATE file_selection[] =
 	{ENCODER_LKP_EV,		idle, 					Idle_InitState}, // turn off
 	/*LKP = Long Key Press*/
 	{SD_OUT_EV, 			idle, 					Idle_InitState},
-	{TIMEOUT_EV,			idle,					Idle_InitState},
+	{TIMEOUT_EV,			idle,					Idle_InitState},	// return to default menu because of inactivity
 
 	{FILE_SELECTED_EV, 		player, 				Player_InitState},
-	//{CHANGE_MODE_EV, 		effects, 				Effects_InitState},
 
 	{FILL_BUFFER_EV, 		file_selection,			Audio_updateAll},
 	{NEXT_SONG_EV, 			file_selection,			FileSelection_PlayNextSong},
@@ -123,7 +122,7 @@ STATE file_selection[] =
 /*** Player State ***/
 STATE player[] =
 {
-	{PP_EV, 				player, 				Player_ToggleMusic}, //play pausa
+	{PP_EV, 				player, 				Player_ToggleMusic}, // play pausa
 	{STOP_EV, 				player, 				Player_Stop},
 	{NEXT_EV, 				player, 				Player_PlayNextSong},
 	{PREV_EV, 				player, 				Player_PlayPreviousSong},
@@ -134,9 +133,8 @@ STATE player[] =
 
 	{ENCODER_LKP_EV,		idle, 					Idle_InitState}, // turn off
 
-	//{CHANGE_MODE_EV, 		file_selection, 		FileSelection_InitState},
 	{SD_OUT_EV, 			idle, 					Idle_InitState},
-	{TIMEOUT_EV,			idle,	 				Idle_InitState},//??
+	{TIMEOUT_EV,			idle,	 				Idle_InitState},	// return to default menu because of inactivity
 
 	{FILL_BUFFER_EV, 		player,					Audio_updateAll},
 	{NEXT_SONG_EV, 			player,					Player_PlayNextSong},
@@ -147,9 +145,7 @@ STATE player[] =
 
 
 /*******************************************************************************
- *******************************************************************************
                         GLOBAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
 
 //========interfaz=================
@@ -165,10 +161,9 @@ void FSM_StartInitState()
 }
 
 /*******************************************************************************
- *******************************************************************************
                         LOCAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
+
 /*Dummy function*/
 static void do_nothing(void)
 {
