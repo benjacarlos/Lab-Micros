@@ -16,6 +16,7 @@
 
 #include "gpio.h"
 #include "board.h"
+
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
@@ -37,6 +38,7 @@
 #define MSG_LEN(x,y,z) (((x)+(z)-(y)) % ((z) - 1 )) // MSG_LEN(rear, front, max_len)
 
 #define UART_PORTS	{PORTB, PORTC, PORTD, PORTC, PORTE}
+
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
  ******************************************************************************/
@@ -58,6 +60,7 @@ static uint8_t p_in_rear[UART_CANT_IDS], p_in_front[UART_CANT_IDS];
 static bool uart_use[UART_CANT_IDS] = {false};
 
 static void (*my_callback)(void);
+
 /*******************************************************************************
  *                        GLOBAL FUNCTION DEFINITIONS
  ******************************************************************************/
@@ -173,17 +176,14 @@ bool UART_is_tx_msg_complete(uint8_t id)
 unsigned char UART_Recieve_Data(void)
 {
 	while(((UART0->S1)& UART_S1_RDRF_MASK) ==0); // Espero recibir un caracter
-	return(UART0->D); //Devuelvo el caracter recibido
+	return(UART0->D); 							 // Devuelvo el caracter recibido
 }
 
 void UART_Send_Data(unsigned char tx_data)
 {
-	while(((UART0->S1)& UART_S1_TDRE_MASK) ==0); //Puedo Transmitir ?
-	UART0->D = tx_data; // Transmito
+	while(((UART0->S1)& UART_S1_TDRE_MASK) ==0); // Puedo Transmitir ?
+	UART0->D = tx_data; 						 // Transmito
 }
-
-
-
 
 /*******************************************************************************
  *                       LOCAL FUNCTION DEFINITIONS
@@ -243,13 +243,9 @@ void UART_rx_tx_irq_handler(UART_Type * p_uart, uint8_t id)
 		rx_data=p_uart->D;
 		if (((p_in_rear[i] + 2) % (MAX_BUFFER_LEN - 1)) != p_in_front[i]) // Buffer full
 		{
-			p_in_rear[i] = (p_in_rear[i] + 1) % (MAX_BUFFER_LEN - 1); // Incremento circular
+			p_in_rear[i] = (p_in_rear[i] + 1) % (MAX_BUFFER_LEN - 1); 	  // Incremento circular
 			buffer_in[i][p_in_rear[i]] = rx_data;
 		}
-
-		//if(my_callback)
-		//	my_callback();
-
 	}
 
 	gpioToggle(TP);

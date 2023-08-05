@@ -6,10 +6,22 @@
 #ifndef FTM_H_
 #define FTM_H_
 
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
+
 #include <stdint.h>
 #include <stdbool.h>
 
+/*******************************************************************************
+ * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
+ ******************************************************************************/
+
 #define FTM_DMA_SOURCE	20
+
+/*******************************************************************************
+ * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
+ ******************************************************************************/
 
 typedef enum
 {
@@ -69,10 +81,17 @@ typedef enum
 	FTM_DMA_ON
 } FTM_DmaMode_t;
 
-typedef uint8_t FTM_t; // id
+/*******************************************************************************
+ * VARIABLE PROTOTYPES WITH GLOBAL SCOPE
+ ******************************************************************************/
+
+typedef uint8_t FTM_t;		// id
 typedef uint16_t FTMData_t;
 
-//void 		FTM_Init(void);
+/*******************************************************************************
+ * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
+ ******************************************************************************/
+
 void PWM_Init(FTM_t id, FTM_Channel_t channel, FTM_Prescal_t prescaler,
 			  uint8_t port_ftm, uint8_t pin_ftm, uint8_t pin_alt, FTMLogic_t logic,
 			  uint16_t pwm_mod, uint16_t pwm_duty, FTM_DmaMode_t is_dma);

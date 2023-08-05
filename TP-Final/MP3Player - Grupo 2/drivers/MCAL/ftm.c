@@ -4,11 +4,23 @@
   @author   Grupo 5
  ******************************************************************************/
 
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
+
 #include "ftm.h"
 #include "MK64F12.h"
 
+/*******************************************************************************
+ * PRIVATE VARIABLES WITH FILE LEVEL SCOPE
+ ******************************************************************************/
+
 volatile FTM_Type *p_ftm[] = FTM_BASE_PTRS;
 volatile PORT_Type *p_ports[] = PORT_BASE_PTRS;
+
+/*******************************************************************************
+ *                        GLOBAL FUNCTION DEFINITIONS
+ ******************************************************************************/
 
 void PWM_Init(FTM_t id, FTM_Channel_t channel, FTM_Prescal_t prescaler,
 			  uint8_t port_ftm, uint8_t pin_ftm, uint8_t pin_alt, FTMLogic_t logic,

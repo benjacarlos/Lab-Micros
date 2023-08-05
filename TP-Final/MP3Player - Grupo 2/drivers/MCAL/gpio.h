@@ -1,4 +1,4 @@
-/***************************************************************************/ /**
+/*****************************************************************************
   @file     gpio.h
   @brief    Simple GPIO Pin services, similar to Arduino
   @author   Grupo 5
@@ -41,13 +41,13 @@ enum
 #define OUTPUT 1
 #define INPUT_PULLUP 2
 #define INPUT_PULLDOWN 3
-#endif // INPUT
+#endif
 
 // Digital values
 #ifndef LOW
 #define LOW 0
 #define HIGH 1
-#endif // LOW
+#endif
 
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS

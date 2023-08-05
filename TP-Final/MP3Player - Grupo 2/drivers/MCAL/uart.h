@@ -14,23 +14,20 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
 
 #define UART_CANT_IDS   4
 
-
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
+
 typedef enum uart_parity_t {
 	UART_PARITY_NONE,
 	UART_PARITY_EVEN,
-	UART_PARITY_ODD,
-	//UART_PARITY_MARK,
-	//UART_PARITY_SPACE
+	UART_PARITY_ODD
 } uart_parity_t;
 
 typedef enum uart_data_bits_t {
@@ -117,6 +114,7 @@ bool UART_is_tx_msg_complete(uint8_t id);
 
 
 void UART_attach_callback(void(*callback)(void));
+
 /*******************************************************************************
  ******************************************************************************/
 

@@ -7,6 +7,7 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+
 #include "gpio.h"
 #include "MK64F12.h"
 #include "core_cm4.h"
@@ -17,16 +18,19 @@
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
+
 #define PORT2_SIM_SCGC5_MASK(p) (SIM_SCGC5_PORTA_MASK << (((p) >> 5) & 0x07))
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
 void interruptHandler(uint8_t port);
 
 /*******************************************************************************
  * PRIVATE VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
 static PORT_Type *ports[] = PORT_BASE_PTRS;
 static GPIO_Type *gpioPorts[] = GPIO_BASE_PTRS;
 static void (*callbacks[5][32])(void);
