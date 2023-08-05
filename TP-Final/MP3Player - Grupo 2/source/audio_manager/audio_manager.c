@@ -7,6 +7,7 @@
 /******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+
 #include <stdint.h>
 
 #include "audio_manager.h"
@@ -20,7 +21,6 @@
 #include "fsl_common.h"
 #include "queue.h"
 
-
 /******************************************************************************
  * DEFINES
  ******************************************************************************/
@@ -31,6 +31,7 @@
 /*******************************************************************************
  * LOCAL VARIABLES
  ******************************************************************************/
+
 static bool playing = false;
 static bool init = false;
 
@@ -45,14 +46,16 @@ static float effects_in[BUFFER_SIZE], effects_out[BUFFER_SIZE];
 
 static uint8_t vol = 15;
 static char vol2send = 15 + 40;
-/******************************************************************************
- *
+
+/*******************************************************************************
+ *                        GLOBAL FUNCTION DEFINITIONS
  ******************************************************************************/
+
 void Audio_init(void)
 {
 	if(!init)
 	{
-		Mm_OnConnection(); //Init the SD;
+		Mm_OnConnection(); 		// Init the SD;
 		FileSystem_ScanFiles(); // Build file system tree
 		currFile = FileSystem_GetFirstFile();
 		maxFile = FileSystem_GetFilesCount();

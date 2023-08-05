@@ -7,6 +7,10 @@
 #ifndef AUDIO_MANAGER_AUDIO_MANAGER_H_
 #define AUDIO_MANAGER_AUDIO_MANAGER_H_
 
+/*******************************************************************************
+ * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
+ ******************************************************************************/
+
 void Audio_init(void);
 
 void Audio_deinit(void);
