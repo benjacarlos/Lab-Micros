@@ -1,15 +1,17 @@
 /***************************************************************************
   @file     equalizer.h
-  @brief    ...
   @author   Grupo 5
  ******************************************************************************/
+
 #ifndef EQUALIZER_H
 #define EQUALIZER_H
 
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+
 #include "arm_math.h"
+
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
@@ -68,4 +70,5 @@ int32_t equalizer_get_band_gain (int32_t band);
  * @param outputF32 pointer to an array of size FRAME_SIZE //!(will be overwritten)
  */
 void equalizer_equalize(float32_t* inputF32, float32_t * outputF32);
+
 #endif

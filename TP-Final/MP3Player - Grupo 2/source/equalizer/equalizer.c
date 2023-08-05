@@ -3,17 +3,22 @@
   @brief    ...
   @author   Grupo 5
  ******************************************************************************/
+
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
+
 #include "math_helper.h"
 #include "equalizer.h"
-
 
 /*******************************************************************************
  * STATIC VARIABLES AND CONST VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
 
 /* ----------------------------------------------------------------------
-** Arm Biquad cascade filters for each band
+** 			Arm Biquad cascade filters for each band
 ** ------------------------------------------------------------------- */
+
 static arm_biquad_cas_df1_32x64_ins_q31 S1;
 static arm_biquad_cas_df1_32x64_ins_q31 S2;
 static arm_biquad_casd_df1_inst_q31 S3;
@@ -23,12 +28,17 @@ static arm_biquad_casd_df1_inst_q31 S6;
 static arm_biquad_casd_df1_inst_q31 S7;
 static arm_biquad_casd_df1_inst_q31 S8;
 
+/* ----------------------------------------------------------------------
+** 			Arm Biquad cascade filters pointers
+** ------------------------------------------------------------------- */
+
 static arm_biquad_cas_df1_32x64_ins_q31 * hpFilter [2] = {&S1, &S2};
 static arm_biquad_casd_df1_inst_q31 * lpFilter [6] = {&S3, &S4, &S5, &S6, &S7, &S8};
 
 /* ----------------------------------------------------------------------
-** Q31 state buffers for Band1, Band2, Band3, Band4, Band5, Band6, Band7 and Band8
+** State buffers for Band1, Band2, Band3, Band4, Band5, Band6, Band7 and Band8
 ** ------------------------------------------------------------------- */
+
  // There are 4 state variables per filter and every filter has 2 stages
 static q63_t biquadStateBandQ63 [2][4 * 2];
 static q31_t biquadStateBandQ31 [6][4 * 2];
@@ -227,10 +237,9 @@ static const q31_t coeffTable[NUMBER_OF_BANDS * COEF_PER_FILTER * GAIN_LEVELS] =
 		536870912,375814044,204883326,-186040984,-268643972,536870912,-540252661,244102159,400006857,-289423789,
 
 };
+
 /*******************************************************************************
- *******************************************************************************
                         GLOBAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
 
 /**
@@ -239,7 +248,6 @@ static const q31_t coeffTable[NUMBER_OF_BANDS * COEF_PER_FILTER * GAIN_LEVELS] =
  */
 void equalizer_init(void)
 {
-	//arm_float_to_q31(FloatcoeffTable, coeffTable,NUMBER_OF_BANDS * COEF_PER_FILTER * GAIN_LEVELS);
     /* Initialize the state and coefficient buffers for all Biquad sections all gains set to 0 on setup*/
 
         arm_biquad_cas_df1_32x64_init_q31(&S1, NUMBER_OF_STAGES,
@@ -274,7 +282,6 @@ void equalizer_init(void)
           (q31_t *) &coeffTable[COEF_PER_FILTER*GAIN_LEVELS*7 + COEF_PER_FILTER*(DEFAULT_GAIN + MAX_GAIN)],
           &biquadStateBandQ31[5][0], 2);
 
-  
 }
 
 /**
