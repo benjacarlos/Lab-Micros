@@ -7,6 +7,7 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+
 #include "clock_config.h"
 #include "fsl_rtc.h"
 #include "time_service.h"
@@ -19,11 +20,13 @@
 /*******************************************************************************
  * DEFINITIONS
  ******************************************************************************/
+
 #define EXAMPLE_OSC_WAIT_TIME_MS 1000UL
 
 /*******************************************************************************
  * FUNCTION PROTOTYPES FOR PRIVATE FUNCTIONS WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
 #if !(defined(FSL_FEATURE_RTC_HAS_NO_CR_OSCE) && FSL_FEATURE_RTC_HAS_NO_CR_OSCE)
 /* Wait for 32kHz OSC clock start up. */
 static void EXAMPLE_WaitOSCReady(uint32_t delay_ms);
@@ -36,12 +39,12 @@ static void TimeService_FinishInit(void);
  ******************************************************************************/
 static rtc_datetime_t date;
 void (*rtc_callback)(void);
+
 /*******************************************************************************
- *******************************************************************************
                         GLOBAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
-/*!
+
+/*
  * @brief Main function
  */
 void TimeService_Init(void (*callback)(void))
@@ -54,20 +57,6 @@ void TimeService_Init(void (*callback)(void))
 			.hour = 19U,
 			.minute = 41U,
 			.second = 0};
-
-	/*char *ptr = strtok(__TIME__, ':');
-	int i = 0;
-	while(ptr != NULL)
-	{
-		if (i==0)
-			date.hour = atoi(ptr); //Guardar hour = ptr  st -> to int
-		else if (i == 1)
-			date.minute = atoi(ptr);//Guardar minute = ptr  st -> to int
-		else if (i == 2)
-			date.second = atoi(ptr);//Guardar second = ptr  st -> to int
-		ptr = strtok(NULL, ':');
-		i++;
-	}*/
 
 	date.hour = (__TIME__[0] - '0')*10 + (__TIME__[1]-'0');
 	date.minute = (__TIME__[3] - '0')*10 + (__TIME__[4]-'0');
@@ -137,7 +126,7 @@ void TimeService_Disable(void)
 	RTC_DisableInterrupts(RTC, kRTC_SecondsInterruptEnable);
 }
 
-/*!
+/*
  * @brief ISR for Alarm interrupt
  *
  * This function changes the state of busyWait.
@@ -159,9 +148,7 @@ void RTC_Seconds_IRQHandler(void)
 
 
 /*******************************************************************************
- *******************************************************************************
                         LOCAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
 static void TimeService_FinishInit(void)
 {
@@ -184,7 +171,7 @@ static void TimeService_FinishInit(void)
 
 
 #if !(defined(FSL_FEATURE_RTC_HAS_NO_CR_OSCE) && FSL_FEATURE_RTC_HAS_NO_CR_OSCE)
-/*!
+/*
  * @brief Waitting for the OSC clock steady.
  *
  * Due to the oscillator startup time is depending on the hardware design and usually

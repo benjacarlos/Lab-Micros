@@ -1,4 +1,4 @@
-/***************************************************************************/ /**
+/*******************************************************************************
   @file     matrix display.c
   @brief    8x8 RGB display source
   @author   Grupo 5
@@ -7,6 +7,7 @@
 /******************************************************************************
  * 		INCLUDES HEADER FILES
  ****************************************************************************/
+
 #include "fsl_edma.h"
 #include "fsl_dmamux.h"
 
@@ -25,10 +26,10 @@
 #define PIXEL_SIZE (24U)
 #define DMA_CHANEL (0U)
 
-#define FTM_PRESCALE   0                                               // Configuration of the FTM driver
-#define FTM_MODULO     75//62                                              // for 800kbps rate needed in WS2812 leds
-#define HIGH_DUTY      50//42                                              // Duty value for '1' binit
-#define LOW_DUTY       24//20                                              // Duty value for '0' binit
+#define FTM_PRESCALE   0       // Configuration of the FTM driver
+#define FTM_MODULO     75      // for 800kbps rate needed in WS2812 leds
+#define HIGH_DUTY      50      // Duty value for '1' binit
+#define LOW_DUTY       24      // Duty value for '0' binit
 #define OFF_DUTY	   2
 
 #define PRE			(0U)
@@ -36,26 +37,27 @@
 #define PIXELS		((DISPLAY_SIZE + 1) * PIXEL_SIZE)
 #define MATRIX_LEN	(PRE + PIXELS + POST)
 
-#define ZERO 	(LOW_DUTY)//(10U)
-#define ONE 	(HIGH_DUTY)//(20U)
-#define PULSE 	(29U) // 30 - 1
+#define ZERO 	(LOW_DUTY)	//(10U)
+#define ONE 	(HIGH_DUTY)	//(20U)
+#define PULSE 	(29U) 		// 30 - 1
 
 /***************************************************************************
 *	LOCAL VARIABLES WITH FILE LEVEL SCOPE
 ****************************************************************************/
+
 static volatile bool is_init = false;
 static uint16_t buffers[2][MATRIX_LEN];
 static uint16_t * currBuffer;
 
-//static volatile pixel_t pixel_buffer[DISPLAY_SIZE];
 static volatile bool change_buffer = false;
 static volatile uint8_t bright = 0;
 
-static edma_handle_t g_EDMA_Handle;                             /* Edma handler */
-static edma_transfer_config_t g_transferConfig;                 /* Edma transfer config. */
+static edma_handle_t g_EDMA_Handle;                  /* Edma handler */
+static edma_transfer_config_t g_transferConfig;      /* Edma transfer config. */
 
 static volatile uint8_t timer_id;
 static volatile bool transfer_done = false;
+
 /***************************************************************************
 *	LOCAL FUNCTION DECLARATION
 ****************************************************************************/
@@ -161,17 +163,11 @@ void md_writeBuffer(colors_t *new_buffer)
 		default: break;
 		}
 	}
-	//change_buffer = true;
 
-	//if(change_buffer)
-	//{
-		if(currBuffer == buffers[0])
-			currBuffer = buffers[1];
-		else
-			currBuffer = buffers[0];
-
-	//	change_buffer = false;
-	//}
+	if(currBuffer == buffers[0])
+		currBuffer = buffers[1];
+	else
+		currBuffer = buffers[0];
 
 	EDMA_PrepareTransfer(&g_transferConfig, (void *)(currBuffer), sizeof(uint16_t),
 									(void *)FTM_GetCnVAddress(0, 0), sizeof(uint16_t),
@@ -193,18 +189,6 @@ pixel_t md_makeColor(bool r, bool g, bool b)
 
 	pixel_t ret = {.R = r, .G = g, .B = b};
 	return ret;
-}
-
-void md_setBrightness(uint8_t brigthness)
-{
-	/*uint8_t new_b = brigthness / 32;
-	//if(new_b == 0){new_b = 1;}
-	if(new_b >= 7){new_b = 6;}
-	if(bright != new_b)
-	{
-		bright = new_b;
-		md_writeBuffer(pixel_buffer);
-	}*/
 }
 
 /***************************************************************************

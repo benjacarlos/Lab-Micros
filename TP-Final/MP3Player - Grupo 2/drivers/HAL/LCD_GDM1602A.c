@@ -14,9 +14,11 @@
 #include "SysTick.h"
 #include "LCD_GDM1602A.h"
 #include "fsl_device_registers.h"
+
 /**************************************************************
  * 		CONSTANTS AND MACROS
  **************************************************************/
+
 #define BLANCK_SPACE			(0x20										)
 #define CLEAR					(1											)
 #define RET_HOME				(1<<1										)
@@ -29,12 +31,12 @@
 #define ENABLE(x)  				(((x) & 1)<<1								)
 #define RS(x)					( (x) & 1									)
 #define VAL(x)					(((x) & 0xF)<<2								)
-
+// RS -> Qa, E -> Qb, Data -> Qc a Qf
 #define BLOCK(e, rs, v) 		(ENABLE(e) | RS(rs) | VAL(v)				)
 
 #define INIT_INSTRUCTIONS		10
 
-#define SHIFTING_BUFFER_LEN		(25*DISPLAY_COLUMNS) //might be excessive...
+#define SHIFTING_BUFFER_LEN		(25*DISPLAY_COLUMNS)
 
 #define CURSOR_VISIBLE			0
 #define CURSOR_BLINK			0
@@ -44,6 +46,7 @@
 /*********************************************************
  * 		LOCAL STRUCTS AND ENUMS
  ********************************************************/
+
 typedef enum{
 	NOTHING,
 	SHIFTING,
@@ -60,9 +63,11 @@ typedef struct{
 	lcd_line_state_t state;
 	lcd_shift_speed_t speed;
 }lcd_line_t;
+
 /****************************************************************
  * 		FUNCTION DECLARATION WITH FILE SCOPE
  ******************************************************************/
+
 static void sendBlock(uint8_t byte, uint8_t rs);
 static void initRoutineTimerCallback(void);
 static void initRoutineSPICallback(void);
@@ -73,6 +78,7 @@ static void shifttingCallback(void);
 /*****************************************************************
  * 		VARIABLES WITH FILE LEVEL SCOPE
  *****************************************************************/
+
 static uint8_t 	init_status = 0;
 static uint8_t 	timer_id;
 static uint8_t 	init_fase;
@@ -85,16 +91,12 @@ static uint8_t init_delays[INIT_INSTRUCTIONS] = {5,1,1,1,1,1,2,1,1,2};
 
 static bool send_status = true; // Free to send something
 
-/*
-static char lines[DISPLAY_ROWS][SHIFTING_BUFFER_LEN];
-static bool shiftingLine[DISPLAY_ROWS] = {0U};
-static uint8_t shifting_p[DISPLAY_ROWS] = {0U};
-static uint8_t shifting_timer;
-*/
 static lcd_line_t lcdLines[DISPLAY_ROWS];
+
 /**********************************************************************
  * 		FUNCTION WITH GOBAL SCOPE
  **********************************************************************/
+
 void LCD_Init(void)
 {
 	if(init_status == 0)
@@ -138,7 +140,6 @@ bool LCD_setCursor(uint8_t row, uint8_t column)
 	{
 		uint8_t address = column + row * 0x40;
 		LCD_writeInstruction(SET_DDRAM(address));
-		//lcdLines[row].state = NOTHING;
 		return true;
 	}
 	return false;
@@ -233,51 +234,10 @@ void LCD_writeShiftingStr(char * str, uint8_t len, uint8_t row, lcd_shift_speed_
 	}
 }
 
-/*
-void LCD_writeBouncingStr(char * str, uint8_t len, uint8_t row, uint8_t begin, lcd_shift_speed_t speed)
-{
-	uint8_t i;
-	if(row < DISPLAY_ROWS)
-	{
-		memset(lcdLines[row].buffer, 0x20, SHIFTING_BUFFER_LEN);
-		for(i = 0; i < len; i++)
-		{
-			lcdLines[row].buffer[i] = str[i];
-		}
-		if(len+begin <= DISPLAY_COLUMNS) // static
-		{
-			LCD_writeStrInPos(lcdLines[row].buffer, DISPLAY_COLUMNS, row, begin);
-			Systick_PauseCallback(lcdLines[row].timer_id);
-			lcdLines[row].state = NOTHING;
-			return;
-		}
-		Systick_ChangeCallbackPeriod(lcdLines[row].timer_id, (3-speed)*FAST_SPEED);
-		lcdLines[row].speed = speed;
-
-		if(lcdLines[row].state == NOTHING)
-		{
-			Systick_ResumeCallback(lcdLines[row].timer_id);
-		}
-
-		lcdLines[row].state = BOUNCING;
-		lcdLines[row].pointer = 0;
-		lcdLines[row].begin = begin;
-		lcdLines[row].length = len;
-		lcdLines[row].direction = true;
-	}
-}*/
-/*
-void LCD_changeState(bool state)
-{
-	volatile uint8_t val = DISPLAY(state,CURSOR_VISIBLE,CURSOR_BLINK);
-	printf("Alguien esta matando todo");
-	LCD_writeInstruction(val);
-}
-*/
-
 /****************************************************************
  * 		FUNCTIONS WITH FILE LEVEL SCOPE
  ***************************************************************/
+
 static void LCD_writeInstruction(uint8_t instruct)
 {
 	sendBlock(instruct, 0);
@@ -366,16 +326,6 @@ static void shifttingCallback(void)
 				buffer[j] = lcdLines[i].buffer[(lcdLines[i].pointer + j)%lcdLines[i].length];
 			}
 
-			/*if(curr == BOUNCING)
-			{
-				if(!lcdLines[i].direction && lcdLines[i].pointer==0)
-					lcdLines[i].direction = true;
-				else if(lcdLines[i].direction && ((start + lcdLines[i].length -  lcdLines[i].pointer) <= DISPLAY_COLUMNS))
-					lcdLines[i].direction = false;
-
-				lcdLines[i].pointer += lcdLines[i].direction?1:-1;
-			}
-			else*/
 			lcdLines[i].pointer = (lcdLines[i].pointer + 1)%SHIFTING_BUFFER_LEN;
 
 			LCD_writeStrInPos(buffer, DISPLAY_COLUMNS-start, i, start);

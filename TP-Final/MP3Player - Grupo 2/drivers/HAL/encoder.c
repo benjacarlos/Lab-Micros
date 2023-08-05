@@ -17,8 +17,8 @@
 /*************************************************
  *  	LOCAL FUNCTION DECLARATION
  ************************************************/
-void lookForMoves(void);
 
+void lookForMoves(void);
 
 /************************************************
  *  	VARIABLES WITH LOCAL SCOPE

@@ -5,16 +5,24 @@
  ******************************************************************************/
 #ifndef TIMER_H_
 #define TIMER_H_
+
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
+
 #include <stdbool.h>
 
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
  ******************************************************************************/
+
 #define TIMER_ISR_PERIOD 100 //100ms
 #define INITIAL_TIMER_ELEMENTS_ARRAY_LENGTH 20
+
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
+
 /** Each TimerElement is used to store the callback which Timer needs to call.
  * @variable callbackID. An unique ID of the element.
  * @variable callback. The function to be called.

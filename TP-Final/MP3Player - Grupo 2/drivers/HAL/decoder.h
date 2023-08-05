@@ -4,12 +4,12 @@
   @author   Team 2 - Lab de Micros
  ******************************************************************************/
 
+#ifndef _DECODER_H_
+#define _DECODER_H_
+
 /*******************************************************************************
 *							INCLUDE HEADER FILES
 ******************************************************************************/
-
-#ifndef _DECODER_H_
-#define _DECODER_H_
 
 #include <stdbool.h> 
 #include <stdint.h>
@@ -19,8 +19,8 @@
 /*******************************************************************************
 *				  CONSTANT AND MACRO DEFINITIONS USING #DEFINE
 ******************************************************************************/
-#define ID3_MAX_NUM_CHARS 50
 
+#define ID3_MAX_NUM_CHARS 50
 
 #define DECODED_BUFFER_SIZE 5000  
 

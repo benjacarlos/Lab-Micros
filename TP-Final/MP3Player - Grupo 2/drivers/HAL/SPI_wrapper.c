@@ -1,9 +1,11 @@
-/*
- * SPI_wrapper.c
- *
- *  Created on: 16 ene. 2021
- *      Author: Santi
- */
+/*******************************************************************************
+  @file     SPI_wrapper.c
+  @author   Grupo 5
+ ******************************************************************************/
+
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -15,9 +17,20 @@
 #include "SPI_wrapper.h"
 #include "hardware.h"
 
+#include "gpio.h"
+#include "board.h"
+
+/*******************************************************************************
+ * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
+ ******************************************************************************/
+
 #define MAX_SIZE 750
 #define MSG_LEN(rear, front, max) (((rear) + (max) - (front)) % ((max)-1)) // MSG_LEN(rear, front, max_len)
 #define BUFFER_FULL(rear, front, max) ((((rear) + 2) % ((max)-1)) == (front))
+
+/*******************************************************************************
+ * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
+ ******************************************************************************/
 
 typedef struct spi_block
 {
@@ -26,14 +39,21 @@ typedef struct spi_block
 	void (*callback)(void);
 } spi_block_t;
 
+/*******************************************************************************
+ * PRIVATE VARIABLES WITH FILE LEVEL SCOPE
+ ******************************************************************************/
+
 static SPI_Type *p_spi[] = SPI_BASE_PTRS;
 
 static spi_block_t buffer_out[MAX_SIZE] = {0U};
 static uint16_t p_out_rear = 0, p_out_front = 1;
 static uint16_t msg_size = 0;
 
-//static uint32_t masterFifoSize; // necesario??
 static uint32_t masterCommand;
+
+/*******************************************************************************
+ *                        GLOBAL FUNCTION DEFINITIONS
+ ******************************************************************************/
 
 void SPI_Init(spi_id_t id, spi_slave_t slave, uint32_t baudrate)
 {
@@ -89,8 +109,6 @@ void SPI_Init(spi_id_t id, spi_slave_t slave, uint32_t baudrate)
 
 	masterCommand = DSPI_MasterGetFormattedCommand(&commandData);
 
-	//	masterFifoSize = FSL_FEATURE_DSPI_FIFO_SIZEn(port_spi_n);
-
 	DSPI_StopTransfer(p_spi[id]);
 	DSPI_FlushFifo(p_spi[id], true, true);
 	DSPI_ClearStatusFlags(p_spi[id], (uint32_t)kDSPI_AllStatusFlag);
@@ -106,16 +124,12 @@ void SPI_Config(spi_id_t id, spi_slave_t slave, uint32_t baudrate)
 	masterConfig.whichPcs = 1 << slave;
 	masterConfig.ctarConfig.baudRate = baudrate;
 
-	uint32_t srcClock_Hz = CLOCK_GetFreq(kCLOCK_BusClk);//__CORE_CLOCK__ / 2; // Bus Clock
+	uint32_t srcClock_Hz = CLOCK_GetFreq(kCLOCK_BusClk);	// Bus Clock
 	DSPI_MasterInit(p_spi[id], &masterConfig, srcClock_Hz);
 }
 
 void SPI_Send(spi_id_t id, spi_slave_t slave, const char *msg, uint16_t len, void (*end_callback)(void))
 {
-	/**
-	 * static uint32_t buffer_out[MAX_SIZE] = {0U};
-	 * static uint16_t p_out_rear = 0, p_out_front = 1;
-	 */
 	uint16_t i = 0;
 
 	if (slave < 5 && slave > 0)
@@ -170,9 +184,6 @@ void SPI_Send(spi_id_t id, spi_slave_t slave, const char *msg, uint16_t len, voi
 	DSPI_StartTransfer(p_spi[id]);
 }
 
-#include "gpio.h"
-#include "board.h"
-
 #ifndef TEST
 void SPI0_IRQHandler(void)
 {
@@ -205,7 +216,6 @@ void SPI0_IRQHandler(void)
 	/* Check if we're done with this transfer.*/
 	if (msg_size == 0)
 	{
-		//isTransferCompleted = true;
 		/* Complete the transfer and disable the interrupts */
 		DSPI_DisableInterrupts(p_spi[0], kDSPI_TxFifoFillRequestInterruptEnable);
 	}

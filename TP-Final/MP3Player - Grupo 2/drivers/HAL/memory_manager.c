@@ -7,7 +7,6 @@
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
-//#include "file_system_manager.h"
 
 #include <stdio.h>
 
@@ -20,19 +19,11 @@
 #include "sdmmc_config.h"
 
 #include "memory_manager.h"
-/*******************************************************************************
- * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
- ******************************************************************************/
-
-
-/*******************************************************************************
- * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
- ******************************************************************************/
-
 
 /*******************************************************************************
  * PRIVATE VARIABLES WITH FILE LEVEL SCOPE
  ******************************************************************************/
+
 static bool SD_connected = false;
 static bool SD_error = false;
 static bool SD_HostInitDone = false;
@@ -46,10 +37,9 @@ static uint8_t SD_status = 0;
 static void Mm_Callback(bool isInserted, void *userData);
 
 /*******************************************************************************
- *******************************************************************************
                         GLOBAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
+
 void Mm_Init()
 {
 	SYSMPU->CESR &= ~SYSMPU_CESR_VLD_MASK;
@@ -87,11 +77,11 @@ bool Mm_SDDesconnection(void)
 		SD_status = 0;
 	return ret;
 }
+
 /*******************************************************************************
- *******************************************************************************
                         LOCAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
+
 static void Mm_Callback(bool isInserted, void *userData)
 {
 	if(SD_connected == isInserted)
@@ -101,12 +91,10 @@ static void Mm_Callback(bool isInserted, void *userData)
 	else if(isInserted)
 	{
 		SD_status = 1;
-		//Mm_OnConnection();
 	}
 	else
 	{
 		SD_status = 2;
-		//Mm_OnDesconection();
 	}
 
 	SD_connected = isInserted;
@@ -117,7 +105,6 @@ void Mm_OnDesconection(void)
 	const TCHAR driverNumberBuffer[3U] = {SDDISK + '0', ':', '/'};
 	f_mount(NULL, driverNumberBuffer, 1U);
 	g_sd.initReady = false;
-	//firstFile = FileSystem_ResetFiles();
 	//printf("fuera\r\n");
 }
 
@@ -147,8 +134,5 @@ void Mm_OnConnection(void)
 		return;
 	}
 
-	//Mm_ScanFiles(buff);
-
-	//FileSystem_PrintFiles(true);
 }
 

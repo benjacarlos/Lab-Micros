@@ -7,16 +7,32 @@
 #ifndef LCD_GDM1602A_H_
 #define LCD_GDM1602A_H_
 
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
+
 #include <stdbool.h>
+
+/*******************************************************************************
+ * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
+ ******************************************************************************/
 
 #define DISPLAY_ROWS			2
 #define DISPLAY_COLUMNS			16
+
+/*******************************************************************************
+ * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
+ ******************************************************************************/
 
 typedef  enum{
 	SLOW,
 	MIDIUM,
 	FAST
 }lcd_shift_speed_t;
+
+/*******************************************************************************
+ * FUNCTION PROTOTYPES WITH GLOBAL SCOPE
+ ******************************************************************************/
 
 /**
  * Initialize the LCD using SPI interface
@@ -65,11 +81,6 @@ void LCD_writeStrInPos(char * str, uint8_t len, uint8_t row, uint8_t column);
  * 			Sped: low, med or fast shifting
  */
 void LCD_writeShiftingStr(char * str, uint8_t len, uint8_t row, lcd_shift_speed_t speed);
-
-/**
- * @brief Write a string in the display that bounce between begin and the end of the string
- */
-//void LCD_writeBouncingStr(char * str, uint8_t len, uint8_t row, uint8_t begin, lcd_shift_speed_t speed);
 
 /**
  * @brief Clean one line of the display

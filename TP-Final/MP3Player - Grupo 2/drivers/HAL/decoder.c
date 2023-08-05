@@ -80,8 +80,6 @@ static uint32_t      bytesRem;									      // Encoded MP3 bytes remaining to b
 static bool          fileOpened;                                     // true if there is an open file, false if is not
 static uint32_t      lastFrameLength;                                // Last frame length
 // MP3-encoded buffer data
-//static uint8_t       mp3FrameBuffer[FRAME_BYTES];					  // buffer for MP3-encoded frames
-//static uint8_t mp3FrameBuffer[FRAME_BYTES] __attribute__((aligned(4)));
 static uint8_t mp3FrameBuffer[FRAME_BYTES+1] __attribute__((aligned(4U)));
 
 static uint32_t      topPosition;                                    // current position in frame buffer (points to top)
@@ -102,7 +100,6 @@ char year[ID3_MAX_NUM_CHARS];                                      // year of th
 void decoder_MP3DecoderInit(void)
 {
     helixDecoder = MP3InitDecoder();
-    //mp3File = NULL;
     fileOpened = false;
     bottomPosition = 0;
     topPosition = 0;
@@ -114,7 +111,6 @@ void decoder_MP3DecoderInit(void)
 
 bool decoder_MP3LoadFile(const char* filename)
 {
-    // he is gulty I don't have any proof but I don�t have any doubts either 
     bool check = false;
 
     // if the file was open
