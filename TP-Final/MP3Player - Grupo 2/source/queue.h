@@ -1,14 +1,16 @@
-/***************************************************************************/ /**
+/*******************************************************************************
   @file     queue.h
   @brief
   @author   Grupo 5
  ******************************************************************************/
+
 #ifndef EVENTQUEUE_H
 #define EVENTQUEUE_H
 
 /*******************************************************************************
  * INCLUDE HEADER FILES
  ******************************************************************************/
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -17,6 +19,7 @@
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  ******************************************************************************/
+
 //EVENTS
 typedef enum
 {
@@ -25,7 +28,7 @@ typedef enum
   PRESS_EV,
 
   /* BUTTONS NAMES */
-  PP_EV, //play pausa
+  PP_EV, 	//	play pausa
   STOP_EV,
   NEXT_EV,
   PREV_EV,
@@ -46,7 +49,7 @@ typedef enum
   NEXT_SONG_EV,
   PREV_SONG_EV,
   FILL_BUFFER_EV
-} EventType; //VER SI ESTO ES LO MEJOR, O SI ES MEJOR UNA ESTRUCTURA EVENTO MAS COMPLEJA, ADEMAS FALTA DIFERENCIAR LOS DISTINTOS EVENTOS DE TIMER
+} EventType;
 
 typedef struct EVENT
 {

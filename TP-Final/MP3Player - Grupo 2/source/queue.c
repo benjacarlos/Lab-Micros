@@ -18,9 +18,7 @@ event_queue_t eventQueue;
 event_t queue[QUEUE_SIZE];
 
 /*******************************************************************************
- *******************************************************************************
                         GLOBAL FUNCTION DEFINITIONS
- *******************************************************************************
  ******************************************************************************/
 
 void initQueue(void)
@@ -31,11 +29,11 @@ void initQueue(void)
 
   for (i = 0; i < QUEUE_SIZE; i++)
   {
-    tempaux++->ack = true; //debo hacer esto para asegurarme de que todas las celdas de la cola esten habilitadas para ser escritas
+    tempaux++->ack = true; // Debo hacer esto para asegurarme de que todas las celdas de la cola esten habilitadas para ser escritas
   }
 
-  eventQueue.queue = queue; //la cola de eventos
-  eventQueue.p2get = queue; //los punteros para leer y escribir estan en el mismo lugar (cola vacia)
+  eventQueue.queue = queue; // La cola de eventos
+  eventQueue.p2get = queue; // Los punteros para leer y escribir estan en el mismo lugar (cola vacia)
   eventQueue.p2write = queue;
 }
 
@@ -43,23 +41,23 @@ bool emitEvent(EventType type)
 {
   event_t *temp = eventQueue.p2write;
 
-  if (eventQueue.p2write->ack == false) // si en la cola de eventos no hay mas lugar -> error
+  if (eventQueue.p2write->ack == false) // Si en la cola de eventos no hay mas lugar -> error
   {
     return false;
   }
 
-  eventQueue.p2write->type = type; // guardo el ID del evento
+  eventQueue.p2write->type = type; 		// Guardo el ID del evento
 
-  if ((eventQueue.p2write) == ((eventQueue.queue) + (QUEUE_SIZE - 1))) // movimiento del puntero de write
+  if ((eventQueue.p2write) == ((eventQueue.queue) + (QUEUE_SIZE - 1))) // Movimiento del puntero de write
   {
-    eventQueue.p2write = eventQueue.queue; // si estoy al final de la cola debo moverlo al principio
+    eventQueue.p2write = eventQueue.queue; 								// Si estoy al final de la cola debo moverlo al principio
   }
   else
   {
-    (eventQueue.p2write)++; // sino avanza una posicion
+    (eventQueue.p2write)++; // Sino avanza una posicion
   }
-  temp->p2NextEv = (struct EVENT *)eventQueue.p2write; // guardo en el evento anterior un puntero al evento actual para no tener que problems con el movimiento en get_event
-  temp->ack = false;                                   // marco el lugar como ocupado
+  temp->p2NextEv = (struct EVENT *)eventQueue.p2write; // Guardo en el evento anterior un puntero al evento actual para no tener que problems con el movimiento en get_event
+  temp->ack = false;                                   // Marco el lugar como ocupado
   return true;
 }
 
@@ -68,7 +66,7 @@ EventType getEvent()
   EventType retval;
   if (queueIsEmpty())
   {
-    return NONE_EV; // si la cola esta vacia -> error
+    return NONE_EV; 				// si la cola esta vacia -> error
   }
   retval = eventQueue.p2get->type; // guardo el tipo y muevo el puntero
   eventQueue.p2get->ack = true;
@@ -78,5 +76,5 @@ EventType getEvent()
 
 bool queueIsEmpty(void)
 {
-  return (eventQueue.p2get == eventQueue.p2write && eventQueue.p2get->ack == true); // si ambos punteros estan en la misma posicion y el evento al que apunta read ya ha sido leido entonces la cola esta vacia
+  return (eventQueue.p2get == eventQueue.p2write && eventQueue.p2get->ack == true); // Si ambos punteros estan en la misma posicion y el evento al que apunta read ya ha sido leido entonces la cola esta vacia
 }
