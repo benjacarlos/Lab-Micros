@@ -144,7 +144,7 @@ void md_writeBuffer(colors_t *new_buffer)
 
 	for (i = 0; i < DISPLAY_SIZE; i++)
 	{
-		//pixel_buffer[i] = new_buffer[i];
+
 		backBuffer[PRE + i * 24 + 23 - bright] = ZERO;
 		switch (new_buffer[i])
 		{
@@ -202,7 +202,6 @@ static void md_dmaCallback(edma_handle_t *handle, void *userData, bool transferD
 	while(!FTM_IsInterruptPending (0,FTM_CH_0)){}; // Sync with CHF
 	FTM_StopClock(0);
 	FTM_onOM(0,0);
-	//Systick_ResumeCallback(timer_id);
 
 	transfer_done = true;
 }
