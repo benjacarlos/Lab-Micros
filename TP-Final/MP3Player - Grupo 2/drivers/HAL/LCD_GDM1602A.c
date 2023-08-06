@@ -101,7 +101,7 @@ void LCD_Init(void)
 {
 	if(init_status == 0)
 	{
-		SPI_Init(SPI_0_ID, SPI_SLAVE_0, 750000U);
+		SPI_Init(SPI_0_ID, SPI_SLAVE_0, 500000U);
 		SysTick_Init();
 		init_fase = 0;
 
@@ -121,7 +121,7 @@ void LCD_Init(void)
 
 void LCD_UpdateClock(void)
 {
-	SPI_Config(SPI_0_ID, SPI_SLAVE_0, 750000U);
+	SPI_Config(SPI_0_ID, SPI_SLAVE_0, 500000U);
 }
 
 bool LCD_isInit(void)
