@@ -101,7 +101,7 @@ void LCD_Init(void)
 {
 	if(init_status == 0)
 	{
-		SPI_Init(SPI_0_ID, SPI_SLAVE_0, 350000U);
+		SPI_Init(SPI_0_ID, SPI_SLAVE_0, 300000U);
 		SysTick_Init();
 		init_fase = 0;
 

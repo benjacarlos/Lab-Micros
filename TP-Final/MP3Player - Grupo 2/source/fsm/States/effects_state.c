@@ -122,7 +122,7 @@ void Effects_NextOption(void)
     else
     {
         uint8_t max = OPTIONS_COUNT - 1;
-        if (currentOptionIndex == max - 1)
+        if (currentOptionIndex == max )
             currentOptionIndex = 0;
         else
             currentOptionIndex++;
@@ -149,7 +149,7 @@ void Effects_PreviousOption(void)
     {
         uint8_t max = OPTIONS_COUNT - 1;
         if (currentOptionIndex == 0)
-            currentOptionIndex = max - 1;
+            currentOptionIndex = max ;
         else
             currentOptionIndex--;
         setCurrentOption();
@@ -176,7 +176,6 @@ void Effects_SelectOption(void)
     }
     else
     {
-    	//LCD_clearDisplay();
         if (currentOptionIndex == OPTIONS_COUNT-1)
         {
         	settingCustom = true;
