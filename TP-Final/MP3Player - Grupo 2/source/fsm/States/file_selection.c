@@ -1,6 +1,6 @@
 /*******************************************************************************
-  @file     file_selection_state.c
-  @brief    File Selection State Functions
+  @file     file_selection.c
+  @brief    File Selection state functions
   @author   Grupo 5
  ******************************************************************************/
 
@@ -20,7 +20,7 @@
 
 #include "audio_manager.h"
 
-#include "file_selection_state.h"
+#include "file_selection.h"
 #include "queue.h"
 #include "Timer.h"
 #include "LCD_GDM1602A.h"

@@ -1,6 +1,6 @@
 /*******************************************************************************
-  @file     Idle_state.h
-  @brief    Idle state
+  @file     Idle.h
+  @brief    Idle state header
   @author   Grupo 5
  ******************************************************************************/
 
@@ -27,6 +27,6 @@ void Idle_InitState(void);
  */
 void Idle_OnUserInteraction(void);
 
-void Idle_UpdateTime(void);
+void Idle_Update(void);
 
 #endif /* IDLE_STATE_H */

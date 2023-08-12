@@ -104,12 +104,6 @@ TimeServiceDate_t TimeService_GetCurrentDateTime(void)
 		.minute = date.minute,
 		.second = date.second};
 	return newDate;
-	/* print default time */
-	/*
-	char dateTime[19];
-	snprintf(dateTime, sizeof(dateTime), "%02hd-%02hd-%04hd %02hd:%02hd:%02hd", date.day, date.month, date.year, date.hour,
-			   date.minute, date.second);
-	return &dateTime[0];*/
 }
 
 void TimeService_Enable(void)

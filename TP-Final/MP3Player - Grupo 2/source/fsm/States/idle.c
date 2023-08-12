@@ -1,6 +1,6 @@
 /*******************************************************************************
-  @file     idle_state.c
-  @brief    Idle state functions.
+  @file     idle.c
+  @brief    Idle state functions
   @author   Grupo 5
  ******************************************************************************/
 
@@ -8,7 +8,7 @@
  * INCLUDE HEADER FILES
  ******************************************************************************/
 
-#include "idle_state.h"
+#include "idle.h"
 #include "queue.h"
 #include "power_mode_switch.h"
 #include "LCD_GDM1602A.h"
@@ -90,17 +90,9 @@ void Idle_OnUserInteraction(void)
 
 }
 
-void Idle_UpdateTime()
+// For periodic during idle state if needed
+void Idle_Update()
 {
-	TimeServiceDate_t date = TimeService_GetCurrentDateTime();
-
-	char dateString[16];
-	char timeString[16];
-	snprintf(dateString, sizeof(dateString), "   %02hd-%02hd-%04hd     ", date.day, date.month, date.year);
-	snprintf(timeString, sizeof(timeString), "    %02hd:%02hd:%02hd      ", date.hour,date.minute, date.second);
-
-	LCD_writeStrInPos(timeString, 15, 0, 0);
-	LCD_writeStrInPos(dateString, 15, 1, 0);
 }
 
 

@@ -39,7 +39,7 @@
 #include "time_service.h"
 #include "equalizer.h"
 
-#include "States/idle_state.h"
+#include "States/idle.h"
 
 /*******************************************************************************
  * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
@@ -131,7 +131,7 @@ void App_Init(void)
 	vumeterRefresh_init(); // FFT
 	equalizer_init();
 
-	TimeService_Init(Idle_UpdateTime);
+	TimeService_Init(Idle_Update);
 
 	Encoder_Init();
 	buttonsInit();

@@ -1,6 +1,6 @@
 /***************************************************************************/ /**
-  @file     effects_state.c
-  @brief    Effects state functions.
+  @file     effects.c
+  @brief    Effects state functions
   @author   Grupo 5
  ******************************************************************************/
 
@@ -8,7 +8,7 @@
  * INCLUDE HEADER FILES
  ******************************************************************************/
 
-#include "States/effects_state.h"
+#include "States/effects.h"
 #include "LCD_GDM1602A.h"
 #include "queue.h"
 #include "Timer.h"

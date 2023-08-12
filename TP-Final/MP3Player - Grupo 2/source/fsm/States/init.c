@@ -1,6 +1,6 @@
 /***************************************************************************/ /**
-  @file     init_state.c
-  @brief    Init state functions.
+  @file     init.c
+  @brief    Init state functions
   @author   Grupo 5
  ******************************************************************************/
 
@@ -9,8 +9,8 @@
  ******************************************************************************/
 
 #include "queue.h"
-#include "States/init_state.h"
-#include "States/idle_state.h"
+#include "States/init.h"
+#include "States/idle.h"
 #include "memory_manager.h"
 #include "power_mode_switch.h"
 

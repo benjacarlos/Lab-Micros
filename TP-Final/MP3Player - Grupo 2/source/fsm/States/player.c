@@ -1,6 +1,6 @@
 /***************************************************************************/ /**
-  @file     add_user.c
-  @brief    add user state functions
+  @file     player.c
+  @brief    Player state functions
   @author   Grupo 5
  ******************************************************************************/
 
@@ -8,7 +8,7 @@
  * INCLUDE HEADER FILES
  ******************************************************************************/
 
-#include <fsm/States/player_state.h>
+#include <fsm/States/player.h>
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>

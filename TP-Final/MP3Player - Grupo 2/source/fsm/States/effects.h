@@ -1,6 +1,6 @@
 /*******************************************************************************
-  @file     effects_state.h
-  @brief    Effects state
+  @file     effects.h
+  @brief    Effects state header
   @author   Grupo 5
  ******************************************************************************/
 #ifndef EFFECTS_STATE_H

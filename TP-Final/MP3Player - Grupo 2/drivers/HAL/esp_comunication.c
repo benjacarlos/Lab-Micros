@@ -14,7 +14,7 @@
 #include "uart.h"
 
 #include "audio_manager.h"
-#include "States/effects_state.h"
+#include "States/effects.h"
 #include "queue.h"
 
 /*******************************************************************************

@@ -8,15 +8,15 @@
  * INCLUDE HEADER FILES
  ******************************************************************************/
 
-#include <fsm/States/effects_state.h>
+#include <fsm/States/effects.h>
 #include <stdio.h>
 #include "fsm.h"
 #include "fsm_table.h"
-#include "States/init_state.h"
-#include "States/idle_state.h"
-#include "States/file_selection_state.h"
-#include "States/player_state.h"
-#include "States/effects_state.h"
+#include "States/init.h"
+#include "States/idle.h"
+#include "States/file_selection.h"
+#include "States/player.h"
+#include "States/effects.h"
 
 #include "audio_manager.h"
 
